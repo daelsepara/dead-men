@@ -1,0 +1,2 @@
+#!/bin/bash
+spell -n story.zil -b | grep -v -Ev "DESC|LIGHTBIT|CRLF|HLIGHT|FCLEAR|COND|LTABLE|PRECHOICE|FSET|PUTP|WORNBIT|WEARBIT|SETG|AUX" | grep -i -v -Ev "realize|mesmerize|mesmerizing|spellcasting"
