@@ -1,2 +1,2 @@
 #!/bin/bash
-spell -n story.zil -b | grep -v -Ev "DESC|LIGHTBIT|CRLF|HLIGHT|FCLEAR|COND|LTABLE|PRECHOICE|FSET|PUTP|WORNBIT|WEARBIT|SETG|AUX" | grep -i -v -Ev "realize|mesmerize|mesmerizing|spellcasting"
+spell -n story.zil -b | grep -v -Ev "DESC|LIGHTBIT|CRLF|HLIGHT|FCLEAR|COND|LTABLE|PRECHOICE|FSET|PUTP|WORNBIT|WEARBIT|SETG|AUX" | grep -i -v -Ev "cannonfire|skarvench|matey|borograve|poopdeck|realize|jollyboat|wineflask|carab|leshand|porbuck|blutz|orlop|sailmaster|calidor|toliver|glorianne|corpselight|cookpot"| uniq
