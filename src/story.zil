@@ -24,6 +24,7 @@
 	<PUTP ,STORY007 ,P?CODEWORD CODEWORD-DETRUDE>
 	<PUT <GETP ,STORY012 ,P?DESTINATIONS> 3 ,STORY409>
 	<PUTP ,STORY013 ,P?DEATH T>
+	<PUTP ,STORY032 ,P?DEATH T>
 	<RETURN>>
 
 <CONSTANT DIED-IN-COMBAT "You died in combat.">
@@ -477,184 +478,139 @@
 <ROUTINE STORY030-PRECHOICE ()
 	<GAIN-LIFE 1>>
 
+<CONSTANT TEXT031 "In a small courtyard off the fish market lives Doctor Scriptor, a collector of magical curios. You have brought him items in the past, both for identification and to see if he would buy them from you. He looks up from his dusty manuscripts and takes what you have brought to show him, holding up a jeweller's glass and passing each item in turn under the sharp scrutiny of his beady old eyes.||\"Well?\" you ask.||\"One moment.\" Scriptor gives a dry cough, perching his glasses on his thin nose and consulting a dusty leatherbound book. \"Hmm. Ah yes, ah yes. Eureka!\"">
+<CONSTANT CHOICES031 <LTABLE "ask him about a" "a" "a" "a" "if you don't have any of these you may as well leave">>
+
 <ROOM STORY031
 	(IN ROOMS)
 	(DESC "031")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT031)
+	(CHOICES CHOICES031)
+	(DESTINATIONS <LTABLE STORY316 STORY335 STORY354 STORY373 STORY392>)
+	(REQUIREMENTS <LTABLE CONCH-SHELL-HORN BAT-SHAPED-TALISMAN BRONZE-HELMET DRAGON-RING NONE>)
+	(TYPES <LTABLE R-ITEM R-ITEM R-ITEM R-ITEM R-NONE>)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT032 "You explode into a sudden flurry of dazzling action. Pushing your friends back out of danger, you dive nimbly to one side as the chief ruffian's knife whistles through the air just a hand's breath above your scalp. Then, springing up onto the bar, you launch yourself forward, tumbling in midair so as to go careening against the ruffian's legs with the force of a rolling barrel. They are bowled over like so many skittles.||Jumping to your feet, you pause just long enough to check that Blutz and the others have safely made their getaway. It is your one mistake. A clumsily thrown knife catches you in the thing, laying open a nasty gash.">
+<CONSTANT TEXT032-CONTINUED "You limp hastily outside where your friends help you to get to safety. Only when you are sure there is no sound of pursuit do you slow to a walk.||\"Well, that wasn't very successful,\" says Blutz, gasping for breath.\"||\"What are you griping about, Mister Blutz?\" you say with a relieved grin. \"You've still got your health, and that's what counts.\"">
 
 <ROOM STORY032
 	(IN ROOMS)
 	(DESC "032")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT032)
+	(PRECHOICE STORY032-PRECHOICE)
+	(CONTINUE STORY392)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY032-PRECHOICE ()
+	<LOSE-LIFE 1 "You died from the knife wound." ,STORY032>
+	<COND (<G? ,LIFE-POINTS 0>
+		<CRLF>
+		<TELL TEXT032-CONTINUED>
+		<CRLF>
+	)>>
+
+<CONSTANT TEXT033 "The sunlight, filtering weakly through tobacco-stained windows, makes his eyes shine like pearls as he turns to you. \"Pull up a pew, mates,\" he says, stifling a sodden belch. \"Ol' Greymalkin is always ready to swap stories with a fellow buccaneer.\"||\"Here is a fearless warrior of the waves, indeed,\" says Grimes behind his hand. \"He's in full sail on a sea of wine, and that smell isn't salt spray billowing on the wind!\"||\"I heard that!\" snaps Greymalkin drunkenly. \"Poke fun at ol' Greymalkin if you like, ye scurvy nobbler -- I'll wager I saw more action afore my lights were put out than ye'll see in your whole poxy life. Aye, an' I heard a few tales in my time, too.\"||\"Heard anything recently?\" you ask.||\"Heard a fair bit. Talkin' about it dries the tongue out, though.\"">
+<CONSTANT CHOICES033 <LTABLE "buy a drink" "go over to the three bullies and the scholar" "pay a visit to the shipyard">>
 
 <ROOM STORY033
 	(IN ROOMS)
 	(DESC "033")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT033)
+	(CHOICES CHOICES033)
+	(DESTINATIONS <LTABLE STORY090 STORY052 STORY374>)
+	(REQUIREMENTS <LTABLE 1 NONE NONE>)
+	(TYPES <LTABLE R-MONEY R-NONE R-NONE>)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT034 "His eyes roll in their sockets, each an orb as big as a boulder. \"A ship, is it? Well, there are many moored in this harbour. More ships than you could dream of: all the ships of myth and legend! But do you not see this harbour chain?\" His hand dips into the dark water, jangling the massive links as a man might play with a watch-chain.||\"Won't you lift it,\" you boldly ask him; \"allow us to enter and choose a vessel?\"||He booms his mirth to the sky. \"Hah! You're audacious enough to be a hero, at least. No, I won't help you -- but see this lock? You could open the chain yourself easily enough, except for the fact that no man can see or touch the key that fits it.\"">
+<CONSTANT CHOICES034 <LTABLE "try something" "try unlocking the chain by magic" "try an item that you think might do the trick" "failing any of these, you must admit defeat.">>
 
 <ROOM STORY034
 	(IN ROOMS)
 	(DESC "034")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT034)
+	(CHOICES CHOICES034)
+	(DESTINATIONS <LTABLE STORY091 STORY110 STORY129 STORY072>)
+	(REQUIREMENTS <LTABLE SKILL-CUNNING SKILL-SPELLS NONE NONE>)
+	(TYPES <LTABLE R-SKILL R-SKILL R-NONE R-NONE>)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT035 "\"Sidonian men-o'-war hard astern! Three of of 'em!\" cries your lookout. The Gloriannic warship sees them too and alters course to engage the enemy. Forgotten for the time being, your own ship is able to slip away.||Oakley joins you on the poopdeck. \"They're almost over the horizon,\" he says, glancing back. \"A nice bit of luck, those Sidonian ships turning up just when they did. But Iøm a bit surprised at you making a run for it, skipper. I'd have thought you'd order us to muck in and help the Gloriannic captain.\"||You smile and pat the wand tucked into your belt. \"Help him, Mister Oakley? Against what -- those magical mirages I conjured? They'll be fading like a morning haze as soon as we're out of sight.\"||He laughs heartily to hear this.">
 
 <ROOM STORY035
 	(IN ROOMS)
 	(DESC "035")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT035)
+	(CONTINUE STORY016)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT036 "Sailors are a superstitious lot, easily spooked by any overt display of sorcery. Because of this you are reluctant to unleash the full force of your magic in front of the crew. Luckily Blutz realises your dilemma and provides you with an excuse to slip away. \"When I was a lad, we always used to say you could get a wind by whistling for it,\" he declares loudly. \"Its worth a try now, ain't it, shipmates?\" Turning to you, he adds: \"Begging your pardon, skipper, but it's an ill wind you get if you whistle while the captain's on deck.\"||\"Eh? Oh yes, of course; I've heard that legend. Well, anything's worth trying. Carry on, Mister Blutz.\"||While the crew start whistling, you go below to your cabin and conjure a wind. Returning on deck a little while later, you see the sails billowing and the sailors dancing for joy. \"Quick thinking, Mister Blutz,\" you mutter as the Lady of Shalott clears the mouth of the bay.||\"Just whistle anytime you need me, Cap'n\" he replies with a wink.">
 
 <ROOM STORY036
 	(IN ROOMS)
 	(DESC "036")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT036)
+	(CONTINUE STORY396)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT037 "The storm turns the sky to boiling pitch, and in your fancy it seems that you would be swamped by celestial fires if it were not that the sea now boils up to the edge of heaven, hissing those fires into smoky darkness. Your crew cling to whatever comes to hand as mighty waves come heaving over the side. You see one man lose his balance and go hurtling across the deck -- only saved at the last moment by catching hold of the mainsail shrouds.||\"Cap'n!\" cries the helmsman, peering into the thundering curtains of rain. \"I cannot see to steer her!\"||You hold your amulet before his eyes. Its burnished gold surface sparkles in the flicker of lightning. \"Focus your gaze on this,\" you tell him. \"Have faith.\"||He stands fast as though entranced, turning the whipstaff to follow each swing of the amulet. The sails strain, drawing shrieks of protest from the masts, and high waves crash around your bows, but you plunge on directly for the heart of the storm.">
 
 <ROOM STORY037
 	(IN ROOMS)
 	(DESC "037")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT037)
+	(CONTINUE STORY094)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT038-NODAMAGE "You pull your ship deftly aft of the enemy ship without taking damage.">
+
+<CONSTANT TEXT038-DAMAGED "You are clipped by cannon-fire as you go in.">
 
 <ROOM STORY038
 	(IN ROOMS)
 	(DESC "038")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(PRECHOICE STORY038-PRECHOICE)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY038-PRECHOICE ()
+	<COND (<IN? ,SKILL-SEAFARING ,SKILLS>
+		<CRLF>
+		<TELL TEXT038-NODAMAGE>
+		<CRLF>
+		<STORY-JUMP ,STORY415>
+	)(ELSE
+		<CRLF>
+		<TELL TEXT038-DAMAGED>
+		<CRLF>
+		<DAMAGE-SHIP 1 ,STORY415 ,STORY227>
+	)>>
+
+<CONSTANT TEXT039 "The sailmaster is the officer in charge of day-to-day navigation of the ship. His tiny cabin is strewn about with papers, compasses, books and other maritime paraphernalia.||A sound from the bunk directly by your shoulder makes you give a start of alarm. You thought the blasted cabin was empty! But just as you are lunging forward, the blanket is tossed aside and you have a clear view of the bunk's occupant -- not a sailor, but only the little monkey that serves as the ship's mascot. Mister Chatter is what the crew call him. He squats on the bunk and watches as you search around the rest of the cabin.||You have time to grab two items from the following: a toolkit, a book of charts, a crucifix, a lodestone and the monkey.">
 
 <ROOM STORY039
 	(IN ROOMS)
 	(DESC "039")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT039)
+	(PRECHOICE STORY039-PRECHOICE)
+	(CONTINUE STORY172)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY039-PRECHOICE ()
+	<SELECT-FROM-LIST <LTABLE TOOLKIT BOOK-OF-CHARTS CRUCIFIX LODESTONE MONKEY> 5 2>>
+
+<CONSTANT TEXT040 "BY steering a southerly route you take advantage of the prevailing east current which should bear you to Port Leshand with the need for hard effort at the oars. Additionally, there is always the chance that you will be picked up by one of the many ships that ply these waters||After a whole day at sea you do not have such hopes. In all that tie you have seen nothing but the boundless expanse of ocean all around you. The sky is cloudless, giving you no respite from the sun that beats mercilessly down from dawn to dusk. By night a cool wind leaves you huddled, shivering, inside your ragged cloths.">
+<CONSTANT TEXT040-CONTINUED "Shortly after sunrise on the second day, you catch sight of a small uncharted island off to port. In form it is a rough hump of rock with no more than a hundred paces from side to side, girt with weed and sandbanks covered with clumps of greenish algae.||\"A coral reef,\" decides Grimes, noting the vague orange-pink shadow of rocks beneath the waves. \"There could at least be fresh rainwater here -- and insects, if not birds.\"||\"What do we want with insects?\" asks Blutz in disgust.||\"Food,\" you tell him. \"Necessity must overrule nicety if we're to survive.\"">
+<CONSTANT CHOICES040 <LTABLE "put in at at the island" "continue on your present course" "detour northwards towards the Smoking Islands">>
 
 <ROOM STORY040
 	(IN ROOMS)
 	(DESC "040")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT040)
+	(CHOICES CHOICES040)
+	(DESTINATIONS <LTABLE STORY028 STORY047 STORY066>)
+	(TYPES THREE-NONES)
 	(FLAGS LIGHTBIT)>
 
 <ROOM STORY041
@@ -1547,7 +1503,7 @@
 	(DESTINATIONS NONE)
 	(REQUIREMENTS NONE)
 	(TYPES NONE)
-	(EVENTS NONE)
+	(EVENTS STORY090-EVENTS)
 	(PRECHOICE NONE)
 	(CONTINUE NONE)
 	(ITEM NONE)
@@ -1556,6 +1512,11 @@
 	(DEATH F)
 	(VICTORY F)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY090-EVENTS ()
+	<CHARGE-MONEY 1>
+	<PRESS-A-KEY>
+	<RETURN ,STORY090>>
 
 <ROOM STORY091
 	(IN ROOMS)
@@ -2241,22 +2202,17 @@
 	(VICTORY F)
 	(FLAGS LIGHTBIT)>
 
+<CONSTANT TEXT129 "Which of these possessions will you use?">
+<CONSTANT CHOICES129 <LTABLE "try the" "a" "a" "if you have none of these, you will have to give up and throw yourself on the giant's charity">>
+
 <ROOM STORY129
 	(IN ROOMS)
 	(DESC "129")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT129)
+	(CHOICES CHOICES129)
+	(DESTINATIONS <LTABLE STORY243 STORY224 STORY262 STORY072>)
+	(REQUIREMENTS <LTABLE HORNPIPE MONKEY DRAGON-RING NONE>)
+	(TYPES <LTABLE R-ITEM R-ITEM R-ITEM R-NONE>)
 	(FLAGS LIGHTBIT)>
 
 <ROOM STORY130

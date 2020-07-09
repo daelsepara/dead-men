@@ -456,10 +456,16 @@
             <REPEAT ()
                 <COND (<NOT .ITEM> <RETURN>)>
                 <SET COUNT <+ .COUNT 1>>
-                <TELL N .COUNT " - " T .ITEM  CR>
+                <HLIGHT ,H-BOLD>
+                <TELL N .COUNT>
+                <HLIGHT 0>
+                <TELL " - " T .ITEM  CR>
                 <SET .ITEM <NEXT? .ITEM>>
             >
-            <TELL N <+ .COUNT 1> " - drop " T .OBJ " instead." CR>
+            <HLIGHT ,H-BOLD>
+            <TELL N <+ .COUNT 1>>
+            <HLIGHT 0>
+            <TELL " - drop " T .OBJ " instead." CR>
             <SET KEY <INPUT 1>>
             <COND (<AND <G? .KEY 48> <L? .KEY <+ .COUNT 49>>>
                 <SET CHOICE <- .KEY 48>>
@@ -505,31 +511,47 @@
     )>>
 
 <ROUTINE SELECT-FROM-LIST (LIST ITEMS MAX "OPT" DESC CONTAINER "AUX" KEY COUNT CHOICE)
+    <COND (<NOT .CONTAINER> <SET .CONTAINER ,PLAYER>)>
     <SET COUNT 0>
     <COND (<NOT .DESC> <SET DESC "item">)>
     <RESET-SELECTIONS>
     <REPEAT ()
         <CRLF>
-        <COND (<OR <NOT .CONTAINER> <EQUAL? .CONTAINER ,PLAYER>>
+        <COND (<EQUAL? .CONTAINER ,PLAYER>
             <TELL "You are already carrying " N <COUNT-POSSESSIONS> " items in your inventory." CR>
         )>
-        <TELL "You can select up to " N .MAX " " .DESC "s from this list:" CR>
+        <TELL "You can select up to " N .MAX " " .DESC "s from:" CR>
         <DO (I 1 .ITEMS)
+            <HLIGHT ,H-BOLD>
             <COND (<L? .I 10>
                 <TELL N .I>
             )(ELSE
                 <TELL C <+ <- .I 10> !\A>>
             )>
+            <HLIGHT 0>
             <TELL " - [">
             <COND (<INTBL? <GET .LIST .I> SELECT-CHOICES 10> <TELL "X">)(ELSE <TELL " ">)>
             <TELL "] - " D <GET .LIST .I> CR>
         >
-        <COND (<EQUAL? .CONTAINER ,SKILLS> <TELL "G - Skills Glossary" CR>)>
-        <TELL "0 - I'm alright with my choices." CR>
+        <COND (<AND <EQUAL? .CONTAINER ,PLAYER> <L? .ITEMS 12>> <HLIGHT ,H-BOLD> <TELL "C"> <HLIGHT 0> <TELL " - View your character (" D ,CURRENT-CHARACTER ")" CR>)>
+        <COND (<AND <EQUAL? .CONTAINER ,SKILLS> <L? .ITEMS 16>> <HLIGHT ,H-BOLD> <TELL "G"> <HLIGHT 0> <TELL " - Display skills glossary" CR>)>
+        <HLIGHT ,H-BOLD>
+        <TELL "0">
+        <HLIGHT 0>
+        <TELL " - I'm alright with my choices." CR>
         <TELL "Select which " .DESC "(s) to take: " CR>
         <SET KEY <INPUT 1>>
-        <COND (<EQUAL? .KEY !\0> <RETURN>)>
-        <COND (<EQUAL? .KEY !\G !\g> <PRINT-SKILLS> <PRESS-A-KEY>)>
+        <COND (<EQUAL? .KEY !\0>
+            <COND (<L? .COUNT .MAX>
+                <TELL CR "Are you sure?">
+                <COND(<YES?> <RETURN>)>
+            )(ELSE
+                <RETURN>
+            )>
+        )>
+        <COND (<AND ,CHARACTERS-ENABLED <EQUAL? .CONTAINER ,PLAYER> <L? .ITEMS 12> <EQUAL? .KEY !\c !\C>> <DESCRIBE-PLAYER> <PRESS-A-KEY>)>
+        <COND (<AND ,CHARACTERS-ENABLED <EQUAL? .CONTAINER ,SKILLS> <L? .ITEMS 16> <EQUAL? .KEY !\G !\g>> <PRINT-SKILLS> <PRESS-A-KEY>)>
+        <COND (<AND ,CHARACTERS-ENABLED <EQUAL? .CONTAINER ,PLAYER> <L? .ITEMS 18> <EQUAL? .KEY !\i !\I>> <DESCRIBE-INVENTORY> <PRESS-A-KEY>)>
         <COND (<OR <AND <G=? .KEY !\1> <L=? .KEY !\9>> <AND <G=? .KEY !\a> <L=? .KEY !\f>> <AND <G=? .KEY !\A> <L=? .KEY !\F>>>
             <COND (<AND <G=? .KEY !\a> <L=? .KEY !\f>>
                 <SET CHOICE <+ <- .KEY !\a> 10>> 
@@ -560,7 +582,7 @@
     <COND (<G? .COUNT 0>
         <DO (I 1 9)
             <COND (<GET SELECT-CHOICES .I>
-                <COND (<OR <NOT .CONTAINER> <EQUAL? .CONTAINER ,PLAYER>>
+                <COND (<EQUAL? .CONTAINER ,PLAYER>
                     <TAKE-ITEM <GET SELECT-CHOICES .I>>
                 )(ELSE
                     <MOVE <GET SELECT-CHOICES .I> .CONTAINER>
@@ -580,9 +602,15 @@
         <CRLF>
         <TELL "You can buy anything you have money for:" CR>
         <DO (I 1 .ITEMS)
-            <TELL N .I " - " D <GET .WARES .I> " (" N <GET .PRICELIST .I> " " D ,CURRENCY ")" CR>
+            <HLIGHT ,H-BOLD>
+            <TELL N .I>
+            <HLIGHT 0>
+            <TELL " - " D <GET .WARES .I> " (" N <GET .PRICELIST .I> " " D ,CURRENCY ")" CR>
         >
-        <TELL "0 - Bye" CR>
+        <HLIGHT ,H-BOLD>
+        <TELL "0">
+        <HLIGHT 0>
+        <TELL " - Bye" CR>
         <TELL "You are carrying " N ,MONEY " " D ,CURRENCY ": ">
         <SET KEY <INPUT 1>>
         <CRLF>
@@ -745,9 +773,15 @@
             <HLIGHT 0>
             <CRLF>
             <DO (I 1 .COUNT)
-                <TELL N .I " - " D <GET CHARACTERS .I> CR>
+                <HLIGHT ,H-BOLD>
+                <TELL N .I>
+                <HLIGHT 0>
+                <TELL " - " D <GET CHARACTERS .I> CR>
             >
-            <TELL "C - Custom character" CR>
+            <HLIGHT ,H-BOLD>
+            <TELL "C">
+            <HLIGHT 0>
+            <TELL " - Custom character" CR>
             <TELL "Select which character?">
             <SET KEY <INPUT 1>>
             <COND (<AND <G=? .KEY !\1> <L=? .KEY !\9>>
