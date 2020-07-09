@@ -47,7 +47,7 @@
 <OBJECT SKILL-SWORDPLAY
     (DESC "SWORDPLAY")
     (LDESC "The best fighting skill. You must possess a sword to use this skill.")
-    (REQUIRES SWORD)>
+    (REQUIRES SWORD SHARKS-TOOTH-SWORD)>
 
 <OBJECT SKILL-WILDERNESS-LORE
     (DESC "WILDERNESS LORE")

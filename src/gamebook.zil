@@ -258,15 +258,16 @@
     )>
     <RTRUE>>
 
-<ROUTINE CHECK-SKILL-POSSESSIONS (SKILL "AUX" REQUIRED)
+<ROUTINE CHECK-SKILL-POSSESSIONS (SKILL "AUX" REQUIRED RESULT)
     <SET REQUIRED <GETP .SKILL ,P?REQUIRES>>
-    <COND (.REQUIRED
-        <COND (<NOT <IN? .REQUIRED ,PLAYER>>
-            <NOT-POSSESSED .REQUIRED>
-            <RFALSE>
-        )>
-    )>
-    <RTRUE>>
+    <COND (<NOT .REQUIRED> <RTRUE>)>
+    <REPEAT ()
+        <SET RESULT F>
+        <COND (<NOT .REQUIRED> <RETURN>)>
+        <COND (<IN? .REQUIRED ,PLAYER> <SET RESULT T> <RETURN>)>
+        <SET .REQUIRED <NEXT? .REQUIRED>>
+    >
+    <RETURN .RESULT>>
 
 <ROUTINE NOT-POSSESSED (OBJ)
     <CRLF><CRLF>
@@ -342,6 +343,24 @@
 <ROUTINE GAIN-ITEM ("AUX" ITEM)
     <SET ITEM <GETP ,HERE ,P?ITEM>>
     <TAKE-ITEM .ITEM>>
+
+<ROUTINE GAIN-LIFE (POINTS "AUX" DIFF)
+    <COND (<L? ,LIFE-POINTS ,MAX-LIFE-POINTS>
+        <SET DIFF <- ,MAX-LIFE-POINTS ,LIFE-POINTS>>
+        <CRLF>
+        <SETG LIFE-POINTS <+ ,LIFE-POINTS .POINTS>>
+        <HLIGHT ,H-BOLD>
+        <TELL "You gained ">
+        <COND (<G? ,LIFE-POINTS ,MAX-LIFE-POINTS>
+            <SETG LIFE-POINTS ,MAX-LIFE-POINTS>
+            <TELL N .DIFF>
+        )(ELSE
+            <TELL N .POINTS>
+        )>
+        <TELL " life points.">
+        <HLIGHT 0>
+        <CRLF>
+    )>>
 
 <ROUTINE GIVE-ITEM (ITEM)
     <REMOVE-ITEM .ITEM "gave">>
