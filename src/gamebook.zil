@@ -39,11 +39,19 @@
     (FLAGS CONTBIT OPENBIT)>
 
 <PROPDEF QUANTITY 0>
+<PROPDEF STARS 0>
 
 <OBJECT SKILLS
     (DESC "Skills")
     (SYNONYM SKILLS)
     (FLAGS CONTBIT OPENBIT)>
+
+<OBJECT VEHICLES
+    (DESC "vehicles")
+    (SYNONYM VEHICLES)
+    (FLAGS CONTBIT OPENBIT)>
+
+<GLOBAL CURRENT-VEHICLE NONE>
 
 <ROUTINE GAME-BOOK ("AUX" KEY)
     <COND (,CHARACTERS-ENABLED
@@ -74,7 +82,7 @@
         <COND (,CONTINUE-TO-CHOICES
             <SET KEY <PROCESS-STORY>>
             <COND (<AND ,CHARACTERS-ENABLED <EQUAL? .KEY !\c !\C>> <DESCRIBE-PLAYER> <PRESS-A-KEY> <SET KEY NONE>)>
-            <COND (<AND ,CHARACTERS-ENABLED <EQUAL? .KEY !\g !\G>> <CRLF> <PRINT-SKILLS> <PRESS-A-KEY> <SET KEY NONE>)>
+            <COND (<AND ,CHARACTERS-ENABLED <EQUAL? .KEY !\g !\G>> <PRINT-SKILLS> <PRESS-A-KEY> <SET KEY NONE>)>
             <COND (<AND ,CHARACTERS-ENABLED <EQUAL? .KEY !\i !\I>> <DESCRIBE-INVENTORY> <PRESS-A-KEY> <SET KEY NONE>)>
             <COND (<EQUAL? .KEY !\h !\H !\?> <DISPLAY-HELP> <PRESS-A-KEY> <SET KEY NONE>)>
             <COND (<EQUAL? .KEY !\q !\Q> <CRLF> <TELL "Are you sure you want to quit the game?"> <COND(<YES?> <RETURN>)>)>
@@ -502,7 +510,7 @@
         <TELL "Select which " .DESC "(s) to take: " CR>
         <SET KEY <INPUT 1>>
         <COND (<EQUAL? .KEY !\0> <RETURN>)>
-        <COND (<EQUAL? .KEY !\G !\g> <CRLF> <PRINT-SKILLS> <PRESS-A-KEY>)>
+        <COND (<EQUAL? .KEY !\G !\g> <PRINT-SKILLS> <PRESS-A-KEY>)>
         <COND (<OR <AND <G=? .KEY !\1> <L=? .KEY !\9>> <AND <G=? .KEY !\a> <L=? .KEY !\f>> <AND <G=? .KEY !\A> <L=? .KEY !\F>>>
             <COND (<AND <G=? .KEY !\a> <L=? .KEY !\f>>
                 <SET CHOICE <+ <- .KEY !\a> 10>> 
@@ -545,7 +553,8 @@
 
 ; "Story - Merchant routines (display)"
 ; ---------------------------------------------------------------------------------------------
-<ROUTINE MERCHANT (WARES PRICELIST "AUX" ITEM ITEMS KEY)
+<ROUTINE MERCHANT (WARES PRICELIST "OPT" CONTAINER "AUX" ITEM ITEMS KEY)
+    <COND (<NOT .CONTAINER> <SET CONTAINER ,PLAYER>)>
     <COND (<OR <NOT .WARES> <NOT .PRICELIST>> <RETURN>)>
     <SET ITEMS <GET .WARES 0>>
     <REPEAT ()
@@ -559,7 +568,7 @@
         <SET KEY <INPUT 1>>
         <CRLF>
         <COND (<AND ,CHARACTERS-ENABLED <EQUAL? .KEY !\c !\C>> <DESCRIBE-PLAYER> <PRESS-A-KEY> <SET KEY NONE>)>
-        <COND (<AND ,CHARACTERS-ENABLED <EQUAL? .KEY !\i !\I>> <DESCRIBE-INVENTORY> <PRESS-A-KEY> <SET KEY NONE>)>
+        <COND (<AND ,CHARACTERS-ENABLED <EQUAL? .KEY !\i !\I> <EQUAL? .CONTAINER ,PLAYER>> <DESCRIBE-INVENTORY> <PRESS-A-KEY> <SET KEY NONE>)>
         <COND (<AND <G? .KEY 48> <L? .KEY <+ .ITEMS 49>>>
             <SET ITEM <- .KEY 48>>
             <CRLF>
@@ -571,12 +580,18 @@
                     <TELL "You can't afford " T <GET .WARES .ITEM> "!" CR>
                 )(ELSE
                     <COND (<FSET? <GET .WARES .ITEM> ,TAKEBIT>
-                        <COND (<IN? <GET .WARES .ITEM> ,PLAYER>
+                        <COND (<IN? <GET .WARES .ITEM> .CONTAINER>
                             <TELL "You already have " T <GET .WARES .ITEM> "!" CR>
                         )(ELSE
                             <SETG ,MONEY <- ,MONEY <GET .PRICELIST .ITEM>>>
                             <TELL "You bought " T <GET .WARES .ITEM> CR>
-                            <MOVE <GET .WARES .ITEM> ,PLAYER>
+                            <COND (<AND <EQUAL? .CONTAINER ,PLAYER> <EQUAL? <COUNT-POSSESSIONS> LIMIT-POSSESSIONS> <NOT <IN? <GET .WARES .ITEM> .CONTAINER>>>
+                                <CRLF>
+                                <TELL "You are carrying too many items." CR>
+                                <DROP-REPLACE-ITEM <GET .WARES .ITEM>>
+                            )(ELSE
+                                <MOVE <GET .WARES .ITEM> .CONTAINER>
+                            )>
                         )>
                     )(ELSE
                         <TELL "You can't have that!" CR>
@@ -658,9 +673,17 @@
         <TELL "Codewords: ">
         <HLIGHT 0>
         <PRINT-CONTAINER ,CODEWORDS>
+        <COND (<FIRST? VEHICLES>
+            <CRLF>
+            <HLIGHT ,H-BOLD>
+            <PRINT-CAP-OBJ ,VEHICLE>
+            <TELL ": ">
+            <HLIGHT 0>
+            <PRINT-CONTAINER ,VEHICLES>
+        )>
     )>>
 
-<ROUTINE PRINT-CONTAINER (CONTAINER "AUX" COUNT ITEMS QUANTITY)
+<ROUTINE PRINT-CONTAINER (CONTAINER "AUX" COUNT ITEMS)
     <SET COUNT 0>
     <SET ITEMS <FIRST? .CONTAINER>>
     <COND (.ITEMS
@@ -670,9 +693,11 @@
                 <HLIGHT ,H-ITALIC>
                 <TELL D .ITEMS>
                 <HLIGHT 0>
-                <SET QUANTITY <GETP .ITEMS ,P?QUANTITY>>
-                <COND (.QUANTITY
-                    <TELL " (" N .QUANTITY ")">
+                <COND (<GETP .ITEMS ,P?QUANTITY>
+                    <TELL " (" N <GETP .ITEMS ,P?QUANTITY> ")">
+                )>
+                <COND (<GETP .ITEMS ,P?STARS>
+                    <TELL " (" N <GETP .ITEMS ,P?STARS> " stars)">
                 )>
                 <COND (<AND <FSET? .ITEMS ,WEARBIT> <FSET? .ITEMS ,WORNBIT>>
                     <TELL " (worn)">
@@ -854,6 +879,7 @@
 <ROUTINE PRINT-SKILLS ("AUX" COUNT)
     <SET COUNT <GET SKILL-GLOSSARY 0>>
     <COND (<G? .COUNT 0>
+        <CRLF>
         <DO (I 1 .COUNT)
             <HLIGHT ,H-ITALIC>
             <TELL D <GET SKILL-GLOSSARY .I> CR>

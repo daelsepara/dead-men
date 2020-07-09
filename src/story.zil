@@ -1,11 +1,20 @@
 <GLOBAL CHARACTERS-ENABLED T>
 
 <CONSTANT BAD-ENDING "You quest for glory ends here.">
-<CONSTANT GOOD-ENDING "The adventure is over. You have been granted command of a new vessel! Congratulations!">
+<CONSTANT GOOD-ENDING "You are successful in your quest for glory! Congratulations!">
 
 <OBJECT CURRENCY (DESC "doubloons")>
+<OBJECT VEHICLE (DESC "ships")>
 
 <ROUTINE RESET-OBJECTS ()
+	<PUTP ,LADY-OF-SHALOTT ,P?STARS 1>
+	<PUTP ,SHIVERED-TIMBER ,P?STARS 2>
+	<PUTP ,QUEENS-RANSOM ,P?STARS 3>
+	<PUTP ,FAERIE-QUEEN ,P?STARS 3>
+	<PUTP ,METEOR ,P?STARS 4>
+	<PUTP ,OCTAVIUS ,P?STARS 4>
+	<PUTP ,PROVIDENCE ,P?STARS 5>
+	<PUTP ,CALYPSO ,P?STARS 5>
 	<RETURN>>
 
 <ROUTINE RESET-STORY ()
@@ -265,94 +274,66 @@
 <ROUTINE STORY015-PRECHOICE ()
 	<LOSE-ITEM ,MAGIC-WAND>>
 
+<CONSTANT TEXT016 "You sail back into Selenice harbour with a hold full of treasure and hearts full of confidence. News of your fortune spreads rapidly, bringing the master shipwright himself hurrying down to the quay to greet you.||\"Come aboard, Master Kemp,\" you say, heartily pumping his hand as he steps off the gangplank. \"We've found rich pickings on our travels. Perhaps now you can sell us a ship more suited to our needs?\" With that, you throw open the hold covers with a theatrical flourish.||The sunlight reflects off your haul in patterns of gold, silver and ruby-red across Kemp's face. He looks up with as broad a smile as a mouth could manage and says, \"Why, captain. I have the very ship for you moored just along the quay.\"||You turn to look where he is pointing, a gasp of admiration escaping your lips as you do. The ship is a proud tall-masted galleon with sixty cannon bristling along her gunwales. Her figurehead is a painted oak mermaid of almost supernatural beauty. \"The Faerie Queen,\# says Blutz, reading the name emblazoned on the prow. \"I think I'm in love.\"||\"That's the one for us,\" you concur. \"Master Kemp, you keep the sloop and the loot here in the hold. We'll have the Faerie Queen.\"||Kemp nods, stunned at having made the quickest sale of his life, while you stride down the gangplank and along the quay to take command of your new vessel.">
+
 <ROOM STORY016
 	(IN ROOMS)
 	(DESC "016")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT016)
+	(CONTINUE STORY184)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT017 "You agree it is senseless to try steering out of the bay in thick fog. The anchor is dropped, but as you turn to go below you are met by a deputation of crewmen. Their spokesman is the bo'sun - a great thickset man with a head like a cannonball, he stands before you twisting his cap in his hand with the nervousness of a small child. \"The thing is, Cap'n\" he says with many a glance to left and right, \"this looks a dire place to lie becalmed, an' now with this fog comin' in... Well, it's given some o' the men the jibbers, an' we was wonderin' -- with your reputation for magic an' that -- if you couldn't lay a charm to keep the ship safe from hobgoblins an' such?\"||\"A simple enough request, bo'sun, and one I'm glad to grant if it will help the men's morale.\"Taking your amulet in hand, you recite a benediction that renders the ship inviolate against any assault by evil spirits or creatures of the night. Acknowledging the crew's thankful looks with a bland smile, you go down to your cabin and turn in. The night passes uneventfully.">
 
 <ROOM STORY017
 	(IN ROOMS)
 	(DESC "017")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT017)
+	(CONTINUE STORY396)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT018 "Sudden rain thunders down onto the deck, and a moment later you are hit by a wind that strains the sails to the verge of snapping. The sky above looks like molten tar, and lightning drops in dazzling splinters through the darkness. Drawing the fan from your sleeve, you rush forward and sweep it hard. There are mutterings of superstitious awe from the sailors as the storm abates. You can still see the titanic waves crashing down off your bows, but it seems that the fan forms a funnel through the storm -- a funnel through which you can steer your ship.||\"Helmsman!\" you shout. \"Dead ahead: take us into the eye of the storm.\" The thundercloud fan vanishes from your hand now that its power is used up -- but it has served its purpose.">
 
 <ROOM STORY018
 	(IN ROOMS)
 	(DESC "018")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
+	(STORY TEXT018)
 	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(CONTINUE STORY094)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY018-PRECHOICE ()
+	<LOSE-ITEM ,THUNDERCLOUD-FAN>>
+
+<CONSTANT TEXT019 "Smoke-hazed flashes blister among the gunwales of the Moon Dog, followed by a sound like thunder that rolls across the water. Cannonballs crack against the timbers of your vessel. There is a cry of alarm as the mizzenmast splits, and you have to dodge to one side as the rigging comes crashing down. At least one of your crew is not so fortunate: you see him swept overboard by the broken boom as it falls.">
 
 <ROOM STORY019
 	(IN ROOMS)
 	(DESC "019")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT019)
+	(PRECHOICE STORY019-PRECHOICE)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY019-PRECHOICE ("AUX" STARS)
+	<COND (,CURRENT-VEHICLE
+		<SET STARS <GETP ,CURRENT-VEHICLE ,P?STARS>>
+		<SET STARS <- .STARS 2>>
+		<COND (<L? .STARS 0> <SET .STARS 0>)>
+		<PUTP ,CURRENT-VEHICLE ,P?STARS .STARS>
+		<COND (<G? .STARS 0> <STORY-JUMP ,STORY006>)>
+	)>
+	<STORY-JUMP ,STORY227>>
+
+<CONSTANT TEXT020 "There is a murmur of amazement from the pirates in Skarvench's cabin. Then you hear a voice which you recognize as Curshaw, the weaselly quartermaster: \"But how, Cap'n? Them Gloriannes know the sea like as to porpoises. They'd blow us out of the water before we got within a league of the Queen's flagship.\"||Crouching outside in the darkened passage, you nod to yourself. That's the question you'd have liked to ask.||There is a pause. You picture Skarvench giving one of his secretive smiles as he takes a pinch of snuff. Sure enough, there comes a satisfied sneeze and then his crowing voice is heard again: \"Never you mind the details, Mister. Thats for your old captain to sort out, ain't it? Suffice to say that there's a shipwright in Port Selenice who's being well paid for his work.\"||\"But, Cap'n\" you hear the ox-like first mate, Porbuck protesting, \"we've always stuck by all your plans, but this surely can't be feasible. Won't Queen Titania be heavily guarded? It'd be our one ship against a dozen!\"||Precisely what you were thinking.">
+<CONSTANT CHOICES020 <LTABLE "wait and hear Skarvench's reply" "rejoin your friends if you think it's time" "risk taking the time to snatch some supplies from the sailmaster's cabin">>
 
 <ROOM STORY020
 	(IN ROOMS)
 	(DESC "020")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT020)
+	(CHOICES CHOICES020)
+	(DESTINATIONS <LTABLE STORY077 STORY172 STORY039>)
+	(TYPES THREE-NONES)
 	(FLAGS LIGHTBIT)>
 
 <ROOM STORY021
