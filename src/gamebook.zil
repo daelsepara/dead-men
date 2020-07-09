@@ -77,7 +77,7 @@
             <COND (<AND ,CHARACTERS-ENABLED <EQUAL? .KEY !\g !\G>> <CRLF> <PRINT-SKILLS> <PRESS-A-KEY> <SET KEY NONE>)>
             <COND (<AND ,CHARACTERS-ENABLED <EQUAL? .KEY !\i !\I>> <DESCRIBE-INVENTORY> <PRESS-A-KEY> <SET KEY NONE>)>
             <COND (<EQUAL? .KEY !\h !\H !\?> <DISPLAY-HELP> <PRESS-A-KEY> <SET KEY NONE>)>
-            <COND (<EQUAL? .KEY !\q !\Q> <CRLF> <TELL "Are you sure? "><COND(<YES?> <RETURN>)>)>
+            <COND (<EQUAL? .KEY !\q !\Q> <CRLF> <TELL "Are you sure you want to quit the game?"> <COND(<YES?> <RETURN>)>)>
             <COND (<EQUAL? .KEY !\x !\X> <CRLF> <RETURN>)>
         )>
         <CLOCKER>
@@ -542,6 +542,56 @@
         >
     )>
     <RETURN>>
+
+; "Story - Merchant routines (display)"
+; ---------------------------------------------------------------------------------------------
+<ROUTINE MERCHANT (WARES PRICELIST "AUX" ITEM ITEMS KEY)
+    <COND (<OR <NOT .WARES> <NOT .PRICELIST>> <RETURN>)>
+    <SET ITEMS <GET .WARES 0>>
+    <REPEAT ()
+        <CRLF>
+        <TELL "You can buy anything you have money for:" CR>
+        <DO (I 1 .ITEMS)
+            <TELL N .I " - " D <GET .WARES .I> " (" N <GET .PRICELIST .I> " " D ,CURRENCY ")" CR>
+        >
+        <TELL "0 - Bye" CR>
+        <TELL "You are carrying " N ,MONEY " " D ,CURRENCY ": ">
+        <SET KEY <INPUT 1>>
+        <CRLF>
+        <COND (<AND ,CHARACTERS-ENABLED <EQUAL? .KEY !\c !\C>> <DESCRIBE-PLAYER> <PRESS-A-KEY> <SET KEY NONE>)>
+        <COND (<AND ,CHARACTERS-ENABLED <EQUAL? .KEY !\i !\I>> <DESCRIBE-INVENTORY> <PRESS-A-KEY> <SET KEY NONE>)>
+        <COND (<AND <G? .KEY 48> <L? .KEY <+ .ITEMS 49>>>
+            <SET ITEM <- .KEY 48>>
+            <CRLF>
+            <TELL "Purchase " D <GET .WARES .ITEM> " (" N <GET .PRICELIST .ITEM> " " D ,CURRENCY ")?">
+            <COND (<YES?>
+                <CRLF>
+                <HLIGHT ,H-BOLD>
+                <COND (<L? ,MONEY <GET .PRICELIST .ITEM>>
+                    <TELL "You can't afford " T <GET .WARES .ITEM> "!" CR>
+                )(ELSE
+                    <COND (<FSET? <GET .WARES .ITEM> ,TAKEBIT>
+                        <COND (<IN? <GET .WARES .ITEM> ,PLAYER>
+                            <TELL "You already have " T <GET .WARES .ITEM> "!" CR>
+                        )(ELSE
+                            <SETG ,MONEY <- ,MONEY <GET .PRICELIST .ITEM>>>
+                            <TELL "You bought " T <GET .WARES .ITEM> CR>
+                            <MOVE <GET .WARES .ITEM> ,PLAYER>
+                        )>
+                    )(ELSE
+                        <TELL "You can't have that!" CR>
+                    )>
+                )>
+                <HLIGHT 0>
+            )>
+        )>
+        <UPDATE-STATUS-LINE>
+        <COND (<EQUAL? .KEY !\0>
+            <CRLF>
+            <TELL "Are you sure?">
+            <COND (<YES?> <RTRUE>)>            
+        )>
+    >>
 
 ; "Story - Support Routines (display)"
 ; ---------------------------------------------------------------------------------------------

@@ -6,3 +6,10 @@
     (DESC "Detrude")
     (SYNONYM DETRUDE)>
 
+<OBJECT CODEWORD-MARATHON
+    (DESC "Marathon")
+    (SYNONYM MARATHON)>
+
+<OBJECT CODEWORD-PROSPERO
+    (DESC "Prospero")
+    (SYNONYM PROSPERO)>
