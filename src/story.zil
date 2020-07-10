@@ -25,10 +25,12 @@
 	<PUT <GETP ,STORY012 ,P?DESTINATIONS> 3 ,STORY409>
 	<PUTP ,STORY013 ,P?DEATH T>
 	<PUTP ,STORY032 ,P?DEATH T>
+	<PUTP ,STORY040 ,P?DEATH T>
+	<PUTP ,STORY041 ,P?DEATH T>
+	<PUTP ,STORY047 ,P?DEATH T>
 	<RETURN>>
 
 <CONSTANT DIED-IN-COMBAT "You died in combat.">
-<CONSTANT DIED-EJADA-SORCERY "You have died from the Ejada's sorcery.">
 
 <ROUTINE DAMAGE-SHIP (DMG SURVIVED DESTROYED "AUX" STARS)
 	<COND (,CURRENT-VEHICLE
@@ -45,7 +47,10 @@
 		<STORY-JUMP .DESTROYED>
 	)>
 	<RETURN>>
-	
+
+<ROUTINE IF-ALIVE (TEXT)
+	<COND (<G? ,LIFE-POINTS 0> <TELL CR .TEXT CR>)>>
+
 <CONSTANT PROLOGUE-TEXT "\"Pirates!\" The roar of cannonfire thunders across the waves as word leaves the captain's lips. Hurtling out of the billowing plumes of smoke come a barrage of iron shells. Each is larger than a man's fist, and strikes with a force that splinters the oak beams of your ship and shatters men's skulls like eggs. The mainmast takes a direct hit and topples, crushing the sailors standing under it.||A grappling hook latches onto the rail. The pirates are getting ready to board you. Rushing to the side, you see their sinister vessel drawing alongside, black sails flapping in the breeze like a carrion-bird's wings. Her prow has the face of a medieval gargoyle. You read the name painted on her bows: the Belle Dame. But there is no look of beauty about her, nor hint of mercy on the faces of the eager brigands lining her rail.||A crewman standing beside you utters a groan of fear. \"It's Skarvench's ship.\"||\"Who's he?\" you ask, having to shout over the din of cannon shots and the pirates' battle-cries.||He stares at you as though you are a simpleton, and then remembers that this is your first voyage to the New World. \"The worst man that ever lived,\" is his blunt reply. And then the ships come together and the pirates are upon you.||Rushing headlong into the terrified crew, the pirates cleave a swathe of gory death across the ship's deck, their cutlasses rising and falling like scythes. You see the ship's officers fighting valiantly to defend the helm, but they are hopelessly outnumbered and soon butchered at their post. The fierce grins on the pirate's faces tell you that they expect easy pickings. You narrow your eyes as anger wells up inside you. You know that you will die today, but you feel no fear -- only a cold determination to sell your life dearly. Two pirates lunge at you. You duck the swing of the first, catch his arm and throw him against his crony. The sword intended for you ends up in a pirate's belly, and his knife comes up by reflex to slash at the man who has inadvertently impaled him.||\"Two down...\" You turn, and then for the first time you clap eyes on Skarvench himself. He stands astride the rail, grasping a grappling-line in one hand and a pistol in the other, whipping his sea-dogs into a killing frenzy with his evil laughter. His broad back and gangling limbs make him look like a massive crow. His beard is as long and lank as seaweed, and a single eye blazes beneath his bald brow -- the other is covered by a leather patch.||He is raising his pistol. You are rooted to the spot under his baleful stare. It can't be fear you're feeling surely...||\"Ah, matey,\" he says with a brown-toothed grin. \"Got to kill you again, 'ave I?\"||Again..? You have no time to ponder this enigma. In the next instant, he fires his pistol and your whole world goes black.||--||You sit up with a gasp, sweat soaking your clothes.||\"You've 'ad that dream again, eh?\"||You look around, memory trickling back as the dream recedes. The slow creaking of a ship's timbers, the unhurried heave of the waves... you are in the stuffy confines of the Belle Dame's bowels. Sailors snore fitfully around you, catching some sleep between chores. In the glimmer of an oil lamp sits Old Marshy, the ship's carpenter, whittling at a stick of wood. He glances across at you, shaking his head sadly. \"It was two years ago. Don't know why you can't stop 'aving the dreams.\"||\"Dreams? Nightmares!\" you say, mopping the sweat away. As you do, you feel the scar across your forehead where Skarvench's bullet struck you. A finger's breadth to the right -- one less tot of rum for Skarvench's breakfast that fateful morning! -- and your brains would have been blown out. As it is the bullet only grazed you, leaving the visible mark on your head and the scar of hatred deep in your heart.||Now that the nightmare has washed away, you recall the two years that have passed since that day. When you were first brought aboard the Belle Dame, Skarvench deemed you too insignificant to ransom and too close to death to be worth pressing into service. He would have cast you into the deep and never had a qualm -- that was the fate of most who survived the battle -- but Old Marshy undertook to nurse you back to health. You can well remember the weeks it took to get your strength back -- weeks experienced like glimpses in broken glass, because of fever. You remember Old Marshy holding the wooden spoons of gruel to your lips until his thin arms trembled with tiredness, urging you to eat. You remember the shouts of the pirates as they toiled in the rigging, and their drunken laughter under the stars at night. And most of all you remember Skarvench, looming through your thoughts like the embodiment of cruelty, striding the deck and waiting for you to die.||You did not die; thanks to Old Marshy you regained your strength. But death might have been better than the living hell you have had to endure these two years as an ordinary seaman aboard the cruellest ship to sail the Carab Sea. Skarvench metes out discipline as the whim takes him, revelling in the suffering of others; pain is his wine, and death his meat. Often you have had to stand by and watch a man whipped for the slightest mistake. Sometimes you have felt that whip yourself -- all to raucous laughter of Skarvench and his vicious pirate band.||\"All hands on deck!\" Hearing the command, you shake the other sailors awake and hurry up out of the dingy confines of the orlop deck into the blaze of daylight.||Skarvench stands on the poopdeck. The ox-like first mate, Porbuck gives you a shove and growls, \"You , get up in the rigging.\" As you climb, you glance out to sea. A small ship lies off the port bow and the Belle Dame is rapidly closing on her. You see a tall wooden crucifix standing amidships; she has no cannon. That is foolhardy. \"Go to sea on a prayer,\" as the adage goes, \"but take a keg of powder too.\"||You understand the reason for the other ship's lack of weaponry when you get a better view of the men lining her rail. They're all monks!||Skarvench's voice goes snarling across the water. \"Heave to or be blown out o' the water!\" he calls. \"We'll be takin' your treasure, holy or not!\"||\"We have no treasure,\" calls back one of the monks. \"We are poor brothers of the Saviour, travelling to the New World to spread His message to the heathen.\"||Skarvench smiles -- always a sign of his bad temper -- and says, \"Is that so? Well, I know of no place more heathen than the ocean bed.\" He leans on the poopdeck rail and calls to the master gunner: \"Mister Borograve, prepare to give 'em a broadside. I want their shaved heads sent forty fathoms deep, where heaven can't hear their mealy-mouthed prayers!\"||The monks know they cannot outrun the Belle Dame. As Borograve orders the cannons primed, they begin to sing a hymn. It is a glorious and peaceful sound that reminds you of the meadows and villages of your homeland. Most of the sailors pause in their duties, overcome by the melancholy beauty of the song. Even one or two of the pirates look uneasy at what they are about to do.||\"Prepare to fire,\" says Skarvench, keen as a hound at the scent of a kill.||\"No!\" A carpenter's hammer goes flying through the air and strikes Skarvench's head with a crack loud enough to carry up to where you sit in the rigging. Skarvench remains as steady as a rock, his hand flashing out with the startling speed to snatch the hammer out of the air as it falls. then he turns. His face is a mask of white fury. The fact that there is a stream of blood flowing from his temple only makes him look all the more terrible. His gaze bores along the deck and finds:||\"Mister Marsh! This your hammer, is it?\"||Old Marshy quails, his one jot of boldness used up. \"B-but, Cap'n... they're holy men! I don't think...||Skarvench tastes his own blood on his lip and savours it with his tongue. He gestures to a couple of pirates, and Old Marshy is seized and dragged up to the poopdeck. \"Lay his head on the rail there, lads,\" says Skarvench in a voice like honeyed venom. He raises the hammer. \"You're right, Mister Marsh; you don't think. That's the trouble with having nothin' in your brain-pan, see?\"||Far too late, you realise what Skarvench is going to do. You give a gasp and start down through the rigging. But even as you act, you know there is nothing you can do...||The hammer smashes down. It sounds like a wineflask breaking. The ordinary seamen look away in horror. The pirates grin gleefully like their captain, excited by the grisly sight. The corpse slumps to the deck.||\"God curse you, Skarvench,\" you mutter under your breath as you reach the foot of the mast. \"I'll see you dead for that.\"||\"You're not alone in wishing that,\" whispers a voice, \"but I'd stow such talk unless you want your own skull under the hammer next.\"||You look around to see three of the crew -- Grimes, Oakley and Blutz -- men who, like you, were taken off plundered ships and force to work for the pirates. \"We've a plan,\" continues Grimes in a low voice. \"If we stay aboard this devil ship our days are surely numbered, so tonight we plan to jump ship. We're scheduled to take the evening watch. We'll lower the jollyboat with a few supplies, then strike out towards Port Leshand.\"||\"Five hundred leagues of open ocean in a tiny boat like that!\" you gasp. \"It's near certain death.\"||\"Better than certain death, which is what we can expect here,\" mutters Oakley. \"Look, you've got a reputation of being a handy customer to have along in a tight spot. To be honest, we haven't got much of a chance without you. Now, are you with us?\"||You glare back up at the tall stooped figure on the poopdeck. He stamps to and fro, the brain-smeared hammer still in his hand, annoyed that the monks made their getaway while he was distracted by Old Marshy. You'll make him pay for his crimes one day, but you know the moment is not yet right.||You turn to Grimes and the others and give a swift nod. \"I'm with you.\"">
 
 <CONSTANT TEXT-BLANK "This story point has not been written yet.">
@@ -110,6 +115,7 @@
 	<COND (<IN? ,SKILL-SPELLS ,SKILLS> <STORY-JUMP ,STORY061>)>>
 
 <CONSTANT TEXT005 "Ejada responds with a cry of rage and sorcerous gesture. Immediately a hail of red-hot stones pour down out of the sky to pelt you as you flee. \"Craven mortals, \" she thunders. \"I gave you the chance to leave with honour, but you spurned my kindness. Now suffer the consequences.\"||\"Kindness, she calls it?\" gasps Blutz as he struggles to keep up through the battering rain of stones. \"She's killing us with her kindness!">
+<CONSTANT DIED-EJADA-SORCERY "You have died from the Ejada's sorcery.">
 
 <ROOM STORY005
 	(IN ROOMS)
@@ -156,7 +162,7 @@
 		<CRLF>
 	)(ELSE
 		<CRLF>
-		<LOSE-LIFE 1 "You have died from the bullet wound." ,STORY006>
+		<LOSE-LIFE 1 "You died from the bullet wound." ,STORY006>
 	)>>
 
 <GLOBAL STORY007-FLAG F>
@@ -505,11 +511,7 @@
 
 <ROUTINE STORY032-PRECHOICE ()
 	<LOSE-LIFE 1 "You died from the knife wound." ,STORY032>
-	<COND (<G? ,LIFE-POINTS 0>
-		<CRLF>
-		<TELL TEXT032-CONTINUED>
-		<CRLF>
-	)>>
+	<IF-ALIVE TEXT032-CONTINUED>>
 
 <CONSTANT TEXT033 "The sunlight, filtering weakly through tobacco-stained windows, makes his eyes shine like pearls as he turns to you. \"Pull up a pew, mates,\" he says, stifling a sodden belch. \"Ol' Greymalkin is always ready to swap stories with a fellow buccaneer.\"||\"Here is a fearless warrior of the waves, indeed,\" says Grimes behind his hand. \"He's in full sail on a sea of wine, and that smell isn't salt spray billowing on the wind!\"||\"I heard that!\" snaps Greymalkin drunkenly. \"Poke fun at ol' Greymalkin if you like, ye scurvy nobbler -- I'll wager I saw more action afore my lights were put out than ye'll see in your whole poxy life. Aye, an' I heard a few tales in my time, too.\"||\"Heard anything recently?\" you ask.||\"Heard a fair bit. Talkin' about it dries the tongue out, though.\"">
 <CONSTANT CHOICES033 <LTABLE "buy a drink" "go over to the three bullies and the scholar" "pay a visit to the shipyard">>
@@ -600,9 +602,10 @@
 <ROUTINE STORY039-PRECHOICE ()
 	<SELECT-FROM-LIST <LTABLE TOOLKIT BOOK-OF-CHARTS CRUCIFIX LODESTONE MONKEY> 5 2>>
 
-<CONSTANT TEXT040 "BY steering a southerly route you take advantage of the prevailing east current which should bear you to Port Leshand with the need for hard effort at the oars. Additionally, there is always the chance that you will be picked up by one of the many ships that ply these waters||After a whole day at sea you do not have such hopes. In all that tie you have seen nothing but the boundless expanse of ocean all around you. The sky is cloudless, giving you no respite from the sun that beats mercilessly down from dawn to dusk. By night a cool wind leaves you huddled, shivering, inside your ragged cloths.">
+<CONSTANT TEXT040 "BY steering a southerly route you take advantage of the prevailing east current which should bear you to Port Leshand with the need for hard effort at the oars. Additionally, there is always the chance that you will be picked up by one of the many ships that ply these waters||After a whole day at sea you do not have such hopes. In all that tie you have seen nothing but the boundless expanse of ocean all around you. The sky is cloudless, giving you no respite from the sun that beats mercilessly down from dawn to dusk. By night a cool wind leaves you huddled, shivering, inside your ragged clothes.">
 <CONSTANT TEXT040-CONTINUED "Shortly after sunrise on the second day, you catch sight of a small uncharted island off to port. In form it is a rough hump of rock with no more than a hundred paces from side to side, girt with weed and sandbanks covered with clumps of greenish algae.||\"A coral reef,\" decides Grimes, noting the vague orange-pink shadow of rocks beneath the waves. \"There could at least be fresh rainwater here -- and insects, if not birds.\"||\"What do we want with insects?\" asks Blutz in disgust.||\"Food,\" you tell him. \"Necessity must overrule nicety if we're to survive.\"">
 <CONSTANT CHOICES040 <LTABLE "put in at at the island" "continue on your present course" "detour northwards towards the Smoking Islands">>
+<CONSTANT RAGGED-CLOTHES "Your ragged clothes were not enough to keep you warm. You died some time in the night.">
 
 <ROOM STORY040
 	(IN ROOMS)
@@ -610,187 +613,163 @@
 	(STORY TEXT040)
 	(CHOICES CHOICES040)
 	(DESTINATIONS <LTABLE STORY028 STORY047 STORY066>)
+	(PRECHOICE STORY040-PRECHOICE)
 	(TYPES THREE-NONES)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY040-PRECHOICE ()
+	<COND (<IN? ,SKILL-WILDERNESS-LORE ,SKILLS>
+		<LOSE-LIFE 1 RAGGED-CLOTHES ,STORY040>
+		<IF-ALIVE "[With your knowledge of WILDERNESS LORE, you soak your ragged clothes in the sea to keep yourself warm at night and cool during the day]">
+	)(ELSE
+		<LOSE-LIFE 2 RAGGED-CLOTHES ,STORY040>
+		<COND (<G? ,LIFE-POINTS 0>
+			<CRLF>
+			<TELL "[" RAGGED-CLOTHES "]">
+			<CRLF>
+		)>
+	)>
+	<IF-ALIVE TEXT040-CONTINUED>>
+
+<CONSTANT TEXT041 "Heavy stones fly about you like shots from a cannon as you beat your retreat. Several of them thud harmlessly into the soft sand but then you feel a hot slash of pain as one strikes the inside of your head, leaving a ragged gash. You stumble, but Blutz catches your arm and helps you into the boat.||You lose consciousness for a moment. The next thing you know, the boat is already out amid the waves with Oakley and Grimes plying the oars for all they're worth.||The battering hail of rocks continues as the natives watch you row away.">
+<CONSTANT TEXT041-CONTINUED "You slump down into the bottom of the boat with an exhausted sigh of relief as you finally get out to open sea beyond reach of the islander's bombardment.||\"I think they wanted us to stay for dinner,\" jokes Oakley with grim humour. \"I hope the natives on the next island are more friendly.\"||So do you.">
+
+<CONSTANT DIED-BOMBARDMENT "You died from injuries sustained during the bombardment.">
 
 <ROOM STORY041
 	(IN ROOMS)
 	(DESC "041")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT041)
+	(PRECHOICE STORY041-PRECHOICE)
+	(CONTINUE STORY116)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY041-PRECHOICE ()
+	<COND (<AND <IN? ,SKILL-CHARMS ,SKILLS> <IN? ,MAGIC-AMULET ,PLAYER>>
+		<LOSE-LIFE 1 DIED-BOMBARDMENT ,STORY041>
+		<IF-ALIVE "[Your lucky magic amulet saved you from sustaining more serious injuries]">
+	)(ELSE
+		<LOSE-LIFE 4 DIED-BOMBARDMENT ,STORY041>
+	)>
+	<IF-ALIVE TEXT041-CONTINUED>>
+
+<CONSTANT TEXT042 "You tread on a twig and Skarvench and his cronies leap up with angry roars to do battle. Discovered, you have no recourse but to rush in on them.">
 
 <ROOM STORY042
 	(IN ROOMS)
 	(DESC "042")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT042)
+	(EVENTS STORY042-EVENTS)
+	(CONTINUE STORY267)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY042-EVENTS ()
+	<COND (<OR <IN? ,SKILL-ROGUERY ,SKILLS> <IN? ,SKILL-WILDERNESS-LORE ,SKILLS>> <RETURN ,STORY080>)>
+	<RETURN ,STORY042>>
+
+<CONSTANT TEXT043 "\"These are glad tidings!\" he declares with enthusiasm. \"I am always happy to launch gentlemen of fortune on their careers.\"||For the next hour you are shown around the shipyard while discussing the exact specifications of your new ship. You explain to Kemp everything you want, from the timber to be used and the kind of armaments right down to details such as cargo capacity, the figurehead, and even the cabin fittings.||\"You know your vessels,\" he says approvingly. \"Naturally, in view of the fact that on every point you have stipulated that you want materials and labour of only the soundest and best quality, you must appreciate that the price will not be cheap.\"||You add up the costs and discover that you will need at least one diamond to purchase even a small second-hand ship. Failing that, you will have to obtain one some other way. Promising to return as soon as you have come to a firm decision, you take your leave of Master Kemp and walk back into town.||\"Where to now?\" says Oakley.||You think for a moment. \"We'll take rooms at the Sweat of the Brow inn. If Skarvench shows his face anywhere in Selenice, it'll be there.\"||Never a truer word was spoken. You arrive at the inn and stand frozen in shock in the doorway. There the devil stands, large as life in front of you. A rum bottle is clutched in his hand and his crew throng the tap-room around him, cowering as he subjects them to one of his thunderous drunken rants.||Then his eye alights on you. His snarling voice is cut off in mid-sentence. A thin line of spittle runs down into his beard as his teeth show shark-like in a vicious grin. It is the moment you have waited for. Face to face with your arch foe.">
 
 <ROOM STORY043
 	(IN ROOMS)
 	(DESC "043")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT043)
+	(CONTINUE STORY014)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT044 "Blutz directs the crew to fetch up the cargo from the hold. At first you have no idea what he's talking about, then you remember the barrels of rock salt that the last owner of the Lady of Shalott left aboard when he sold her. The light begins to dawn when Blutz orders the cannons loaded with this salt. The first broadside scours the surface of the iceberg, and it is not long before water is trickling down in the hot noon sun.||\"I remembered that salt can be used to melt ice and snow,\" explains Blutz, beaming with elation at the success of his plan. After two more broadsides the salt has etched its way deep into the ice and there comes a continuous crackling sound as the iceberg slowly breaks apart under the onslaught.||An attack with pickaxes completes the task. Soon the ice has been chipped away to leave a deep gouge, and the Octavius comes drifting forth gleaming into the full daylight. You board her, abandoning the sloop, and set a northward course.||The days pass and your new ship is a delight, handling better than any vessel you've ever sailed. You feel a glow of pride as you at last steer her through the harbour gate and up to the Selenice docks.">
 
 <ROOM STORY044
 	(IN ROOMS)
 	(DESC "044")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT044)
+	(PRECHOICE STORY044-PRECHOICE)
+	(CONTINUE STORY184)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY044-PRECHOICE ()
+	<REMOVE ,CURRENT-VEHICLE>
+	<MOVE ,OCTAVIUS ,VEHICLES>
+	<SETG CURRENT-VEHICLE ,OCTAVIUS>>
+
+<CONSTANT TEXT045 "Mermaids are like all faerie creatures in being motivated by caprice. They  can be cruel or kind, as the whim takes them. It is well known that they sometimes seek the company of mortal men, whom they entice with their beauty and promise of secret wealth, because they constantly yearn to draw a little of the surface world's warmth and vitality into their own submerged realm of twilit silence. Few who have succumbed to a mermaidøs lures survive to tell the tale. There are cases of men who have tarried a while under the sea, then returned with the gift of second sight -- for the mermaids are able to grant knowledge of future events. Such cases are rare. A more likely fate is to be washed up ton the beach, leeched of breath by the mermaidøs kiss, dead face forever frozen in fearful rapture of having heard the mermaid's secrets and witnessed her unearthly beauty.||You know one more thing. Any question put to a mermaid must be answered truthfully if the questioner has a firm grip on her. In that respect, too, she is like any other faerie creature.">
 
 <ROOM STORY045
 	(IN ROOMS)
 	(DESC "045")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT045)
+	(CONTINUE STORY064)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT046 "Slurring his words, Mandrigard peers soddenly at you across the table. \"It's more talk you want, is it? Well, Iøm talked out. Not all the blabber in a thousand harems will wipe out the curse I carry with me -- and you poor dolts are part of that curse now -- now, and forevermore!\"||Wine-soaked spittle sprays out from his lips as he screams all this. The look in his eyes is like the fires of hell. Then suddenly his eyelids droop, and he slumps forward across the treasure, mumbling, \"See this scar on my left hand? There's the proof, y'see? 'Tis where I broke the lock of that heathen shrine. See the stain of my curse, do you?\"">
 
 <ROOM STORY046
 	(IN ROOMS)
 	(DESC "046")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT046)
+	(CONTINUE STORY065)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT047 "A little rainfall helps to slake your thirst, but hunger still chews at your bellies and the constant blaze of the sun makes you dizzy.">
+<CONSTANT TEXT047-CONTINUED "Squinting into the sunset, Oakley gives a sudden cry of anguish. \"Another night of this, God rot me, and I'll be as mad as a gannet! If we only had something to eat.\" He gnaws the leather of his belt just to have a taste of something solid in his mouth.">
+<CONSTANT CHOICES047 <LTABLE "improvise something with" "or" "eat a" "otherwise">>
 
 <ROOM STORY047
 	(IN ROOMS)
 	(DESC "047")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT047)
+	(CHOICES CHOICES047)
+	(DESTINATIONS <LTABLE STORY218 STORY218 STORY237 STORY275>)
+	(REQUIREMENTS <LTABLE SKILL-SEAFARING SKILL-WILDERNESS-LORE MONKEY NONE>)
+	(TYPES <LTABLE R-SKILL R-SKILL R-ITEM R-NONE>)
+	(PRECHOICE STORY047-PRECHOICE)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY047-PRECHOICE ()
+	<LOSE-LIFE 1 "You died of hunger." ,STORY047>
+	<IF-ALIVE TEXT047-CONTINUED>>
+
+<CONSTANT TEXT048 "You eat and drink while listening to Mortice tell his tale. It is a gruesome story, beginning with a storm at sea. Mortice was washed ashore on a deserted island along with a dozen corpses of his former shipmates. After many months he was picked up by a ship called Cold Grue, but there his hope soon turned to despair. \"By day I was locked up in the fo'c'sle, and only let out at night to toil on deck. I never knew a harsher taskmaster than El Draque, the captain of that fell ship! There were other poor sailors aboard with me, and if ever you set a foot wrong -- or even if you didn't, sometimes -- you'd be taken down to the hold an' never seen again. Once I watched El Draque and his corsairs bury treasure by moonlight on a stretch o' shore off Tortoise Island, under a rock marked with crossed bones. Aye, I marked that well; I'd be goin' back there, if I had myself a ship that could outrun the Cold Grue!\"||\"And how did you escape?\" asks Blutz, chomping on a chicken leg.||\"Why, I made myself this raft and starved until I was so thin I could squeeze out the fo'c'sle hatch like any bag of old scraps. There wasn't a soul stirring on deck during the hours o' daylight, you see. So I loaded up food and water and pushed off. Been adrift for weeks, I have, till I caught sight o' you jolly lads!\" He refills your cups from the full barrel beside him.">
 
 <ROOM STORY048
 	(IN ROOMS)
 	(DESC "048")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT048)
+	(PRECHOICE STORY048-PRECHOICE)
+	(CONTINUE STORY105)
+	(CODEWORD CODEWORD-RAVEN)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY048-PRECHOICE ()
+	<COND (<IN? ,SKILL-SEAFARING ,SKILLS> <STORY-JUMP ,STORY067>)>>
+
+<CONSTANT TEXT049 "You race off into the jungle not a moment too soon. Turning to peer back from the crest of a wooded hill, you see the Belle Dame already riding at anchor offshore. A rowboat is bringing Skarvench and his cut-throats to the beach even now.||\"He'll never leave until he's found us,\" mutters Oakley as you trudge on through the dense green thickets.||\"It's a big island,\" you call back over your shoulder. \"If we stay hidden long enough, he'll have to give up the search and leave. For all he knows we might be dead already.\"">
 
 <ROOM STORY049
 	(IN ROOMS)
 	(DESC "049")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT049)
+	(PRECHOICE STORY049-PRECHOICE)
+	(CONTINUE STORY163)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY049-PRECHOICE ()
+	<COND (<IN? ,SKILL-WILDERNESS-LORE ,SKILLS> <STORY-JUMP ,STORY144>)>>
+
+<CONSTANT TEXT050 "A letter of marque would allow you to indulge in a spot of honest piracy -- or rather privateering, as it is called. Such a letter licenses you to act as a private soldier of Her Majesty's navy, with full entitlement to plunder Sidonian treasure-ships.||\"But we'll never be able to get one,\" says Blutz despondently after you have all spent some time discussing the idea.||\"That's right,\" growls Oakley. \"It costs almost as much in bribes to get hold of a letter of marque as you're likely to bring in as profit.\"||\"Aha,\" you say, pulling a furled-up document from your sleeve and tossing it onto the table. \"What's this?\"||Grimes inspects it with mounting astonishment. \"Why, it's a letter of marque, establishing your right to act as privateers on the Carab Sea! How did you get --\" He pauses and a slow grin suffuses his face. \"The ink's still wet.\"||You retrieve the letter of marque, beaming with pride. It is a good a forgery as any you've ever done. When the ink dries up it will be indistinguishable from the real thing.">
+<CONSTANT CHOICES050 <LTABLE "call on Master Capstick" "otherwise">>
 
 <ROOM STORY050
 	(IN ROOMS)
 	(DESC "050")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT050)
+	(CHOICES CHOICES050)
+	(DESTINATIONS <LTABLE STORY069 STORY107>)
+	(REQUIREMENTS <LTABLE <LTABLE CODEWORD-MARATHON> NONE>)
+	(TYPES <LTABLE R-CODEWORD R-NONE>)
+	(ITEM LETTER-OF-MARQUE)
 	(FLAGS LIGHTBIT)>
 
 <ROOM STORY051
