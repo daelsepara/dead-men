@@ -51,6 +51,12 @@
     (SYNONYM VEHICLES)
     (FLAGS CONTBIT OPENBIT)>
 
+<OBJECT GIVEBAG
+    (DESC "items to give")
+    (SYNONYM BAG)
+    (ADJECTIVE GIVE)
+    (FLAGS CONTBIT OPENBIT)>
+
 <GLOBAL CURRENT-VEHICLE NONE>
 
 <ROUTINE GAME-BOOK ("AUX" KEY)
@@ -443,6 +449,14 @@
     >
     <RETURN .COUNT>>
 
+<ROUTINE COUNT-IN-CONTAINER (LIST CONTAINER "AUX" COUNT ITEMS)
+    <SET COUNT 0>
+    <SET ITEMS <GET .LIST 0>>
+    <DO (I 1 .ITEMS)
+        <COND (<IN? <GET .LIST .I> .CONTAINER> <SET COUNT <+ .COUNT 1>>)>
+    >
+    <RETURN .COUNT>>
+
 <ROUTINE COUNT-POSSESSIONS ()
     <RETURN <COUNT-CONTAINER ,PLAYER>>>
 
@@ -539,7 +553,13 @@
         <TELL "0">
         <HLIGHT 0>
         <TELL " - I'm alright with my choices." CR>
-        <TELL "Select which " .DESC "(s) to take: " CR>
+        <TELL "Select which " .DESC "(s) to ">
+        <COND (<EQUAL? .CONTAINER ,GIVEBAG>
+            <TELL "give">
+        )(ELSE
+            <TELL "take">
+        )>
+        <TELL ":" CR>
         <SET KEY <INPUT 1>>
         <COND (<EQUAL? .KEY !\0>
             <COND (<L? .COUNT .MAX>
@@ -760,6 +780,17 @@
         <TELL "None" CR>
     )>>
 
+<ROUTINE TRANSFER-CONTAINER (FROM TO "AUX" ITEM NEXT)
+    <COND (<COUNT-CONTAINER .FROM>
+        <SET ITEM <FIRST? .FROM>>
+        <REPEAT ()
+            <COND (<NOT .ITEM> <RETURN>)>
+            <SET NEXT <NEXT? .ITEM>>
+            <MOVE .ITEM .TO>
+            <SET .ITEM .NEXT>
+        >
+    )>>
+
 ; "Character Routines"
 ; ---------------------------------------------------------------------------------------------
 <ROUTINE CHOOSE-CHARACTER ("AUX" COUNT KEY CHOICE CHARACTER SKILLS POSSESSIONS)
@@ -866,7 +897,6 @@
     <SETG LIFE-POINTS <GETP ,CHARACTER-CUSTOM ,P?LIFE-POINTS>>
     <SETG MAX-LIFE-POINTS ,LIFE-POINTS>>
 
-
 <ROUTINE DESCRIBE-CHARACTER (CHARACTER "AUX" COUNT SKILLS POSSESSIONS QUANTITY)
     <COND (.CHARACTER
         <CRLF>
@@ -968,6 +998,9 @@
 <ROUTINE RESET-SKILLS ()
     <RESET-CONTAINER ,SKILLS>>
 
+<ROUTINE RESET-GIVEBAG ()
+    <RESET-CONTAINER ,GIVEBAG>>
+
 <ROUTINE RESET-PLAYER ()
     <SETG CURRENT-CHARACTER NONE>
     <SETG MONEY 0>
@@ -975,7 +1008,8 @@
     <SETG MAX-LIFE-POINTS 0>
     <RESET-POSSESSIONS>
     <RESET-CODEWORDS>
-    <RESET-SKILLS>>
+    <RESET-SKILLS>
+    <RESET-GIVEBAG>>
 
 ; "System/Utility/Miscellaneous routines"
 ; ---------------------------------------------------------------------------------------------
@@ -1045,3 +1079,12 @@
             )>
         >
     >>
+
+<ROUTINE EMPHASIZE (TEXT)
+    <COND (.TEXT
+        <CRLF>
+        <HLIGHT ,H-BOLD>
+        <TELL .TEXT>
+        <HLIGHT 0>
+        <CRLF>
+    )>>
