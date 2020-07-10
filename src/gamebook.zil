@@ -264,16 +264,14 @@
     )>
     <RTRUE>>
 
-<ROUTINE CHECK-SKILL-POSSESSIONS (SKILL "AUX" REQUIRED RESULT)
-    <SET REQUIRED <GETP .SKILL ,P?REQUIRES>>
-    <COND (<NOT .REQUIRED> <RTRUE>)>
-    <REPEAT ()
-        <SET RESULT F>
-        <COND (<NOT .REQUIRED> <RETURN>)>
-        <COND (<IN? .REQUIRED ,PLAYER> <SET RESULT T> <RETURN>)>
-        <SET .REQUIRED <NEXT? .REQUIRED>>
+<ROUTINE CHECK-SKILL-POSSESSIONS (SKILL "AUX" REQUIREMENTS COUNT)
+    <SET REQUIREMENTS <GETP .SKILL ,P?REQUIRES>>
+    <COND (<NOT .REQUIREMENTS> <RTRUE>)>
+    <SET COUNT <GET .REQUIREMENTS 0>>
+    <DO (I 1 .COUNT)
+        <COND (<IN? <GET .REQUIREMENTS .I> ,PLAYER> <RTRUE>)>
     >
-    <RETURN .RESULT>>
+    <RFALSE>>
 
 <ROUTINE NOT-POSSESSED (OBJ)
     <CRLF><CRLF>
@@ -888,7 +886,7 @@
         <COND (<NOT .SKILL> <RETURN>)>
         <SET REQUIREMENT <GETP .SKILL ,P?REQUIRES>>
         <COND (.REQUIREMENT
-            <MOVE .REQUIREMENT ,PLAYER>
+            <MOVE <GET .REQUIREMENT 1> ,PLAYER>
         )>
         <SET SKILL <NEXT? .SKILL>>
     >
@@ -1013,6 +1011,15 @@
 
 ; "System/Utility/Miscellaneous routines"
 ; ---------------------------------------------------------------------------------------------
+<ROUTINE EMPHASIZE (TEXT)
+    <COND (.TEXT
+        <CRLF>
+        <HLIGHT ,H-BOLD>
+        <TELL .TEXT>
+        <HLIGHT 0>
+        <CRLF>
+    )>>
+
 <ROUTINE GET-INDEX (LIST ITEM "AUX" COUNT)
     <COND (.LIST
         <SET COUNT <GET .LIST 0>>
@@ -1023,6 +1030,25 @@
         >
     )>
     <RETURN 0>>
+
+<ROUTINE GAMES-UP (TEXT "AUX" W)
+    <TELL .TEXT CR CR>
+    <PRINT-GAME-OVER>
+    <CRLF>
+    <REPEAT PROMPT ()
+        <PRINTI "Would you like to RESTART or QUIT? > ">
+        <REPEAT ()
+            <READLINE>
+            <SET W <AND <GETB ,LEXBUF 1> <GET ,LEXBUF 1>>>
+            <COND (<EQUAL? .W ,W?RESTART>
+                <RESTART>
+            )(<EQUAL? .W ,W?QUIT>
+                <QUIT-MSG>
+            )(T
+                <TELL CR "(Please type RESTART or QUIT) > ">
+            )>
+        >
+    >>
 
 <ROUTINE LINE-ERASE (ROW)
     <CURSET .ROW 1>
@@ -1060,31 +1086,3 @@
 <ROUTINE QUIT-MSG ()
     <TELL CR "Thanks for playing." CR>
     <QUIT>>
-
-<ROUTINE GAMES-UP (TEXT "AUX" W)
-    <TELL .TEXT CR CR>
-    <PRINT-GAME-OVER>
-    <CRLF>
-    <REPEAT PROMPT ()
-        <PRINTI "Would you like to RESTART or QUIT? > ">
-        <REPEAT ()
-            <READLINE>
-            <SET W <AND <GETB ,LEXBUF 1> <GET ,LEXBUF 1>>>
-            <COND (<EQUAL? .W ,W?RESTART>
-                <RESTART>
-            )(<EQUAL? .W ,W?QUIT>
-                <QUIT-MSG>
-            )(T
-                <TELL CR "(Please type RESTART or QUIT) > ">
-            )>
-        >
-    >>
-
-<ROUTINE EMPHASIZE (TEXT)
-    <COND (.TEXT
-        <CRLF>
-        <HLIGHT ,H-BOLD>
-        <TELL .TEXT>
-        <HLIGHT 0>
-        <CRLF>
-    )>>

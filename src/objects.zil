@@ -54,7 +54,7 @@
     (SYNONYM DEED)
     (ADJECTIVE OWNERSHIP)
     (FLAGS TAKEBIT)>
-    
+
 <OBJECT FEATHER-SHIELD
     (DESC "feather shield")
     (SYNONYM SHIELD)

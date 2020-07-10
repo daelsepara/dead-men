@@ -30,6 +30,7 @@
 	<PUTP ,STORY041 ,P?DEATH T>
 	<PUTP ,STORY047 ,P?DEATH T>
 	<PUTP ,STORY066 ,P?DEATH T>
+	<PUTP ,STORY073 ,P?DEATH T>
 	<RETURN>>
 
 <CONSTANT DIED-IN-COMBAT "You died in combat.">
@@ -355,7 +356,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY013-PRECHOICE ()
-	<COND (<OR <AND <IN? ,SKILL-MARKSMANSHIP ,SKILLS> <IN? ,PISTOL ,PLAYER>> <AND <IN? ,SKILL-SWORDPLAY ,SKILLS> <IN? ,SWORD ,PLAYER>>>
+	<COND (<OR <AND <IN? ,SKILL-MARKSMANSHIP ,SKILLS> <CHECK-SKILL-POSSESSIONS ,SKILL-MARKSMANSHIP>> <AND <IN? ,SKILL-SWORDPLAY ,SKILLS> <CHECK-SKILL-POSSESSIONS ,SKILL-SWORDPLAY>>>
 		<LOSE-LIFE 2 DIED-IN-COMBAT ,STORY013>
 	)(<IN? ,SKILL-BRAWLING ,SKILLS>
 		<LOSE-LIFE 3 DIED-IN-COMBAT ,STORY013>
@@ -1092,184 +1093,129 @@
 	(CONTINUE STORY392)
 	(FLAGS LIGHTBIT)>
 
+<CONSTANT TEXT071 "The blind man is Greymalkin Smith. Once a pirate himself, he was blinded in powder keg explosion and now ekes out a living running errands around town and swapping gossip for drinks.||You have also seen the three ruffians before. In fact, just a few weeks ago you learned that the governor of Leshand has put a price on their heads.">
+<CONSTANT CHOICES071 <LTABLE "talk to Greymalkin" "intervene to stop the ruffians bullying the scholar" "go off to the shipyard">>
+
 <ROOM STORY071
 	(IN ROOMS)
 	(DESC "071")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT071)
+	(CHOICES CHOICES071)
+	(DESTINATIONS <LTABLE STORY033 STORY052 STORY374>)
+	(TYPES THREE-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT072 "His laughter is the peal of summer thunder. \"Scurry off then, little mice. I mistook you for a sea rats at least!\"||The dolphin and the shark convey you back to the beach where you blew the horn. In awed silence, still stunned by the uncanny adventure, you disembark uncertainly and stagger on weak knees up the shore.">
 
 <ROOM STORY072
 	(IN ROOMS)
 	(DESC "072")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT072)
+	(CONTINUE STORY203)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT073 "Grappling hooks hug your vessel to the warship's flank, and marines come swarming over the rail with loud battle-cries. The fighting rages from stem to stern -- the clash of cutlasses, the bangs and acrid smoke of pistol shots, the screams of wounded men. Blood and gunpowder are the smells mingling on the briny breeze this afternoon.||The marines have numbers on their side, but they are pitched against some of the toughest buccaneers on the Carab Sea. Your men know they are fighting for their very lives, since almost every one of them has a price on his head.">
 
 <ROOM STORY073
 	(IN ROOMS)
 	(DESC "073")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT073)
+	(PRECHOICE STORY073-PRECHOICE)
+	(CONTINUE STORY225)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY073-PRECHOICE ()
+	<COND (<OR
+		<AND <IN? ,SKILL-SWORDPLAY ,SKILLS> <CHECK-SKILL-POSSESSIONS ,SKILL-SWORDPLAY>> <AND <IN? ,SKILL-MARKSMANSHIP ,SKILLS> <CHECK-SKILL-POSSESSIONS ,SKILL-MARKSMANSHIP>>>
+		<LOSE-LIFE 2 DIED-IN-COMBAT ,STORY073>
+	)(<IN? ,SKILL-BRAWLING ,SKILLS>
+		<LOSE-LIFE 3 DIED-IN-COMBAT ,STORY073>
+	)(ELSE
+		<LOSE-LIFE 6 DIED-IN-COMBAT ,STORY073>
+	)>>
+
+<CONSTANT TEXT074 "It is only a matter of minutes before you hear the sound you were dreading: an ominous scraping as the ship lurches to a halt. \"That tears it!\" says Grimes. \"We've run aground.\"||A hasty inspection reveals that you have run the keel onto a sandbank. There is no damage to the hull, but you will have to wait until high tide to get off again. By now the fog is closing tightly around the bay, blotting out any sight of the island.||\"We may as well sit it out until dawn,\" you decide.">
 
 <ROOM STORY074
 	(IN ROOMS)
 	(DESC "074")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT074)
+	(CONTINUE STORY366)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT075 "The storm fills the sky and your ship is just a speck in its grip. The rain lashes down out of a darkness blacker than night, drumming the deck. Waves as high as cliffs sweep past, flooding over the side and forcing each man to cling on for dear life. Your orders are drowned out by the palpable roar of the wind, which strains the sails to bursting point. You take the whipstaff yourself and push the prow into the onrushing tumult, seeking the hurricane's heart.||Grimes rushes back, his face contorted with fear. \"Skipper!\" he cries. \"The hurricane must have scattered the Queen's fleet! There's a Gloriannic warship dead across our bows, and the wind's sweeping her straight towards us!\"||You can see the ship between billowing sheets of rain. Her mast is broken and she is careening out of control towards you. You have only seconds in which to avoid a collision.">
+<CONSTANT CHOICES075 <LTABLE "tilt the whipstaff to port" "starboard">>
 
 <ROOM STORY075
 	(IN ROOMS)
 	(DESC "075")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT075)
+	(CHOICES CHOICES075)
+	(DESTINATIONS <LTABLE STORY113 STORY132>)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT076 "To your own amazement as much as your foe's, the weasel suddenly jumps out of your haversack and leaps across the deck to give him a painful bite on the hand. Skarvench drops the taper with a startled oath: \"Agh! Devil take the animal!\"||He seizes the weasel by its neck and casts it off over the side, but its attack has bought you the time you need to close in. Now you are face to face with Skarvench in a battle to the finish.">
 
 <ROOM STORY076
 	(IN ROOMS)
 	(DESC "076")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT076)
+	(CONTINUE STORY171)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT077 "Skarvench gives a sharp cough as he swigs a shot of rum. \"Guarded?\" he snarls. \"Aye, she'll be guarded. But what if a storm scattered her escort fleet? What then, eh my lads?||\"There'd still be her flagship to contend with, Cap'n\" objects the quartermaster. \"The Rose, I'm told it's called -- a ship of eighty cannon!\"||\"It's possible to pluck a rose, me hearties!\" rejoins Skarvench with a peal of harsh laughter. \"Specially when she lies becalmed, shrouded in mist with no target for her guns.\"||\"But what's this talk of mist and dead calm?\" queries Borograve the master gunner. \"I thought the plan rested on a storm?\"||\"It all relies too much on chance, if you ask me,\" says the first mate.||You tend to agree -- although you never knew Skarvench to trust anything to luck before, not even when playing dice. You are itching to hear how he is going to justify his scheme, but every second you linger here increases the risk of discovery.">
+<CONSTANT CHOICES077 <LTABLE "continue to eavesdrop regardless of the danger" "snatch a few supplies from the empty cabin opposite" "go straight back on deck empty-handed">>
 
 <ROOM STORY077
 	(IN ROOMS)
 	(DESC "077")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT077)
+	(CHOICES CHOICES077)
+	(DESTINATIONS <LTABLE STORY115 STORY096 STORY172>)
+	(TYPES THREE-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT078 "Two more boxes are swiftly opened, their lids splintering under hard shovel-blows. These also contain dead bodies lying on bars of silver. The third gives you particular cause to shudder -- a thin rill of blood has caked on its lips, just as a careless or gluttonous man might leave a dribble of gravy.||\"Vampires!\" gasps Blutz. All together you turn to look at the sun, now almost drowned in the western sea. In mere moments the last of the daylight will have drained away.||Blutz pulls a stick from his belt and thrusts it into your hand. It is the broken stool-leg he got clouted with back in the tavern in Selenice. The end has splintered to leave a sharp point. Sharp enough to pierce a heart, if driven down with courage and strength.||There is just time to impale one of the three corpses you've unearthed. You glance from one to other. Which will it be:">
+<CONSTANT CHOICES078 <LTABLE "choose the body with blood on its lips" "the one with a skull tattoo" "the one with ice-blue eyes">>
 
 <ROOM STORY078
 	(IN ROOMS)
 	(DESC "078")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT078)
+	(CHOICES CHOICES078)
+	(DESTINATIONS <LTABLE STORY169 STORY188 STORY150>)
+	(TYPES THREE-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT079 "As the cannibals close in, things look bleak indeed. Can you possibly outrun them and get the jollyboat out to sea before you are overwhelmed? Then you remember seeing fragments of coloured chalk further up the beach. \"Come on,\" you say urgently, pulling your companions after you, \I've got an idea.\"||The cannibals follow in sullen silence as you retreat along the beach. Pretending to stumble, you gather pieces of pink chalk as you go and use these to daub spots on your skin. At first the others think you've lost your wits, but then Blutz sees what you have in mind. \"They'll think we're plague ridden!\" he cries. \"They certainly won't want to eat us then!\"||The four of you crouch shivering beside your boat as he cannibals come striding up. At first the look on their faces is one of ravenous glee, but this soon changes to horror when they get close enough to see the ugly blotches on your skin. The shivering helps to make it look as though you have a fever, but in fact there is no need for pretence -- you really are quaking in fear by now.||You give a ghastly moan and start to foam convincingly at the mouth. This is more than enough for the cannibals. Flinging down their weapons, they run off. Once they are out of sight along the beach, you get up and examine what they have left behind. Along with a profusion of spears and clubs, you find a feather shield and a shark's tooth sword. The latter is a blade of hardwood edged with shark's teeth -- unconventional but it serves as well as a normal sword.">
+<CONSTANT TEXT079-CONTINUED "The others have lost no time getting the boat into the water. Hurrying in case the cannibals should realise they've been tricked and return, you put to sea.">
 
 <ROOM STORY079
 	(IN ROOMS)
 	(DESC "079")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT079)
+	(PRECHOICE STORY079-PRECHOICE)
+	(CONTINUE STORY116)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY079-PRECHOICE ()
+	<SELECT-FROM-LIST <LTABLE FEATHER-SHIELD SHARKS-TOOTH-SWORD> 2 2>
+	<CRLF>
+	<TELL TEXT079-CONTINUED>
+	<CRLF>>
+
+<CONSTANT TEXT080 "Moving with no more noise than a snake, you edge through the undergrowth until you are close enough to hear what Skarvench and the others. While the two seamen sweat over their spades, heaving up great clods of earth, Skarvench passes the grog bottle around and recounts his scurvy plans.||\"So what's this treasure for, Cap'n?\" hiccups the quartermaster.||\"To reward a certain shipwright in Port Selenice, for one thing,\" says Skarvench.\"He's to be paid in gold for the new ship he's building us.\"||\"New ship?\" says Porbuck the mate, roused from his dull-witted torpor. \"I liked the old one.\"||Skarvench ignores him. \"And the silver's for the Queen's wizard, William wild. He'll be supplying special sails for our new vessel -- aye, and a bit o' trickery into the bargain to ensure we take the Rose unhindered, me hearties!\" And he gives a low chuckle of perfect wickedness at the thought.||The scheming dog! His monstrous arrogance makes your blood boil.">
+<CONSTANT CHOICES080 <LTABLE "wait until they have taken the treasure aboard their ship and sailed off" "risk attacking them in your weakened state">>
 
 <ROOM STORY080
 	(IN ROOMS)
 	(DESC "080")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT080)
+	(CHOICES CHOICES080)
+	(DESTINATIONS <LTABLE STORY288 STORY267>)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
 
 <ROOM STORY081

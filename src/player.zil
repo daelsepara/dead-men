@@ -12,7 +12,7 @@
 <OBJECT SKILL-CHARMS
     (DESC "CHARMS")
     (LDESC "The expert use of magical wards to protect you from danger. Also includes that most elusive of qualities. luck. YOu must possess a magic amulet to use this skill.")
-    (REQUIRES MAGIC-AMULET)>
+    (REQUIRES <LTABLE MAGIC-AMULET>)>
 
 <OBJECT SKILL-CUNNING
     (DESC "CUNNING")
@@ -25,7 +25,7 @@
 <OBJECT SKILL-MARKSMANSHIP
     (DESC "MARKSMANSHIP")
     (LDESC "A long-range attack skill. You must possess a pistol to use this skill")
-    (REQUIRES PISTOL)>
+    (REQUIRES <LTABLE PISTOL>)>
 
 <OBJECT SKILL-ROGUERY
     (DESC "ROGUERY")
@@ -38,7 +38,7 @@
 <OBJECT SKILL-SPELLS
     (DESC "SPELLS")
     (LDESC "A range of magical effects encompassing illusions, elemental effects, commands, and summonings. You must possess a magic wand to use this skill.")
-    (REQUIRES MAGIC-WAND)>
+    (REQUIRES <LTABLE MAGIC-WAND>)>
 
 <OBJECT SKILL-STREETWISE
     (DESC "STREETWISE")
@@ -47,7 +47,7 @@
 <OBJECT SKILL-SWORDPLAY
     (DESC "SWORDPLAY")
     (LDESC "The best fighting skill. You must possess a sword to use this skill.")
-    (REQUIRES SWORD SHARKS-TOOTH-SWORD)>
+    (REQUIRES <LTABLE SWORD SHARKS-TOOTH-SWORD>)>
 
 <OBJECT SKILL-WILDERNESS-LORE
     (DESC "WILDERNESS LORE")
