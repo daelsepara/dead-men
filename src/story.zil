@@ -34,6 +34,7 @@
 	<PUTP ,STORY081 ,P?DEATH T>
 	<PUTP ,STORY097 ,P?DEATH T>
 	<PUTP ,STORY099 ,P?DEATH T>
+	<PUTP ,STORY110 ,P?DEATH T>
 	<RETURN>>
 
 <CONSTANT DIED-IN-COMBAT "You died in combat.">
@@ -1471,7 +1472,7 @@
 	)>
 	<IF-ALIVE TEXT097-CONTINUED>>
 
-<CONSTANT TEXT098 "The chief of the islander arrives. He is a very big man adorned in feathers and glass trinkets, with a weathered grey face like a carving in driftwood. Dipping his finger in a coconut-shell dish carried by an attendant, he proceeds to draw a design on your face in red dye.||\"It's just like the warpaint of these natives,\" says Grimes, looking at you. \"I wonder what that means?\"||\"Maybe he's inviting me to join the tribe,\" you say with a wry smile.||Next the tribal shaman comes forward and draws a picture in the sand with his long bony fingers. It shows a woman with a scropion crown. He spits on the picture, then lifts his ceremonial sceptre and points westwards. The chief says something which sounds like, \"Matya Ejada niyu,\" and each of the islanders in turn nods and repeats the words before stamping on the picture. Before long the imge is completely lost in the scuffed sand.||\"A curious little ritual,\" remarks Oakley. \"Now, why don't we shove off, mates before we outstay our welcome?\"||You have to agree. Clambering into the boat, you row off watched by the horde of silent islanders. \Youøre not going to leave that warpaint on your face, are you?\" Oakley asks when you are well clear of the shore. \"It makes you look like a ruddy heathen.\"">
+<CONSTANT TEXT098 "The chief of the islander arrives. He is a very big man adorned in feathers and glass trinkets, with a weathered grey face like a carving in driftwood. Dipping his finger in a coconut-shell dish carried by an attendant, he proceeds to draw a design on your face in red dye.||\"It's just like the warpaint of these natives,\" says Grimes, looking at you. \"I wonder what that means?\"||\"Maybe he's inviting me to join the tribe,\" you say with a wry smile.||Next the tribal shaman comes forward and draws a picture in the sand with his long bony fingers. It shows a woman with a scorpion crown. He spits on the picture, then lifts his ceremonial sceptre and points westwards. The chief says something which sounds like, \"Matya Ejada niyu,\" and each of the islanders in turn nods and repeats the words before stamping on the picture. Before long the image is completely lost in the scuffed sand.||\"A curious little ritual,\" remarks Oakley. \"Now, why don't we shove off, mates before we outstay our welcome?\"||You have to agree. Clambering into the boat, you row off watched by the horde of silent islanders. \Youøre not going to leave that warpaint on your face, are you?\" Oakley asks when you are well clear of the shore. \"It makes you look like a ruddy heathen.\"">
 
 <ROOM STORY098
 	(IN ROOMS)
@@ -1488,7 +1489,7 @@
 		<GAIN-CODEWORD ,CODEWORD-SCRIP>
 	)>>
 
-<CONSTANT TEXT099 "Recognizing its former master, the little animal suddenly slips out of your grasp, bursts from the undergrowth and goes scampering towards him. Skarvench and his men leap up and seize their weapons, instantly alert. Standing rigid with a snarl sampted on this cruel face, Skarvench scans the jungle and then his eyes lock on yours despite the cover of junglecover of foliage. You realise the game is up -- he's spotted you. You rise to your feet with a defiant battle-cry as he levels his pistol. Thirty paces separate you -- a distance you might cover in six seconds, from a standing start. A bullet can cross it in an instant...||Just as Skarvench squeezes the trigger, the monkey leaps up and gives his wrist a painful nip. He bellows in range and the shot goes wide, whistling past your ear to embed itself in the bole of a tree. But you have no time to give thanks; within moments the pirates have closed in. The battle is joined, and you and your comrades are fighting for your lives.">
+<CONSTANT TEXT099 "Recognizing its former master, the little animal suddenly slips out of your grasp, bursts from the undergrowth and goes scampering towards him. Skarvench and his men leap up and seize their weapons, instantly alert. Standing rigid with a snarl stamped on this cruel face, Skarvench scans the jungle and then his eyes lock on yours despite the cover of foliage. You realise the game is up -- he's spotted you. You rise to your feet with a defiant battle-cry as he levels his pistol. Thirty paces separate you -- a distance you might cover in six seconds, from a standing start. A bullet can cross it in an instant...||Just as Skarvench squeezes the trigger, the monkey leaps up and gives his wrist a painful nip. He bellows in range and the shot goes wide, whistling past your ear to embed itself in the bole of a tree. But you have no time to give thanks; within moments the pirates have closed in. The battle is joined, and you and your comrades are fighting for your lives.">
 
 <ROOM STORY099
 	(IN ROOMS)
@@ -1524,7 +1525,7 @@
 <ROUTINE STORY100-PRECHOICE ()
 	<COND (<CHECK-SKILL ,SKILL-ROGUERY> <STORY-JUMP ,STORY176>)>>
 
-<CONSTANT TEXT101 "Only one thing can save you and your comrades now. You must summon a rainsorm to provide you with the drinking water you so desperately need. But despite the dire straits you are now in, you cannot help hesitating. Conjuring with the weather is a risky business at best of times. The slightest slip can turn a breeze into a typhoon, or a scatter of snowflakes into a raging blizzard. You remember a time years ago, when you were just an apprentice wizard. You tried to conjure a sunny afternoon so you could go picknicking, only to start a three-week heat wave that burnt the fields brown and reduced rivers to muddy trickles.||You gaze a the wand in your hand. Mistakes like that are a long way in your past; you are an accomplished sorcerer now. On the other hand, the hurricane season is looming just a month away, and that makes the risk in summoning a storm particularly high.||\"What are you waiting for?\" says Blutz. \"We'll die without fresh water.\"||\"And what if rain swamps our boat and it sinks?\" you ask him. \"We'll be just as dead.\"||Decide.">
+<CONSTANT TEXT101 "Only one thing can save you and your comrades now. You must summon a rainstorm to provide you with the drinking water you so desperately need. But despite the dire straits you are now in, you cannot help hesitating. Conjuring with the weather is a risky business at best of times. The slightest slip can turn a breeze into a typhoon, or a scatter of snowflakes into a raging blizzard. You remember a time years ago, when you were just an apprentice wizard. You tried to conjure a sunny afternoon so you could go picnicking, only to start a three-week heat wave that burnt the fields brown and reduced rivers to muddy trickles.||You gaze a the wand in your hand. Mistakes like that are a long way in your past; you are an accomplished sorcerer now. On the other hand, the hurricane season is looming just a month away, and that makes the risk in summoning a storm particularly high.||\"What are you waiting for?\" says Blutz. \"We'll die without fresh water.\"||\"And what if rain swamps our boat and it sinks?\" you ask him. \"We'll be just as dead.\"||Decide.">
 <CONSTANT CHOICES101 <LTABLE "try conjuring rain" "not">>
 
 <ROOM STORY101
@@ -1536,7 +1537,7 @@
 	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
 
-<CONSTANT TEXT102 "\"Give me a hand!\" says Blutz. \"She's as slippery as a salmon.\"||The mermaid thrashes in his grasp, churning up sea-foam with her powerful tail, but Oakley and Gries hyrry to help, holding her fast until you can complete your spell. You chant the words. Her eyes glaze like frost; her struggling ceases. For a brief time, the magic makes her your slave.||\"What is our best route home?\" you demand of her.||\"Home?\" she says dully, speaking as though in deep sleep. \"Where is home?\"||\"The far west. Port Leshand.\"||\"Sail on your present course if you fear neither weird dooms nor fierce weather. Steer south if a witch's hospitality does not daunt you. West to face rain and wind and the nightmare ship; south to see the earth god's daughter.\"||There is along pause while you all weigh up these words. \"Er, perhaps not as lucid as we might've hoped...\" says Grimes.||\"The best we'll get from a faerie creature, enthralled or not,\" you tell him. You dismiss the mermaid, breaking the spell with a snap of your fingers.">
+<CONSTANT TEXT102 "\"Give me a hand!\" says Blutz. \"She's as slippery as a salmon.\"||The mermaid thrashes in his grasp, churning up sea-foam with her powerful tail, but Oakley and Grimes hurry to help, holding her fast until you can complete your spell. You chant the words. Her eyes glaze like frost; her struggling ceases. For a brief time, the magic makes her your slave.||\"What is our best route home?\" you demand of her.||\"Home?\" she says dully, speaking as though in deep sleep. \"Where is home?\"||\"The far west. Port Leshand.\"||\"Sail on your present course if you fear neither weird dooms nor fierce weather. Steer south if a witch's hospitality does not daunt you. West to face rain and wind and the nightmare ship; south to see the earth god's daughter.\"||There is along pause while you all weigh up these words. \"Er, perhaps not as lucid as we might've hoped...\" says Grimes.||\"The best we'll get from a faerie creature, enthralled or not,\" you tell him. You dismiss the mermaid, breaking the spell with a snap of your fingers.">
 
 <ROOM STORY102
 	(IN ROOMS)
@@ -1545,7 +1546,7 @@
 	(CONTINUE STORY178)
 	(FLAGS LIGHTBIT)>
 
-<CONSTANT TEXT103 "You get the others' help in hooking the jollyboat's mooring rope and winching it up onto the desk by means of pulleys attached to the ship's yardam. \"At least we can make sure our little craft is seaworthy,\" you tell the others as you bend to examine whatever damage the boat has tken during the days you have spent on the open ocean.||\"Are you stark mad?\" says Oakley. \"We're trapped aboard a cursed ship, and all you find to do is fiddle with the damned jollyboat!\"||You hum a few bars of a sea shanty, then look up from your work with a relaxed grin. \"Let's think of a plan while we fix our boat up, mates. That way we'll be ready to jump ship when the chance comes our way.\"">
+<CONSTANT TEXT103 "You get the others' help in hooking the jollyboat's mooring rope and winching it up onto the desk by means of pulleys attached to the ship's yardarm. \"At least we can make sure our little craft is seaworthy,\" you tell the others as you bend to examine whatever damage the boat has taken during the days you have spent on the open ocean.||\"Are you stark mad?\" says Oakley. \"We're trapped aboard a cursed ship, and all you find to do is fiddle with the damned jollyboat!\"||You hum a few bars of a sea shanty, then look up from your work with a relaxed grin. \"Let's think of a plan while we fix our boat up, mates. That way we'll be ready to jump ship when the chance comes our way.\"">
 
 <ROOM STORY103
 	(IN ROOMS)
@@ -1559,7 +1560,7 @@
 	<COND (<IN? ,CODEWORD-DETRUDE ,CODEWORDS> <REMOVE ,CODEWORD-DETRUDE>)>
 	<COND (<IN? ,CODEWORD-PECCANT ,CODEWORDS> <REMOVE ,CODEWORD-PECCANT>)>>
 
-<CONSTANT TEXT104 "Certain features of this island are ominously remiscent of an old sea-myth concerning the giant crab Pusat Tassek. This crab is said to be as big as a house. It basks in mid-ocean with the top of its shell exposed, sometimes staying in one place so long that sands gathers on its back and plants start to grow there, all the while feeding on fish that it attracts to its maw with a sweet-smelling chemical secretion.">
+<CONSTANT TEXT104 "Certain features of this island are ominously reminiscent of an old sea-myth concerning the giant crab Pusat Tassek. This crab is said to be as big as a house. It basks in mid-ocean with the top of its shell exposed, sometimes staying in one place so long that sands gathers on its back and plants start to grow there, all the while feeding on fish that it attracts to its maw with a sweet-smelling chemical secretion.">
 <CONSTANT CHOICES104 <LTABLE "stay here to look for food" "put to sea, either heading on your previous course westward" "turning north towards the Smoking Islands">>
 
 <ROOM STORY104
@@ -1571,7 +1572,7 @@
 	(TYPES THREE-NONES)
 	(FLAGS LIGHTBIT)>
 
-<CONSTANT TEXT105 "\"So,\" says Mortice as you settle down to sleep, \"are you going to invite me aboard your boat, or leave me here on my blessed raft all night?\"||Oakley smiles at him. \"Are you standing on ceremony, mate? Waiting for a bloody invite?\"||Mortice takes ill against this joking retort. \"Aye,\" he growls, spitting into his beard. \"An invite's just what I'm after. Well, haven't ye dined like lords at my expense until you're as full as farmyard geese? Call me over, damn your veins!\"||Blutz is understandably ot keen to sleep beside a lunatic, no matter how charitable. He turns to you and mutters under his breath, \"Well, our boat's pretty cramped already -- and no more comfortable than his raft, I'd say.\"||\"What's that whispering?\" snarls Mortice, stamping his foot. \"Secrecy and distrust!\" Is this how you repay a bit o' kindness, eh? Come on, will you ask me aboard or not?||\"||\"Ask the skipper,\" says Grimes, nodding towards you.">
+<CONSTANT TEXT105 "\"So,\" says Mortice as you settle down to sleep, \"are you going to invite me aboard your boat, or leave me here on my blessed raft all night?\"||Oakley smiles at him. \"Are you standing on ceremony, mate? Waiting for a bloody invite?\"||Mortice takes ill against this joking retort. \"Aye,\" he growls, spitting into his beard. \"An invite's just what I'm after. Well, haven't ye dined like lords at my expense until you're as full as farmyard geese? Call me over, damn your veins!\"||Blutz is understandably not keen to sleep beside a lunatic, no matter how charitable. He turns to you and mutters under his breath, \"Well, our boat's pretty cramped already -- and no more comfortable than his raft, I'd say.\"||\"What's that whispering?\" snarls Mortice, stamping his foot. \"Secrecy and distrust!\" Is this how you repay a bit o' kindness, eh? Come on, will you ask me aboard or not?||\"||\"Ask the skipper,\" says Grimes, nodding towards you.">
 <CONSTANT CHOICES105 <LTABLE "either ask Mortice to come aboard" "let him stay on his raft">>
 
 <ROOM STORY105
@@ -1587,95 +1588,76 @@
 <ROUTINE STORY105-PRECHOICE ()
 	<COND (<CHECK-SKILL ,SKILL-FOLKLORE> <STORY-JUMP ,STORY086>)>>
 
+<CONSTANT TEXT106 "The clouds are black banners across the scarlet of sunset when, gazing into the face of approaching night, you spy a billowing sail gleaming wanly in the dusk. A ship bound for Leshand! Jumping to your feet, shouting and waving, you wait anxiously until an answering hail tells you they've seen you. The ship comes nearer, her prow sliding though the twilit waters, her sails pinned like sheets of gold against the darkening sky. Faces look down from the rail, and a rope ladder is lowered. You climb rapidly despite your fatigue, gladdened by the friendly speech of the sailors.||A hand grasps yours and helps you up. \"Welcome aboard the Jewel of Heaven,\" says a Gloriannic voice. You do not reply at once, but fall on your knees alongside Oakley and the others, thanking almighty God for deliverance from the brink of doom.">
+
 <ROOM STORY106
 	(IN ROOMS)
 	(DESC "106")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT106)
+	(CONTINUE STORY370)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT107 "Finding a secluded snug in a tavern away from the docks, you consult with your friends as to what your next move should be.||Blutz is all for telling the authorities what you know, \"They're in a better position than we are to protect Queen Titania,\" he argues.||\"I disagree,\" says Grimes, \"An opportunity like this won't quickly come our way again. It's like the tide: take it at the flood and fortune follows; wait till it's out and you've missed your boat.\"||\"We should go to Port Selenice,\" says Oakley. \"That's where Skarvench will go next. \"Let's see if we can't steal a march on the fiend and scupper his plans. The Gloriannic authorities will reward us richly, but even more important than that --||\"More important than that, we get our revenge on Skarvench,\" you finish.">
+<CONSTANT CHOICES107 <LTABLE "head straight for Selenice" "go to the governor first">>
 
 <ROOM STORY107
 	(IN ROOMS)
 	(DESC "107")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT107)
+	(CHOICES CHOICES107)
+	(DESTINATIONS <LTABLE STORY145 STORY126>)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT108 "The days pass, balmy and full of ease after your long deprivation. With rest and food you recover quickly from your ordeal.||At last you catch sight of land, and after tacking along the coast for a few hours you arrive at Leshand harbour. A forest of masts sways along the wharf, and the sharp smells of tar and fish waft on the air. As the Jewel of Heaven ties up at the quayside, you are anxious to gather your few belongings and go ashore.||\"Dry land,\" says Oakley, in the tone of a man greeting his long-lost sweetheart. \"I never thought to see it again!\"||The captain and crew are busy with unloading their cargo. You thank them, shaking each man's hand as you press across the deck and make your way down the gangplank.||The dock is a confused bustle, with longshoremen and sailors teeming around and wagons trundling to and fro. Pushing through the milling crowds, you head along a narrow alley in search of an inn.">
 
 <ROOM STORY108
 	(IN ROOMS)
 	(DESC "108")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT108)
+	(CONTINUE STORY009)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT109 "The basilisk is the name of a new type of powerful long-range cannon that has recently come into use on Gloriannic warships. They are not easy to obtain, being manufactured exclusively by the Queen's armourers at the Royal Arsenal. If Skarvench really has managed to lay his hands on one, he must have friends in high places at the Gloriannic court.||The commotion at the bar continues.">
+<CONSTANT CHOICES109 <LTABLE "intervene" "leave and go off to shipyard">>
 
 <ROOM STORY109
 	(IN ROOMS)
 	(DESC "109")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT109)
+	(CHOICES CHOICES109)
+	(DESTINATIONS <LTABLE STORY052 STORY374>)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT110 "You lift your wand, occult syllables leaping to the front of your mind like war hounds eager to be unleashed. \"What can be locked can be unlocked,\" you assert. \"I shall open the chain by most potent art.\"||The colossus regards you with his cool majestic eyes. \"But, mortal: the chain is held closed by magic.\"||You laugh. \"Then I'll cast a spell to undo magic!\" No sooner do you, however, than the coracle is swept off away from the harbour at dizzying speed. If not for Blutz catching hold of your coat, you would have been thrown overboard. \"What's happened, skipper?\" he says as the four of you crouch terrified in the bottom of the coracle with the waves crashing against the sides.||\"I forgot,\" you say with a groan. \"It was magic that brought us here in the first place. My spell undid that.\"||It is dawn by the time you reach Selenice. You are flung up onto the shore, and by the time you turn and look out to the sea, the coracle has vanished.">
+
+<CONSTANT CHOICES110 <LTABLE "use both" "a deed given to you by Master Capstick" "diamonds">>
 
 <ROOM STORY110
 	(IN ROOMS)
 	(DESC "110")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT110)
+	(CHOICES CHOICES110)
+	(DESTINATIONS <LTABLE STORY261 STORY318 STORY299>)
+	(REQUIREMENTS <LTABLE <LTABLE CORKSCREW SHIP-IN-BOTTLE> DEED-OF-OWNERSHIP DIAMOND>)
+	(TYPES <LTABLE R-ALL R-ITEM R-ITEM>)
+	(PRECHOICE STORY110-PRECHOICE)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY110-PRECHOICE ()
+	<COND (<OR
+			<AND <IN? ,CORKSCREW ,PLAYER> <IN? ,SHIP-IN-BOTTLE ,PLAYER>>
+			<IN? ,DEED-OF-OWNERSHIP ,PLAYER>
+			<IN? ,DIAMOND ,PLAYER>>
+			<PUTP ,STORY110 ,P?DEATH F>
+			<CRLF>
+			<TELL "Now you must look for another way to obtain a vessel:">
+			<CRLF>
+	)(ELSE
+		<TELL CR "You have no hope of catching up with Skarvench." CR>
+	)>>
 
 <ROOM STORY111
 	(IN ROOMS)

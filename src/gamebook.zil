@@ -15,6 +15,7 @@
 <CONSTANT R-ITEM 3>
 <CONSTANT R-MONEY 4>
 <CONSTANT R-ANY 5>
+<CONSTANT R-ALL 6>
 
 <CONSTANT LIMIT-POSSESSIONS 8>
 
@@ -177,6 +178,19 @@
                             <CRLF>
                             <PRESS-A-KEY>
                         )>
+                    )(<AND <EQUAL? .TYPE R-ALL> .REQUIREMENTS <L=? .CHOICE <GET .REQUIREMENTS 0>>>
+                        <COND (<CHECK-ALL <GET .REQUIREMENTS .CHOICE>>
+                            <SETG HERE <GET .DESTINATIONS .CHOICE>>
+                            <CRLF>
+                        )(ELSE
+                            <HLIGHT ,H-BOLD>
+                            <CRLF><CRLF>
+                            <TELL "You do not have all the items">
+                            <PRINT-ALL <GET .REQUIREMENTS .CHOICE>>
+                            <HLIGHT 0>
+                            <CRLF>
+                            <PRESS-A-KEY>
+                        )>
                     )>
                     <RETURN>
                 )(ELSE
@@ -229,6 +243,15 @@
 
 ; "Story - Choice Requirements Validations"
 ; ---------------------------------------------------------------------------------------------
+<ROUTINE CHECK-ALL (ITEMS "AUX" COUNT)
+    <COND (.ITEMS
+        <SET COUNT <GET .ITEMS 0>>
+        <DO (I 1 .COUNT)
+            <COND (<NOT <IN? <GET .ITEMS .I> ,PLAYER>> <RFALSE>)>
+        >
+    )>
+    <RTRUE>>
+
 <ROUTINE CHECK-ANY (ITEMS "AUX" COUNT)
     <COND (.ITEMS
         <SET COUNT <GET .ITEMS 0>>
@@ -694,6 +717,9 @@
 
 ; "Story - Support Routines (display)"
 ; ---------------------------------------------------------------------------------------------
+<ROUTINE PRINT-ALL (ITEMS)
+    <PRINT-LIST .ITEMS "and ">>
+
 <ROUTINE PRINT-ANY (ITEMS)
     <PRINT-LIST .ITEMS "or ">>
 
