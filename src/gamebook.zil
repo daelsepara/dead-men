@@ -58,6 +58,7 @@
     (FLAGS CONTBIT OPENBIT)>
 
 <GLOBAL CURRENT-VEHICLE NONE>
+<GLOBAL RUN-ONCE T>
 
 <ROUTINE GAME-BOOK ("AUX" KEY)
     <COND (,CHARACTERS-ENABLED
@@ -71,18 +72,19 @@
     <SETG HERE ,PROLOGUE>
     <INIT-STATUS-LINE>
     <UPDATE-STATUS-LINE>
+    <SETG RUN-ONCE T>
     <REPEAT ()
         <CRLF>
         <RESET-CHOICES>
         <COND (,CHARACTERS-ENABLED <CHECK-EVENTS>)>
         <GOTO ,HERE>
         <PRINT-PAGE>
-        <COND (,CHARACTERS-ENABLED
+        <COND (<AND ,CHARACTERS-ENABLED ,RUN-ONCE>
             <LOSE-MONEY>
             <GAIN-CODEWORD>
             <GAIN-ITEM>
-            <CHECK-PRECHOICE>
         )>
+        <CHECK-PRECHOICE>
         <CHECK-DEATH>
         <CHECK-VICTORY>
         <COND (,CONTINUE-TO-CHOICES
@@ -128,6 +130,8 @@
                             <COND (<CHECK-SKILL-POSSESSIONS <GET .REQUIREMENTS .CHOICE>>
                                 <SETG HERE <GET .DESTINATIONS .CHOICE>>
                                 <CRLF>
+                            )(ELSE
+                                <NOT-POSSESSED <SKILL-FIRST-REQUIREMENT <GET .REQUIREMENTS .CHOICE>>>
                             )>
                         )(ELSE
                             <HLIGHT ,H-BOLD>
@@ -187,11 +191,13 @@
     >
     <RETURN .KEY>>
 
-<ROUTINE PROCESS-STORY ("AUX" COUNT CHOICES TYPES REQUIREMENTS CONTINUE)
+<ROUTINE PROCESS-STORY ("AUX" COUNT CHOICES TYPES REQUIREMENTS CONTINUE CURRENT-LOC CHOICE)
     <SET CHOICES <GETP ,HERE ,P?CHOICES>>
     <SET TYPES <GETP ,HERE ,P?TYPES>>
     <SET REQUIREMENTS <GETP ,HERE ,P?REQUIREMENTS>>
     <SET CONTINUE <GETP ,HERE ,P?CONTINUE>>
+    <SET CURRENT-LOC ,HERE>
+    <SETG RUN-ONCE T>
     <COND (.CHOICES
         <CRLF>
         <TELL "You can ">
@@ -211,7 +217,9 @@
             <COND (<AND <EQUAL? .I 1> <EQUAL? .COUNT 2>> <TELL " ">)>
         >
         <TELL "." CR>
-        <RETURN <PROCESS-CHOICES .CHOICES>>
+        <SET CHOICE <PROCESS-CHOICES .CHOICES>>
+        <COND (<EQUAL? .CURRENT-LOC ,HERE> <SETG RUN-ONCE F>)>
+        <RETURN .CHOICE>
     )(.CONTINUE
         <SETG HERE .CONTINUE>
         <PRESS-A-KEY>
@@ -264,6 +272,12 @@
     )>
     <RTRUE>>
 
+<ROUTINE CHECK-SKILL (SKILL)
+    <COND (<IN? .SKILL ,SKILLS>
+        <RETURN <CHECK-SKILL-POSSESSIONS .SKILL>>
+    )>
+    <RFALSE>>
+
 <ROUTINE CHECK-SKILL-POSSESSIONS (SKILL "AUX" REQUIREMENTS COUNT)
     <SET REQUIREMENTS <GETP .SKILL ,P?REQUIRES>>
     <COND (<NOT .REQUIREMENTS> <RTRUE>)>
@@ -279,6 +293,11 @@
     <TELL "You do not possess " A .OBJ CR>
     <HLIGHT 0>
     <PRESS-A-KEY>>
+
+<ROUTINE SKILL-FIRST-REQUIREMENT (SKILL "AUX" REQUIREMENTS)
+    <SET REQUIREMENTS <GETP .SKILL ,P?REQUIRES>>
+    <COND (<NOT .REQUIREMENTS> <RETURN NONE>)>
+    <RETURN <GET .REQUIREMENTS 1>>>
 
 ; "Story - Event Routines (victory/death/prechoice/transition/codeword/story jump events)"
 ; ---------------------------------------------------------------------------------------------
