@@ -263,16 +263,8 @@
     )>
     <RTRUE>>
 
-<ROUTINE CHECK-CODEWORDS (CODEWORDS "AUX" COUNT)
-    <COND (.CODEWORDS
-        <SET COUNT <GET .CODEWORDS 0>>
-        <COND (<G? .COUNT 0>
-            <DO (I 1 .COUNT)
-                <COND (<NOT <IN? <GET .CODEWORDS .I> ,CODEWORDS>> <RFALSE>)>
-            >
-        )>
-    )>
-    <RTRUE>>
+<ROUTINE CHECK-CODEWORDS (CODEWORDS)
+    <RETURN <CHECK-ALL .CODEWORDS ,CODEWORDS>>>
 
 <ROUTINE CHECK-MONEY (AMOUNT)
     <COND (<G? .AMOUNT 0>
