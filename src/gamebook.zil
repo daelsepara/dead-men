@@ -596,69 +596,67 @@
     )>>
 
 <ROUTINE GIVE-FROM-LIST (LIST UNABLE UNWILLING "OPT" MAX JUMP CONTAINER "AUX" ITEMS COUNT RESULT)
-	<RESET-TEMP-LIST>
-	<COND (<NOT .CONTAINER> <SET .CONTAINER ,PLAYER>)>
-	<COND (<NOT .MAX> <SET MAX 1>)>
-	<SET ITEMS <GET .LIST 0>>
-	<SET COUNT 0>
-	<DO (I 1 .ITEMS)
-		<COND (<AND <GET .LIST .I> <IN? <GET .LIST .I> .CONTAINER>>
-			<SET COUNT <+ .COUNT 1>>
-			<PUT TEMP-LIST .COUNT <GET .LIST .I>>
-		)>
-	>
-	<COND (<G? .COUNT 1>
-		<RESET-GIVEBAG>
-		<REPEAT ()
-			<TRANSFER-CONTAINER ,GIVEBAG .CONTAINER>
-			<SELECT-FROM-LIST TEMP-LIST .COUNT .MAX "item" ,GIVEBAG>
-			<COND (<NOT <EQUAL? <COUNT-CONTAINER ,GIVEBAG> .MAX>>
-				<COND (<AND <EQUAL? .MAX <+ <COUNT-CONTAINER ,GIVEBAG> 1>> <IN? ,ALL-MONEY ,GIVEBAG> <INTBL? ,ALL-MONEY .LIST <+ <GET .LIST 0> 1>>>
-					<COND (<G? ,MONEY 0>
-						<CRLF>
-						<TELL "Are you sure?">
-						<COND (<YES?>
-							<YOU-GAVE ,ALL-MONEY>
-							<COND (.JUMP <STORY-JUMP .JUMP>)>
-							<SET RESULT GIVE-GIVEN>
-							<RETURN>
-						)>
-					)(ELSE
-						<SET RESULT GIVE-UNABLE>
-						<RETURN>
-					)>
-				)>
-				<TRANSFER-CONTAINER ,GIVEBAG .CONTAINER>
-				<EMPHASIZE .UNWILLING>
-				<SET RESULT GIVE-UNWILLING>
-				<RETURN>
-			)(ELSE
-				<CRLF>
-				<TELL "Are you sure?">
-				<COND (<YES?>
-					<YOU-GAVE>
-					<COND (.JUMP
-						<STORY-JUMP .JUMP>
-					)>
-					<SET RESULT GIVE-GIVEN>
-					<RETURN>
-				)>
-			)>
-		>
-		<RETURN .RESULT>
-	)(ELSE
-		<EMPHASIZE .UNABLE>
-		<RETURN GIVE-UNABLE>
-	)>>
+    <RESET-TEMP-LIST>
+    <COND (<NOT .CONTAINER> <SET .CONTAINER ,PLAYER>)>
+    <COND (<NOT .MAX> <SET MAX 1>)>
+    <SET ITEMS <GET .LIST 0>>
+    <SET COUNT 0>
+    <DO (I 1 .ITEMS)
+        <COND (<AND <GET .LIST .I> <IN? <GET .LIST .I> .CONTAINER>>
+            <SET COUNT <+ .COUNT 1>>
+            <PUT TEMP-LIST .COUNT <GET .LIST .I>>
+        )>
+    >
+    <COND (<G? .COUNT 1>
+        <RESET-GIVEBAG>
+        <REPEAT ()
+            <TRANSFER-CONTAINER ,GIVEBAG .CONTAINER>
+            <SELECT-FROM-LIST TEMP-LIST .COUNT .MAX "item" ,GIVEBAG>
+            <COND (<NOT <EQUAL? <COUNT-CONTAINER ,GIVEBAG> .MAX>>
+                <COND (<AND <EQUAL? .MAX <+ <COUNT-CONTAINER ,GIVEBAG> 1>> <IN? ,ALL-MONEY ,GIVEBAG> <INTBL? ,ALL-MONEY .LIST <+ <GET .LIST 0> 1>>>
+                    <COND (<G? ,MONEY 0>
+                        <CRLF>
+                        <TELL "Are you sure?">
+                        <COND (<YES?>
+                            <YOU-GAVE ,ALL-MONEY>
+                            <COND (.JUMP <STORY-JUMP .JUMP>)>
+                            <SET RESULT GIVE-GIVEN>
+                            <RETURN>
+                        )>
+                    )(ELSE
+                        <SET RESULT GIVE-UNABLE>
+                        <RETURN>
+                    )>
+                )>
+                <TRANSFER-CONTAINER ,GIVEBAG .CONTAINER>
+                <EMPHASIZE .UNWILLING>
+                <SET RESULT GIVE-UNWILLING>
+                <RETURN>
+            )(ELSE
+                <CRLF>
+                <TELL "Are you sure?">
+                <COND (<YES?>
+                    <YOU-GAVE>
+                    <COND (.JUMP <STORY-JUMP .JUMP>)>
+                    <SET RESULT GIVE-GIVEN>
+                    <RETURN>
+                )>
+            )>
+        >
+        <RETURN .RESULT>
+    )(ELSE
+        <EMPHASIZE .UNABLE>
+        <RETURN GIVE-UNABLE>
+    )>>
 
 <ROUTINE IF-ALIVE (TEXT)
-	<COND (<G? ,LIFE-POINTS 0> <TELL CR .TEXT CR>)>>
+    <COND (<G? ,LIFE-POINTS 0> <TELL CR .TEXT CR>)>>
 
 <ROUTINE RESET-TEMP-LIST ("AUX" ITEMS)
-	<SET ITEMS <GET TEMP-LIST 0>>
-	<DO (I 1 .ITEMS)
-		<PUT TEMP-LIST .I NONE>
-	>>
+    <SET ITEMS <GET TEMP-LIST 0>>
+    <DO (I 1 .ITEMS)
+        <PUT TEMP-LIST .I NONE>
+    >>
 
 <ROUTINE SELECT-FROM-LIST (LIST ITEMS MAX "OPT" DESC CONTAINER "AUX" KEY COUNT CHOICE)
     <COND (<NOT .CONTAINER> <SET .CONTAINER ,PLAYER>)>
@@ -749,53 +747,53 @@
     <RETURN>>
 
 <ROUTINE SKILL-SWAP (LIST "AUX" COUNT ITEMS SKILLS MY-SKILLS)
-	<COND (<NOT .LIST> <RETURN>)>
+    <COND (<NOT .LIST> <RETURN>)>
     <SET ITEMS <GET .LIST 0>>
     <COND (<NOT .ITEMS> <RETURN>)>
-	<SET COUNT 0>
-	<SET MY-SKILLS <LTABLE NONE NONE NONE NONE NONE NONE NONE NONE>>
-	<SET SKILLS <FIRST? ,SKILLS>>
-	<REPEAT ()
-		<COND (<NOT .SKILLS> <RETURN>)>
-		<SET COUNT <+ .COUNT 1>>
-		<PUT .MY-SKILLS .COUNT .SKILLS>
-		<SET .SKILLS <NEXT? .SKILLS>>
-	>
+    <SET COUNT 0>
+    <SET MY-SKILLS <LTABLE NONE NONE NONE NONE NONE NONE NONE NONE>>
+    <SET SKILLS <FIRST? ,SKILLS>>
+    <REPEAT ()
+        <COND (<NOT .SKILLS> <RETURN>)>
+        <SET COUNT <+ .COUNT 1>>
+        <PUT .MY-SKILLS .COUNT .SKILLS>
+        <SET .SKILLS <NEXT? .SKILLS>>
+    >
     <DO (I 1 .ITEMS)
         <COND (<NOT <INTBL? <GET .LIST .I> .MY-SKILLS 9>>
             <SET COUNT <+ .COUNT 1>>
             <PUT .MY-SKILLS .COUNT <GET .LIST .I>>
         )>
     >
-	<COND (<EQUAL? .COUNT 4> <RETURN>)>
-	<REPEAT ()
-		<RESET-SKILLS>
-		<SELECT-FROM-LIST .MY-SKILLS .COUNT 4 "skill" ,SKILLS>
-		<COND (<AND <EQUAL? <COUNT-CONTAINER ,SKILLS> 4> <CHECK-ALL .LIST ,SKILLS>> <RETURN>)>
-		<COND (<NOT <EQUAL? <COUNT-CONTAINER ,SKILLS> 4>>
-			<EMPHASIZE "You must select 4 skills!">
+    <COND (<EQUAL? .COUNT 4> <RETURN>)>
+    <REPEAT ()
+        <RESET-SKILLS>
+        <SELECT-FROM-LIST .MY-SKILLS .COUNT 4 "skill" ,SKILLS>
+        <COND (<AND <EQUAL? <COUNT-CONTAINER ,SKILLS> 4> <CHECK-ALL .LIST ,SKILLS>> <RETURN>)>
+        <COND (<NOT <EQUAL? <COUNT-CONTAINER ,SKILLS> 4>>
+            <EMPHASIZE "You must select 4 skills!">
             <PRESS-A-KEY>
-		)(ELSE <COND (<NOT <CHECK-ALL .LIST ,SKILLS>>)> 
-			<CRLF>
-			<HLIGHT ,H-BOLD>
-			<TELL "You must also include these skills">
+        )(ELSE <COND (<NOT <CHECK-ALL .LIST ,SKILLS>>)>
+            <CRLF>
+            <HLIGHT ,H-BOLD>
+            <TELL "You must also include these skills">
             <HLIGHT 0>
             <PRINT-ALL .LIST>
-			<CRLF>
+            <CRLF>
             <PRESS-A-KEY>
-		)>
-	>>
+        )>
+    >>
 
 <ROUTINE YOU-GAVE ("OPT" ITEM)
-	<CRLF>
-	<HLIGHT ,H-BOLD>
-	<TELL "You gave: ">
-	<HLIGHT 0>
-	<COND (.ITEM
-		<TELL D .ITEM CR>
-	)(ELSE
-		<PRINT-CONTAINER ,GIVEBAG>
-	)>>
+    <CRLF>
+    <HLIGHT ,H-BOLD>
+    <TELL "You gave: ">
+    <HLIGHT 0>
+    <COND (.ITEM
+        <TELL D .ITEM CR>
+    )(ELSE
+        <PRINT-CONTAINER ,GIVEBAG>
+    )>>
 
 ; "Story - Merchant routines (display)"
 ; ---------------------------------------------------------------------------------------------
