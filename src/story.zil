@@ -854,7 +854,7 @@
 	(CONTINUE STORY097)
 	(FLAGS LIGHTBIT)>
 
-<CONSTANT TEXT059 "\"What is it you want of me? \"growls the god, fixing you in the sharp glare of his eyes.||\"My Olympian lord,\" you begin, \"we are trapped on this ship...\"||\"It's captain dared to pillage my shrine!\" Dionysus thunders. \"But we don't deserve this fate, lord,\" you protest.||Dionysus ponders your case. \"Perhaps not. If you were more my creature, I might be moved to mercy.||\"Your creature, lord?\"||\"The type of mortal I favour,\" continues Dionysus impatiently, \"is a roistering rowdy varlet, full of craziness and lusty with the more uproarious joys that life has to offer. Not for me these sober scholars with their books and scrolls.\"||\"Not I, lord!\" you say hastily.||He nods thoughtfully. \"I wonder. Well, I'll whisk you off to your destination, but mind you're on your worst behaviour from now on. I can't abide a dainty do-gooder!\"At Dionysus's gesture, the wine soaking the decks rises in a cloud of giddying vapour. Reeling from the fumes, you grope out until you feel the hands of your friends. They cling to you as their only protection -- though, truth to tell, if the god had unleashed his full wrath then there would have been little enough that you could do.||The wine-mist clears. There is no sign of Dionysus or his panthers -- nor of the cursed ship. Now the four of you are huddle together in the corner of a dingy tavern. A burly barman stomps over and swabs at a puddle of spilled wine on the table in front of you. \"Ain't you got no homes to go to?\" he grumbles.||\"Where are we?\" Oakley innocently asks him.||The barman gives him a contemptuous look. \"You drunken lubbers! This is a Slaughtered Goat tavern, in Port Leshand.\"||You have been spirited magically to where you wanted to go, but the go's service has its price. He has left your mind permanently tinged with exuberant madness that is his hallmark.">
+<CONSTANT TEXT059 "\"What is it you want of me? \"growls the god, fixing you in the sharp glare of his eyes.||\"My Olympian lord,\" you begin, \"we are trapped on this ship...\"||\"It's captain dared to pillage my shrine!\" Dionysus thunders. \"But we don't deserve this fate, lord,\" you protest.||Dionysus ponders your case. \"Perhaps not. If you were more my creature, I might be moved to mercy.||\"Your creature, lord?\"||\"The type of mortal I favour,\" continues Dionysus impatiently, \"is a roistering rowdy varlet, full of craziness and lusty with the more uproarious joys that life has to offer. Not for me these sober scholars with their books and scrolls.\"||\"Not I, lord!\" you say hastily.||He nods thoughtfully. \"I wonder. Well, I'll whisk you off to your destination, but mind you're on your worst behaviour from now on. I can't abide a dainty do-gooder!\"At Dionysus's gesture, the wine soaking the decks rises in a cloud of giddying vapour. Reeling from the fumes, you grope out until you feel the hands of your friends. They cling to you as their only protection -- though, truth to tell, if the god had unleashed his full wrath then there would have been little enough that you could do.||The wine-mist clears. There is no sign of Dionysus or his panthers -- nor of the cursed ship. Now the four of you are huddle together in the corner of a dingy tavern. A burly barman stomps over and swabs at a puddle of spilled wine on the table in front of you. \"Ain't you got no homes to go to?\" he grumbles.||\"Where are we?\" Oakley innocently asks him.||The barman gives him a contemptuous look. \"You drunken lubbers! This is a Slaughtered Goat tavern, in Port Leshand.\"||You have been spirited magically to where you wanted to go, but the god's services has its price. He has left your mind permanently tinged with exuberant madness that is his hallmark.">
 
 <ROOM STORY059
 	(IN ROOMS)
@@ -865,12 +865,14 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY059-PRECHOICE ()
-	<CRLF>
-	<HLIGHT ,H-BOLD>
-	<TELL "You must acquire now " D ,SKILL-ROGUERY " and " D ,SKILL-BRAWLING " if you did not have them before.">
-	<HLIGHT 0>
-	<CRLF>
-	<SKILL-SWAP ,SKILL-ROGUERY ,SKILL-BRAWLING>>
+	<COND (<NOT <AND <CHECK-SKILL ,SKILL-ROGUERY> <CHECK-SKILL ,SKILL-BRAWLING>>>
+		<CRLF>
+		<HLIGHT ,H-BOLD>
+		<TELL "You must acquire now " D ,SKILL-ROGUERY " and " D ,SKILL-BRAWLING " if you did not have them before.">
+		<HLIGHT 0>
+		<CRLF>
+		<SKILL-SWAP <LTABLE SKILL-ROGUERY SKILL-BRAWLING>>
+	)>>
 
 <CONSTANT TEXT060 "Raising your wand you commence a chant of your own, calling upon the occult forces which empower your magic. Seeing this, the natives fall back with a frightened moan. Then one withered old man in a feather cloak steps forward: their shaman. Wielding an obscene wand carved from a human thigh bone, he screeches a hasty incantation and advances to match his sorcery against yours.||Spells flash and sparkle in the air, but the uncanny duel is short-lived. Seeing that you are far more powerful a wizard than he, the shaman hurls his wand down into the sand in a gesture of surrender.">
 

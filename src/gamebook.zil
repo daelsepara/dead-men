@@ -242,20 +242,22 @@
 
 ; "Story - Choice Requirements Validations"
 ; ---------------------------------------------------------------------------------------------
-<ROUTINE CHECK-ALL (ITEMS "AUX" COUNT)
+<ROUTINE CHECK-ALL (ITEMS "OPT" CONTAINER "AUX" COUNT)
+    <COND (<NOT .CONTAINER> <SET CONTAINER ,PLAYER>)>
     <COND (.ITEMS
         <SET COUNT <GET .ITEMS 0>>
         <DO (I 1 .COUNT)
-            <COND (<NOT <IN? <GET .ITEMS .I> ,PLAYER>> <RFALSE>)>
+            <COND (<NOT <IN? <GET .ITEMS .I> .CONTAINER>> <RFALSE>)>
         >
     )>
     <RTRUE>>
 
-<ROUTINE CHECK-ANY (ITEMS "AUX" COUNT)
+<ROUTINE CHECK-ANY (ITEMS "OPT" CONTAINER "AUX" COUNT)
+    <COND (<NOT .CONTAINER> <SET CONTAINER ,PLAYER>)>
     <COND (.ITEMS
         <SET COUNT <GET .ITEMS 0>>
         <DO (I 1 .COUNT)
-            <COND (<IN? <GET .ITEMS .I> ,PLAYER> <RTRUE>)>
+            <COND (<IN? <GET .ITEMS .I> .CONTAINER> <RTRUE>)>
         >
         <RFALSE>
     )>
@@ -746,10 +748,12 @@
     )>
     <RETURN>>
 
-<ROUTINE SKILL-SWAP (FIRST-SKILL SECOND-SKILL "AUX" COUNT SKILLS MY-SKILLS)
-	<COND (<OR <NOT .FIRST-SKILL> <NOT .SECOND-SKILL>> <RETURN>)>
+<ROUTINE SKILL-SWAP (LIST "AUX" COUNT ITEMS SKILLS MY-SKILLS)
+	<COND (<NOT .LIST> <RETURN>)>
+    <SET ITEMS <GET .LIST 0>>
+    <COND (<NOT .ITEMS> <RETURN>)>
 	<SET COUNT 0>
-	<SET MY-SKILLS <LTABLE NONE NONE NONE NONE NONE NONE>>
+	<SET MY-SKILLS <LTABLE NONE NONE NONE NONE NONE NONE NONE NONE>>
 	<SET SKILLS <FIRST? ,SKILLS>>
 	<REPEAT ()
 		<COND (<NOT .SKILLS> <RETURN>)>
@@ -757,31 +761,29 @@
 		<PUT .MY-SKILLS .COUNT .SKILLS>
 		<SET .SKILLS <NEXT? .SKILLS>>
 	>
-	<COND (<NOT <INTBL? .FIRST-SKILL .MY-SKILLS 7>>
-		<SET COUNT <+ .COUNT 1>>
-		<PUT .MY-SKILLS .COUNT .FIRST-SKILL>
-	)>
-	<COND (<NOT <INTBL? .SECOND-SKILL .MY-SKILLS 7>>
-		<SET COUNT <+ .COUNT 1>>
-		<PUT .MY-SKILLS .COUNT .SECOND-SKILL>
-	)>
+    <DO (I 1 .ITEMS)
+        <COND (<NOT <INTBL? <GET .LIST .I> .MY-SKILLS 9>>
+            <SET COUNT <+ .COUNT 1>>
+            <PUT .MY-SKILLS .COUNT <GET .LIST .I>>
+        )>
+    >
 	<COND (<EQUAL? .COUNT 4> <RETURN>)>
 	<REPEAT ()
 		<RESET-SKILLS>
 		<SELECT-FROM-LIST .MY-SKILLS .COUNT 4 "skill" ,SKILLS>
-		<COND (<AND <EQUAL? <COUNT-CONTAINER ,SKILLS> 4> <IN? .FIRST-SKILL ,SKILLS> <IN? .SECOND-SKILL ,SKILLS>> <RETURN>)>
-		<HLIGHT ,H-BOLD>
+		<COND (<AND <EQUAL? <COUNT-CONTAINER ,SKILLS> 4> <CHECK-ALL .LIST ,SKILLS>> <RETURN>)>
 		<COND (<NOT <EQUAL? <COUNT-CONTAINER ,SKILLS> 4>>
-			<CRLF>
-			<TELL "You must select 4 skills!">
-			<CRLF>
-		)(ELSE <COND (<OR <NOT <IN? .FIRST-SKILL ,SKILLS>> <NOT <IN? .SECOND-SKILL ,SKILLS>>>)> 
+			<EMPHASIZE "You must select 4 skills!">
+            <PRESS-A-KEY>
+		)(ELSE <COND (<NOT <CHECK-ALL .LIST ,SKILLS>>)> 
 			<CRLF>
 			<HLIGHT ,H-BOLD>
-			<TELL "You must select both " D .FIRST-SKILL " and " D .SECOND-SKILL " skills.">
+			<TELL "You must also include these skills">
+            <HLIGHT 0>
+            <PRINT-ALL .LIST>
 			<CRLF>
+            <PRESS-A-KEY>
 		)>
-		<HLIGHT 0>
 	>>
 
 <ROUTINE YOU-GAVE ("OPT" ITEM)
