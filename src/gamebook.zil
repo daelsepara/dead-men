@@ -61,7 +61,7 @@
 <GLOBAL CURRENT-VEHICLE NONE>
 <GLOBAL RUN-ONCE T>
 
-<ROUTINE GAME-BOOK ("AUX" KEY)
+<ROUTINE GAME-BOOK ("AUX" KEY CURRENT-LOC)
     <COND (,CHARACTERS-ENABLED
         <INSTRUCTIONS>
         <RESET-PLAYER>
@@ -78,6 +78,7 @@
         <CRLF>
         <RESET-CHOICES>
         <COND (,CHARACTERS-ENABLED <CHECK-EVENTS>)>
+        <SET CURRENT-LOC ,HERE>
         <GOTO ,HERE>
         <PRINT-PAGE>
         <COND (<AND ,CHARACTERS-ENABLED ,RUN-ONCE>
@@ -86,8 +87,10 @@
             <GAIN-ITEM>
         )>
         <CHECK-PRECHOICE>
-        <CHECK-DEATH>
-        <CHECK-VICTORY>
+        <COND (<EQUAL? .CURRENT-LOC ,HERE>
+            <CHECK-DEATH>
+            <CHECK-VICTORY>
+        )>
         <COND (,CONTINUE-TO-CHOICES
             <SET KEY <PROCESS-STORY>>
             <COND (<AND ,CHARACTERS-ENABLED <EQUAL? .KEY !\c !\C>> <DESCRIBE-PLAYER> <PRESS-A-KEY> <SET KEY NONE>)>
@@ -484,7 +487,9 @@
     <SET ITEM <FIRST? .CONTAINER>>
     <REPEAT ()
         <COND (<NOT .ITEM> <RETURN>)>
-        <SET COUNT <+ .COUNT 1>>
+        <COND (<NOT <FSET? .ITEM ,NDESCBIT>>
+            <SET COUNT <+ .COUNT 1>>
+        )>
         <SET .ITEM <NEXT? .ITEM>>
     >
     <RETURN .COUNT>>
@@ -799,25 +804,29 @@
     <COND (.ITEMS
         <REPEAT ()
             <COND (.ITEMS
-                <COND (<G? .COUNT 0> <TELL ", ">)>
-                <HLIGHT ,H-ITALIC>
-                <TELL D .ITEMS>
-                <HLIGHT 0>
-                <COND (<GETP .ITEMS ,P?QUANTITY>
-                    <TELL " (" N <GETP .ITEMS ,P?QUANTITY> ")">
+                <COND (<NOT <FSET? .ITEMS ,NDESCBIT>>
+                    <COND (<G? .COUNT 0> <TELL ", ">)>
+                    <HLIGHT ,H-ITALIC>
+                    <TELL D .ITEMS>
+                    <HLIGHT 0>
+                    <COND (<GETP .ITEMS ,P?QUANTITY>
+                        <TELL " (" N <GETP .ITEMS ,P?QUANTITY> ")">
+                    )>
+                    <COND (<GETP .ITEMS ,P?STARS>
+                        <TELL " (" N <GETP .ITEMS ,P?STARS> " stars)">
+                    )>
+                    <COND (<AND <FSET? .ITEMS ,WEARBIT> <FSET? .ITEMS ,WORNBIT>>
+                        <TELL " (worn)">
+                    )>
+                    <SET COUNT <+ .COUNT 1>>
                 )>
-                <COND (<GETP .ITEMS ,P?STARS>
-                    <TELL " (" N <GETP .ITEMS ,P?STARS> " stars)">
-                )>
-                <COND (<AND <FSET? .ITEMS ,WEARBIT> <FSET? .ITEMS ,WORNBIT>>
-                    <TELL " (worn)">
-                )>
-                <SET COUNT <+ .COUNT 1>>
             )(ELSE
                 <RETURN>
             )>
             <SET ITEMS <NEXT? .ITEMS>>
         >
+    )>
+    <COND (<G? .COUNT 0>
         <CRLF>
     )(ELSE
         <TELL "None" CR>
@@ -886,6 +895,7 @@
                         <SETG MONEY <GETP .CHARACTER ,P?MONEY>>
                         <SETG LIFE-POINTS <GETP .CHARACTER ,P?LIFE-POINTS>>
                         <SETG MAX-LIFE-POINTS ,LIFE-POINTS>
+                        <MOVE ,ALL-MONEY ,PLAYER>
                         <TELL CR "You have selected " CT ,CURRENT-CHARACTER CR>
                         <TELL CR "[Press a key to begin]" CR>
                         <INPUT 1>
@@ -938,7 +948,8 @@
     <SETG CURRENT-CHARACTER ,CHARACTER-CUSTOM>
     <SETG MONEY <GETP ,CHARACTER-CUSTOM ,P?MONEY>>
     <SETG LIFE-POINTS <GETP ,CHARACTER-CUSTOM ,P?LIFE-POINTS>>
-    <SETG MAX-LIFE-POINTS ,LIFE-POINTS>>
+    <SETG MAX-LIFE-POINTS ,LIFE-POINTS>
+    <MOVE ,ALL-MONEY ,PLAYER>>
 
 <ROUTINE DESCRIBE-CHARACTER (CHARACTER "AUX" COUNT SKILLS POSSESSIONS QUANTITY)
     <COND (.CHARACTER

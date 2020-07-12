@@ -4,5 +4,9 @@ all: clean
 	rm deadmen_freq.zap
 	zapf deadmen.zap
 
+test: clean
+	zilf -w deadmen.zil
+	zapf deadmen.zap
+	
 clean:
 	rm -f *.xzap *.zap *.z?
