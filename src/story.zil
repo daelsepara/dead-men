@@ -2028,7 +2028,7 @@
 	<TELL TEXT138-CONTINUED>
 	<CRLF>>
 
-<CONSTANT TEXT139 "Mulling over your extensive knowledge of myth and legend, you consider what the items might be. Obviously they are classical in style. Very old, then -- which suggests the possibility of powerful magic, since everyone knows that the sorcerers of ancient times knew many magical secrets that are now lost. On the basis of hopeful surmise, you finally identify the items as follows:||The diamond would suffice to buy you a ship of your own but it has no magical properties, unless the effect of staggering wealth on men's greed can be accounted magical.||The conch-shell horn reminds you of such an item which was said to be taken by the Trojans after the sack of Atlantis. It can be used to convey its owner to the secret harbour of Poseidon, god of the sea. This harbour is filled with treasures, but it is guarded by a locked gate which can only be opened by the note of a flute or pipe.||The thundercloud fan is surely sacred to the storm deity of far-off Cathay. If wielded carefully, it unleashes a hurricane which can be directed as one wishes.||You soon place the bronze helmet as having belonged to a Spartan king. No doubt it confers skill at arms upon the wearer, since the Spartans were renowned for their martial prowess.||As for the dragon ring... you're not sure. It strikes a distant chord of memory, but nothing you can quite dredge to the surface. Handling it makes you feel distinctly uneasy, however. If you wish to change the two items you're taking on the basis of this information, do so now.">
+<CONSTANT TEXT139 "Mulling over your extensive knowledge of myth and legend, you consider what the items might be. Obviously they are classical in style. Very old, then -- which suggests the possibility of powerful magic, since everyone knows that the sorcerers of ancient times knew many magical secrets that are now lost. On the basis of hopeful surmise, you finally identify the items as follows:||The diamond would suffice to buy you a ship of your own but it has no magical properties, unless the effect of staggering wealth on men's greed can be accounted magical.||The conch-shell horn reminds you of such an item which was said to be taken by the Trojans after the sack of Atlantis. It can be used to convey its owner to the secret harbour of Poseidon, god of the sea. This harbour is filled with treasures, but it is guarded by a locked gate which can only be opened by the note of a flute or pipe.||The thundercloud fan is surely sacred to the storm deity of far-off Cathay. If wielded carefully, it unleashes a hurricane which can be directed as one wishes.||You soon place the bronze helmet as having belonged to a Spartan king. No doubt it confers skill at arms upon the wearer, since the Spartans were renowned for their martial prowess.||As for the dragon ring... you're not sure. It strikes a distant chord of memory, but nothing you can quite dredge to the surface. Handling it makes you feel distinctly uneasy, however.">
 <CONSTANT STORY139-LIST <LTABLE DIAMOND CONCH-SHELL-HORN THUNDERCLOUD-FAN BRONZE-HELMET DRAGON-RING>>
 
 <ROOM STORY139
@@ -2040,13 +2040,16 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY139-PRECHOICE ("AUX" ITEMS)
-	<SET ITEMS <GET STORY139-LIST 0>>
-	<DO (I 1 .ITEMS)
-		<COND (<IN? <GET .ITEMS .I> ,PLAYER>
-			<REMOVE <GET .ITEMS .I>>
-		)>
-	>
-	<SELECT-FROM-LIST STORY139-LIST 5 2>>
+	<TELL CR "Do you wish to change the two items you're taking on the basis of this information?.">
+	<COND (<YES?>
+		<SET ITEMS <GET STORY139-LIST 0>>
+		<DO (I 1 .ITEMS)
+			<COND (<IN? <GET .ITEMS .I> ,PLAYER>
+				<REMOVE <GET .ITEMS .I>>
+			)>
+		>
+		<SELECT-FROM-LIST STORY139-LIST 5 2>
+	)>>
 
 <CONSTANT TEXT140 "\"Much maintenance,\" she replies in answer to your query. \"Furious storms could yet swamp your boat; icy rain will chill you; hunger will gnaw at your insides and thirst will wither your tongues --\"||\"Is that all?\" says Oakley.||She looks hard at him. \"A cursed ship plies these waters. If you have nerves of iron and fear no fright under all of heaven, you might travel aboard her and safely be brought in sight of land.\"||\"A cuh-cursed ship...\" stammers Blutz. \"What's the cuh-catch?\"||\"You'd pay a high price for your passage,\" replies the mermaid. \"A sinister sacrifice is called for when you wish to disembark. But nothing,\" she stares at the hand grasping her long tresses, \"nothing you can't afford to part with.\"||Nervousness makes Blutz relax his grip. With a haughty twist, the mermaid pulls away from him.">
 
