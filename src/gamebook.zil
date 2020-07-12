@@ -164,13 +164,7 @@
                             <SETG HERE <GET .DESTINATIONS .CHOICE>>
                             <CRLF>
                         )(ELSE
-                            <HLIGHT ,H-BOLD>
-                            <CRLF><CRLF>
-                            <TELL "You do not have all the codewords">
-                            <PRINT-CODEWORDS <GET .REQUIREMENTS .CHOICE>>
-                            <HLIGHT 0>
-                            <CRLF>
-                            <PRESS-A-KEY>
+                            <NOT-ALL-ANY R-ALL <GET .REQUIREMENTS .CHOICE> ,CODEWORDS>
                         )>
                     )(<AND <EQUAL? .TYPE R-ITEM> .REQUIREMENTS <L=? .CHOICE <GET .REQUIREMENTS 0>>>
                         <COND (<CHECK-POSSESSIONS <GET .REQUIREMENTS .CHOICE>>
@@ -187,26 +181,14 @@
                             <SETG HERE <GET .DESTINATIONS .CHOICE>>
                             <CRLF>
                         )(ELSE
-                            <HLIGHT ,H-BOLD>
-                            <CRLF><CRLF>
-                            <TELL "You do not have any of the items">
-                            <PRINT-ANY <GET .REQUIREMENTS .CHOICE>>
-                            <HLIGHT 0>
-                            <CRLF>
-                            <PRESS-A-KEY>
+                            <NOT-ALL-ANY R-ANY <GET .REQUIREMENTS .CHOICE>>
                         )>
                     )(<AND <EQUAL? .TYPE R-ALL> .REQUIREMENTS <L=? .CHOICE <GET .REQUIREMENTS 0>>>
                         <COND (<CHECK-ALL <GET .REQUIREMENTS .CHOICE>>
                             <SETG HERE <GET .DESTINATIONS .CHOICE>>
                             <CRLF>
                         )(ELSE
-                            <HLIGHT ,H-BOLD>
-                            <CRLF><CRLF>
-                            <TELL "You do not have all the items">
-                            <PRINT-ALL <GET .REQUIREMENTS .CHOICE>>
-                            <HLIGHT 0>
-                            <CRLF>
-                            <PRESS-A-KEY>
+                            <NOT-ALL-ANY R-ALL <GET .REQUIREMENTS .CHOICE>>
                         )>
                     )>
                     <RETURN>
@@ -326,6 +308,34 @@
         <COND (<IN? <GET .REQUIREMENTS .I> ,PLAYER> <RTRUE>)>
     >
     <RFALSE>>
+
+<ROUTINE NOT-ALL-ANY (TYPE LIST "OPT" CONTAINER)
+    <COND (<NOT .CONTAINER> <SET CONTAINER ,PLAYER>)>
+    <COND (<EQUAL? .TYPE R-ANY R-ALL>
+        <HLIGHT ,H-BOLD>
+        <CRLF><CRLF>
+        <TELL "You do not have ">
+        <COND (<EQUAL? .TYPE R-ANY>
+            <TELL "any">
+        )(<EQUAL? .TYPE R-ALL>
+            <TELL "all">
+        )> 
+        <TELL " of the ">
+        <COND (<EQUAL? .CONTAINER ,CODEWORDS>
+            <TELL "codewords">
+            <PRINT-CODEWORDS .LIST>
+        )(ELSE
+            <TELL "items">
+            <COND (<EQUAL? .TYPE R-ANY>
+                <PRINT-ANY .LIST>
+            )(<EQUAL? .TYPE R-ALL>
+                <PRINT-ALL .LIST>
+            )>
+        )>
+        <HLIGHT 0>
+        <CRLF>
+        <PRESS-A-KEY>
+    )>>
 
 <ROUTINE NOT-POSSESSED (OBJ)
     <CRLF><CRLF>
