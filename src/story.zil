@@ -58,129 +58,6 @@
 	)>
 	<RETURN>>
 
-<ROUTINE IF-ALIVE (TEXT)
-	<COND (<G? ,LIFE-POINTS 0> <TELL CR .TEXT CR>)>>
-
-<ROUTINE SKILL-SWAP (FIRST-SKILL SECOND-SKILL "AUX" COUNT SKILLS MY-SKILLS)
-	<COND (<OR <NOT .FIRST-SKILL> <NOT .SECOND-SKILL>> <RETURN>)>
-	<SET COUNT 0>
-	<SET MY-SKILLS <LTABLE NONE NONE NONE NONE NONE NONE>>
-	<SET SKILLS <FIRST? ,SKILLS>>
-	<REPEAT ()
-		<COND (<NOT .SKILLS> <RETURN>)>
-		<SET COUNT <+ .COUNT 1>>
-		<PUT .MY-SKILLS .COUNT .SKILLS>
-		<SET .SKILLS <NEXT? .SKILLS>>
-	>
-	<COND (<NOT <INTBL? .FIRST-SKILL .MY-SKILLS 7>>
-		<SET COUNT <+ .COUNT 1>>
-		<PUT .MY-SKILLS .COUNT .FIRST-SKILL>
-	)>
-	<COND (<NOT <INTBL? .SECOND-SKILL .MY-SKILLS 7>>
-		<SET COUNT <+ .COUNT 1>>
-		<PUT .MY-SKILLS .COUNT .SECOND-SKILL>
-	)>
-	<COND (<EQUAL? .COUNT 4> <RETURN>)>
-	<REPEAT ()
-		<RESET-SKILLS>
-		<SELECT-FROM-LIST .MY-SKILLS .COUNT 4 "skill" ,SKILLS>
-		<COND (<AND <EQUAL? <COUNT-CONTAINER ,SKILLS> 4> <IN? .FIRST-SKILL ,SKILLS> <IN? .SECOND-SKILL ,SKILLS>> <RETURN>)>
-		<HLIGHT ,H-BOLD>
-		<COND (<NOT <EQUAL? <COUNT-CONTAINER ,SKILLS> 4>>
-			<CRLF>
-			<TELL "You must select 4 skills!">
-			<CRLF>
-		)(ELSE <COND (<OR <NOT <IN? .FIRST-SKILL ,SKILLS>> <NOT <IN? .SECOND-SKILL ,SKILLS>>>)> 
-			<CRLF>
-			<HLIGHT ,H-BOLD>
-			<TELL "You must select both " D .FIRST-SKILL " and " D .SECOND-SKILL " skills.">
-			<CRLF>
-		)>
-		<HLIGHT 0>
-	>>
-
-<CONSTANT TEMP-LIST <LTABLE NONE NONE NONE NONE NONE NONE NONE NONE NONE NONE NONE NONE NONE NONE NONE>>
-
-<ROUTINE RESET-TEMP-LIST ("AUX" ITEMS)
-	<SET ITEMS <GET TEMP-LIST 0>>
-	<DO (I 1 .ITEMS)
-		<PUT TEMP-LIST .I NONE>
-	>>
-
-<CONSTANT GIVE-GIVEN 0>
-<CONSTANT GIVE-UNABLE 1>
-<CONSTANT GIVE-UNWILLING 2>
-
-<CONSTANT UNWILLING-TO-PART "You were unwilling to part with any.">
-<CONSTANT UNABLE-TO-PART "You are unable to part with any.">
-
-<ROUTINE YOU-GAVE ("OPT" ITEM)
-	<CRLF>
-	<HLIGHT ,H-BOLD>
-	<TELL "You gave: ">
-	<HLIGHT 0>
-	<COND (.ITEM
-		<TELL D .ITEM CR>
-	)(ELSE
-		<PRINT-CONTAINER ,GIVEBAG>
-	)>>
-
-<ROUTINE GIVE-ITEMS (LIST UNABLE UNWILLING "OPT" MAX JUMP CONTAINER "AUX" ITEMS COUNT RESULT)
-	<RESET-TEMP-LIST>
-	<COND (<NOT .CONTAINER> <SET .CONTAINER ,PLAYER>)>
-	<COND (<NOT .MAX> <SET MAX 1>)>
-	<SET ITEMS <GET .LIST 0>>
-	<SET COUNT 0>
-	<DO (I 1 .ITEMS)
-		<COND (<AND <GET .LIST .I> <IN? <GET .LIST .I> .CONTAINER>>
-			<SET COUNT <+ .COUNT 1>>
-			<PUT TEMP-LIST .COUNT <GET .LIST .I>>
-		)>
-	>
-	<COND (<G? .COUNT 1>
-		<RESET-GIVEBAG>
-		<REPEAT ()
-			<TRANSFER-CONTAINER ,GIVEBAG .CONTAINER>
-			<SELECT-FROM-LIST TEMP-LIST .COUNT .MAX "item" ,GIVEBAG>
-			<COND (<NOT <EQUAL? <COUNT-CONTAINER ,GIVEBAG> .MAX>>
-				<COND (<AND <EQUAL? .MAX <+ <COUNT-CONTAINER ,GIVEBAG> 1>> <IN? ,ALL-MONEY ,GIVEBAG> <INTBL? ,ALL-MONEY .LIST <+ <GET .LIST 0> 1>>>
-					<COND (<G? ,MONEY 0>
-						<CRLF>
-						<TELL "Are you sure?">
-						<COND (<YES?>
-							<YOU-GAVE ,ALL-MONEY>
-							<COND (.JUMP <STORY-JUMP .JUMP>)>
-							<SET RESULT GIVE-GIVEN>
-							<RETURN>
-						)>
-					)(ELSE
-						<SET RESULT GIVE-UNABLE>
-						<RETURN>
-					)>
-				)>
-				<TRANSFER-CONTAINER ,GIVEBAG .CONTAINER>
-				<EMPHASIZE .UNWILLING>
-				<SET RESULT GIVE-UNWILLING>
-				<RETURN>
-			)(ELSE
-				<CRLF>
-				<TELL "Are you sure?">
-				<COND (<YES?>
-					<YOU-GAVE>
-					<COND (.JUMP
-						<STORY-JUMP .JUMP>
-					)>
-					<SET RESULT GIVE-GIVEN>
-					<RETURN>
-				)>
-			)>
-		>
-		<RETURN .RESULT>
-	)(ELSE
-		<EMPHASIZE .UNABLE>
-		<RETURN GIVE-UNABLE>
-	)>>
-
 <CONSTANT PROLOGUE-TEXT "\"Pirates!\" The roar of cannonfire thunders across the waves as word leaves the captain's lips. Hurtling out of the billowing plumes of smoke come a barrage of iron shells. Each is larger than a man's fist, and strikes with a force that splinters the oak beams of your ship and shatters men's skulls like eggs. The mainmast takes a direct hit and topples, crushing the sailors standing under it.||A grappling hook latches onto the rail. The pirates are getting ready to board you. Rushing to the side, you see their sinister vessel drawing alongside, black sails flapping in the breeze like a carrion-bird's wings. Her prow has the face of a medieval gargoyle. You read the name painted on her bows: the Belle Dame. But there is no look of beauty about her, nor hint of mercy on the faces of the eager brigands lining her rail.||A crewman standing beside you utters a groan of fear. \"It's Skarvench's ship.\"||\"Who's he?\" you ask, having to shout over the din of cannon shots and the pirates' battle-cries.||He stares at you as though you are a simpleton, and then remembers that this is your first voyage to the New World. \"The worst man that ever lived,\" is his blunt reply. And then the ships come together and the pirates are upon you.||Rushing headlong into the terrified crew, the pirates cleave a swathe of gory death across the ship's deck, their cutlasses rising and falling like scythes. You see the ship's officers fighting valiantly to defend the helm, but they are hopelessly outnumbered and soon butchered at their post. The fierce grins on the pirate's faces tell you that they expect easy pickings. You narrow your eyes as anger wells up inside you. You know that you will die today, but you feel no fear -- only a cold determination to sell your life dearly. Two pirates lunge at you. You duck the swing of the first, catch his arm and throw him against his crony. The sword intended for you ends up in a pirate's belly, and his knife comes up by reflex to slash at the man who has inadvertently impaled him.||\"Two down...\" You turn, and then for the first time you clap eyes on Skarvench himself. He stands astride the rail, grasping a grappling-line in one hand and a pistol in the other, whipping his sea-dogs into a killing frenzy with his evil laughter. His broad back and gangling limbs make him look like a massive crow. His beard is as long and lank as seaweed, and a single eye blazes beneath his bald brow -- the other is covered by a leather patch.||He is raising his pistol. You are rooted to the spot under his baleful stare. It can't be fear you're feeling surely...||\"Ah, matey,\" he says with a brown-toothed grin. \"Got to kill you again, 'ave I?\"||Again..? You have no time to ponder this enigma. In the next instant, he fires his pistol and your whole world goes black.||--||You sit up with a gasp, sweat soaking your clothes.||\"You've 'ad that dream again, eh?\"||You look around, memory trickling back as the dream recedes. The slow creaking of a ship's timbers, the unhurried heave of the waves... you are in the stuffy confines of the Belle Dame's bowels. Sailors snore fitfully around you, catching some sleep between chores. In the glimmer of an oil lamp sits Old Marshy, the ship's carpenter, whittling at a stick of wood. He glances across at you, shaking his head sadly. \"It was two years ago. Don't know why you can't stop 'aving the dreams.\"||\"Dreams? Nightmares!\" you say, mopping the sweat away. As you do, you feel the scar across your forehead where Skarvench's bullet struck you. A finger's breadth to the right -- one less tot of rum for Skarvench's breakfast that fateful morning! -- and your brains would have been blown out. As it is the bullet only grazed you, leaving the visible mark on your head and the scar of hatred deep in your heart.||Now that the nightmare has washed away, you recall the two years that have passed since that day. When you were first brought aboard the Belle Dame, Skarvench deemed you too insignificant to ransom and too close to death to be worth pressing into service. He would have cast you into the deep and never had a qualm -- that was the fate of most who survived the battle -- but Old Marshy undertook to nurse you back to health. You can well remember the weeks it took to get your strength back -- weeks experienced like glimpses in broken glass, because of fever. You remember Old Marshy holding the wooden spoons of gruel to your lips until his thin arms trembled with tiredness, urging you to eat. You remember the shouts of the pirates as they toiled in the rigging, and their drunken laughter under the stars at night. And most of all you remember Skarvench, looming through your thoughts like the embodiment of cruelty, striding the deck and waiting for you to die.||You did not die; thanks to Old Marshy you regained your strength. But death might have been better than the living hell you have had to endure these two years as an ordinary seaman aboard the cruellest ship to sail the Carab Sea. Skarvench metes out discipline as the whim takes him, revelling in the suffering of others; pain is his wine, and death his meat. Often you have had to stand by and watch a man whipped for the slightest mistake. Sometimes you have felt that whip yourself -- all to raucous laughter of Skarvench and his vicious pirate band.||\"All hands on deck!\" Hearing the command, you shake the other sailors awake and hurry up out of the dingy confines of the orlop deck into the blaze of daylight.||Skarvench stands on the poopdeck. The ox-like first mate, Porbuck gives you a shove and growls, \"You , get up in the rigging.\" As you climb, you glance out to sea. A small ship lies off the port bow and the Belle Dame is rapidly closing on her. You see a tall wooden crucifix standing amidships; she has no cannon. That is foolhardy. \"Go to sea on a prayer,\" as the adage goes, \"but take a keg of powder too.\"||You understand the reason for the other ship's lack of weaponry when you get a better view of the men lining her rail. They're all monks!||Skarvench's voice goes snarling across the water. \"Heave to or be blown out o' the water!\" he calls. \"We'll be takin' your treasure, holy or not!\"||\"We have no treasure,\" calls back one of the monks. \"We are poor brothers of the Saviour, travelling to the New World to spread His message to the heathen.\"||Skarvench smiles -- always a sign of his bad temper -- and says, \"Is that so? Well, I know of no place more heathen than the ocean bed.\" He leans on the poopdeck rail and calls to the master gunner: \"Mister Borograve, prepare to give 'em a broadside. I want their shaved heads sent forty fathoms deep, where heaven can't hear their mealy-mouthed prayers!\"||The monks know they cannot outrun the Belle Dame. As Borograve orders the cannons primed, they begin to sing a hymn. It is a glorious and peaceful sound that reminds you of the meadows and villages of your homeland. Most of the sailors pause in their duties, overcome by the melancholy beauty of the song. Even one or two of the pirates look uneasy at what they are about to do.||\"Prepare to fire,\" says Skarvench, keen as a hound at the scent of a kill.||\"No!\" A carpenter's hammer goes flying through the air and strikes Skarvench's head with a crack loud enough to carry up to where you sit in the rigging. Skarvench remains as steady as a rock, his hand flashing out with the startling speed to snatch the hammer out of the air as it falls. then he turns. His face is a mask of white fury. The fact that there is a stream of blood flowing from his temple only makes him look all the more terrible. His gaze bores along the deck and finds:||\"Mister Marsh! This your hammer, is it?\"||Old Marshy quails, his one jot of boldness used up. \"B-but, Cap'n... they're holy men! I don't think...||Skarvench tastes his own blood on his lip and savours it with his tongue. He gestures to a couple of pirates, and Old Marshy is seized and dragged up to the poopdeck. \"Lay his head on the rail there, lads,\" says Skarvench in a voice like honeyed venom. He raises the hammer. \"You're right, Mister Marsh; you don't think. That's the trouble with having nothin' in your brain-pan, see?\"||Far too late, you realise what Skarvench is going to do. You give a gasp and start down through the rigging. But even as you act, you know there is nothing you can do...||The hammer smashes down. It sounds like a wineflask breaking. The ordinary seamen look away in horror. The pirates grin gleefully like their captain, excited by the grisly sight. The corpse slumps to the deck.||\"God curse you, Skarvench,\" you mutter under your breath as you reach the foot of the mast. \"I'll see you dead for that.\"||\"You're not alone in wishing that,\" whispers a voice, \"but I'd stow such talk unless you want your own skull under the hammer next.\"||You look around to see three of the crew -- Grimes, Oakley and Blutz -- men who, like you, were taken off plundered ships and force to work for the pirates. \"We've a plan,\" continues Grimes in a low voice. \"If we stay aboard this devil ship our days are surely numbered, so tonight we plan to jump ship. We're scheduled to take the evening watch. We'll lower the jollyboat with a few supplies, then strike out towards Port Leshand.\"||\"Five hundred leagues of open ocean in a tiny boat like that!\" you gasp. \"It's near certain death.\"||\"Better than certain death, which is what we can expect here,\" mutters Oakley. \"Look, you've got a reputation of being a handy customer to have along in a tight spot. To be honest, we haven't got much of a chance without you. Now, are you with us?\"||You glare back up at the tall stooped figure on the poopdeck. He stamps to and fro, the brain-smeared hammer still in his hand, annoyed that the monks made their getaway while he was distracted by Old Marshy. You'll make him pay for his crimes one day, but you know the moment is not yet right.||You turn to Grimes and the others and give a swift nod. \"I'm with you.\"">
 
 <CONSTANT TEXT-BLANK "This story point has not been written yet.">
@@ -1109,7 +986,7 @@
 <CONSTANT STORY068-GIVELIST <LTABLE SWORD SHARKS-TOOTH-SWORD PISTOL MAGIC-WAND MAGIC-AMULET SHIP-IN-BOTTLE CONCH-SHELL-HORN BAT-SHAPED-TALISMAN BLACK-KITE DIAMOND TOOLKIT HEALING-POTION BRONZE-HELMET CRUCIFIX DRAGON-RING>>
 
 <ROUTINE STORY068-PRECHOICE ()
-	<GIVE-ITEMS STORY068-GIVELIST STORY068-UNABLE STORY068-UNWILLING 2 ,STORY144>>
+	<GIVE-FROM-LIST STORY068-GIVELIST STORY068-UNABLE STORY068-UNWILLING 2 ,STORY144>>
 
 <CONSTANT TEXT069 "Capstick has a fine house on Halyard Street, in one of the richest parts of town. Smartening yourselves up to look as respectable as possible, you ignore the sidelong glances and haughty sniffs of the wealthy passers-by, marching straight up to present yourselves at the front door. The servant who answers the door at first mistakes you for beggars, but once you've corrected that small misunderstanding he shows you through his master's study.||Capstick is sitting by the fire with a book. Seeing you, he gives his great belly-shaking laugh and leaps up to greet you, commanding the servant to bring a bottle of sherry.||\"Freshly taken off a Sidonian merchantman,\" he says shortly, lifting his glass to savour the smoky gold liquid before drinking. \"And..\" he smacks his lips, refills your glasses \"all the better for being plundered off one of those rascals, eh?\"||Soon the conversation turns to the matters you discussed aboard the Jewel of Heaven. At this, Capstick's face falls. \"I have sour news,\" he tells you. \"I must sail for Glorianne in two days' time, and so I'll be unable to partner you in your attack on that devil Skarvench. Moreover I've told the tale to several high officials, but no one believes it's true.\"||You give a glum nod. \"Who can blame them, given the source of your information? We are vagabond ex-pirates, which is not the best pedigree for reliable testimony.\"||\"But I believe you, by God!\" He produces an envelope and hands it to you. \"This is a deed of ownership for a sloop that I own in Port Selenice. She's just a small craft, but better than no ship at all. Go to Selenice, get together a crew, and see if you can't beat this Skarvench at his own game.\"||Thanking Capstick for his help, you take your leave. \"I'm only sorry not to be sailing with you,\" are his parting words.">
 
@@ -1785,7 +1662,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY117-PRECHOICE ("AUX" GIVE-RESULT)
-	<SET GIVE-RESULT <GIVE-ITEMS STORY117-GIVELIST UNABLE-TO-PART UNWILLING-TO-PART>>
+	<SET GIVE-RESULT <GIVE-FROM-LIST STORY117-GIVELIST UNABLE-TO-PART UNWILLING-TO-PART>>
 	<COND (<OR <EQUAL? .GIVE-RESULT GIVE-UNWILLING> <EQUAL? .GIVE-RESULT GIVE-UNABLE>>
 		<EMPHASIZE TEXT117-TURNNASTY>
 		<STORY-JUMP ,STORY041>
@@ -1840,7 +1717,7 @@
 <ROUTINE STORY119-PRECHOICE ("AUX" GIVE-RESULT)
 	<REPEAT ()
 		<TELL CR "You must sacrifice one skill permanently">
-		<SET GIVE-RESULT <GIVE-ITEMS SKILL-GLOSSARY UNABLE-TO-PART UNWILLING-TO-PART 1 NONE ,SKILLS>>
+		<SET GIVE-RESULT <GIVE-FROM-LIST SKILL-GLOSSARY UNABLE-TO-PART UNWILLING-TO-PART 1 NONE ,SKILLS>>
 		<COND (<EQUAL? .GIVE-RESULT ,GIVE-GIVEN>
 			<COND (<EQUAL? ,MAX-LIFE-POINTS ,LIFE-POINTS>
 				<SETG LIFE-POINTS <- ,LIFE-POINTS 1>>
