@@ -40,19 +40,19 @@
 	<PUTP ,STORY133 ,P?DEATH T>
 	<PUTP ,STORY135 ,P?DEATH T>
 	<PUT <GETP ,STORY136 ,P?DESTINATIONS> 2 ,STORY405>
+	<PUTP ,STORY142 ,P?DEATH T>
 	<RETURN>>
 
-<CONSTANT DIED-IN-COMBAT "You died in combat.">
-<CONSTANT DIED-OF-HUNGER "You died of hunger and thirst.">
-<CONSTANT DIED-EJADA-SORCERY "You have died from the Ejada's sorcery.">
+<CONSTANT DIED-IN-COMBAT "You died in combat">
+<CONSTANT DIED-OF-HUNGER "You died of hunger and thirst">
+<CONSTANT DIED-EJADA-SORCERY "You have died from the Ejada's sorcery">
 
 <ROUTINE DAMAGE-SHIP (DMG SURVIVED DESTROYED "AUX" STARS)
 	<COND (,CURRENT-VEHICLE
 		<CRLF>
 		<HLIGHT ,H-BOLD>
-		<TELL CT ,CURRENT-VEHICLE " suffers " N .DMG " damage.">
+		<TELL CT ,CURRENT-VEHICLE " suffers " N .DMG " damage" ,PERIOD-CR>
 		<HLIGHT 0>
-		<CRLF>
 		<SET STARS <GETP ,CURRENT-VEHICLE ,P?STARS>>
 		<SET STARS <- .STARS .DMG>>
 		<COND (<L? .STARS 0> <SET .STARS 0>)>
@@ -165,7 +165,7 @@
 		<CRLF>
 	)(ELSE
 		<CRLF>
-		<LOSE-LIFE 1 "You died from the bullet wound." ,STORY006>
+		<LOSE-LIFE 1 "You died from the bullet wound" ,STORY006>
 	)>>
 
 <GLOBAL USED-CHARMS-TO-FLOAT F>
@@ -238,7 +238,7 @@
 <CONSTANT TEXT012 "You make your way along the dockside, threading between the cars and bales and bustling sailors, until you come to a doorway under a painted sign showing a coil of rope and a ship's barrel. This is the shop of Gallowglass, a chandler and general trader from you have often bought supplies in the past. Catching sight of you through the open doorway, he beckons you inside. \"Ashore again, eh?\" he says jovially. \"But not for long, I'll be bound. What can I do for you?\" He shows you his wares.">
 <CONSTANT TEXT012-CONTINUED "As he turns to serve another customer, Gallowglass adds, \"You won't be staying in port for the Queen's visit, then?\"||\"When is she due to arrive?\" asks Grimes.||Gallowglass smiles and shrugs. \"A month or so. She's touring the colonies, I hear. Everyone's been told to stay on best behaviour or they must answer to the governor. Perhaps that's why I haven't sold half my usual turnover of gunpowder this week.\"||Leaving the chandler's you consider your next move.">
 
-<CONSTANT CHOICES012 <LTABLE "find someone to identify any unusual items you've come across if you have not already done so" "listen for rumours" "apply for a letter of marque" "pay a visit to Master Capstick" "you have now completed all your business in Leshand">>
+<CONSTANT CHOICES012 <LTABLE "find someone to identify any unusual items you've come across" "listen for rumours" "apply for a letter of marque" "pay a visit to Master Capstick" "you have now completed all your business in Leshand">>
 
 <ROOM STORY012
 	(IN ROOMS)
@@ -256,8 +256,7 @@
 		<MERCHANT <LTABLE CRUCIFIX PISTOL SWORD COMPASS PARROT> <LTABLE 8 10 10 10 2>>
 	)>
 	<CRLF>
-	<TELL TEXT012-CONTINUED>
-	<CRLF>
+	<TELL TEXT012-CONTINUED ,PERIOD-CR>
 	<COND (<CHECK-SKILL ,SKILL-ROGUERY>
 		<PUT <GETP ,STORY012 ,P?DESTINATIONS> 3 ,STORY050>
 	)(ELSE
@@ -351,7 +350,7 @@
 	<DAMAGE-SHIP 2 ,STORY006 ,STORY227>>
 
 <CONSTANT TEXT020 "There is a murmur of amazement from the pirates in Skarvench's cabin. Then you hear a voice which you recognize as Curshaw, the weaselly quartermaster: \"But how, Cap'n? Them Gloriannes know the sea like as to porpoises. They'd blow us out of the water before we got within a league of the Queen's flagship.\"||Crouching outside in the darkened passage, you nod to yourself. That's the question you'd have liked to ask.||There is a pause. You picture Skarvench giving one of his secretive smiles as he takes a pinch of snuff. Sure enough, there comes a satisfied sneeze and then his crowing voice is heard again: \"Never you mind the details, Mister. Thats for your old captain to sort out, ain't it? Suffice to say that there's a shipwright in Port Selenice who's being well paid for his work.\"||\"But, Cap'n\" you hear the ox-like first mate, Porbuck protesting, \"we've always stuck by all your plans, but this surely can't be feasible. Won't Queen Titania be heavily guarded? It'd be our one ship against a dozen!\"||Precisely what you were thinking.">
-<CONSTANT CHOICES020 <LTABLE "wait and hear Skarvench's reply" "rejoin your friends if you think it's time" "risk taking the time to snatch some supplies from the sailmaster's cabin">>
+<CONSTANT CHOICES020 <LTABLE "wait and hear Skarvench's reply" "rejoin your friends" "risk taking the time to snatch some supplies from the sailmaster's cabin">>
 
 <ROOM STORY020
 	(IN ROOMS)
@@ -519,7 +518,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY032-PRECHOICE ()
-	<LOSE-LIFE 1 "You died from the knife wound." ,STORY032>
+	<LOSE-LIFE 1 "You died from the knife wound" ,STORY032>
 	<IF-ALIVE TEXT032-CONTINUED>>
 
 <CONSTANT TEXT033 "The sunlight, filtering weakly through tobacco-stained windows, makes his eyes shine like pearls as he turns to you. \"Pull up a pew, mates,\" he says, stifling a sodden belch. \"Ol' Greymalkin is always ready to swap stories with a fellow buccaneer.\"||\"Here is a fearless warrior of the waves, indeed,\" says Grimes behind his hand. \"He's in full sail on a sea of wine, and that smell isn't salt spray billowing on the wind!\"||\"I heard that!\" snaps Greymalkin drunkenly. \"Poke fun at ol' Greymalkin if you like, ye scurvy nobbler -- I'll wager I saw more action afore my lights were put out than ye'll see in your whole poxy life. Aye, an' I heard a few tales in my time, too.\"||\"Heard anything recently?\" you ask.||\"Heard a fair bit. Talkin' about it dries the tongue out, though.\"">
@@ -614,7 +613,7 @@
 <CONSTANT TEXT040 "BY steering a southerly route you take advantage of the prevailing east current which should bear you to Port Leshand with the need for hard effort at the oars. Additionally, there is always the chance that you will be picked up by one of the many ships that ply these waters||After a whole day at sea you do not have such hopes. In all that tie you have seen nothing but the boundless expanse of ocean all around you. The sky is cloudless, giving you no respite from the sun that beats mercilessly down from dawn to dusk. By night a cool wind leaves you huddled, shivering, inside your ragged clothes.">
 <CONSTANT TEXT040-CONTINUED "Shortly after sunrise on the second day, you catch sight of a small uncharted island off to port. In form it is a rough hump of rock with no more than a hundred paces from side to side, girt with weed and sandbanks covered with clumps of greenish algae.||\"A coral reef,\" decides Grimes, noting the vague orange-pink shadow of rocks beneath the waves. \"There could at least be fresh rainwater here -- and insects, if not birds.\"||\"What do we want with insects?\" asks Blutz in disgust.||\"Food,\" you tell him. \"Necessity must overrule nicety if we're to survive.\"">
 <CONSTANT CHOICES040 <LTABLE "put in at at the island" "continue on your present course" "detour northwards towards the Smoking Islands">>
-<CONSTANT RAGGED-CLOTHES "Your ragged clothes were not enough to keep you warm. You died some time in the night.">
+<CONSTANT RAGGED-CLOTHES "Your ragged clothes were not enough to keep you warm. You died some time in the night">
 
 <ROOM STORY040
 	(IN ROOMS)
@@ -791,7 +790,7 @@
 	(FLAGS LIGHTBIT)>
 
 <CONSTANT TEXT052 "The elderly scholar makes another short-sighted lunge for his spectacles, only to trip over the outstretched leg of one of the ruffians and go sprawling. Their laughter is harsh and braying. The scholar gets to his feet and brushes the dust of his velvet robe. \"Please...\" he says, almost in tears. \"Give those back; I can't see without them.\"">
-<CONSTANT CHOICES052 <LTABLE "use" "try" "if you you don't have either of those skills, you will have to fight them -- either with a sword" "pistol" "your bare hands">>
+<CONSTANT CHOICES052 <LTABLE "use" "try" "or fight with a sword" "a pistol" "your bare hands">>
 
 <ROOM STORY052
 	(IN ROOMS)
@@ -874,7 +873,7 @@
 	<COND (<NOT <AND <CHECK-SKILL ,SKILL-ROGUERY> <CHECK-SKILL ,SKILL-BRAWLING>>>
 		<CRLF>
 		<HLIGHT ,H-BOLD>
-		<TELL "You must acquire now " D ,SKILL-ROGUERY " and " D ,SKILL-BRAWLING " if you did not have them before.">
+		<TELL "You must acquire now " D ,SKILL-ROGUERY " and " D ,SKILL-BRAWLING>
 		<HLIGHT 0>
 		<CRLF>
 		<SKILL-SWAP <LTABLE SKILL-ROGUERY SKILL-BRAWLING>>
@@ -963,7 +962,7 @@
 	<COND (<CHECK-SKILL ,SKILL-WILDERNESS-LORE> <STORY-JUMP ,STORY193>)>>
 
 <CONSTANT TEXT067 "Few details of any sea-going craft escape your trained eye. You note that although Mortice's raft is made of oak planks, which is a heavy wood, it floats surprisingly light in the water. This is especially odd given that the raft also carries the burden of a man, a full rain barrel, and a large chest of provisions. You can only conclude there must be something buoyant lashed to the underside of the raft.">
-<CONSTANT CHOICES067 <LTABLE "query Mortice about this" "let it lie, if you prefer">>
+<CONSTANT CHOICES067 <LTABLE "query Mortice about this" "let it lie">>
 
 <ROOM STORY067
 	(IN ROOMS)
@@ -1124,8 +1123,7 @@
 <ROUTINE STORY079-PRECHOICE ()
 	<SELECT-FROM-LIST <LTABLE FEATHER-SHIELD SHARKS-TOOTH-SWORD> 2 2>
 	<CRLF>
-	<TELL TEXT079-CONTINUED>
-	<CRLF>>
+	<TELL TEXT079-CONTINUED ,PERIOD-CR>>
 
 <CONSTANT TEXT080 "Moving with no more noise than a snake, you edge through the undergrowth until you are close enough to hear what Skarvench and the others. While the two seamen sweat over their spades, heaving up great clods of earth, Skarvench passes the grog bottle around and recounts his scurvy plans.||\"So what's this treasure for, Cap'n?\" hiccups the quartermaster.||\"To reward a certain shipwright in Port Selenice, for one thing,\" says Skarvench.\"He's to be paid in gold for the new ship he's building us.\"||\"New ship?\" says Porbuck the mate, roused from his dull-witted torpor. \"I liked the old one.\"||Skarvench ignores him. \"And the silver's for the Queen's wizard, William wild. He'll be supplying special sails for our new vessel -- aye, and a bit o' trickery into the bargain to ensure we take the Rose unhindered, me hearties!\" And he gives a low chuckle of perfect wickedness at the thought.||The scheming dog! His monstrous arrogance makes your blood boil.">
 <CONSTANT CHOICES080 <LTABLE "wait until they have taken the treasure aboard their ship and sailed off" "risk attacking them in your weakened state">>
@@ -1258,7 +1256,7 @@
 	)>>
 
 <CONSTANT TEXT089 "\"You've given me a cannon-load o' trouble,\" says Skarvench. \"Here's where I pay you back -- with my trusty basilisk here.\"||You glance down to see that he is standing beside a cannon which is pointing straight at you. Skarvench shows you the lighted taper in his hand.||\"You despicable cur!\" you snarl. \"You've no stomach for facing me at close quarters, I see.\"||\"Stow your bluster, mate,\" he sneers. \"Here's where you retire to a safe distance. Thirty fathoms down!\"">
-<CONSTANT CHOICES089 <LTABLE "use a pistol" "amulet" "just plain" "otherwise if you have none of these">>
+<CONSTANT CHOICES089 <LTABLE "use a pistol" "amulet" "just plain" "otherwise">>
 
 <ROOM STORY089
 	(IN ROOMS)
@@ -1828,7 +1826,7 @@
 	(FLAGS LIGHTBIT)>
 
 <CONSTANT TEXT127 "You soon learn that the governor recently ordered preparations for a state visit by Queen Titania. Sitting in a harbour tavern with an old acquaintance of yours, Black Danny McClintock, you watch amazed as the scar-faced rogue orders a jug of spiced milk instead of his usual shot of strong rum. \"We've been warned off causing any affray, under the threat of Moses's Law on our bare backsides,\" he explains. \"I'm playing it safe by doing no drinking or gambling for the duration.\"||You nod, hiding a smile. Moses's Law is thirty-nine strokes of the birch, but what this pack of dockside villains fear more than the pain is the public humiliation. After strutting like bantam cocks around Leshand's byways for so long, they hate having to knuckle under to the law. Doubtless that's why you can see your old friend Snake-Eyes Johnson in the street just outside helping an old lady with her shopping basket -- and not even filching so much as an orange while he does it.||The others listen with interest when you meet up later to tell them what you've learned. \"This state visit,\" ponders Blutz. \"It must be someone pretty important to cause a clampdown like this.\"||If you are to have any hope of catching up with Skarvench you will have to move on soon. He would never show his face around Leshand, with so many murders to his name. But you also have a feeling it might be worth spending a little while digging out more rumours.">
-<CONSTANT CHOICES127 <LTABLE "decide to do so" "visit a chandler's to buy supplies" "look for someone who can identify unusual items" "apply a letter of marque" "pay a visit to Master Capstick" "otherwise if you have now completed all your business in Leshand">>
+<CONSTANT CHOICES127 <LTABLE "decide to do so" "visit a chandler's to buy supplies" "look for someone who can identify unusual items" "apply a letter of marque" "pay a visit to Master Capstick" "you have now completed all your business in Leshand">>
 
 <ROOM STORY127
 	(IN ROOMS)
@@ -1849,7 +1847,7 @@
 	(FLAGS LIGHTBIT)>
 
 <CONSTANT TEXT129 "Which of these possessions will you use?">
-<CONSTANT CHOICES129 <LTABLE "try the" "a" "a" "if you have none of these, you will have to give up and throw yourself on the giant's charity">>
+<CONSTANT CHOICES129 <LTABLE "try the" "a" "a" "you give up and throw yourself on the giant's charity">>
 
 <ROOM STORY129
 	(IN ROOMS)
@@ -1903,7 +1901,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY133-PRECHOICE ()
-	<LOSE-LIFE 1 "The wound proved to be fatal." ,STORY133>>
+	<LOSE-LIFE 1 "The wound proved to be fatal" ,STORY133>>
 
 <CONSTANT TEXT134 "You dart inside the cabin, pushing the door behind you and listening with bated breath as the heavy tread of boots advances along the passage and pauses just outside. Then the door starts to swing open...">
 <CONSTANT CHOICES134 <LTABLE "use" "use" "failing those options, you cannot avoid detection">>
@@ -2009,7 +2007,7 @@
 
 <CONSTANT TEXT138 "A strong breeze stretches your sails wide against the sky, driving you on towards your destiny. But you have no time to brood on what the future may hold; you have a ship to command. Seeing the way her prow cleaves the water, and the jaunty courage of your crew as they go about their chores, your heart brims with optimism. Soon Skarvench will see his last sunset in his life -- of that you feel sure.">
 <CONSTANT TEXT138-CONTINUED "More than a week goes by. On the ninth day, you stand on the deck watching the sun slide out of the sky. Long blazing beams of orange light turn the green waves to liquid gold. And then -- in the blink of an eye -- this idyllic scene is transformed. A purple murk rises from the western horizon, blotting out the afternoon sun behind thick thunderclouds. A cold gust blows in your face, setting the sails to a pensive fluttering like frightened birds. You know well the taste of that chill wind; it is the harbinger of the hurricane.||\"This is but the twitch of the lion's tail compared to what will come,\" mutters Grimes. \"We'll have to put about.\" He calls to the crew: \"Strike the main topsail.\"||You turn. \"Belay that striking order. Lash it!\"||Oakley stares at you. \"Skipper, the hurricane'll tear us apart.\"||The first rain spits into your face, icily intense. \"'We're going in, hurricane or not. God is the master of the heavens and all the world -- but, by all that's holy, I'm the master of this ship!">
-<CONSTANT CHOICES138 <LTABLE "use a" "an amulet" "use" "otherwise, if you have none of those">>
+<CONSTANT CHOICES138 <LTABLE "use a" "an amulet" "use" "otherwise">>
 
 <ROOM STORY138
 	(IN ROOMS)
@@ -2025,8 +2023,7 @@
 <ROUTINE STORY138-PRECHOICE ()
 	<GAIN-LIFE 2>
 	<CRLF>
-	<TELL TEXT138-CONTINUED>
-	<CRLF>>
+	<TELL TEXT138-CONTINUED ,EXCLAMATION-CR>>
 
 <CONSTANT TEXT139 "Mulling over your extensive knowledge of myth and legend, you consider what the items might be. Obviously they are classical in style. Very old, then -- which suggests the possibility of powerful magic, since everyone knows that the sorcerers of ancient times knew many magical secrets that are now lost. On the basis of hopeful surmise, you finally identify the items as follows:||The diamond would suffice to buy you a ship of your own but it has no magical properties, unless the effect of staggering wealth on men's greed can be accounted magical.||The conch-shell horn reminds you of such an item which was said to be taken by the Trojans after the sack of Atlantis. It can be used to convey its owner to the secret harbour of Poseidon, god of the sea. This harbour is filled with treasures, but it is guarded by a locked gate which can only be opened by the note of a flute or pipe.||The thundercloud fan is surely sacred to the storm deity of far-off Cathay. If wielded carefully, it unleashes a hurricane which can be directed as one wishes.||You soon place the bronze helmet as having belonged to a Spartan king. No doubt it confers skill at arms upon the wearer, since the Spartans were renowned for their martial prowess.||As for the dragon ring... you're not sure. It strikes a distant chord of memory, but nothing you can quite dredge to the surface. Handling it makes you feel distinctly uneasy, however.">
 <CONSTANT STORY139-LIST <LTABLE DIAMOND CONCH-SHELL-HORN THUNDERCLOUD-FAN BRONZE-HELMET DRAGON-RING>>
@@ -2060,184 +2057,128 @@
 	(CONTINUE STORY178)
 	(FLAGS LIGHTBIT)>
 
+<CONSTANT TEXT141 "You return to the captain's cabin, where you find Mandrigard snoring, sprawled across a table full of gold coins. Oakley stands looking down at him with hands on hips, his expression an odd mixture of pity and loathing. \"One way to lift the curse,\" he says at last, \"might be to put an end to the wretch.\"||\"Murder him?\" gasps Blutz. \"I don't hold with killing a man who's not standing on his hind legs. Anyway, you're only saying that so you can take his treasure.\"||\"He's dead drunk,\" points out Grimes. \"We could take the treasure from under his nose without provoking so much as a murmur. He'd never miss a few choice bits, and what good is treasure to him if he can never spend it?\"||As usual the others look to you for authority.">
+<CONSTANT CHOICES141 <LTABLE "give the go-ahead to murder Mandrigard while he sleeps" "help yourself to just a few items of treasure" "go back up on deck">>
+
 <ROOM STORY141
 	(IN ROOMS)
 	(DESC "141")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT141)
+	(CHOICES CHOICES141)
+	(DESTINATIONS <LTABLE STORY179 STORY198 STORY217>)
+	(TYPES THREE-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT142 "Huge eye-stalks rise from the water, swivelling to bring you under the scrutiny of the crab's ghastly black gaze. It's claw swings down at you like a yacht's boom, and it rears and twists in a furious effort to snatch you off its back. Realising that you will be torn in half instantly if you fall prey to the claws, you throw yourself flat and cling to the crab's shell for dear life. There is a great lurch, then sea water washes in to engulf you. The crab is diving into the depths -- and taking you along with it.">
+<CONSTANT CHOICES142 <LTABLE "try swimming to safety" "rely on a charm against drowning">>
 
 <ROOM STORY142
 	(IN ROOMS)
 	(DESC "142")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT142)
+	(CHOICES CHOICES142)
+	(DESTINATIONS <LTABLE STORY180 STORY199>)
+	(REQUIREMENTS <LTABLE SKILL-SEAFARING SKILL-CHARMS>)
+	(TYPES <LTABLE R-SKILL R-SKILL>)
+	(PRECHOICE STORY142-PRECHOICE)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY142-PRECHOICE ()
+	<COND (<OR <CHECK-SKILL ,SKILL-SEAFARING> <CHECK-SKILL ,SKILL-CHARMS>>
+		<PUTP ,STORY142 ,P?DEATH F>
+	)(ELSE
+		<EMPHASIZE "There is nothing you can do to save yourself.">
+	)>>
+
+<CONSTANT TEXT143 "Rising to your feet, you perform as elegant an imitation of a courtly bow as your uncouth background and the cramped conditions will allow. \"Of course, we had nearly forgotten our manners. Long privation can do that to the best of us --\"||\"Yes, yes!\" says Mortice eagerly, gripping the side of your boat.||Oakleyøs brow furrows into a frown and he looks on the point of saying something, but not before you have completed your mock ritual with the words: \"Mister Mortice, you have my permission to come aboard our little vessel.\"||Instantly there is a flutter of tattered rags and a soft thud as he lands beside you in a jollyboat. You are taken aback. He moved so fast! With a toothy smile, he says, \"You lot get some rest. I'll keep watch a while">
 
 <ROOM STORY143
 	(IN ROOMS)
 	(DESC "143")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT143)
+	(PRECHOICE STORY143-PRECHOICE)
+	(CONTINUE STORY200)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY143-PRECHOICE ()
+	<COND (<OR <IN? ,CRUCIFIX ,PLAYER> <CHECK-SKILL ,SKILL-CHARMS>> <STORY-JUMP ,STORY181>)>>
+
+<CONSTANT TEXT144 "You hide out deep in the hinterland of the island, surviving off berries and fruit. Eventually you deem it safe to make your way back to the native village. Peering out from the sheltering foliage, you find that the Belle Dame has sailed off. The coast is clear.||\"That fiend!\" rages Oakley. \"No doubt he's off to wreak more wickedness in the world. Are we really going to sit here sucking coconuts while he goes unpunished?\"||You all agree it is high time you pressed on with your journey. The natives are now too scared to repeat the offer of an escort; you're on your own.">
 
 <ROOM STORY144
 	(IN ROOMS)
 	(DESC "144")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT144)
+	(CONTINUE STORY177)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT145 "Experienced sailors like the four of you have no trouble working your passage to Port Selenice. You sign on aboard a caravel and for the next week or so your days are filled with the familiar routine of life at sea.||\"Look at the sunset!\" calls Blutz across the deck one evening. He points to where long clouds like like mauve paint smears across a palette of gloriously mingled gold, scarlet, violet and grey. \"This is the life, eh, shipmates?||Grimes looks up from trimming the topsails. \"I'll take no pleasure from any such sight,\" he says grimly, \"until I know that Skarvench no longer lives under the same sky as we.\"||Eventually you reach port, and the captain of the caravel pays you off with 5 doubloons. Taking up your packs, you stride down the gangplank and along the bustling quay.">
 
 <ROOM STORY145
 	(IN ROOMS)
 	(DESC "145")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT145)
+	(PRECHOICE STORY145-PRECHOICE)
+	(CONTINUE STORY165)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY145-PRECHOICE ()
+	<GAIN-LIFE 3>
+	<SETG MONEY <+ ,MONEY 5>>
+	<UPDATE-STATUS-LINE>>
+
+<CONSTANT TEXT146 "The innkeeper of The Hanged Man is a sour-faced man named Drood. You can see him at the bar polishing tankards with a filthy piece of rag. As you step up, he sets aside the tankard he's holding and gives you a long loury glare. \"Heard you were dead,\" he says. \"Seems the news hasn't reach you yet, though.\"||You ignore this. \"Skarvench been in?\" you ask.||\"Not lately. Things are too hot for him in Leshand.\" Drood spits on the bar and starts wiping it.||A beefy hand clamps on your shoulder and turns you around. Facing you are six burly ruffians. You vaguely recognise them as Skarvench's \"business associates\" -- men who act as his spies and assassins on shore.||There leader regards you with eyes like tiny beads of dull glass. \"Cap'n Skarvench is in Port Selenice takin' delivery of a new ship,\" he says, \"Why're you askin'?\"||\"We're planning to meet him.\"||You start to move past the ruffians, then freeze as they draw knives. \"Tell you what,\" says the leader, \"you go straight to hell, and no doubt the cap'n will join you there when he's good and ready...\"||It's life or death.">
+<CONSTANT CHOICES146 <LTABLE "fight" "use" "use">>
 
 <ROOM STORY146
 	(IN ROOMS)
 	(DESC "146")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT146)
+	(CHOICES CHOICES146)
+	(DESTINATIONS <LTABLE STORY013 STORY051 STORY032>)
+	(REQUIREMENTS <LTABLE NONE SKILL-CUNNING SKILL-AGILITY>)
+	(TYPES <LTABLE R-NONE R-SKILL R-SKILL>)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT147 "Stepping up to the bar, you act as if you'd only just spotted the three ruffians. \"Toby Whipstaff!\" you say to the largest of them. \"Why, I haven't clapped eyes on you in a month o' Sundays! How blows the wind, Toby?\"||He greets you with a broad smile, forgetting his sport with the scholar. \"All's well. Last week we took a Sidonian galleon loaded with gold plate; pickings have rarely been richer.\"||You nod. \"And not just Sidonian pickings, I suppose, otherwise the governor wouldn't have set a price of a hundred doubloons on your head.\"||He fingers his neck nervously. \"Ah that must be the little business involving the Gloriannic merchantman a while back. I didn't expect them to make so much of it.\"||\"You're too modest! Five sailors were killed, including the governor's godson.\"||Whipstaff visibly pales. \"A hundred doubloons, eh? That much.\"||\"Your brother's been posted for twice that. No doubt it was his expertise with the flensing-knife that attracted undue attention.\"||\"My brother? But he's sailing for Leshand this very day. I must get to the docks!\" Tossing the spectacles on the bar, he races out with his two cronies close behind.">
 
 <ROOM STORY147
 	(IN ROOMS)
 	(DESC "147")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT147)
+	(CONTINUE STORY223)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT148 "He gives you a single large emerald -- one of his tears of mirth at your great gall. The dolphin and the shark convey you back, chatting to one another on the way. You cannot hear everything they are saying because of the splashing of the waves, but you gather they had their own ideas as to how you'd fare at Neptune's gate. \"One of them's the spitting image of that Ulysses,' you overhear the dolphin say. The shark snorts and replies, \"I'm more interested in the fat one. I like the look of him. I might hang around the shore tomorrow and see if he goes swimming.||At last you arrive at the beach near Selenice. Your adventure has taken the whole night. As the sun rises, the coracle sinks under the waves. Blutz gives a shudder and seeing this, you remark, \"Don't worry, Mister Blutz, you'll be all right so long as you don't go for a swim.\"||\"Er, it's not that,\" he protests. \"I was just, er, a bit chilly. Come on, mates, let's go to the shipyard and spend our emerald!">
 
 <ROOM STORY148
 	(IN ROOMS)
 	(DESC "148")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT148)
+	(CONTINUE STORY337)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT149 "He examines the letter, then hands it back. \"All's in order,\" he says. His manner is far from friendly, but at least the expression of icy menace is gone from  his eyes. He orders the marines to lower their weapons. You cannot help noticing that the marine sergeant keeps his pistol cocked, however. \"I will take delivery of Her Majesty's share of your plunder,\" says the captain curtly. \"This will save you the trouble of sailing to Leshand to hand it over.\"||You show him to the hold, where he makes an inventory of your treasure and then divides a sizeable pile from it -- nearly a quarter of all your spoils. \"You're levying a harsh tax,\" you say, pointing at the pile.||For the first time his face shows a smile. It is like a crack appearing on thin ice. \"You're mistaken. That pile is what you get to keep. We're taking all the rest.\"||You barely choke back a gasp. He means to take three-quarters of your treasure! You will barely have enough left to buy a decent ship.">
+<CONSTANT CHOICES149 <LTABLE "use" "if not then either you allow him to take the Queen's share" "else to fight to keep what you have">>
 
 <ROOM STORY149
 	(IN ROOMS)
 	(DESC "149")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT149)
+	(CHOICES CHOICES149)
+	(DESTINATIONS <LTABLE STORY168 STORY187 STORY206>)
+	(REQUIREMENTS <LTABLE SKILL-CUNNING NONE NONE>)
+	(TYPES <LTABLE R-SKILL R-NONE R-NONE>)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT150 "You do not relish such grisly work, but there is no time for hesitation. Kneeling in the bottom of the pit, you raise the sharp stake and drive it deep into the corpse's chest. Instantly the mouth gapes open and there issues forth such a howl of cold hatred that it will haunt your dreams forevermore. The eyes blaze for an instant in their sockets, then darken in true death as a fountain of dry brown blood wells up around the wound.||You lurch to your feet, glad to feel your friends' hands at your shoulders. Gradually, under your horrified eyes, the corpses collapse and shrivel away to dust.||\"Collect the treasure, shipmates,\" you say in a hoarse voice. \"And look sharp -- I'm keen to quit this place.\"||The moon has risen by the time all the loot is safely stowed aboard the Lady of Shalott. Only then, with shaking hand do you broach a bottle of rum. Each man gulps his tot eagerly, anxious to rid himself of his memories of this ghastly evening.">
 
 <ROOM STORY150
 	(IN ROOMS)
 	(DESC "150")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT150)
+	(CONTINUE STORY016)
 	(FLAGS LIGHTBIT)>
 
 <ROOM STORY151

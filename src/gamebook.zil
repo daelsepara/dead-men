@@ -42,6 +42,9 @@
 
 <GLOBAL CONTINUE-TO-CHOICES T>
 
+<GLOBAL PERIOD-CR ".|">
+<GLOBAL EXCLAMATION-CR "!|">
+
 <OBJECT CODEWORDS
     (DESC "Codewords")
     (SYNONYM CODEWORDS)
@@ -154,9 +157,8 @@
                         )(ELSE
                             <HLIGHT ,H-BOLD>
                             <CRLF><CRLF>
-                            <TELL "You do not have " T <GET .REQUIREMENTS .CHOICE> " skill!">
+                            <TELL "You do not have " T <GET .REQUIREMENTS .CHOICE> " skill" ,EXCLAMATION-CR>
                             <HLIGHT 0>
-                            <CRLF>
                             <PRESS-A-KEY>
                         )>
                     )(<AND <EQUAL? .TYPE R-CODEWORD> .REQUIREMENTS <L=? .CHOICE <GET .REQUIREMENTS 0>>>
@@ -194,7 +196,7 @@
                     <RETURN>
                 )(ELSE
                     <CRLF>
-                    <TELL CR "Internal Error." CR>
+                    <TELL CR "Internal Error" ,PERIOD-CR>
                     <SET KEY !\q>
                     <RETURN>
                 )>
@@ -229,7 +231,7 @@
             <COND (<AND <NOT <EQUAL? .COUNT 2>> <L? .I .COUNT> <TELL ", ">>)>
             <COND (<AND <EQUAL? .I 1> <EQUAL? .COUNT 2>> <TELL " ">)>
         >
-        <TELL "." CR>
+        <TELL ,PERIOD-CR>
         <SET CHOICE <PROCESS-CHOICES .CHOICES>>
         <COND (<EQUAL? .CURRENT-LOC ,HERE> <SETG RUN-ONCE F>)>
         <RETURN .CHOICE>
@@ -271,7 +273,7 @@
         <COND (<L? ,MONEY .AMOUNT>
             <CRLF><CRLF>
             <HLIGHT ,H-BOLD>
-            <TELL "You do not have enough " D ,CURRENCY "." CR>
+            <TELL "You do not have enough " D ,CURRENCY ,PERIOD-CR>
             <HLIGHT 0>
             <PRESS-A-KEY>
             <RFALSE>
@@ -386,7 +388,7 @@
     <HLIGHT ,H-BOLD>
     <TELL .MESSAGE>
     <HLIGHT 0>
-    <GAMES-UP " ">>
+    <GAMES-UP>>
 
 <ROUTINE STORY-JUMP (STORY)
     <COND (.STORY
@@ -400,12 +402,11 @@
 <ROUTINE CHARGE-MONEY (COST)
     <CRLF>
     <HLIGHT ,H-BOLD>
-    <TELL "You are charged " N .COST " " D ,CURRENCY ".">
+    <TELL "You are charged " N .COST " " D ,CURRENCY ,PERIOD-CR>
     <HLIGHT 0>
     <SETG MONEY <- ,MONEY .COST>>
     <COND (<L? ,MONEY 0> <SETG MONEY 0>)>
-    <UPDATE-STATUS-LINE>
-    <CRLF>>
+    <UPDATE-STATUS-LINE>>
 
 <ROUTINE GAIN-ITEM ("AUX" ITEM)
     <SET ITEM <GETP ,HERE ,P?ITEM>>
@@ -424,9 +425,8 @@
         )(ELSE
             <TELL N .POINTS>
         )>
-        <TELL " life points.">
+        <TELL " life points" ,PERIOD-CR>
         <HLIGHT 0>
-        <CRLF>
     )>>
 
 <ROUTINE GIVE-ITEM (ITEM)
@@ -451,18 +451,17 @@
         <SETG CONTINUE-TO-CHOICES F>
     )(ELSE
         <PUTP .STORY ,P?DEATH F>
-        <TELL "You lost " N .DMG " Life Points.">
+        <TELL "You lost " N .DMG " Life Points">
     )>
     <HLIGHT 0>
-    <CRLF>
+    <TELL ,PERIOD-CR>
     <RETURN>>
 
 <ROUTINE REMOVE-ITEM (ITEM REASON)
     <REMOVE .ITEM>
     <HLIGHT ,H-BOLD>
-    <TELL "You " .REASON " " T .ITEM ".">
+    <TELL "You " .REASON " " T .ITEM ,PERIOD-CR>
     <HLIGHT 0>
-    <CRLF>
     <PRESS-A-KEY>
     <CRLF>
     <RETURN>>
@@ -477,7 +476,7 @@
         <TELL "]" CR>
         <COND (<AND <EQUAL? <COUNT-POSSESSIONS> LIMIT-POSSESSIONS> <NOT <IN? .ITEM ,PLAYER>>>
             <CRLF>
-            <TELL "You are carrying too many items." CR>
+            <TELL "You are carrying too many items" ,PERIOD-CR>
             <DROP-REPLACE-ITEM .ITEM>
         )(ELSE
             <MOVE .ITEM ,PLAYER>
@@ -492,9 +491,8 @@
         <COND (<AND .REQUIRES <IN? .REQUIRES ,SKILLS>>
             <CRLF>
             <HLIGHT ,H-BOLD>
-            <TELL "You cannot drop " T .ITEM " because it is required by " T .REQUIRES " skill!">
+            <TELL "You cannot drop " T .ITEM " because it is required by " T .REQUIRES " skill" ,EXCLAMATION-CR>
             <HLIGHT 0>
-            <CRLF>
             <RFALSE>
         )>
     )>
@@ -542,7 +540,7 @@
             <HLIGHT ,H-BOLD>
             <TELL N <+ .COUNT 1>>
             <HLIGHT 0>
-            <TELL " - drop " T .OBJ " instead." CR>
+            <TELL " - drop " T .OBJ " instead" ,PERIOD-CR>
             <SET KEY <INPUT 1>>
             <COND (<AND <G? .KEY 48> <L? .KEY <+ .COUNT 49>>>
                 <SET CHOICE <- .KEY 48>>
@@ -658,7 +656,7 @@
     <REPEAT ()
         <CRLF>
         <COND (<EQUAL? .CONTAINER ,PLAYER>
-            <TELL "You are already carrying " N <COUNT-POSSESSIONS> " items in your inventory." CR>
+            <TELL "You are already carrying " N <COUNT-POSSESSIONS> " items in your inventory" ,PERIOD-CR>
         )>
         <TELL "You can select up to " N .MAX " " .DESC "s from:" CR>
         <DO (I 1 .ITEMS)
@@ -678,7 +676,7 @@
         <HLIGHT ,H-BOLD>
         <TELL "0">
         <HLIGHT 0>
-        <TELL " - I'm alright with my choices." CR>
+        <TELL " - I'm alright with my choices" ,PERIOD-CR>
         <TELL "Select which " .DESC "(s) to ">
         <COND (<EQUAL? .CONTAINER ,GIVEBAG>
             <TELL "give">
@@ -714,9 +712,8 @@
                     <COND (<EQUAL? .COUNT .MAX>
                         <CRLF>
                         <HLIGHT ,H-BOLD>
-                        <TELL "You have already selected " N .MAX " " .DESC "s!">
+                        <TELL "You have already selected " N .MAX " " .DESC "s" ,EXCLAMATION-CR>
                         <HLIGHT 0>
-                        <CRLF>
                     )(ELSE
                         <SET COUNT <+ .COUNT 1>>
                         <PUT SELECT-CHOICES <GET-INDEX SELECT-CHOICES NONE> <GET .LIST .CHOICE>>
@@ -819,11 +816,11 @@
                 <CRLF>
                 <HLIGHT ,H-BOLD>
                 <COND (<L? ,MONEY <GET .PRICELIST .ITEM>>
-                    <TELL "You can't afford " T <GET .WARES .ITEM> "!" CR>
+                    <TELL "You can't afford " T <GET .WARES .ITEM> ,EXCLAMATION-CR>
                 )(ELSE
                     <COND (<FSET? <GET .WARES .ITEM> ,TAKEBIT>
                         <COND (<IN? <GET .WARES .ITEM> .CONTAINER>
-                            <TELL "You already have " T <GET .WARES .ITEM> "!" CR>
+                            <TELL "You already have " T <GET .WARES .ITEM> ,EXCLAMATION-CR>
                         )(ELSE
                             <SETG ,MONEY <- ,MONEY <GET .PRICELIST .ITEM>>>
                             <TELL "You bought " T <GET .WARES .ITEM> CR>
@@ -836,7 +833,7 @@
                             )>
                         )>
                     )(ELSE
-                        <TELL "You can't have that!" CR>
+                        <TELL "You can't have that" ,EXCLAMATION-CR>
                     )>
                 )>
                 <HLIGHT 0>
@@ -888,8 +885,7 @@
             <TELL ": ">
             <PRINT-CONTAINER ,PLAYER>
         )(ELSE
-            <TELL ".">
-            <CRLF>
+            <TELL ,PERIOD-CR>
         )>
     )>>
 
@@ -1036,7 +1032,7 @@
                 )>
             )(<EQUAL? .KEY !\C !\c>
                 <CREATE-CHARACTER>
-                <TELL CR "You have created a custom character." CR>
+                <TELL CR "You have created a custom character" ,PERIOD-CR>
                 <TELL CR "[Press a key to begin]" CR>
                 <INPUT 1>
                 <RETURN>
@@ -1061,9 +1057,8 @@
         )(ELSE
             <CRLF>
             <HLIGHT ,H-BOLD>
-            <TELL "You must select 4 skills.">
+            <TELL "You must select 4 skills" ,PERIOD-CR>
             <HLIGHT 0>
-            <CRLF>
         )>
     >
     <SET SKILL <FIRST? ,SKILLS>>
@@ -1089,7 +1084,7 @@
         <HLIGHT 0>
         <COND (<GETP .CHARACTER ,P?LDESC>
             <CRLF>
-            <TELL <GETP .CHARACTER ,P?LDESC> CR>
+            <TELL <GETP .CHARACTER ,P?LDESC> ,PERIOD-CR>
         )>
         <CRLF>
         <HLIGHT ,H-BOLD>
@@ -1104,7 +1099,7 @@
                     <HLIGHT ,H-ITALIC>
                     <TELL D <GET .SKILLS .I> CR>
                     <HLIGHT 0>
-                    <TELL <GETP <GET .SKILLS .I> P?LDESC> CR>
+                    <TELL <GETP <GET .SKILLS .I> P?LDESC> ,PERIOD-CR>
                 >
             )>  
             <CRLF>
@@ -1151,7 +1146,7 @@
             <HLIGHT ,H-ITALIC>
             <TELL D <GET SKILL-GLOSSARY .I> CR>
             <HLIGHT 0>
-            <TELL <GETP <GET SKILL-GLOSSARY .I> P?LDESC> CR>
+            <TELL <GETP <GET SKILL-GLOSSARY .I> P?LDESC> ,PERIOD-CR>
             <COND (<NOT <EQUAL? .I .COUNT>> <CRLF>)>
         >
     )>>
@@ -1217,8 +1212,8 @@
     )>
     <RETURN 0>>
 
-<ROUTINE GAMES-UP (TEXT "AUX" W)
-    <TELL .TEXT CR CR>
+<ROUTINE GAMES-UP ("OPT" TEXT "AUX" W)
+    <COND (.TEXT <TELL .TEXT CR CR>)>
     <PRINT-GAME-OVER>
     <CRLF>
     <REPEAT PROMPT ()
@@ -1270,5 +1265,5 @@
     <HLIGHT 0>>
 
 <ROUTINE QUIT-MSG ()
-    <TELL CR "Thanks for playing." CR>
+    <TELL CR "Thanks for playing" ,PERIOD-CR>
     <QUIT>>
