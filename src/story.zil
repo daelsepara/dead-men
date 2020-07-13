@@ -65,6 +65,7 @@
 	<PUTP ,STORY171 ,P?DEATH T>
 	<PUTP ,STORY175 ,P?DEATH T>
 	<PUT <GETP ,STORY177 ,P?DESTINATIONS> 2 ,STORY404>
+	<PUTP ,STORY182 ,P?DEATH T>
 	<RETURN>>
 
 <CONSTANT DIED-IN-COMBAT "You died in combat">
@@ -331,14 +332,20 @@
 <ROUTINE STORY015-PRECHOICE ()
 	<LOSE-ITEM ,MAGIC-WAND>>
 
-<CONSTANT TEXT016 "You sail back into Selenice harbour with a hold full of treasure and hearts full of confidence. News of your fortune spreads rapidly, bringing the master shipwright himself hurrying down to the quay to greet you.||\"Come aboard, Master Kemp,\" you say, heartily pumping his hand as he steps off the gangplank. \"We've found rich pickings on our travels. Perhaps now you can sell us a ship more suited to our needs?\" With that, you throw open the hold covers with a theatrical flourish.||The sunlight reflects off your haul in patterns of gold, silver and ruby-red across Kemp's face. He looks up with as broad a smile as a mouth could manage and says, \"Why, captain. I have the very ship for you moored just along the quay.\"||You turn to look where he is pointing, a gasp of admiration escaping your lips as you do. The ship is a proud tall-masted galleon with sixty cannon bristling along her gunwales. Her figurehead is a painted oak mermaid of almost supernatural beauty. \"The Faerie Queen,\# says Blutz, reading the name emblazoned on the prow. \"I think I'm in love.\"||\"That's the one for us,\" you concur. \"Master Kemp, you keep the sloop and the loot here in the hold. We'll have the Faerie Queen.\"||Kemp nods, stunned at having made the quickest sale of his life, while you stride down the gangplank and along the quay to take command of your new vessel.">
+<CONSTANT TEXT016 "You sail back into Selenice harbour with a hold full of treasure and hearts full of confidence. News of your fortune spreads rapidly, bringing the master shipwright himself hurrying down to the quay to greet you.||\"Come aboard, Master Kemp,\" you say, heartily pumping his hand as he steps off the gangplank. \"We've found rich pickings on our travels. Perhaps now you can sell us a ship more suited to our needs?\" With that, you throw open the hold covers with a theatrical flourish.||The sunlight reflects off your haul in patterns of gold, silver and ruby-red across Kemp's face. He looks up with as broad a smile as a mouth could manage and says, \"Why, captain. I have the very ship for you moored just along the quay.\"||You turn to look where he is pointing, a gasp of admiration escaping your lips as you do. The ship is a proud tall-masted galleon with sixty cannon bristling along her gunwales. Her figurehead is a painted oak mermaid of almost supernatural beauty. \"The Faerie Queen,\" says Blutz, reading the name emblazoned on the prow. \"I think I'm in love.\"||\"That's the one for us,\" you concur. \"Master Kemp, you keep the sloop and the loot here in the hold. We'll have the Faerie Queen.\"||Kemp nods, stunned at having made the quickest sale of his life, while you stride down the gangplank and along the quay to take command of your new vessel.">
 
 <ROOM STORY016
 	(IN ROOMS)
 	(DESC "016")
 	(STORY TEXT016)
+	(PRECHOICE STORY016-PRECHOICE)
 	(CONTINUE STORY184)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY016-PRECHOICE ()
+	<REMOVE ,CURRENT-VEHICLE>
+	<MOVE ,FAERIE-QUEEN ,VEHICLES>
+	<SETG CURRENT-VEHICLE ,FAERIE-QUEEN>>
 
 <CONSTANT TEXT017 "You agree it is senseless to try steering out of the bay in thick fog. The anchor is dropped, but as you turn to go below you are met by a deputation of crewmen. Their spokesman is the bo'sun - a great thickset man with a head like a cannonball, he stands before you twisting his cap in his hand with the nervousness of a small child. \"The thing is, Cap'n\" he says with many a glance to left and right, \"this looks a dire place to lie becalmed, an' now with this fog comin' in... Well, it's given some o' the men the jibbers, an' we was wonderin' -- with your reputation for magic an' that -- if you couldn't lay a charm to keep the ship safe from hobgoblins an' such?\"||\"A simple enough request, bo'sun, and one I'm glad to grant if it will help the men's morale.\"Taking your amulet in hand, you recite a benediction that renders the ship inviolate against any assault by evil spirits or creatures of the night. Acknowledging the crew's thankful looks with a bland smile, you go down to your cabin and turn in. The night passes uneventfully.">
 
@@ -2656,185 +2663,147 @@
 	(CONTINUE STORY161)
 	(FLAGS LIGHTBIT)>
 
+<CONSTANT TEXT181 "You sleep soundly, waking at dawn to discover that Mortice and his raft have vanished. \"Good riddance to him, too,\" growls Oakley when you shake him awake with the news.||\"He was a rather creepy character,\" Grimes concedes.||\"Yes, but what about the food and water he had?\" Blutz reminds them. \"Now we're just as badly off as we were before.\"">
+
 <ROOM STORY181
 	(IN ROOMS)
 	(DESC "181")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT181)
+	(CONTINUE STORY332)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT182 "Skarvench and his men are not the sort to be taken unawares. With savagery shining from their eager faces, they close to surround you. The clash of steel and the sharp crack of musket shots ring out, startling the constant jungle murmur into silence. Gunpowder smoke and the abattoir stink of blood clog your nostrils. You are heavily outnumbered, and the struggle grows ever more desperate.">
+<CONSTANT TEXT182-DEATH "You sell your lives dearly, but in an ultimately futile massacre.">
+<CONSTANT CHOICES182 <LTABLE "fight on" "surrender">>
 
 <ROOM STORY182
 	(IN ROOMS)
 	(DESC "182")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT182)
+	(CHOICES CHOICES182)
+	(DESTINATIONS <LTABLE STORY220 STORY201>)
+	(PRECHOICE STORY182-PRECHOICE)
+	(TYPES TWO-NONES)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY182-PRECHOICE ()
+	<COND (<AND <CHECK-SKILL ,SKILL-SWORDPLAY> <CHECK-SKILL ,SKILL-MARKSMANSHIP>>
+		<COND (,RUN-ONCE
+			<LOSE-LIFE 5 DIED-IN-COMBAT ,STORY182>
+		)>
+	)(ELSE
+		<CRLF>
+		<TELL TEXT182-DEATH ,PERIOD-CR>
+	)>>
+
+<CONSTANT TEXT183 "\"El Draque?\" whispers an old sea salt whom you get talking to. \"Have ye not heard? He was captured and hanged at sea barely a month ago. By one account, his body was thrown overboard, but then swam three times around the ship before it sank.\"||Grimes peers into the sailor's tankard. \"What are you drinking mate?\"||\"Why, are you buying a round?\" says the fellow briskly.||\"No,\" Grimes replies. \"I was just going to advise you to drink a bit less of it.\" As you leave the tavern, he says, \"Enough of these taproom tales. It's time we shipped out after Skarvench.\"">
 
 <ROOM STORY183
 	(IN ROOMS)
 	(DESC "183")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT183)
+	(CONTINUE STORY392)
 	(FLAGS LIGHTBIT)>
 
 <ROOM STORY184
 	(IN ROOMS)
 	(DESC "184")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(PRECHOICE STORY184-PRECHOICE)
+	(CONTINUE STORY320)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY184-PRECHOICE ()
+	<COND (<EQUAL? ,CURRENT-VEHICLE ,LADY-OF-SHALOTT>
+		<PUTP ,LADY-OF-SHALOTT ,P?STARS 1>
+	)(<EQUAL? ,CURRENT-VEHICLE ,SHIVERED-TIMBER>
+		<PUTP ,SHIVERED-TIMBER ,P?STARS 2>
+	)(<EQUAL? ,CURRENT-VEHICLE ,QUEENS-RANSOM>
+		<PUTP ,QUEENS-RANSOM ,P?STARS 3>
+	)(<EQUAL? ,CURRENT-VEHICLE ,FAERIE-QUEEN>
+		<PUTP ,FAERIE-QUEEN ,P?STARS 3>
+	)(<EQUAL? ,CURRENT-VEHICLE ,METEOR>
+		<PUTP ,METEOR ,P?STARS 4>
+	)(<EQUAL? ,CURRENT-VEHICLE ,OCTAVIUS>
+		<PUTP ,OCTAVIUS ,P?STARS 4>
+	)(<EQUAL? ,CURRENT-VEHICLE ,PROVIDENCE>
+		<PUTP ,PROVIDENCE ,P?STARS 5>
+	)(<EQUAL? ,CURRENT-VEHICLE ,CALYPSO>
+		<PUTP ,CALYPSO ,P?STARS 5>
+	)>>
+
+<CONSTANT TEXT185 "One of the bullies gives a brutish sneer. \"You won't use that,\" he says with a scornful glance at the pistol. \"You'd be strung up for using a weapon in a brawl.\"||You shrug. \"True, I might get a rope around my neck -- if I'm caught. But it's a sure thing you won't attend the hanging. You'll be dead meat by then.\" He stares at you, licking his thick lips uncertainly. \"You wouldn't dare. Even if you kill me, my buddies here'll rip you apart.\"||You raise your pistol purposefully. It is aimed right between his eyes. \"Again, maybe that's so, but it won't do you any good with your brains splattered all over that wall.\"||His nerve breaks. With a snarl, he draws his cronies away and they slope off into the street. You tuck the pistol back inside your shirt before anyone sees you with it.">
 
 <ROOM STORY185
 	(IN ROOMS)
 	(DESC "185")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT185)
+	(CONTINUE STORY223)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT186 "Signing on a small crew, you set sail. A strong following wind allows you to make good headway, and you reach the island within a fortnight. As you coast in search of safe anchorage, Blutz points out a smaller isle that would be joined to the main island at low tide. Beyond it lies a bay where you drop anchor. Going ashore on the smaller island armed with shovels, you soon discover a boulder marked with crossed bones. \"Here's where we shall dig,\" you tell the others.||You labour on throughout the afternoon -- and hot work it is, with barely a breath of wind under a sun steaming through coastal marsh-haze. The western sky is already turning the colour of blood when there is the scrape of iron on wood. \"I've found a box!\" yells Blutz.||\"And I another!\" Grimes calls out a moment later.||Scooping away the sand with your hands, you uncover a dozen large wooden crates. \"This is a goodly hoard!\" you say, breathless with sudden excitement. \"Break one open, lads, and let's see El Draque's treasure.\"||Grimes smashes a hasp with his shovel. There is a creak as you wrench the lid up. A strong smell of tobacco and tar rises from the interior -- and something else: formaldehyde. A corpse lies there, resting on silver ingots, eyes staring sightlessly from a face which is colourless but untouched by decay. On the waxy flesh of its bare chest you see a tattoo with the legend \"Dethly is fear\".||\"In God's holy name,\" breathes Oakley, \"what's this?\"||Blutz grabs your arm. \"The sun's close to setting, skipper. For heaven's sake, let's forget the treasure and put to sea while we still can!\"">
+<CONSTANT CHOICES186 <LTABLE "open the other boxes" "wait until nightfall" "return to the ship and set sail at once">>
 
 <ROOM STORY186
 	(IN ROOMS)
 	(DESC "186")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT186)
+	(CHOICES CHOICES186)
+	(DESTINATIONS <LTABLE STORY078 STORY347 STORY413>)
+	(TYPES THREE-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT187 "The captain and his marines wait like hawks for your decision. You can sense Oakley and the others readying themselves for a fight, but you know that both honour and common-sense demand that you give in to these conditions.||\"All right, tell your men to load the Queen's gold aboard your ship.\" After he has issued the order, your resentment is still smouldering. \"I expect you'd have preferred us to fight,\" you say. \"You enjoy killing pirates, I'll bet.\"||He shrugs as if your opinion means nothing. \"Killing pirates is my duty. But you're not a pirate are you? Youøre a privateer, and it's not my job to quarrel with privateers. Not so long as they pay the Queen her due.\"||He returns to his warship and turns in the direction of Leshand. \"Any orders? asks Grimes as you watch the warship sail away.||\"Yes, Mister Grimes. Lay in a course for Selenice while we still have a few doubloons in our hold.\"">
 
 <ROOM STORY187
 	(IN ROOMS)
 	(DESC "187")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT187)
+	(CONTINUE STORY301)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT188 "This is grim work, but you cannot afford the luxury of hesitation. In moments the sunlight will be gone. Quickly dropping to your knees beside the open box, you raise the stake in both hands and plunge it down hard into the corpse's heart. A terrible gasping sigh escapes the dead lips, reminding you of the sound of autumn leaves scattering in a breeze. Then the body crumbles like ancient parchment.||Blutz cries out. At the same moment, the sun is blotted out beyond the horizon and night rushes triumphantly across the world.">
 
 <ROOM STORY188
 	(IN ROOMS)
 	(DESC "188")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT188)
+	(CONTINUE STORY347)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT189 "You take out your pocket-watch and glance at it. The glass was cracked when it stopped Skarvench's bullet, but it is still working. \"Midnight,\" you say, and close the case with a click.||There is a gasp from the sailors. One man almost falls out of the rigging in shock. Staring at the sky, they watch as an encroaching arc of darkness closes in front of the moon. \"'Tis doomsday!\" cries the bo'sun. \"First an unseasonal hurricane, then becalmed in fog, then flying ships - an' now a dragon devours the moon!\" A low moan of dread escapes the crew's lips.||Stand fast, you timid swabs!\" you thunder down at them from the poopdeck. \"Have you never seen an eclipse of the moon before?\"">
 
 <ROOM STORY189
 	(IN ROOMS)
 	(DESC "189")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT189)
+	(CONTINUE STORY246)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT190 "The helmet fills your mind with the battle-lore of the Spartans. You sense the effect is only temporary - but it should last long enough to help you defeat Skarvench, or die trying.">
 
 <ROOM STORY190
 	(IN ROOMS)
 	(DESC "190")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT190)
+	(PRECHOICE STORY190-PRECHOICE)
+	(CONTINUE STORY209)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY190-PRECHOICE ("AUX" COUNT)
+	<RESET-TEMP-SKILLS>
+	<SET COUNT 1>
+	<COND (<NOT <IN? ,SKILL-BRAWLING ,PLAYER>>
+		<PUT TEMP-SKILLS .COUNT ,SKILL-BRAWLING>
+		<SET COUNT <+ .COUNT 1>>
+		<EMPHASIZE "You have temporarily gained BRAWLING">
+	)>
+	<COND (<NOT <IN? ,SKILL-SWORDPLAY ,PLAYER>>
+		<PUT TEMP-SKILLS .COUNT ,SKILL-SWORDPLAY>
+		<SET COUNT <+ .COUNT 1>>
+		<EMPHASIZE "You have temporarily gained SWORDPLAY">
+	)>
+	<RETURN>>
 
 <ROOM STORY191
 	(IN ROOMS)
