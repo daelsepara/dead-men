@@ -6,6 +6,23 @@
 <OBJECT CURRENCY (DESC "doubloons")>
 <OBJECT VEHICLE (DESC "ships")>
 
+<CONSTANT INTERRUPT-KEY-CAPS !\D>
+<CONSTANT INTERRUPT-KEY !\d>
+
+<ROUTINE SPECIAL-INTERRUPT-ROUTINE (KEY)
+	<COND (<EQUAL? .KEY INTERRUPT-KEY-CAPS INTERRUPT-KEY>
+		<COND (<IN? ,HEALING-POTION ,PLAYER>
+			<CRLF><CRLF>
+			<TELL "Drink healing potion?">
+			<COND (<YES?>
+				<SETG ,LIFE-POINTS ,MAX-LIFE-POINTS>
+				<REMOVE ,HEALING-POTION>
+			)>
+			<RTRUE>
+		)>
+	)>
+	<RFALSE>>
+
 <ROUTINE RESET-OBJECTS ()
 	<PUTP ,LADY-OF-SHALOTT ,P?STARS 1>
 	<PUTP ,SHIVERED-TIMBER ,P?STARS 2>
@@ -41,10 +58,13 @@
 	<PUTP ,STORY135 ,P?DEATH T>
 	<PUT <GETP ,STORY136 ,P?DESTINATIONS> 2 ,STORY405>
 	<PUTP ,STORY142 ,P?DEATH T>
+	<PUTP ,STORY152 ,P?DEATH T>
+	<PUTP ,STORY155 ,P?DEATH T>
 	<RETURN>>
 
 <CONSTANT DIED-IN-COMBAT "You died in combat">
 <CONSTANT DIED-OF-HUNGER "You died of hunger and thirst">
+<CONSTANT DIED-OF-THIRST "You go mad from thirst">
 <CONSTANT DIED-EJADA-SORCERY "You have died from the Ejada's sorcery">
 
 <ROUTINE DAMAGE-SHIP (DMG SURVIVED DESTROYED "AUX" STARS)
@@ -490,7 +510,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY030-PRECHOICE ()
-	<GAIN-LIFE 1>>
+	<COND (,RUN-ONCE <GAIN-LIFE 1>)>>
 
 <CONSTANT TEXT031 "In a small courtyard off the fish market lives Doctor Scriptor, a collector of magical curios. You have brought him items in the past, both for identification and to see if he would buy them from you. He looks up from his dusty manuscripts and takes what you have brought to show him, holding up a jeweller's glass and passing each item in turn under the sharp scrutiny of his beady old eyes.||\"Well?\" you ask.||\"One moment.\" Scriptor gives a dry cough, perching his glasses on his thin nose and consulting a dusty leatherbound book. \"Hmm. Ah yes, ah yes. Eureka!\"">
 <CONSTANT CHOICES031 <LTABLE "ask him about a" "a" "a" "a" "if you don't have any of these you may as well leave">>
@@ -574,9 +594,9 @@
 	(CONTINUE STORY094)
 	(FLAGS LIGHTBIT)>
 
-<CONSTANT TEXT038-NODAMAGE "You pull your ship deftly aft of the enemy ship without taking damage.">
+<CONSTANT TEXT038-NODAMAGE "You pull your ship deftly aft of the enemy ship without taking damage">
 
-<CONSTANT TEXT038-DAMAGED "You are clipped by cannon-fire as you go in.">
+<CONSTANT TEXT038-DAMAGED "You are clipped by cannon-fire as you go in">
 
 <ROOM STORY038
 	(IN ROOMS)
@@ -587,13 +607,11 @@
 <ROUTINE STORY038-PRECHOICE ()
 	<COND (<CHECK-SKILL ,SKILL-SEAFARING>
 		<CRLF>
-		<TELL TEXT038-NODAMAGE>
-		<CRLF>
+		<TELL TEXT038-NODAMAGE ,PERIOD-CR>
 		<STORY-JUMP ,STORY415>
 	)(ELSE
 		<CRLF>
-		<TELL TEXT038-DAMAGED>
-		<CRLF>
+		<TELL TEXT038-DAMAGED ,PERIOD-CR>
 		<DAMAGE-SHIP 1 ,STORY415 ,STORY227>
 	)>>
 
@@ -628,10 +646,10 @@
 
 <ROUTINE STORY040-PRECHOICE ()
 	<COND (<CHECK-SKILL ,SKILL-WILDERNESS-LORE>
-		<LOSE-LIFE 1 RAGGED-CLOTHES ,STORY040>
+		<COND (,RUN-ONCE <LOSE-LIFE 1 RAGGED-CLOTHES ,STORY040>)>
 		<IF-ALIVE "[With your knowledge of WILDERNESS LORE, you soak your ragged clothes in the sea to keep yourself warm at night and cool during the day]">
 	)(ELSE
-		<LOSE-LIFE 2 RAGGED-CLOTHES ,STORY040>
+		<COND (,RUN-ONCE <LOSE-LIFE 2 RAGGED-CLOTHES ,STORY040>)>
 		<COND (<G? ,LIFE-POINTS 0>
 			<CRLF>
 			<TELL "[" RAGGED-CLOTHES "]">
@@ -957,7 +975,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY066-PRECHOICE ()
-	<LOSE-LIFE 1 DIED-OF-HUNGER ,STORY066>
+	<COND (,RUN-ONCE <LOSE-LIFE 1 DIED-OF-HUNGER ,STORY066>)>
 	<IF-ALIVE TEXT066-CONTINUED>
 	<COND (<CHECK-SKILL ,SKILL-WILDERNESS-LORE> <STORY-JUMP ,STORY193>)>>
 
@@ -1155,7 +1173,7 @@
 	<SET DMG 6>
 	<COND (<IN? ,FEATHER-SHIELD ,PLAYER> <SET DMG <- .DMG 3>>)>
 	<COND (<CHECK-SKILL ,SKILL-CHARMS> <SET DMG <- .DMG 1>>)>
-	<LOSE-LIFE .DMG DIED-EJADA-SORCERY ,STORY081>>
+	<COND (,RUN-ONCE <LOSE-LIFE .DMG DIED-EJADA-SORCERY ,STORY081>)>>
 
 <CONSTANT TEXT082 "\"She was El Draque's ship,\" says Kemp. \"A fine stout vessel. I did some work on her once. Curious to choose a bat as your figurehead, but that was El Draque for you. Those scarlet sails can't have been cheap, either. I hear he was captured by the Gloriannic Navy and hanged at sea for his crimes -- though what became of the Grue, I can't say.\"||Kemp has other customers to attend to, so you bid him good day and walk back to town.||\"Where to now?\" says Oakley.||You think for a moment. \"We'll take rooms at the Sweat o' the Brow inn. If Skarvench shows his face anywhere in Selenice, it'll be there.\"||You have never spoken a truer word, for no sooner have you stepped through the doorway of the inn than you are rooted to the spot in shock. There the fiend stands, large as life in front of you. A rum bottle is clutched in his hand and his crew throng the tap-room around him, cowering as he subjects them to one of this thunderous drunken rants.||Then his eye alights on you. His snarling voice is cut off in mid-sentence. A thin line of spittle runs down into his beard as his teeth show shark-like in a vicious grin. It is the moment you have waited for. Face to face with your dearest foe.">
 
@@ -1270,7 +1288,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY089-PRECHOICE ()
-	<COND (<IN? ,WEASEL ,PLAYER> <STORY-JUMP STORY076>)>>
+	<COND (<IN? ,WEASEL ,PLAYER> <STORY-JUMP ,STORY076>)>>
 
 <CONSTANT TEXT090 "You fetch a foaming stoop of ale. After fastidiously transferring the contents to his odd saucer-shaped goblet, he turns his blind gaze on you. \"You were with that Skarvench, weren't ye?\"||\"How did you --?\" begins Blutz.||He holds up his hand. \"I hears a thing or two. Like about Skarvench doin' in old Marshy. I sailed with Marshy, lads, once upon a time, and Skarvench weren't fit to spit upon his shoes. Talkin' of Skarvench, you know the new ship he's had built, the Moon Dog? Fitted with silver sails that came in a crate all the way from Glorianne. An' why did Skarvench keep askin' around about full moons an' cloud cover an' such -- ain't tide tables good enough for him no more? Makes you wonder, mates. Is it lunacy, or is there method in his madness?\"||He's a fine one to talk about lunacy,\" whispers Grimes as you get up to leave.||\"I heard that too!\" screeches Greymalkin after you. \"Ye'd do well to pay heed to what I told you, if ye want to live. Watch out for that basilisk he had shipped aboard an an' all.\"">
 <CONSTANT CHOICES090 <LTABLE "step in to save the scholar from being bullied" "go to the shipyard">>
@@ -1387,7 +1405,7 @@
 	<COND (<CHECK-SKILL ,SKILL-WILDERNESS-LORE>
 		<EMPHASIZE "You soaked your clothes in the water to protect yourself from the heat.">
 	)(ELSE
-		<LOSE-LIFE 1 RAGGED-CLOTHES ,STORY097>
+		<COND(,RUN-ONCE <LOSE-LIFE 1 RAGGED-CLOTHES ,STORY097>)>
 	)>
 	<IF-ALIVE TEXT097-CONTINUED>>
 
@@ -1566,8 +1584,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY110-PRECHOICE ()
-	<COND (<OR
-		<AND <IN? ,CORKSCREW ,PLAYER> <IN? ,SHIP-IN-BOTTLE ,PLAYER>>
+	<COND (<OR <AND <IN? ,CORKSCREW ,PLAYER> <IN? ,SHIP-IN-BOTTLE ,PLAYER>>
 		<IN? ,DEED-OF-OWNERSHIP ,PLAYER>
 		<IN? ,DIAMOND ,PLAYER>>
 		<PUTP ,STORY110 ,P?DEATH F>
@@ -2021,7 +2038,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY138-PRECHOICE ()
-	<GAIN-LIFE 2>
+	<COND (,RUN-ONCE <GAIN-LIFE 2>)>
 	<CRLF>
 	<TELL TEXT138-CONTINUED ,EXCLAMATION-CR>>
 
@@ -2181,184 +2198,132 @@
 	(CONTINUE STORY016)
 	(FLAGS LIGHTBIT)>
 
+<CONSTANT TEXT151 "Clutching the talisman, you appeal to whatever ancient god or demon it depicts to use its power now. For a long instant nothing happens, and you fear that the talisman's magic has worn off with age, but then you see a black shadow spreading across the face of the moon. It has the outline of a bat's wing.||\"The bat was the symbol of night in ancient times,\" says Grimes, his voice hushed in awe as the last moonlight vanishes like a shuttered lantern-beam and the world is plunged into starlit darkness.">
+
 <ROOM STORY151
 	(IN ROOMS)
 	(DESC "151")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT151)
+	(CONTINUE STORY246)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT152 "The basilisk cannon roars, hurling fire and hot iron towards you. You throw yourself to one side, but the blast still catches you.">
+<CONSTANT TEXT152-CONTINUED "You cry out in terrible agony but manage to stagger towards your foe. \"You take a lot o' killing, I'll say that for ye,\" hisses Skarvench as he draws his sword. \"But now your luck's run out.\"">
 
 <ROOM STORY152
 	(IN ROOMS)
 	(DESC "152")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT152)
+	(PRECHOICE STORY152-PRECHOICE)
+	(CONTINUE STORY171)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY152-PRECHOICE ()
+	<LOSE-LIFE 5 "You died from your injuries" ,STORY152>
+	<IF-ALIVE TEXT152-CONTINUED>>
+
+<CONSTANT TEXT153 "Reaching up, you take a firm grip on the bulkhead beam running across the ceiling of the passage. Then you swing yourself up until you are braced across the beam. A moment later you see the sailmaster's distinctive bald head appear below where you're hiding, but he does not look up. As he vanishes into his cabin, you drop silently to the floor and hurry up the companion-way to join your comrades.">
 
 <ROOM STORY153
 	(IN ROOMS)
 	(DESC "153")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT153)
+	(CONTINUE STORY172)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT154 "You row in towards the island, beaching your vessel on the deserted shore. Oakley gives a cry of delight as he spots a pineapple that has fallen from a tree at the top of the beach. Its juice stings his sun-cracked lips, but he chews ravenously at it all the same.||\"Head's up,\" Grimes says tersely. \"We got company, shipmates.\"||You turn your head. A large group of Carab natives have emerged from the woods and are coming across the sand towards you. \"Welcoming party...\" you mutter under your breath, noticing the spears.">
+<CONSTANT CHOICES154 <LTABLE "attack either with a pistol" "or in hand-to-hand fighting" "or you might prefer to parley" "put to sea before they reach you">>
 
 <ROOM STORY154
 	(IN ROOMS)
 	(DESC "154")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT154)
+	(CHOICES CHOICES154)
+	(DESTINATIONS <LTABLE STORY196 STORY215 STORY272 STORY177>)
+	(REQUIREMENTS <LTABLE SKILL-MARKSMANSHIP NONE NONE NONE>)
+	(TYPES <LTABLE R-SKILL R-NONE R-NONE R-NONE>)
+	(PRECHOICE STORY154-PRECHOICE)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY154-PRECHOICE ()
+	<COND (<IN? ,CODEWORD-SCRIP ,CODEWORDS> <STORY-JUMP ,STORY253>)>>
+
+<CONSTANT TEXT155 "Your limbs ache with the strain of rowing, like men who have been stretched on the rack. Slumping over the oars, you gaze feebly out across the merciless distance that still separates you from civilization. The water laps temptingly against the sides of your boat, but you know that it holds out a false promise: brine cannot slake a poor mariner's thirst, it can only drive him mad.">
 
 <ROOM STORY155
 	(IN ROOMS)
 	(DESC "155")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT155)
+	(PRECHOICE STORY155-PRECHOICE)
+	(CONTINUE STORY426)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY155-PRECHOICE ()
+	<COND(<CHECK-SKILL ,SKILL-SEAFARING>
+		<LOSE-LIFE 1 DIED-OF-THIRST ,STORY155>
+	)(ELSE
+		<LOSE-LIFE 2 DIED-OF-THIRST ,STORY155>
+	)>>
+
+<CONSTANT TEXT156 "The most westerly of the islands comes in sight. It is a large golden-shored jungle island with many welcoming coves. \"Others have put in here, when blown north off the main shipping route,\" Grimes recalls. \"The natives are said to be hospitable.\"||You stare into the west. Leshand is still two hundred leagues off, and it might be wise to re-provision before you undertake that long haul. And yet worry gnaws at your mind: \"Hospitable when faced with gifts and muskets and a sea-going vessel of ten cannon, perhaps. But how will they greet a handful of starving wretches in a ramshackle craft?\"||It's up to you.">
+<CONSTANT CHOICES156 <LTABLE "put in here" "sail on towards Port Leshand">>
 
 <ROOM STORY156
 	(IN ROOMS)
 	(DESC "156")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT156)
+	(CHOICES CHOICES156)
+	(DESTINATIONS <LTABLE STORY154 STORY177>)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT157 "Now you guess the truth. As daughter of the earth goddess, Ejada received unending strength and vitality as long as she remained in contact with the ground. Now she is like an uprooted flower wilting in the hot sunlight. \"Restore me to the earth,\" she begs, \"and all my treasures are yours.\"||\"They are anyway.\" You learned never to trust a sorceress. Wedging her on a high cornice of the building, well clear of the soil that would regenerate her power, you go inside to explore. You soon find a hoard of magical treasures comprising a magic wand, a healing potion, a ship in a bottle, and a black kite. The potion can be drunk once at any time to restore your Life points to normal (Press 'D' during action selection). The other items may or may not come in handy later.">
+<CONSTANT TEXT157-CONTINUED "Returning to the beach, you quit Grimoire Island without further delay">
 
 <ROOM STORY157
 	(IN ROOMS)
 	(DESC "157")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT157)
+	(PRECHOICE STORY157-PRECHOICE)
+	(CONTINUE STORY137)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY157-PRECHOICE ()
+	<SELECT-FROM-LIST <LTABLE MAGIC-WAND HEALING-POTION SHIP-IN-BOTTLE BLACK-KITE> 4 4>
+	<CRLF>
+	<TELL TEXT157-CONTINUED ,PERIOD-CR>>
+
+<CONSTANT TEXT158 "Coconuts are often found drifting at sea. This is how coconut trees establish themselves on new islands, after all. They can float at sea for months and remain perfectly fresh, so there is no reason why this one should not be edible. You finally manage to convince Blutz that it has not bobbed up from the kingdom of the dead or any such nonsense, and he happily joins the rest of you in your meal.">
 
 <ROOM STORY158
 	(IN ROOMS)
 	(DESC "158")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT158)
+	(CONTINUE STORY389)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT159 "The mermaid splashes grey spume with her tail, writhing angrily in Blutz's grip and spitting like a snake. But she answers you none the less: \"Set your prow south if food and  comfort are your aim, for the islands there more hospitable to land-dwellers than these storm-churned seas. Your present course westward will take you to a baleful rendezvous, and one you are unlikely to get away from in once piece.\"||\"I don't like the sound of that,\" says Blutz. \"But tell us more about the isles to the south. Aren't there any dangers there?\"||\"There is the witch Ejada,\" replies the mermaid. \"She seeks souls for her god, and such is her power that none can strike her down while her feet remain planted on solid earth --\"||Suddenly flinging a handful of brine into Blutz's face, she pulls free of his grip, leaving only two or three coral-coloured hairs twined between his stubby fingers.">
 
 <ROOM STORY159
 	(IN ROOMS)
 	(DESC "159")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT159)
+	(CONTINUE STORY178)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT160 "Settling into your jollyboat, you are not sorry to see the gloomy hulk of the Larnassos fade off into the darkness and drizzle. As for Captain Mandrigard -- will he ever find rest or an end to his curse? You wonder.||\"Should have more sense than to offend a high priest, shouldn't he,\" says Oakley. \"Save your pity for ourselves mate; we're not through this yet.\"">
+<CONSTANT CHOICES160 <LTABLE "steer south from here, towards the Smoking Islands" "stay on your present course" "otherwise">>
 
 <ROOM STORY160
 	(IN ROOMS)
 	(DESC "160")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT160)
+	(CHOICES CHOICES160)
+	(DESTINATIONS <LTABLE STORY135 STORY386 STORY349>)
+	(REQUIREMENTS <LTABLE NONE <LTABLE CODEWORD-PECCANT NONE>>)
+	(TYPES <LTABLE R-NONE R-CODEWORD R-NONE>)
 	(FLAGS LIGHTBIT)>
 
 <ROOM STORY161

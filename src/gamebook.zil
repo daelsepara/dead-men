@@ -202,6 +202,7 @@
                 )>
             )>
         )>
+        <COND (<SPECIAL-INTERRUPT-ROUTINE .KEY> <RFALSE>)>
         <COND (<EQUAL? .KEY !\c !\C !\g !\G !\i !\I !\q !\Q !\h !\H !\?> <CRLF> <RETURN>)>
     >
     <RETURN .KEY>>
@@ -214,25 +215,28 @@
     <SET CURRENT-LOC ,HERE>
     <SETG RUN-ONCE T>
     <COND (.CHOICES
-        <CRLF>
-        <TELL "You can ">
-        <SET COUNT <GET .CHOICES 0>>
-        <DO (I 1 .COUNT)
-            <COND (<AND <EQUAL? .I .COUNT> <G? .COUNT 1>> <TELL "or ">)>
-            <HLIGHT ,H-BOLD>
-            <TELL N .I ") ">
-            <HLIGHT 0>
-            <TELL <GET .CHOICES .I>>
-            <COND (<AND <EQUAL? R-SKILL <GET .TYPES .I>> .REQUIREMENTS> <TELL " ("> <HLIGHT ,H-ITALIC> <TELL D <GET .REQUIREMENTS .I>> <HLIGHT 0> <TELL ")">)>
-            <COND (<AND <EQUAL? R-CODEWORD <GET .TYPES .I>> .REQUIREMENTS> <PRINT-CODEWORDS <GET .REQUIREMENTS .I>>)>
-            <COND (<AND <EQUAL? R-ITEM <GET .TYPES .I>> .REQUIREMENTS> <TELL " ("> <HLIGHT ,H-ITALIC> <TELL D <GET .REQUIREMENTS .I>> <HLIGHT 0> <TELL ")">)>
-            <COND (<AND <EQUAL? R-MONEY <GET .TYPES .I>> .REQUIREMENTS> <TELL " (" N <GET .REQUIREMENTS .I> " " D ,CURRENCY ")">)>
-            <COND (<AND <EQUAL? R-ANY <GET .TYPES .I>> .REQUIREMENTS> <PRINT-ANY <GET .REQUIREMENTS .I>>)>
-            <COND (<AND <NOT <EQUAL? .COUNT 2>> <L? .I .COUNT> <TELL ", ">>)>
-            <COND (<AND <EQUAL? .I 1> <EQUAL? .COUNT 2>> <TELL " ">)>
+        <REPEAT ()
+            <CRLF>
+            <TELL "You can ">
+            <SET COUNT <GET .CHOICES 0>>
+            <DO (I 1 .COUNT)
+                <COND (<AND <EQUAL? .I .COUNT> <G? .COUNT 1>> <TELL "or ">)>
+                <HLIGHT ,H-BOLD>
+                <TELL N .I ") ">
+                <HLIGHT 0>
+                <TELL <GET .CHOICES .I>>
+                <COND (<AND <EQUAL? R-SKILL <GET .TYPES .I>> .REQUIREMENTS> <TELL " ("> <HLIGHT ,H-ITALIC> <TELL D <GET .REQUIREMENTS .I>> <HLIGHT 0> <TELL ")">)>
+                <COND (<AND <EQUAL? R-CODEWORD <GET .TYPES .I>> .REQUIREMENTS> <PRINT-CODEWORDS <GET .REQUIREMENTS .I>>)>
+                <COND (<AND <EQUAL? R-ITEM <GET .TYPES .I>> .REQUIREMENTS> <TELL " ("> <HLIGHT ,H-ITALIC> <TELL D <GET .REQUIREMENTS .I>> <HLIGHT 0> <TELL ")">)>
+                <COND (<AND <EQUAL? R-MONEY <GET .TYPES .I>> .REQUIREMENTS> <TELL " (" N <GET .REQUIREMENTS .I> " " D ,CURRENCY ")">)>
+                <COND (<AND <EQUAL? R-ANY <GET .TYPES .I>> .REQUIREMENTS> <PRINT-ANY <GET .REQUIREMENTS .I>>)>
+                <COND (<AND <NOT <EQUAL? .COUNT 2>> <L? .I .COUNT> <TELL ", ">>)>
+                <COND (<AND <EQUAL? .I 1> <EQUAL? .COUNT 2>> <TELL " ">)>
+            >
+            <TELL ,PERIOD-CR>
+            <SET CHOICE <PROCESS-CHOICES .CHOICES>>
+            <COND (.CHOICE <RETURN>)>
         >
-        <TELL ,PERIOD-CR>
-        <SET CHOICE <PROCESS-CHOICES .CHOICES>>
         <COND (<EQUAL? .CURRENT-LOC ,HERE> <SETG RUN-ONCE F>)>
         <RETURN .CHOICE>
     )(.CONTINUE
