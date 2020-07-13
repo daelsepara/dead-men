@@ -282,7 +282,8 @@
 		<MERCHANT <LTABLE CRUCIFIX PISTOL SWORD COMPASS PARROT> <LTABLE 8 10 10 10 2>>
 	)>
 	<CRLF>
-	<TELL TEXT012-CONTINUED ,PERIOD-CR>
+	<TELL TEXT012-CONTINUED>
+	<TELL ,PERIOD-CR>
 	<COND (<CHECK-SKILL ,SKILL-ROGUERY>
 		<PUT <GETP ,STORY012 ,P?DESTINATIONS> 3 ,STORY050>
 	)(ELSE
@@ -619,11 +620,13 @@
 <ROUTINE STORY038-PRECHOICE ()
 	<COND (<CHECK-SKILL ,SKILL-SEAFARING>
 		<CRLF>
-		<TELL TEXT038-NODAMAGE ,PERIOD-CR>
+		<TELL TEXT038-NODAMAGE>
+		<TELL ,PERIOD-CR>
 		<STORY-JUMP ,STORY415>
 	)(ELSE
 		<CRLF>
-		<TELL TEXT038-DAMAGED ,PERIOD-CR>
+		<TELL TEXT038-DAMAGED>
+		<TELL ,PERIOD-CR>
 		<DAMAGE-SHIP 1 ,STORY415 ,STORY227>
 	)>>
 
@@ -1153,7 +1156,8 @@
 <ROUTINE STORY079-PRECHOICE ()
 	<SELECT-FROM-LIST <LTABLE FEATHER-SHIELD SHARKS-TOOTH-SWORD> 2 2>
 	<CRLF>
-	<TELL TEXT079-CONTINUED ,PERIOD-CR>>
+	<TELL TEXT079-CONTINUED>
+	<TELL ,PERIOD-CR>>
 
 <CONSTANT TEXT080 "Moving with no more noise than a snake, you edge through the undergrowth until you are close enough to hear what Skarvench and the others. While the two seamen sweat over their spades, heaving up great clods of earth, Skarvench passes the grog bottle around and recounts his scurvy plans.||\"So what's this treasure for, Cap'n?\" hiccups the quartermaster.||\"To reward a certain shipwright in Port Selenice, for one thing,\" says Skarvench.\"He's to be paid in gold for the new ship he's building us.\"||\"New ship?\" says Porbuck the mate, roused from his dull-witted torpor. \"I liked the old one.\"||Skarvench ignores him. \"And the silver's for the Queen's wizard, William wild. He'll be supplying special sails for our new vessel -- aye, and a bit o' trickery into the bargain to ensure we take the Rose unhindered, me hearties!\" And he gives a low chuckle of perfect wickedness at the thought.||The scheming dog! His monstrous arrogance makes your blood boil.">
 <CONSTANT CHOICES080 <LTABLE "wait until they have taken the treasure aboard their ship and sailed off" "risk attacking them in your weakened state">>
@@ -2052,7 +2056,8 @@
 <ROUTINE STORY138-PRECHOICE ()
 	<COND (,RUN-ONCE <GAIN-LIFE 2>)>
 	<CRLF>
-	<TELL TEXT138-CONTINUED ,EXCLAMATION-CR>>
+	<TELL TEXT138-CONTINUED>
+	<TELL ,EXCLAMATION-CR>>
 
 <CONSTANT TEXT139 "Mulling over your extensive knowledge of myth and legend, you consider what the items might be. Obviously they are classical in style. Very old, then -- which suggests the possibility of powerful magic, since everyone knows that the sorcerers of ancient times knew many magical secrets that are now lost. On the basis of hopeful surmise, you finally identify the items as follows:||The diamond would suffice to buy you a ship of your own but it has no magical properties, unless the effect of staggering wealth on men's greed can be accounted magical.||The conch-shell horn reminds you of such an item which was said to be taken by the Trojans after the sack of Atlantis. It can be used to convey its owner to the secret harbour of Poseidon, god of the sea. This harbour is filled with treasures, but it is guarded by a locked gate which can only be opened by the note of a flute or pipe.||The thundercloud fan is surely sacred to the storm deity of far-off Cathay. If wielded carefully, it unleashes a hurricane which can be directed as one wishes.||You soon place the bronze helmet as having belonged to a Spartan king. No doubt it confers skill at arms upon the wearer, since the Spartans were renowned for their martial prowess.||As for the dragon ring... you're not sure. It strikes a distant chord of memory, but nothing you can quite dredge to the surface. Handling it makes you feel distinctly uneasy, however.">
 <CONSTANT STORY139-LIST <LTABLE DIAMOND CONCH-SHELL-HORN THUNDERCLOUD-FAN BRONZE-HELMET DRAGON-RING>>
@@ -2304,7 +2309,8 @@
 <ROUTINE STORY157-PRECHOICE ()
 	<SELECT-FROM-LIST <LTABLE MAGIC-WAND HEALING-POTION SHIP-IN-BOTTLE BLACK-KITE> 4 4>
 	<CRLF>
-	<TELL TEXT157-CONTINUED ,PERIOD-CR>>
+	<TELL TEXT157-CONTINUED>
+	<TELL ,PERIOD-CR>>
 
 <CONSTANT TEXT158 "Coconuts are often found drifting at sea. This is how coconut trees establish themselves on new islands, after all. They can float at sea for months and remain perfectly fresh, so there is no reason why this one should not be edible. You finally manage to convince Blutz that it has not bobbed up from the kingdom of the dead or any such nonsense, and he happily joins the rest of you in your meal.">
 
@@ -2465,7 +2471,8 @@
 	)>
 	<PUTP ,STORY167 ,P?DEATH F>
 	<CRLF>
-	<TELL TEXT167-CONTINUED ,PERIOD-CR>>
+	<TELL TEXT167-CONTINUED>
+	<TELL ,PERIOD-CR>>
 
 <CONSTANT TEXT168 "After agreeing to the captain's demands, you direct your crew to carry the bulk of the treasure aboard the warship. At least, that's the way it seems. The truth is that only the top of each chest contains gold coins - the rest is filled with the salt that was left aboard the Lady Shalott by her last owner. A few groans, pleas, tears and offers of bribery help to make this charade convincing. The warship sails off towards Leshand and you turn your prow towards Selenice, hoping to be long gone before they discover you've tricked them.">
 
@@ -2599,7 +2606,8 @@
 <ROUTINE STORY176-PRECHOICE ()
 	<SELECT-FROM-LIST <LTABLE DIAMOND BLACK-KITE> 2 2>
 	<CRLF>
-	<TELL TEXT176-CONTINUED ,PERIOD-CR>>
+	<TELL TEXT176-CONTINUED>
+	<TELL ,PERIOD-CR>>
 
 <CONSTANT TEXT177 "Taking stock of your situation leaves you in a grim mood. \"We're still more than two hundred leagues out from Port Leshand, ad there are no islands along the route for us to restock our supplies. What we've got left for now is going to have to keep us going for at least ten days.\"||Oakley has another thought, equally sobering. Pointing at the timbers of your vessel - now warped by the constant sun and the battering of high waves -- he mutters: \"Ten days? We might not stay afloat that long.\"||\"Maybe we shouldn't try to make it all the way to Leshand,\" suggests Blutz. \"We could head south from here towards the main shipping lanes. There's a good chance we'd be rescued by a friendly vessel.\"">
 
@@ -2694,7 +2702,8 @@
 		)>
 	)(ELSE
 		<CRLF>
-		<TELL TEXT182-DEATH ,PERIOD-CR>
+		<TELL TEXT182-DEATH>
+		<TELL ,PERIOD-CR>
 	)>>
 
 <CONSTANT TEXT183 "\"El Draque?\" whispers an old sea salt whom you get talking to. \"Have ye not heard? He was captured and hanged at sea barely a month ago. By one account, his body was thrown overboard, but then swam three times around the ship before it sank.\"||Grimes peers into the sailor's tankard. \"What are you drinking mate?\"||\"Why, are you buying a round?\" says the fellow briskly.||\"No,\" Grimes replies. \"I was just going to advise you to drink a bit less of it.\" As you leave the tavern, he says, \"Enough of these taproom tales. It's time we shipped out after Skarvench.\"">
