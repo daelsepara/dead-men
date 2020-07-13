@@ -60,6 +60,8 @@
 	<PUTP ,STORY142 ,P?DEATH T>
 	<PUTP ,STORY152 ,P?DEATH T>
 	<PUTP ,STORY155 ,P?DEATH T>
+	<PUT <GETP ,STORY164 ,P?DESTINATIONS> 5 ,STORY409>
+	<PUTP ,STORY167 ,P?DEATH T>
 	<RETURN>>
 
 <CONSTANT DIED-IN-COMBAT "You died in combat">
@@ -2326,184 +2328,161 @@
 	(TYPES <LTABLE R-NONE R-CODEWORD R-NONE>)
 	(FLAGS LIGHTBIT)>
 
+<CONSTANT TEXT161 "Gazing back, you see the hump of the great crab's shell as it rears up, threshing at the water with its claws in a frenzied search for the human prey that so narrowly escaped its clutches.||\"I expect it's rather short-sighted,\" Blutz says. \"Obviously it wouldn't need sharp vision, seeing as how fish are so plentiful in these waters.\"||\"Yes, but keep your voice down,\" hisses Oakley. \"No reason to suppose that it's deaf as well.\"||Leaving the crab far in your wake, you decide which way to go next.">
+<CONSTANT CHOICES161 <LTABLE "steer westwards" "north towards the Smoking Islands">>
+
 <ROOM STORY161
 	(IN ROOMS)
 	(DESC "161")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT161)
+	(CHOICES CHOICES161)
+	(DESTINATIONS <LTABLE STORY047 STORY066>)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT162 "Mortice becomes livid with rage, hissing out a torrent of curses to freeze the blood. At last, when his anger runs out of words, he lapses into silence and merely glares at you with incandescent yellow eyes.||\"Perhaps we should board his vessel, if it comes to that,\" suggests Grimes.||Oakley agrees. \"There could well be treasure in that long box there,\" he says. His eyes are locked on Mortice.||All of you stand tense, alert. Mortice couches on his raft like a wild beast at bay. As he sees Oakley place his foot on the side of the jollyboat, ready to spring over to the raft, he gives a guttural snarl and says, \"Try it. I'll rip yer gizzard out through yer backside and feed it to the fishes.\"||\"Emphatically unwelcoming,\" you remark. \"If we persist in trying to board the raft I think we'll have a fight on our hands.\"||\"A fight?\" says Oakley, looking back at you. \"He's just one old lubber.\" But all the same he stays poised there, waiting for you to say the word.">
+<CONSTANT CHOICES162 <LTABLE "attack Mortice with bare hands" "a sword" "a pistol" "you can just cut the raft adrift">>
 
 <ROOM STORY162
 	(IN ROOMS)
 	(DESC "162")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT162)
+	(CHOICES CHOICES162)
+	(DESTINATIONS <LTABLE STORY219 STORY238 STORY257 STORY276>)
+	(REQUIREMENTS <LTABLE NONE SKILL-SWORDPLAY SKILL-MARKSMANSHIP NONE>)
+	(TYPES <LTABLE R-NONE R-SKILL R-SKILL R-NONE>)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT163 "\"Let's face it,\" says Oakley a few days later, \"we don't know the first thing about foraging. We'll starve if we stay here.\"||You have to admit he is right. Unable to trap birds or animals, you are forced back on a meager diet of nuts. You cannot even be sure which are safe to eat, and stomach pains and retching gradually sap your resolve.">
+<CONSTANT TEXT163-CONTINUED "\"It's hopeless,\" says Grimes. \"We'd be better off going out to face Skarvench. At least we might get a quick clean death.\"||Knowing Skarvench, you doubt that. But it is better to boldly confront your foe than starve to death like miserable dogs. You lead others back to the shore.">
 
 <ROOM STORY163
 	(IN ROOMS)
 	(DESC "163")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT163)
+	(PRECHOICE STORY163-PRECHOICE)
+	(CONTINUE STORY087)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY163-PRECHOICE ()
+	<LOSE-LIFE 1 DIED-OF-HUNGER ,STORY163>
+	<IF-ALIVE TEXT163-CONTINUED>>
+
+<CONSTANT TEXT164 "Haunting moonlit street corners and smoky low-raftered taverns, you gradually piece together a tale of real terror. It seems El Draque was a Carpathian mercenary who arrived in the New World ten years ago and at once embarked on a spree of unrestrained piracy. Instantly recognizable by his filed teeth and acid blue eyes, he inspired such fear that most ships surrendered as soon as he raised his flag. The general consensus among everyone you speak to is that he slept by day in a box in the cargo hold of his ship, that he drank the blood of those he murdered, and that he was impervious to mortal injury.||There is one more thing. A month ago, taken unawares by a Gloriannic frigate, El Draque was caught and hanged at sea. His body was then flung overboard. The authorities were satisfied -- at least enough to pay out the bounty on his head to the frigate captain who caught him. But then, a week or so later, that same frigate captain was found dead in a harbour-front inn. His throat has been sliced from ear to ear, but the weird thing was there was that there was hardly a drop of blood.||You've heard enough to guess that the career of the notorious El Draque has not yet ended.">
+<CONSTANT CHOICES164 <LTABLE "try to find out more about Skarvench's activities" "ask around concerning the impending royal visit" "visit a chandler's to buy supplies now that you've heard all the rumours that interest you" "look for someone who can identify unusual items" "apply for a letter of marque" "pay a visit to Master Capstick" "you have completed all your business in Leshand">>
 
 <ROOM STORY164
 	(IN ROOMS)
 	(DESC "164")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT164)
+	(CHOICES CHOICES164)
+	(DESTINATIONS <LTABLE STORY278 STORY202 STORY012 STORY031 STORY409 STORY069 STORY107>)
+	(REQUIREMENTS <LTABLE NONE NONE NONE NONE NONE <LTABLE CODEWORD-MARATHON> NONE>)
+	(TYPES <LTABLE R-NONE R-NONE R-NONE R-NONE R-NONE R-CODEWORD R-NONE>)
+	(PRECHOICE STORY164-PRECHOICE)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY164-PRECHOICE ()
+	<COND (<CHECK-SKILL ,SKILL-ROGUERY>
+		<PUT <GETP ,STORY164 ,P?DESTINATIONS> 5 ,STORY050>
+	)(ELSE
+		<PUT <GETP ,STORY164 ,P?DESTINATIONS> 5 ,STORY409>
+	)>>
+
+<CONSTANT TEXT165 "Of all the ports in the Carab Sea, only Selenice -- 'the Pirates' Haven' -- would it be safe for a bloodthirsty cut-throat like Skarvench to show his face and openly spend his ill-gotten gold. Selenice has no allegiance to any nation. It is ruled by the common consent of buccaneers who live here -- the Brethren of the Coast, as they term themselves -- and it is buccaneers and their families who are the town's only citizens.||Curiously, life here is not the lawless mayhem that outsiders imagine. The buccaneers of Selenice arrive here glutted with more than their share of violence and hardship. They want nothing more than to peacefully squander their loot on ale, women and dice. One rule that is stringently enforce above all others is an absolute ban on the use of weapons. Normal brawls can and do occur, for buccaneers are hard men filled with pride, and tempers can flare up easily when the rum flows freely. But any brawl is settled barehanded, since to draw a weapon in Selenice is to invite summary justice from the Brethren of the Coast. However you may have fared elsewhere under the laws of civilized kingdoms, you'd do well not to fall afoul of the Brethren.||Passing a pedlar in the street outside the Thorny Knot tavern, Oakley glances across at you. \"Maybe we should do a spot of shopping, skipper?\"||\"I'd rather do a spot of drinking,\" says Blutz, casting a longing eye at the tavern.">
+<CONSTANT CHOICES165 <LTABLE "buy something form the pedlar" "go into the tavern" "go off to see the local shipbuilder">>
 
 <ROOM STORY165
 	(IN ROOMS)
 	(DESC "165")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT165)
+	(CHOICES CHOICES165)
+	(DESTINATIONS <LTABLE STORY336 STORY355 STORY374>)
+	(TYPES THREE-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT166 "Drawing your sword, you lunge towards the three bullies with a fierce yell. The terrified scholar throws himself flat and crawls under a table. The fight ranges back and forth across the room until suddenly you are seized from behind. Craning your neck, you see a throng of disapproving faces. A tall dour-faced man steps forward, saying, \"To draw a weapon in Selenice contravenes the code of the Brethren of the Coast. Fortunately we were able to stop you before anyone got seriously hurt.||Your weapons are confiscated and any doubloons you were carrying are taken as fine. Then you are bustled out of the inn and sent packing.">
 
 <ROOM STORY166
 	(IN ROOMS)
 	(DESC "166")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT166)
+	(PRECHOICE STORY166-PRECHOICE)
+	(CONTINUE STORY374)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY166-PRECHOICE ()
+	<COND (<IN? ,SWORD ,PLAYER>
+		<REMOVE ,SWORD>
+	)(<IN? ,SHARKS-TOOTH-SWORD ,PLAYER>
+		<REMOVE ,SHARKS-TOOTH-SWORD>
+	)(<IN? ,CLEAVER ,PLAYER>
+		<REMOVE ,CLEAVER>
+	)>
+	<COND (<IN? ,PISTOL ,PLAYER> <REMOVE ,PISTOL>)>
+	<SETG MONEY 0>
+	<UPDATE-STATUS-LINE>>
+
+<CONSTANT TEXT167 "He takes a mighty breath and blows it out at you, sending your coracle surging away on a huge billowing wave. You careen through the sea-soaked darkness, shivering for hours in the teeth of an unseasonal gale until finally you are cast up onto the beach outside Selenice.||Dawn tinges the sky with rose and gold. You sit up. There is no sign of the coracle. Waves lap the shoreline, seeming to whisper the secrets of the sea. You know those secrets well now;">
+<CONSTANT TEXT167-CONTINUED "Returning to town, you run through your remaining options">
 
 <ROOM STORY167
 	(IN ROOMS)
 	(DESC "167")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT167)
+	(PRECHOICE STORY167-PRECHOICE)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY167-PRECHOICE ()
+	<COND (<NOT <CHECK-SKILL ,SKILL-SEAFARING>>
+		<CRLF>
+		<HLIGHT ,H-BOLD>
+		<TELL "You must acquire now " D ,SKILL-SEAFARING>
+		<HLIGHT 0>
+		<CRLF>
+		<SKILL-SWAP <LTABLE SKILL-BRAWLING>>
+	)>
+	<COND (<AND <IN? ,CORKSCREW ,PLAYER> <IN? ,SHIP-IN-BOTTLE ,PLAYER>>
+		<STORY-JUMP ,STORY261>
+	)(<IN? ,DEED-OF-OWNERSHIP ,PLAYER>
+		<STORY-JUMP ,STORY318>
+	)(<IN? ,DIAMOND ,PLAYER>
+		<STORY-JUMP ,STORY299>
+	)(ELSE
+		<EMPHASIZE "Returning to town, you have exhausted all your options. You have no hope of catching up with Skarvench.">
+		<RETURN>
+	)>
+	<PUTP ,STORY167 ,P?DEATH F>
+	<CRLF>
+	<TELL TEXT167-CONTINUED ,PERIOD-CR>>
+
+<CONSTANT TEXT168 "After agreeing to the captain's demands, you direct your crew to carry the bulk of the treasure aboard the warship. At least, that's the way it seems. The truth is that only the top of each chest contains gold coins - the rest is filled with the salt that was left aboard the Lady Shalott by her last owner. A few groans, pleas, tears and offers of bribery help to make this charade convincing. The warship sails off towards Leshand and you turn your prow towards Selenice, hoping to be long gone before they discover you've tricked them.">
 
 <ROOM STORY168
 	(IN ROOMS)
 	(DESC "168")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT168)
+	(CONTINUE STORY016)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT169 "This is grim work, but you cannot afford the luxury of hesitation. The sunlight is all but gone. Kneeling quickly beside the open coffin, you raise the stake in both hands and plunge it down with all your strength into the corpse's breast. There is a terrible gasping sigh from the dead lips. It reminds you of autumn leaves scattering in a breeze. Then the body crumples like withered parchment.||Blutz cries out. At the same moment, the sun is blotted out beyond the horizon and blue darkness rushes across the shore.">
 
 <ROOM STORY169
 	(IN ROOMS)
 	(DESC "169")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT169)
+	(CONTINUE STORY347)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT170 "Handing the kite to a sailor, you tell him to go up into the rigging and cast it towards the sky. \"What good will that do, skipper?\" asks Oakley as you watch the man climb.||\"Call it a hunch, Mister Oakley. That witch Ejada wouldn't treasure anything so mundane as a kite unless it possessed some kind of magical power. Now we'll find out exactly what.\"||\"It's a long shot,\" says Blutz, watching the Moon Dog dip lower in the night sky with silver sails gleaming.||You watch the sailor reach the top of the mast and throw the kite up into the heavens. Caught by some wind that the sails do not feel, it soars aloft higher and higher, seeming to grow larger as it goes so that it spreads like an inkblot against the moon.||\"The dragon wing of night o'erspreads the world...\" breathes Grimes, his voice barely a whisper. And the last of the moonlight is blotted out, leaving only the gleam of ships' lanterns on the low bank of fog and the spangling of a million stars in the clear blackness above.">
 
 <ROOM STORY170
 	(IN ROOMS)
 	(DESC "170")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT170)
+	(CONTINUE STORY246)
 	(FLAGS LIGHTBIT)>
 
 <ROOM STORY171
