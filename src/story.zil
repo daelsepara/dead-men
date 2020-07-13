@@ -62,6 +62,8 @@
 	<PUTP ,STORY155 ,P?DEATH T>
 	<PUT <GETP ,STORY164 ,P?DESTINATIONS> 5 ,STORY409>
 	<PUTP ,STORY167 ,P?DEATH T>
+	<PUTP ,STORY171 ,P?DEATH T>
+	<PUTP ,STORY175 ,P?DEATH T>
 	<RETURN>>
 
 <CONSTANT DIED-IN-COMBAT "You died in combat">
@@ -2485,95 +2487,96 @@
 	(CONTINUE STORY246)
 	(FLAGS LIGHTBIT)>
 
+<CONSTANT TEXT171 "\"I don't know how you escaped death before,\" snarls Skarvench, \"but this time I'm going to make sure of the matter. I'll cut off your head and stick it on the bowsprit of my ship!||His sword comes slicing down in a lethal arc, barely missing your shoulder as you dodge desperately aside. It splinters a great chunk of wood out of the mast behind you. Skarvench only gives a bellow of insensate fury and draws it back for another swing. His is in a killing rage, and this fight will be every bit as dangerous as you had anticipated.">
+
 <ROOM STORY171
 	(IN ROOMS)
 	(DESC "171")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT171)
+	(PRECHOICE STORY171-PRECHOICE)
+	(CONTINUE STORY361)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY171-PRECHOICE ()
+	<COND (<AND <CHECK-SKILL ,SKILL-SWORDPLAY> <CHECK-SKILL ,SKILL-MARKSMANSHIP>>
+		<LOSE-LIFE 2 DIED-IN-COMBAT ,STORY171>
+	)(<CHECK-SKILL ,SKILL-BRAWLING>
+		<LOSE-LIFE 3 DIED-IN-COMBAT ,STORY171>
+	)(ELSE
+		<LOSE-LIFE 5 DIED-IN-COMBAT ,STORY171>
+	)>>
+
+<CONSTANT TEXT172 "The others are waiting for you on deck. In the slanting rays of the setting moon you make out the furtive silhouettes of Grimes, tall and gaunt; Oakley, strong as a tar barrel; and fat little Blutz.||They have the jollyboat swung out over the side. Stealthily you lower it into the water, working in deep silence like four burglars intent on a night's business. From the below wafts the sound of a hornpipe and snatches of revelry as the crew sing sea shanties in the galley. Climbing down to the jollyboat, you shove off from the side and row with muffled oars away from the brooding bulk of Belle Dame. The moon slips below the western horizon, leaving the night studded with stars. There is no wind and the sea is as flat as a pane of glass. As the sounds of jollity fade into the distance, only the soft splash of your oars remains to disturb the eerie quiet.">
 
 <ROOM STORY172
 	(IN ROOMS)
 	(DESC "172")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT172)
+	(PRECHOICE STORY172-PRECHOICE)
+	(CONTINUE STORY289)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY172-PRECHOICE ()
+	<COND (<OR <CHECK-SKILL ,SEAFARING> <IN? ,BOOK-OF-CHARTS ,PLAYER>>
+		<STORY-JUMP ,STORY381>
+	)(<CHECK-SKILL ,SKILL-CHARMS>
+		<STORY-JUMP ,STORY399>
+	)(<CHECK-SKILL ,SKILL-SPELLS>
+		<STORY-JUMP ,STORY416>
+	)>>
+
+<CONSTANT TEXT173 "You beach the jollyboat on a narrow strand of fine white sand backed by high cliffs. At the top of the cliffs you can clearly see the tall green boles of coconut trees. \"We're saved!\" cries Blutz, dancing an absurd little jig. \"We can eat those coconuts and even drink the milk if we can't find fresh water.\"||\"But there's a problem,\" says Grimes, surveying the steep cliffs with a dour gaze. \"Who's going to climb up there and get them? You, Mister Blutz?\"">
+<CONSTANT CHOICES173 <LTABLE "climb the cliffs alone" "make your way along the beach in search of a way up" "try looking for food here on the beach" "put to sea and continue west towards the next island">>
 
 <ROOM STORY173
 	(IN ROOMS)
 	(DESC "173")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT173)
+	(CHOICES CHOICES173)
+	(DESTINATIONS <LTABLE STORY192 STORY211 STORY230 STORY116>)
+	(REQUIREMENTS <LTABLE SKILL-AGILITY NONE NONE NONE>)
+	(TYPES <LTABLE R-SKILL R-NONE R-NONE R-NONE>)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT174 "Putting into a small cove, you moor the boat beside a large rock and then scramble ashore up a rocky moss-coated slope. Immediately you are confronted by lush jungle teeming with colour and life. Bright bulbous fruits dangle enticingly from the tree branches, yours for the taking. High up amid the emerald foliage, parrots in stained-glass hues peer down at you curiously, heads cocked to one side giving them a comical expression.||You and your friends have no difficulty in gathering food and fresh water.">
 
 <ROOM STORY174
 	(IN ROOMS)
 	(DESC "174")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT174)
+	(PRECHOICE STORY174-PRECHOICE)
+	(CONTINUE STORY269)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY174-PRECHOICE ("AUX" QUANTITY)
+	<COND (<IN? ,PROVISIONS ,PLAYER>
+		<SET QUANTITY <+ <GETP ,PROVISIONS ,P?QUANTITY> 2>>
+		<PUTP ,PROVISIONS ,P?QUANTITY .QUANTITY>
+	)(ELSE
+		<SET QUANTITY 2>
+		<PUTP ,PROVISIONS ,P?QUANTITY .QUANTITY>
+		<TAKE-ITEM ,PROVISIONS>
+	)>
+	<COND (<IN? ,CODEWORD-PROSPERO ,CODEWORDS> <STORY-JUMP ,STORY250>)>>
+
+<CONSTANT TEXT175 "Your head swims; your limbs tremble with weakness. Looking into Oakley's face, you give a croak of bleak amusement. \"Saints alive, man, you look as though you'd been keelhauled!\"||He manages a wry half-smile- \"You think you do don't?\" Staggering over to slump beside you, he adds, \"We're not for long for this world now now, are we, mate?\"||You gaze into the west, almost all hope gone.">
 
 <ROOM STORY175
 	(IN ROOMS)
 	(DESC "175")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT175)
+	(PRECHOICE STORY175-PRECHOICE)
+	(CONTINUE STORY156)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY175-PRECHOICE ()
+	<COND (<CHECK-SKILL ,SKILL-SEAFARING>
+		<LOSE-LIFE 1 DIED-OF-HUNGER ,STORY175>
+	)(ELSE
+		<LOSE-LIFE 2 DIED-OF-HUNGER ,STORY175>
+	)>>
 
 <ROOM STORY176
 	(IN ROOMS)
