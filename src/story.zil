@@ -64,6 +64,7 @@
 	<PUTP ,STORY167 ,P?DEATH T>
 	<PUTP ,STORY171 ,P?DEATH T>
 	<PUTP ,STORY175 ,P?DEATH T>
+	<PUT <GETP ,STORY177 ,P?DESTINATIONS> 2 ,STORY404>
 	<RETURN>>
 
 <CONSTANT DIED-IN-COMBAT "You died in combat">
@@ -2146,8 +2147,7 @@
 
 <ROUTINE STORY145-PRECHOICE ()
 	<GAIN-LIFE 3>
-	<SETG MONEY <+ ,MONEY 5>>
-	<UPDATE-STATUS-LINE>>
+	<GAIN-MONEY 5>>
 
 <CONSTANT TEXT146 "The innkeeper of The Hanged Man is a sour-faced man named Drood. You can see him at the bar polishing tankards with a filthy piece of rag. As you step up, he sets aside the tankard he's holding and gives you a long loury glare. \"Heard you were dead,\" he says. \"Seems the news hasn't reach you yet, though.\"||You ignore this. \"Skarvench been in?\" you ask.||\"Not lately. Things are too hot for him in Leshand.\" Drood spits on the bar and starts wiping it.||A beefy hand clamps on your shoulder and turns you around. Facing you are six burly ruffians. You vaguely recognise them as Skarvench's \"business associates\" -- men who act as his spies and assassins on shore.||There leader regards you with eyes like tiny beads of dull glass. \"Cap'n Skarvench is in Port Selenice takin' delivery of a new ship,\" he says, \"Why're you askin'?\"||\"We're planning to meet him.\"||You start to move past the ruffians, then freeze as they draw knives. \"Tell you what,\" says the leader, \"you go straight to hell, and no doubt the cap'n will join you there when he's good and ready...\"||It's life or death.">
 <CONSTANT CHOICES146 <LTABLE "fight" "use" "use">>
@@ -2518,7 +2518,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY172-PRECHOICE ()
-	<COND (<OR <CHECK-SKILL ,SEAFARING> <IN? ,BOOK-OF-CHARTS ,PLAYER>>
+	<COND (<OR <CHECK-SKILL ,SKILL-SEAFARING> <IN? ,BOOK-OF-CHARTS ,PLAYER>>
 		<STORY-JUMP ,STORY381>
 	)(<CHECK-SKILL ,SKILL-CHARMS>
 		<STORY-JUMP ,STORY399>
@@ -2578,94 +2578,82 @@
 		<LOSE-LIFE 2 DIED-OF-HUNGER ,STORY175>
 	)>>
 
+<CONSTANT TEXT176 "Resorting to an old trick of your trade, you toss a few pebbles to distract Ejada. She thinks she has heard you creeping away, and gives a wild laugh as she hurls her deathly bolts in the direction of the sound. Meanwhile you sneak into her tower and hastily feel your way along the wall until you come to a treasure chest. From this you pull a large diamond and a black kite.">
+<CONSTANT TEXT176-CONTINUED "Ejada is still striding about the outside casting her spells into the undergrowth. \"Show yourself, coward!\" she screeches. \"This darkness won't last forever.\" Indeed it won't. Before the spell can wear off, you take your friends' arms and lead them back to the beach">
+
 <ROOM STORY176
 	(IN ROOMS)
 	(DESC "176")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT176)
+	(PRECHOICE STORY176-PRECHOICE)
+	(CONTINUE STORY195)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY176-PRECHOICE ()
+	<SELECT-FROM-LIST <LTABLE DIAMOND BLACK-KITE> 2 2>
+	<CRLF>
+	<TELL TEXT176-CONTINUED ,PERIOD-CR>>
+
+<CONSTANT TEXT177 "Taking stock of your situation leaves you in a grim mood. \"We're still more than two hundred leagues out from Port Leshand, ad there are no islands along the route for us to restock our supplies. What we've got left for now is going to have to keep us going for at least ten days.\"||Oakley has another thought, equally sobering. Pointing at the timbers of your vessel - now warped by the constant sun and the battering of high waves -- he mutters: \"Ten days? We might not stay afloat that long.\"||\"Maybe we shouldn't try to make it all the way to Leshand,\" suggests Blutz. \"We could head south from here towards the main shipping lanes. There's a good chance we'd be rescued by a friendly vessel.\"">
+
+<CONSTANT CHOICES177 <LTABLE "go south" "keep on heading west">>
 
 <ROOM STORY177
 	(IN ROOMS)
 	(DESC "177")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT177)
+	(CHOICES CHOICES177)
+	(DESTINATIONS <LTABLE STORY367 STORY404>)
+	(TYPES TWO-NONES)
+	(PRECHOICE STORY177-PRECHOICE)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY177-PRECHOICE ()
+	<COND (<IN? ,CODEWORD-PECCANT ,CODEWORDS>
+		<PUT <GETP ,STORY177 ,P?DESTINATIONS> 2 ,STORY386>
+	)(ELSE
+		<PUT <GETP ,STORY177 ,P?DESTINATIONS> 2 ,STORY404>
+	)>>
+
+<CONSTANT TEXT178 "The flash of coral-pink tail against the white-foamed grey of the sea, and then she is gone.||Thunder rattles the buttresses of heaven, and the sky gleams with distant lightning. Grimes squints into the west. \"Another storm rolling in ahead,\" he says. \"We're in for a battering.\"||\"Let's head south!\" cries Blutz in sudden desperation. \"There are fewer storms, and we could pick up supplies among the islands, some of which are inhabited.\"||\"Yes,\" grunts Oakley. \"By cannibals.\"">
+<CONSTANT CHOICES178 <LTABLE "give the order to steer south" "stay on your present westward course">>
 
 <ROOM STORY178
 	(IN ROOMS)
 	(DESC "178")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT178)
+	(CHOICES CHOICES178)
+	(DESTINATIONS <LTABLE STORY135 STORY235>)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT179 "It takes no special skill to murder a man while he sleeps, just a callous disregard for life. As Mandrigard's bright red blood drips down onto the floorboards and scattered jewels, you and your three companions stare at one another in the flickering lamplight. You all know the significance of your dreadful deed. Before you were merry rogues -- swashbucklers with one eye for plunder and one eye for thrills. Now you are rank villains.||Cramming your pockets with gold and gems worth a king's ransom you hurry away from the scene of the murder, up onto the deck where you at last feel a shudder of remorse.||Oakley recognizes the look on your face; he wears the same expression himself. Nodding, he cries, \"If this fresh breeze could only clean up my lungs of the stench of butchery - and this rain wash my hands of Mandrigard's blood!\"||\"Forget it,\" grunts Grimes. \"The deed's done. \"We can never go back to being as we were before.\"">
+<CONSTANT CHOICES179 <LTABLE "escape from the ship" "or you think you have an item in your possession that might help" "otherwise">>
 
 <ROOM STORY179
 	(IN ROOMS)
 	(DESC "179")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT179)
+	(CHOICES CHOICES179)
+	(DESTINATIONS <LTABLE STORY236 STORY255 STORY388>)
+	(REQUIREMENTS <LTABLE SKILL-CHARMS NONE NONE>)
+	(TYPES <LTABLE R-SKILL R-NONE R-NONE>)
+	(PRECHOICE STORY179-PRECHOICE)
+	(CODEWORD CODEWORD-CHANCERY)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE  STORY179-PRECHOICE ()
+	<COND (,RUN-ONCE
+		<GAIN-MONEY 10000>
+	)>>
+
+<CONSTANT TEXT180 "The giant crab drops down into the murk of the ocean, sinking as rapidly as a rock, and you are being carried along with it in the strong undertow. Luckily you were able to get a good lungful of air before you went under, and now you make full use of your remaining strength to strike powerfully up towards the glimmering pane of light that marks the surface.||The water drags at you like liquid lead. Your pulse thunders in your ears and your chest is burning with the need for air, but you struggle on with desperate strokes, clawing your way upwards until at last you break the surface.||Gasping for air, you are barely aware of your friends hauling you into the jollyboat. \"Come on, lads!\" you hear Oakley's voice yelling. \"Let's get clear before it resurfaces.\"">
 
 <ROOM STORY180
 	(IN ROOMS)
 	(DESC "180")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT180)
+	(CONTINUE STORY161)
 	(FLAGS LIGHTBIT)>
 
 <ROOM STORY181
