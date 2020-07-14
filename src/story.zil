@@ -72,10 +72,14 @@
 	<PUTP ,STORY200 ,P?DEATH T>
 	<PUTP ,STORY203 ,P?DEATH T>
 	<PUTP ,STORY206 ,P?DEATH T>
+	<PUTP ,STORY215 ,P?DEATH T>
+	<PUTP ,STORY216 ,P?DEATH T>
+	<PUTP ,STORY219 ,P?DEATH T>
 	<RETURN>>
 
 <CONSTANT DIED-IN-COMBAT "You died in combat">
 <CONSTANT DIED-OF-HUNGER "You died of hunger and thirst">
+<CONSTANT DIED-GREW-WEAKER "You grow weaker and eventually died">
 <CONSTANT DIED-OF-THIRST "You go mad from thirst">
 <CONSTANT DIED-EJADA-SORCERY "You have died from the Ejada's sorcery">
 
@@ -206,8 +210,7 @@
 	(DEATH T)
 	(FLAGS LIGHTBIT)>
 
-<ROUTINE STORY005-PRECHOICE ("AUX" DMG)
-	<SET DMG 6>
+<ROUTINE STORY005-PRECHOICE ("AUX" (DMG 6))
 	<COND (<CHECK-SKILL ,SKILL-CHARMS> <SET DMG <- .DMG 2>>)>
 	<COND (<IN? ,FEATHER-SHIELD ,PLAYER> <SET DMG <- .DMG 2>>)>
 	<LOSE-LIFE .DMG DIED-EJADA-SORCERY ,STORY005>>
@@ -230,7 +233,7 @@
 
 <ROUTINE STORY006-PRECHOICE ()
 	<TELL "A bullet tears into your leg. ">
-	<COND (<G? ,LIFE-POINTS 1>
+	<COND (<IS-ALIVE 1>
 		<SETG ,LIFE-POINTS <- ,LIFE-POINTS 1>>
 		<PUTP ,STORY006 ,P?DEATH F>
 		<TELL TEXT006-CONTINUED>
@@ -347,14 +350,13 @@
 	(DEATH T)
 	(FLAGS LIGHTBIT)>
 
-<ROUTINE STORY013-PRECHOICE ()
+<ROUTINE STORY013-PRECHOICE ("AUX" (DMG 6))
 	<COND (<OR <CHECK-SKILL ,SKILL-MARKSMANSHIP> <CHECK-SKILL ,SKILL-SWORDPLAY>>
-		<LOSE-LIFE 2 DIED-IN-COMBAT ,STORY013>
+		<SET DMG 2>
 	)(<CHECK-SKILL ,SKILL-BRAWLING>
-		<LOSE-LIFE 3 DIED-IN-COMBAT ,STORY013>
-	)(ELSE
-		<LOSE-LIFE 6 DIED-IN-COMBAT ,STORY013>
-	)>>
+		<SET DMG 3>
+	)>
+	<LOSE-LIFE .DMG DIED-IN-COMBAT ,STORY013>>
 
 <CONSTANT TEXT014 "A look of thunder flickers behind Skarvench's eye. \"Still alive, eh? Come and drink with your old cap'n!\" He waves the rum bottle as if inviting you to take it, but you'd sooner put your hand in a wolf's mouth.||Blutz's blood is up at the sight of your hated foe. \"God rot your one eye, villain!\" he screams. \"I'd like to take that bottle and --\"||There is a crash of breaking wood and Blutz falls with a groan. Glancing to one side, you see he has been hit over the head with a stool. Curshaw stands there grinning, then puts his boot into the unconscious Blutz's ribs. He drops the broken leg of the stool beside him.||Oakley and Grimes stand face to face with the closing circle of Skarvench's men. You whirl to face the pirate captain himself. \"Enough, Skarvench; your quarrel's with me, not them.\"||He crows with laughter. \"Ah, that's a right noble sentiment and no mistake! See here, though: my quarrel's with all who'd try'n scupper my plans. I'm aimin' to bag me a queen, no less, an' then sell her to the highest bidder. So I'm goin' to have to do away with you, mate -- which I should've done long ago, but I guess my old heart's just too soft.\"||His hand goes to his belt. You realise he's reaching for a weapon, and your own fingers close instinctively on something on the table beside you. You raise it, and Skarvench gives a screech of laughter. You're holding only a corkscrew. He has a musket. \"I'll be the wealthiest man on the seven seas,\" he boasts. \"And he who would that wealth deny, down among the dead men let him lie!\"||There is a flash as he fires. Smoke fills the air and the musket-ball thuds into your chest. You feel an instant of searing pain, then everything goes black.">
 
@@ -709,7 +711,7 @@
 		<IF-ALIVE "[With your knowledge of WILDERNESS LORE, you soak your ragged clothes in the sea to keep yourself warm at night and cool during the day]">
 	)(ELSE
 		<COND (,RUN-ONCE <LOSE-LIFE 2 RAGGED-CLOTHES ,STORY040>)>
-		<COND (<G? ,LIFE-POINTS 0>
+		<COND (<IS-ALIVE>
 			<CRLF>
 			<TELL "[" RAGGED-CLOTHES "]">
 			<CRLF>
@@ -1121,14 +1123,13 @@
 	(DEATH T)
 	(FLAGS LIGHTBIT)>
 
-<ROUTINE STORY073-PRECHOICE ()
+<ROUTINE STORY073-PRECHOICE ("AUX" (DMG 6))
 	<COND (<OR <CHECK-SKILL ,SKILL-SWORDPLAY> <CHECK-SKILL ,SKILL-MARKSMANSHIP>>
-		<LOSE-LIFE 2 DIED-IN-COMBAT ,STORY073>
+		<SET DMG 2>
 	)(<CHECK-SKILL ,SKILL-BRAWLING>
-		<LOSE-LIFE 3 DIED-IN-COMBAT ,STORY073>
-	)(ELSE
-		<LOSE-LIFE 6 DIED-IN-COMBAT ,STORY073>
-	)>>
+		<SET DMG 3>
+	)>
+	<LOSE-LIFE .DMG DIED-IN-COMBAT ,STORY073>>
 
 <CONSTANT TEXT074 "It is only a matter of minutes before you hear the sound you were dreading: an ominous scraping as the ship lurches to a halt. \"That tears it!\" says Grimes. \"We've run aground.\"||A hasty inspection reveals that you have run the keel onto a sandbank. There is no damage to the hull, but you will have to wait until high tide to get off again. By now the fog is closing tightly around the bay, blotting out any sight of the island.||\"We may as well sit it out until dawn,\" you decide.">
 
@@ -1227,8 +1228,7 @@
 	(DEATH T)
 	(FLAGS LIGHTBIT)>
 
-<ROUTINE STORY081-PRECHOICE ("AUX" DMG)
-	<SET DMG 6>
+<ROUTINE STORY081-PRECHOICE ("AUX" (DMG 6))
 	<COND (<IN? ,FEATHER-SHIELD ,PLAYER> <SET DMG <- .DMG 3>>)>
 	<COND (<CHECK-SKILL ,SKILL-CHARMS> <SET DMG <- .DMG 1>>)>
 	<COND (,RUN-ONCE <LOSE-LIFE .DMG DIED-EJADA-SORCERY ,STORY081>)>>
@@ -1814,7 +1814,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY120-PRECHOICE ()
-	<COND (<G? ,LIFE-POINTS 2>
+	<COND (<IS-ALIVE 2>
 		<PUTP ,STORY120 ,P?DEATH F>
 		<STORY-JUMP ,STORY370>
 	)(ELSE
@@ -1991,7 +1991,7 @@
 
 <ROUTINE STORY135-PRECHOICE ()
 	<LOSE-LIFE 1 DIED-OF-HUNGER ,STORY212>
-	<COND (<G? ,LIFE-POINTS 0>
+	<COND (<IS-ALIVE>
 		<COND (<CONSUME-PROVISIONS 1 ,STORY212> <RETURN>)>
 		<COND (<IN? ,MONKEY ,PLAYER>
 			<CRLF>
@@ -2278,12 +2278,11 @@
 	(DEATH T)
 	(FLAGS LIGHTBIT)>
 
-<ROUTINE STORY155-PRECHOICE ()
+<ROUTINE STORY155-PRECHOICE ("AUX" (DMG 2))
 	<COND(<CHECK-SKILL ,SKILL-SEAFARING>
-		<LOSE-LIFE 1 DIED-OF-THIRST ,STORY155>
-	)(ELSE
-		<LOSE-LIFE 2 DIED-OF-THIRST ,STORY155>
-	)>>
+		<SET DMG 1>
+	)>
+	<LOSE-LIFE .DMG DIED-OF-THIRST ,STORY155>>
 
 <CONSTANT TEXT156 "The most westerly of the islands comes in sight. It is a large golden-shored jungle island with many welcoming coves. \"Others have put in here, when blown north off the main shipping route,\" Grimes recalls. \"The natives are said to be hospitable.\"||You stare into the west. Leshand is still two hundred leagues off, and it might be wise to re-provision before you undertake that long haul. And yet worry gnaws at your mind: \"Hospitable when faced with gifts and muskets and a sea-going vessel of ten cannon, perhaps. But how will they greet a handful of starving wretches in a ramshackle craft?\"||It's up to you.">
 <CONSTANT CHOICES156 <LTABLE "put in here" "sail on towards Port Leshand">>
@@ -2514,14 +2513,13 @@
 	(DEATH T)
 	(FLAGS LIGHTBIT)>
 
-<ROUTINE STORY171-PRECHOICE ()
+<ROUTINE STORY171-PRECHOICE ("AUX" (DMG 5))
 	<COND (<AND <CHECK-SKILL ,SKILL-SWORDPLAY> <CHECK-SKILL ,SKILL-MARKSMANSHIP>>
-		<LOSE-LIFE 2 DIED-IN-COMBAT ,STORY171>
+		<SET DMG 2>
 	)(<CHECK-SKILL ,SKILL-BRAWLING>
-		<LOSE-LIFE 3 DIED-IN-COMBAT ,STORY171>
-	)(ELSE
-		<LOSE-LIFE 5 DIED-IN-COMBAT ,STORY171>
-	)>>
+		<SET DMG 3>
+	)>
+	<LOSE-LIFE .DMG DIED-IN-COMBAT ,STORY171>>
 
 <CONSTANT TEXT172 "The others are waiting for you on deck. In the slanting rays of the setting moon you make out the furtive silhouettes of Grimes, tall and gaunt; Oakley, strong as a tar barrel; and fat little Blutz.||They have the jollyboat swung out over the side. Stealthily you lower it into the water, working in deep silence like four burglars intent on a night's business. From the below wafts the sound of a hornpipe and snatches of revelry as the crew sing sea shanties in the galley. Climbing down to the jollyboat, you shove off from the side and row with muffled oars away from the brooding bulk of Belle Dame. The moon slips below the western horizon, leaving the night studded with stars. There is no wind and the sea is as flat as a pane of glass. As the sounds of jollity fade into the distance, only the soft splash of your oars remains to disturb the eerie quiet.">
 
@@ -2580,12 +2578,11 @@
 	(DEATH T)
 	(FLAGS LIGHTBIT)>
 
-<ROUTINE STORY175-PRECHOICE ()
+<ROUTINE STORY175-PRECHOICE ("AUX" (DMG 2))
 	<COND (<CHECK-SKILL ,SKILL-SEAFARING>
-		<LOSE-LIFE 1 DIED-OF-HUNGER ,STORY175>
-	)(ELSE
-		<LOSE-LIFE 2 DIED-OF-HUNGER ,STORY175>
-	)>>
+		<SET DMG 1>
+	)>
+	<LOSE-LIFE .DMG DIED-OF-HUNGER ,STORY175>>
 
 <CONSTANT TEXT176 "Resorting to an old trick of your trade, you toss a few pebbles to distract Ejada. She thinks she has heard you creeping away, and gives a wild laugh as she hurls her deathly bolts in the direction of the sound. Meanwhile you sneak into her tower and hastily feel your way along the wall until you come to a treasure chest. From this you pull a large diamond and a black kite.">
 <CONSTANT TEXT176-CONTINUED "Ejada is still striding about the outside casting her spells into the undergrowth. \"Show yourself, coward!\" she screeches. \"This darkness won't last forever.\" Indeed it won't. Before the spell can wear off, you take your friends' arms and lead them back to the beach">
@@ -2881,6 +2878,7 @@
 
 <CONSTANT TEXT196 "A shot rings out. A man falls dead. It is a sad, grim, brutally sudden scene which has been played out many times on the stage of life. As always, the onlookers stand for a moment, stunned, waiting for Death to withdraw into the wings so the action can resume.||The moment passes. The natives are not awed by your ability to kill at a distance -- they have seen firearms before, and know it is no miracle. There is an angry shout, and a thrown rock grazes your hand. The pistol is knocked to the ground. The natives stand watching you, ominously tense, torn between shock, grief and rage.">
 <CONSTANT CHOICES196 <LTABLE "get out while you can, abandoning your pistol" "you stand and fight">>
+<GLOBAL DROPPED-WEAPON NONE>
 
 <ROOM STORY196
 	(IN ROOMS)
@@ -2893,7 +2891,10 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY196-PRECHOICE ()
-	<LOSE-ITEM ,PISTOL>>
+	<COND (,RUN-ONCE
+		<LOSE-ITEM ,PISTOL>
+		<SETG DROPPED-WEAPON ,PISTOL>
+	)>>
 
 <CONSTANT TEXT197 "Gradually you leave behind the icy rain that has been your constant accompaniment throughout the journey. The southern waters into which the mermaid is now taking you are calmer, the weather warmer. Even so, the comfort only allows you time to regret your other deprivations - not the least of which is hunger.">
 <CONSTANT TEXT197-CONTINUED "You see a fleece of white cloud, then a green-tinged hump of land comes in sight. \"Yonder is Red Skull Island,\" announces the mermaid. \"Here, food and water are yours for the taking -- subject only to those laws of ownership which pertain throughout the surface world.\" With a sly wink which raises belated misgivings in your mind, she releases the tow-rope and slides beneath the waves.">
@@ -3061,14 +3062,13 @@
 	(DEATH T)
 	(FLAGS LIGHTBIT)>
 
-<ROUTINE STORY206-PRECHOICE ()
+<ROUTINE STORY206-PRECHOICE ("AUX" (DMG 8))
 	<COND (<OR <CHECK-SKILL ,SKILL-MARKSMANSHIP> <CHECK-SKILL ,SKILL-SWORDPLAY>>
-		<LOSE-LIFE 2 DIED-IN-COMBAT ,STORY206>
+		<SET DMG 2>
 	)(<CHECK-SKILL ,SKILL-BRAWLING>
-		<LOSE-LIFE 4 DIED-IN-COMBAT ,STORY206>
-	)(ELSE
-		<LOSE-LIFE 8 DIED-IN-COMBAT ,STORY206>
+		<SET DMG 4>
 	)>
+	<LOSE-LIFE .DMG DIED-IN-COMBAT ,STORY206>
 	<IF-ALIVE "You survive to see victory.">>
 
 <CONSTANT TEXT207 "Your obsessive search for the iceberg drives you to plot a course far off the familiar shipping lanes. At first, awed by your reputation as a mariner, the crew toil on without complaint. But the days draw by with no sight of land or other ships, and then grumbling begins. Initially it takes the form of simple discontent -- a spluttered curse when a man bites into an apple from the deck-barrel and finds it sour, or a surly rejoinder when orders are given. Oakley, Grimes and Blutz do their best to keep discipline, but the sun beats down day after day until the pitch bubbles in the seams and the deck is too hot to walk on in bare feet. Water begins to run low, and it is then that the grumbling begins to veer towards outright mutiny.">
@@ -3129,184 +3129,152 @@
 	<TELL TEXT210-ENDING>
 	<TELL ,PERIOD-CR>>
 
+<CONSTANT TEXT211 "Some distance along the shore you find a ladder of knotted vines dangling down from the clifftop. \"Looks like there are natives,\" observes Oakley unnecessarily. \"Perhaps we'd be wiser to go back to the boat and shove off.\"||Your experience has been that not all islanders are hostile. It usually depends on the way they have been treated by the outsiders they've met. On the other hand, there are some who are unabashed cannibals and will attack with provocation if they see the chance of an easy meal.">
+<CONSTANT CHOICES211 <LTABLE "climb the vines" "return to the jollyboat and continue on your voyage">>
+
 <ROOM STORY211
 	(IN ROOMS)
 	(DESC "211")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT211)
+	(CHOICES CHOICES211)
+	(DESTINATIONS <LTABLE STORY249 STORY116>)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT212 "Grimoire Island is a strangely idyllic-looking place, with wide white beaches fringed by gently swaying palm trees. A balmy breeze blows refreshingly from the east. Birds the colour of precious gems watch your approach without fear.||\"It's eerie,\" decides Grimes. \"Almost too perfect.\"||\"Like it's been tended,\" says Blutz. \"You know, like somebody's garden back home.\"||\"A demon's garden, if the native stories are to be believed,\" chips in Oakley. All three, like you, are in a strange mood: both allured and uneasy.">
+<CONSTANT CHOICES212 <LTABLE "go ashore" "row on towards the next island">>
 
 <ROOM STORY212
 	(IN ROOMS)
 	(DESC "212")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT212)
+	(CHOICES CHOICES212)
+	(DESTINATIONS <LTABLE STORY118 STORY137>)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT213 "Blutz reaches out towards what looks like a bunch of oranges. You snatch them out of his pudgy hand. \"That's strychnine fruit,\" you warn him. \"It's deadly poisonous.\" Oakley shows you a handful of berries he's picked, but you shake your head. \"Those too. Everything here looks delicious, but most are poison.\"||\"The tower, then,\" says Grimes. \"Whoever lives there might give us food.\"||Blutz looks worried. \"But what kind of person lives on an island surrounded by poisonous plants?\"||It's a good question.">
+<CONSTANT CHOICES213 <LTABLE "go to the tower" "put to sea at once">>
 
 <ROOM STORY213
 	(IN ROOMS)
 	(DESC "213")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT213)
+	(CHOICES CHOICES213)
+	(DESTINATIONS <LTABLE STORY194 STORY137>)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT214 "You easily outmanoeuvre the warship and soon leave her far behind">
+<CONSTANT CHOICES214 <LTABLE "fight her" "permit your ship to be boarded">>
 
 <ROOM STORY214
 	(IN ROOMS)
 	(DESC "214")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(CHOICES CHOICES214)
+	(DESTINATIONS <LTABLE STORY252 STORY024>)
+	(PRECHOICE STORY214-PRECHOICE)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY214-PRECHOICE ()
+	<COND (<CHECK-SKILL ,SKILL-SEAFARING>
+		<CRLF>
+		<TELL TEXT214>
+		<TELL ,PERIOD-CR>
+		<STORY-JUMP ,STORY016>
+	)>>
+
+<CONSTANT TEXT215 "You are outnumbered, but you have an advantage they do not hare. Warfare in their society is rarely fatal, intended only as a ritual show of strength. They lack the murderous instincts of you 'civilized' men.">
+<CONSTANT TEXT215-CONTINUED "You fight your way down the beach and hastily put to sea under a hail of thrown pebbles.">
 
 <ROOM STORY215
 	(IN ROOMS)
 	(DESC "215")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT215)
+	(PRECHOICE STORY215-PRECHOICE)
+	(CONTINUE STORY177)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY215-PRECHOICE ("AUX" (DMG 6))
+	<COND (<CHECK-SKILL ,SKILL-SWORDPLAY>
+		<SET DMG 2>
+	)(<CHECK-SKILL ,SKILL-BRAWLING>
+		<SET DMG 3>
+	)>
+	<LOSE-LIFE .DMG DIED-IN-COMBAT ,STORY215>
+	<IF-ALIVE TEXT215-CONTINUED>
+	<COND (,DROPPED-WEAPON
+		<TAKE-ITEM ,DROPPED-WEAPON>
+		<SETG DROPPED-WEAPON NONE>
+	)>>
+
+<CONSTANT TEXT216 "Oakley's head rocks back as he feels the sting of your knuckles across his cheek, cutting off his song before he can launch into another gloom-ridden verse. \"Quiet!\" you tell him with a hiss of righteous anger in your voice.||He glares back at you, bloodshot eyes wide in a drained and haggard face. He is shaking with fear as much as fury. \"Quiet?\" he sobs. \"Why? We're all going to Davy Jones's mess hall tonight, and it's his pet sharks as will be making their meal of us.\"||\"Nonsense!\" You take hold of his shoulders and stare him straight in the eye. \"Listen to me: none of us is going to die. We can all come through this in one piece if we pull together. The worst threat we have to face isn't the sea, or the weather, or hunger, or thirst. It's ourselves. Our fear. If we give in to panic, then we're lost.\"||Oakley nods. \"You're right.\" He helps you bail water taking turns throughout the night and the following day.">
+<CONSTANT TEXT216-CONTINUED "You grow weaker, but at least you have inspired a glimmer of hope in your little band.">
 
 <ROOM STORY216
 	(IN ROOMS)
 	(DESC "216")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT216)
+	(PRECHOICE STORY216-PRECHOICE)
+	(CONTINUE STORY273)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY216-PRECHOICE ()
+	<LOSE-LIFE 1 DIED-GREW-WEAKER ,STORY216>
+	<IF-ALIVE TEXT216-CONTINUED>
+	<COND (<IN? ,CODEWORD-CHANCERY ,CODEWORDS> <REMOVE ,CODEWORD-CHANCERY>)>>
+
+<CONSTANT TEXT217 "Salt spray spits across the deck in billows, driven by high winds that stretch the sails hard against the rigging. \"It's a wonder she ain't broke up long since!\" says Blutz.||\"She's a cursed ship,\" declares Oakley matter-of-factly. \"Such vessels have an unnatural resilience.\"||Hours pass, during which you are blown further into the west. You snatch a short sleep in the shelter of a tarpaulin, preferring not to venture below decks again. At last Grimes shakes you from a feverish dream to say, \"It's time we quit this ship matey.\"||You agree.">
+<CONSTANT CHOICES217 <LTABLE "use an item" "otherwise">>
 
 <ROOM STORY217
 	(IN ROOMS)
 	(DESC "217")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT217)
+	(CHOICES CHOICES217)
+	(DESTINATIONS <LTABLE STORY255 STORY388>)
+	(PRECHOICE STORY217-PRECHOICE)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY217-PRECHOICE ()
+	<COND (<CHECK-SKILL ,SKILL-CHARMS> <STORY-JUMP ,STORY236>)>>
+
+<CONSTANT TEXT218 "With sudden inspiration you snatch off your own belt and twist the metal of the buckle to make a hook. For a line, you get everyone to unlace their boots and tie the strings together. Tied to the end of an oar, this gives you a makeshift fishing rod. You also trick up some nets by fixing socks onto the other oar.||\"What do we use for bait?\" asks Grimes.||\"Ah.\" You give a delicate cough. \"Well, to be blunt... whatever our stomachs couldn't use from the last meal we ate.\"||Their perplexed frowns gradually change to disgust as they catch on to what you mean. \"Ugh, you must be joking says Blutz.||\"Believe me, it's the best bait.You weren't going to use it for anything else, were you, Mister Blutz?\"||Oakley snorts with outrage. \"You expect us to fish using our own excrement? Revolting! Do we want to live like animals, or die like decent men?\"||There is a long pause as the rest of you turn to look at Oakley. He thinks, then gives a grim nod and says, \"Right, let's get on with it, then\"||Hours later you have caught just three small fishes. A meagre enough meal for one person, let alone four. But at least now you won't starve tonight.">
 
 <ROOM STORY218
 	(IN ROOMS)
 	(DESC "218")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT218)
+	(CONTINUE STORY256)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT219 "Despite his shrivelled frame and spindly limbs, Mortice fights with the savagery and strength of a madman. Hissing, clawing, snapping at you with his long teeth, he struggles desperately to force you back off his raft.||At last you manage to succeed in pinning him, but not without injury.">
+<CONSTANT TEXT219-CONTINUED "You press all your weight down on Mortice's arms while he writhes in your grasp. Even now he continues his stream of invective, calling on the very devils of hell s though they were his blood brothers.||\"He's as strong as an old serpent,\" says Grimes, holding on to Mortice's legs. It takes three of you to keep him down. While you do, Blutz looks around the raft.||He soon discovers something lashed to the bottom of the raft, under the water. It is a large pine box. He drags this up and opens it, and at once a mouldering miasma rises out which causes him to gag. \"It's full of old bones,\" he chokes.||Even as these words leave Blutz's lips, there is a mournful unearthly sigh and suddenly the three of you are wrestling empty air. Mortice has vanished like a ghost.">
 
 <ROOM STORY219
 	(IN ROOMS)
 	(DESC "219")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT219)
+	(PRECHOICE STORY219-PRECHOICE)
+	(CONTINUE STORY295)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY219-PRECHOICE ("AUX" (DMG 3))
+	<COND (<CHECK-SKILL ,SKILL-BRAWLING> <SET DMG 1>)>
+	<LOSE-LIFE .DMG DIED-IN-COMBAT ,STORY219>
+	<IF-ALIVE TEXT219-CONTINUED>>
+
+<CONSTANT TEXT220 "The natives scatter, filled with fear, as the battle rages up and down the beach inside their village. Men's lifeblood spurts into the sand. Lusty battle-cries are replaced now by ragged gasps and terse grunts of pain as each blow takes its toll.||You are face to face with Skarvench, locked in mortal combat. His breath is a putrid gust in your face. Both of you bear a dozen wounds; your blood runs down to mingle in the gore-soaked sand underfoot. \"I'm sending you to hell -- he snarls through gritted teeth. His cutlass stabs up, and you feel it grate through your ribs as you are impaled.||\"Then we'll go there together!\" you cry, responding with a killing blow which he fails to see until it is too late. The pair of you sag to your knees, locked in a final embrace like old friends. And you are filled with a fierce exultation as, even while your own life ebbs away, you see the face of your foe go stiff and white in death...">
 
 <ROOM STORY220
 	(IN ROOMS)
 	(DESC "220")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT220)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
 
 <ROOM STORY221
