@@ -76,6 +76,8 @@
 	<PUTP ,STORY216 ,P?DEATH T>
 	<PUTP ,STORY219 ,P?DEATH T>
 	<PUTP ,STORY225 ,P?DEATH T>
+	<PUTP ,STORY231 ,P?DEATH T>
+	<PUTP ,STORY237 ,P?DEATH T>
 	<RETURN>>
 
 <CONSTANT DIED-IN-COMBAT "You died in combat">
@@ -287,7 +289,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY009-EVENTS ()
-	<COND (<IN? ,CODEWORD-CHANCERY ,CODEWORDS>
+	<COND (<CHECK-CODEWORD ,CODEWORD-CHANCERY>
 		<RETURN ,STORY406>
 	)>
 	<RETURN ,STORY423>>
@@ -735,7 +737,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY041-PRECHOICE ()
-	<COND (<AND <CHECK-SKILL ,SKILL-CHARMS> <IN? ,MAGIC-AMULET ,PLAYER>>
+	<COND (<CHECK-SKILL ,SKILL-CHARMS>
 		<LOSE-LIFE 1 DIED-BOMBARDMENT ,STORY041>
 		<IF-ALIVE "[Your lucky magic amulet saved you from sustaining more serious injuries]">
 	)(ELSE
@@ -1391,7 +1393,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY092-EVENTS ()
-	<COND (<IN? ,CODEWORD-ICARUS ,CODEWORDS> <RETURN ,STORY130>)>
+	<COND (<CHECK-CODEWORD ,CODEWORD-ICARUS> <RETURN ,STORY130>)>
 	<RETURN ,STORY149>>
 
 <CONSTANT TEXT093 "With your every thought focussed on the goal of finding the iceberg, you are blinded to the stirrings of mutiny. Oakley, Grimes and Blutz come to your cabin. Although you are all old comrades, they seem nervous in the face of your driving obsession. \"Skipper,\" begins Oakley, \"the crew are discontent. They fear you'll sail us off the edge of the world.\"||\"Edge of the world? Pah!\" you fling your charts down and take a swig of rum. \"It's a thousand leagues from here, at least.\"||\"I don't care for the look on their faces, Cap'n,\" presses Grimes. \"They look like mourners at a funeral -- our funeral, if you won't turn back.\"||You give a sour scowl. \"And you, Mister Blutz? Are you party to this insubordination too?\"||\"I'd sail with you to hell, skipper, if you asked me,\" replies Blutz. \"It's just... well, I never till now though you'd ask!\"||Suddenly the door crashes in. The crew stand there with drawn swords, the bo'sun at their head. \"Out on deck,\" he growls. \"'Tis time we settled this.\"||You and your comrades are hauled up and tied. A plank is fixed out over the side of the ship. Even now, it is livid rage rather than fear that consumes you. You curse them for their perfidy, but to no avail. With a sword at your back, you are forced to climb over the rail and walk until you run out of plank...">
@@ -1418,7 +1420,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY094-PRECHOICE ()
-	<COND (<AND <IN? ,CODEWORD-HORAL ,CODEWORDS> <IN? ,POCKET-WATCH ,PLAYER>> <STORY-JUMP ,STORY189>)>>
+	<COND (<AND <CHECK-CODEWORD ,CODEWORD-HORAL> <IN? ,POCKET-WATCH ,PLAYER>> <STORY-JUMP ,STORY189>)>>
 
 <CONSTANT TEXT095 "Calmly levelling your pistol, you shoot the end off the taper. \"By all that's unholy!\" sears Skarvench. \"I never seen such a shot!\"||Neither have you, but you do not let surprise cost you your momentary advantage. You race in before Skarvench can relight the fuse, and in seconds the two of you are locked in a fight to death.">
 
@@ -1553,8 +1555,8 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY103-PRECHOICE ()
-	<COND (<IN? ,CODEWORD-DETRUDE ,CODEWORDS> <REMOVE ,CODEWORD-DETRUDE>)>
-	<COND (<IN? ,CODEWORD-PECCANT ,CODEWORDS> <REMOVE ,CODEWORD-PECCANT>)>>
+	<COND (<CHECK-CODEWORD ,CODEWORD-DETRUDE> <REMOVE ,CODEWORD-DETRUDE>)>
+	<COND (<CHECK-CODEWORD ,CODEWORD-PECCANT> <REMOVE ,CODEWORD-PECCANT>)>>
 
 <CONSTANT TEXT104 "Certain features of this island are ominously reminiscent of an old sea-myth concerning the giant crab Pusat Tassek. This crab is said to be as big as a house. It basks in mid-ocean with the top of its shell exposed, sometimes staying in one place so long that sands gathers on its back and plants start to grow there, all the while feeding on fish that it attracts to its maw with a sweet-smelling chemical secretion.">
 <CONSTANT CHOICES104 <LTABLE "stay here to look for food" "put to sea, either heading on your previous course westward" "turning north towards the Smoking Islands">>
@@ -2019,7 +2021,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY136-PRECHOICE ()
-	<COND (<IN? ,CODEWORD-PECCANT ,CODEWORDS>
+	<COND (<CHECK-CODEWORD ,CODEWORD-PECCANT>
 		<PUT <GETP ,STORY136 ,P?DESTINATIONS> 2 STORY386>		
 	)(ELSE
 		<PUT <GETP ,STORY136 ,P?DESTINATIONS> 2 STORY405>
@@ -2266,7 +2268,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY154-PRECHOICE ()
-	<COND (<IN? ,CODEWORD-SCRIP ,CODEWORDS> <STORY-JUMP ,STORY253>)>>
+	<COND (<CHECK-CODEWORD ,CODEWORD-SCRIP> <STORY-JUMP ,STORY253>)>>
 
 <CONSTANT TEXT155 "Your limbs ache with the strain of rowing, like men who have been stretched on the rack. Slumping over the oars, you gaze feebly out across the merciless distance that still separates you from civilization. The water laps temptingly against the sides of your boat, but you know that it holds out a false promise: brine cannot slake a poor mariner's thirst, it can only drive him mad.">
 
@@ -2342,8 +2344,13 @@
 	(CHOICES CHOICES160)
 	(DESTINATIONS <LTABLE STORY135 STORY386 STORY349>)
 	(REQUIREMENTS <LTABLE NONE <LTABLE CODEWORD-PECCANT NONE>>)
+	(PRECHOICE STORY160-PRECHOICE)
 	(TYPES <LTABLE R-NONE R-CODEWORD R-NONE>)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY160-PRECHOICE ()
+	<REMOVE ,CURRENT-VEHICLE>
+	<SETG CURRENT-VEHICLE NONE>>
 
 <CONSTANT TEXT161 "Gazing back, you see the hump of the great crab's shell as it rears up, threshing at the water with its claws in a frenzied search for the human prey that so narrowly escaped its clutches.||\"I expect it's rather short-sighted,\" Blutz says. \"Obviously it wouldn't need sharp vision, seeing as how fish are so plentiful in these waters.\"||\"Yes, but keep your voice down,\" hisses Oakley. \"No reason to suppose that it's deaf as well.\"||Leaving the crab far in your wake, you decide which way to go next.">
 <CONSTANT CHOICES161 <LTABLE "steer westwards" "north towards the Smoking Islands">>
@@ -2566,7 +2573,7 @@
 
 <ROUTINE STORY174-PRECHOICE ()
 	<ADD-PROVISIONS 2>
-	<COND (<IN? ,CODEWORD-PROSPERO ,CODEWORDS> <STORY-JUMP ,STORY250>)>>
+	<COND (<CHECK-CODEWORD ,CODEWORD-PROSPERO> <STORY-JUMP ,STORY250>)>>
 
 <CONSTANT TEXT175 "Your head swims; your limbs tremble with weakness. Looking into Oakley's face, you give a croak of bleak amusement. \"Saints alive, man, you look as though you'd been keelhauled!\"||He manages a wry half-smile- \"You think you do don't?\" Staggering over to slump beside you, he adds, \"We're not for long for this world now now, are we, mate?\"||You gaze into the west, almost all hope gone.">
 
@@ -2617,7 +2624,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY177-PRECHOICE ()
-	<COND (<IN? ,CODEWORD-PECCANT ,CODEWORDS>
+	<COND (<CHECK-CODEWORD ,CODEWORD-PECCANT>
 		<PUT <GETP ,STORY177 ,P?DESTINATIONS> 2 ,STORY386>
 	)(ELSE
 		<PUT <GETP ,STORY177 ,P?DESTINATIONS> 2 ,STORY404>
@@ -2795,12 +2802,12 @@
 <ROUTINE STORY190-PRECHOICE ("AUX" COUNT)
 	<RESET-TEMP-SKILLS>
 	<SET COUNT 1>
-	<COND (<NOT <IN? ,SKILL-BRAWLING ,PLAYER>>
+	<COND (<NOT <CHECK-SKILL ,SKILL-BRAWLING>>
 		<PUT TEMP-SKILLS .COUNT ,SKILL-BRAWLING>
 		<SET COUNT <+ .COUNT 1>>
 		<EMPHASIZE "You have temporarily gained BRAWLING">
 	)>
-	<COND (<NOT <IN? ,SKILL-SWORDPLAY ,PLAYER>>
+	<COND (<NOT <CHECK-SKILL ,SKILL-SWORDPLAY>>
 		<PUT TEMP-SKILLS .COUNT ,SKILL-SWORDPLAY>
 		<SET COUNT <+ .COUNT 1>>
 		<EMPHASIZE "You have temporarily gained SWORDPLAY">
@@ -3226,7 +3233,7 @@
 <ROUTINE STORY216-PRECHOICE ()
 	<LOSE-LIFE 1 DIED-GREW-WEAKER ,STORY216>
 	<IF-ALIVE TEXT216-CONTINUED>
-	<COND (<IN? ,CODEWORD-CHANCERY ,CODEWORDS> <REMOVE ,CODEWORD-CHANCERY>)>>
+	<COND (<CHECK-CODEWORD ,CODEWORD-CHANCERY> <REMOVE ,CODEWORD-CHANCERY>)>>
 
 <CONSTANT TEXT217 "Salt spray spits across the deck in billows, driven by high winds that stretch the sails hard against the rigging. \"It's a wonder she ain't broke up long since!\" says Blutz.||\"She's a cursed ship,\" declares Oakley matter-of-factly. \"Such vessels have an unnatural resilience.\"||Hours pass, during which you are blown further into the west. You snatch a short sleep in the shelter of a tarpaulin, preferring not to venture below decks again. At last Grimes shakes you from a feverish dream to say, \"It's time we quit this ship matey.\"||You agree.">
 <CONSTANT CHOICES217 <LTABLE "use an item" "otherwise">>
@@ -3402,184 +3409,155 @@
 	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
 
+<CONSTANT TEXT231 "Your skin is loose on your bones and your tongue feels like a wad of burnt cotton. The urge to drink seawater is almost unbearable now. Your only respite from consciousness is not sleep, but dream-haunted delirium.">
+
 <ROOM STORY231
 	(IN ROOMS)
 	(DESC "231")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT231)
+	(PRECHOICE STORY231-PRECHOICE)
+	(CONTINUE STORY212)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY231-PRECHOICE ("AUX" (DMG 2))
+	<COND (<CHECK-SKILL ,SKILL-SEAFARING> <SET DMG 1>)>
+	<LOSE-LIFE .DMG DIED-OF-THIRST ,STORY231>>
+
+<CONSTANT TEXT232 "You gorge yourselves on ripe fruits and tasty nuts -- only to suffer severe stomach cramps just minutes later. Oakley rushes down the beach and gulps sea water until he vomits. The rest of you follow suit, but you are left dizzy and weak.||\"Something must have been poisonous,\" groans Blutz. \"Maybe we ought to go to the tower. There might be someone there who'll give us food.\"">
+<CONSTANT CHOICES232 <LTABLE "agree and go to the tower" "you think it is better to leave the island now">>
 
 <ROOM STORY232
 	(IN ROOMS)
 	(DESC "232")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT232)
+	(CHOICES CHOICES232)
+	(DESTINATIONS <LTABLE STORY194 STORY137>)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT233 "The four of you crouch down in the weird boat. No sooner have you settled yourselves than the two great fish slap the waters with their tails, drawing you out to sea. Darkness and frothy waves churn past. With spray in your eyes, the moon looks like a whirlpool in the firmament and their is no way to tell how far you've travelled when, at last, the boat drifts to a halt. You see that you are close to the entrance of a massive harbour. A long golden chain is stretched across the harbour mouth to block the vessels from entering or leaving.||The moon emerges from behind a cloud, flooding the scene in its timeless white glow. You give a gasp, for now you see that you had taken to be the pillars of the harbour gate are actually colossal legs stretching up far into the night sky. Craning your neck, you see the massive outline of a giant's shoulders against the moon-grazed clouds.||The giant stoops, showing a smile as wide as a galleon's beam in his face of smooth dark marble. \"Four wayfarers,\" he says in the tone of one who has noticed four curious insects under his nose. \"Mortals. What brings you to Neptune's gate?\"">
+<CONSTANT CHOICES233 <LTABLE "say you seek a ship" "ask for his help in your quest" "tell him you want to return home">>
 
 <ROOM STORY233
 	(IN ROOMS)
 	(DESC "233")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT233)
+	(CHOICES CHOICES233)
+	(DESTINATIONS <LTABLE STORY034 STORY053 STORY072>)
+	(TYPES THREE-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT234 "\"Quick,\" you say to Oakley over your shoulder, \"push me over and make like you're giving me a kick. And make it look convincing.\" He is taken aback at first, but then he catches on to your plan. As you feel him shove you from behind, you fling yourself down to sprawl in the sand. \"Ouch\" you grunt as you feel the toe of his boot. \"Not that convincing!\"||\"We've caught this scurvy wretch,\" Oakley tells the natives with the help of sign-language.||The chief must have learned a few words off sailors who stopped here. \"Kill,\" he says. \"Burn alive over fire.\"||Oakley hesitates. \"Er...\"||\"Oh yes. Er, the prisoner will be taken to Queen Titania, the, er, chief of Glorianne. Get it? She'll decide the proper punishment.\"||The natives are still keen to seize you, but Oakley keeps them off with warnings of dire reprisals if Queen Titania's wishes are not carried out.">
 
 <ROOM STORY234
 	(IN ROOMS)
 	(DESC "234")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT234)
+	(CONTINUE STORY272)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT235 "The storm rolls over you, tossing your jollyboat halfway to the clouds with each wave. The sea becomes thick with icy froth. The sky is a flickering lantern -- one moment blue-white and bright as daybreak, then blacker than the underworld in the thunderous space between lightning flashes.||Wretchedly sick, weak with exhaustion and hunger, the four of you struggle to keep the little craft from submerging. Oakley sings wildly into the sheets of rain as he bails water with cupped hands:||\"Oh, the Coffin Lid heaves to and fro,|tossed by storms and gales,|What's that thunder now I hear:|four hearts thudding full o' fear?|Or Death's bone fingers  drawing near|and banging in the nails?\"||Grimes and Blutz both look to be near the end of their tether. Oakley's gallows song is not helping their nerves. Nor yours, for that matter.">
+<CONSTANT CHOICES235 <LTABLE "try to shut Oakley up and risk provoking a fight" "do nothing and then morale will drain away entirely.">>
 
 <ROOM STORY235
 	(IN ROOMS)
 	(DESC "235")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT235)
+	(CHOICES CHOICES235)
+	(DESTINATIONS <LTABLE STORY216 STORY254>)
+	(PRECHOICE STORY235-PRECHOICE)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY235-PRECHOICE ()
+	<COND (<CHECK-CODEWORD ,CODEWORD-DETRUDE> <REMOVE ,CODEWORD-DETRUDE> <GAIN-CODEWORD ,CODEWORD-PECCANT>)>>
+
+<CONSTANT TEXT236 "Holding firm to your mystic amulet, you pronounce the words of a blessing.||\"Hey, it worked!\" exclaims Blutz, clambering cumbrously over the rail.\"Look, we're not trapped by the curse anymore.\"||You nod, allowing yourself a slight smile of self congratulation. \"Don't dawdle, though. The effect of the charm won't last forever.\"||Lowering yourselves down to the water, you get back into the jollyboat tethered there and row hastily away through the chopping waves. Behind you, the Larnassos fades until she is no more than a wavering patch of shadow, and then is swallowed entirely by the darkness. \"Good riddance!\" spits Grimes.">
 
 <ROOM STORY236
 	(IN ROOMS)
 	(DESC "236")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT236)
+	(PRECHOICE STORY236-PRECHOICE)
+	(CONTINUE STORY136)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY236-PRECHOICE ()
+	<REMOVE ,CURRENT-VEHICLE>
+	<SETG CURRENT-VEHICLE NONE>>
+
+<CONSTANT TEXT237 "\"Well, Mister Chatter,\" says Oakley, settling the little monkey on his knee and producing a pocket-knife, \"it's been an honour to sail with 'ee, but your shipmates are going to ask a favour of you now, and it's that most noble sacrifice a bloke can make.\"">
+<CONSTANT TEXT237-CONTINUED "Rich red sunset glints on the blade, and in a stroke the dead is done. \"Poor little beggar!\" sighs Blutz.||\"Better than poor us, matey,\" says Oakley as he carves you each a hunk of meat. \"Four starving sailors cramped into a jollyboat leaves precious room for sentiment.\"">
 
 <ROOM STORY237
 	(IN ROOMS)
 	(DESC "237")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT237)
+	(PRECHOICE STORY237-PRECHOICE)
+	(CONTINUE STORY256)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY237-PRECHOICE ()
+	<CRLF>
+	<TELL "Eat the monkey (if you are heartless or desperate enough)?">
+	<COND (<YES?>
+		<REMOVE ,MONKEY>
+		<PUTP ,STORY237 ,P?DEATH F>
+		<IF-ALIVE TEXT237-CONTINUED>
+	)(ELSE
+		<LOSE-LIFE 1 DIED-OF-HUNGER ,STORY237>
+	)>>
+
+<CONSTANT TEXT238 "Raising your sword, you leap aboard the raft. You intended only to warn Mortice, but instead of backing off he gives a murderous snarl and runs straight onto the sword, impaling himself through the heart. You look away quickly with a grimace of dismay. Still gripping the blade, you glance back at the others and start to say, \"There wasn't anything I could do. He just --\"||\"Look out!\" Blutz screeches in warning, pointing past you. \"He's not dead!\"||Your eyes jerk back to Mortice, who you now see to your horror is still moving. Twitching galvanically, he grins a blood-rimmed smile and coughs gore, then starts to pull himself along the sword blade towards you.">
+<CONSTANT CHOICES238 <LTABLE "flee back to the boat, letting go of your sword" "fight on">>
 
 <ROOM STORY238
 	(IN ROOMS)
 	(DESC "238")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT238)
+	(CHOICES CHOICES238)
+	(DESTINATIONS <LTABLE STORY238-LOSE-SWORD STORY314>)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<ROOM STORY238-LOSE-SWORD
+	(IN ROOMS)
+	(DESC "238")
+	(EVENTS STORY238-EVENTS)
+	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY238-EVENTS ()
+	<COND (<IN? ,SWORD ,PLAYER>
+		<REMOVE ,SWORD>
+	)(<IN? ,SHARKS-TOOTH-SWORD ,PLAYER>
+		<REMOVE ,SHARKS-TOOTH-SWORD>
+	)(<IN? ,CLEAVER ,PLAYER>
+		<REMOVE ,CLEAVER>
+	)>
+	<RETURN ,STORY276>>
+
+<CONSTANT TEXT239 "The captain listens to your tale with equal measures of horror disbelief. \"It's a hard tale to swallow,\" he says at last, \"but I've heard this fellow Skarvench is full of hubris.\"||\"It's no mere pipedream,\" says Grimes. \"Skarvench is cunning and ruthless. If he's set his sights on such a prize, you can be sure he has a good plan.\"||The captain scratches his head. \"It is true that the Queen's flagship is bound for the colonies,\" he admits. \"But I only heard the news myself as I was about to set sail from Glorianne, so Skarvench must have spies in high places. I'd help if I could, but my vessel is only a merchantman and would fare badly against a fully-armed pirate ship.\"||He finally agrees to set you off in Port Selenice, where you have your best chance of enlisting aid against Skarvench. Then, wishing you well, he resumes his journey towards Leshand.">
 
 <ROOM STORY239
 	(IN ROOMS)
 	(DESC "239")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT239)
+	(PRECHOICE STORY239-PRECHOICE)
+	(CONTINUE STORY165)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY239-PRECHOICE ()
+	<COND (<CHECK-CODEWORD ,CODEWORD-CHANCERY> <STORY-JUMP ,STORY406>)>>
+
+<CONSTANT TEXT240 "You are dragged aboard the Belle Dame. Jeering, the pirates gather round and tie you and your friends to the rail. The burly mate, Porbuck, steps forward swinging a whip in his hand. His huge flabby face is creased into a ghoulish grin.||\"While the cat's away, eh, Porbuck?\" says Oakley. He is trying to sound flippant, but his face is the curdled-milk colour of fear. \"Skarvench won't like it if you kill us before he gets back.\"||Porbuck chortles as he raises the whip. \"Don't you go worryin', Oakley. You won't just die yet. Reckon you'll beg for it though...\"||Hours of agony pass before your flayed bodies are finally cast into the sea. By that time you gratefully accept the cool oblivion of death.">
 
 <ROOM STORY240
 	(IN ROOMS)
 	(DESC "240")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT240)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
 
 <ROOM STORY241
