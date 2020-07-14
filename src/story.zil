@@ -66,6 +66,7 @@
 	<PUTP ,STORY175 ,P?DEATH T>
 	<PUT <GETP ,STORY177 ,P?DESTINATIONS> 2 ,STORY404>
 	<PUTP ,STORY182 ,P?DEATH T>
+	<PUTP ,STORY191 ,P?DEATH T>
 	<RETURN>>
 
 <CONSTANT DIED-IN-COMBAT "You died in combat">
@@ -87,6 +88,39 @@
 		<STORY-JUMP .DESTROYED>
 	)>
 	<RETURN>>
+
+<ROUTINE ADD-PROVISIONS ("OPT" AMOUNT "AUX" QUANTITY)
+	<COND (<NOT .AMOUNT> <SET AMOUNT 1>)>
+	<COND (<IN? ,PROVISIONS ,PLAYER>
+		<SET QUANTITY <+ <GETP ,PROVISIONS ,P?QUANTITY> .AMOUNT>>
+		<PUTP ,PROVISIONS ,P?QUANTITY .QUANTITY>
+	)(ELSE
+		<SET QUANTITY .AMOUNT>
+		<PUTP ,PROVISIONS ,P?QUANTITY .QUANTITY>
+		<TAKE-ITEM ,PROVISIONS>
+	)>>
+
+<ROUTINE CONSUME-PROVISIONS ("OPT" AMOUNT JUMP "AUX" QUANTITY RETURN-VALUE)
+	<SET RETURN-VALUE F>
+	<COND (<NOT .AMOUNT> <SET AMOUNT 1>)>
+	<COND (<IN? ,PROVISIONS ,PLAYER>
+		<SET QUANTITY <GETP ,PROVISIONS ,P?QUANTITY>>
+		<COND (<G? .QUANTITY 0>
+			<SET QUANTITY <- .QUANTITY .AMOUNT>>
+			<PUTP ,PROVISIONS ,P?QUANTITY .QUANTITY>
+			<COND (<G=? .QUANTITY 1>
+				<HLIGHT ,H-BOLD>
+				<TELL "[Your supply of provisions decreased by " N .AMOUNT "]" CR>
+				<HLIGHT 0>
+			)(ELSE
+				<EMPHASIZE "[You've exhausted your supply of provisions]">
+			)>
+			<COND (.JUMP <STORY-JUMP .JUMP>)>
+			<SET RETURN-VALUE T>
+		)>
+		<COND (<L? .QUANTITY 1> <REMOVE ,PROVISIONS>)>
+	)>
+	<RETURN .RETURN-VALUE>>
 
 <CONSTANT PROLOGUE-TEXT "\"Pirates!\" The roar of cannonfire thunders across the waves as word leaves the captain's lips. Hurtling out of the billowing plumes of smoke come a barrage of iron shells. Each is larger than a man's fist, and strikes with a force that splinters the oak beams of your ship and shatters men's skulls like eggs. The mainmast takes a direct hit and topples, crushing the sailors standing under it.||A grappling hook latches onto the rail. The pirates are getting ready to board you. Rushing to the side, you see their sinister vessel drawing alongside, black sails flapping in the breeze like a carrion-bird's wings. Her prow has the face of a medieval gargoyle. You read the name painted on her bows: the Belle Dame. But there is no look of beauty about her, nor hint of mercy on the faces of the eager brigands lining her rail.||A crewman standing beside you utters a groan of fear. \"It's Skarvench's ship.\"||\"Who's he?\" you ask, having to shout over the din of cannon shots and the pirates' battle-cries.||He stares at you as though you are a simpleton, and then remembers that this is your first voyage to the New World. \"The worst man that ever lived,\" is his blunt reply. And then the ships come together and the pirates are upon you.||Rushing headlong into the terrified crew, the pirates cleave a swathe of gory death across the ship's deck, their cutlasses rising and falling like scythes. You see the ship's officers fighting valiantly to defend the helm, but they are hopelessly outnumbered and soon butchered at their post. The fierce grins on the pirate's faces tell you that they expect easy pickings. You narrow your eyes as anger wells up inside you. You know that you will die today, but you feel no fear -- only a cold determination to sell your life dearly. Two pirates lunge at you. You duck the swing of the first, catch his arm and throw him against his crony. The sword intended for you ends up in a pirate's belly, and his knife comes up by reflex to slash at the man who has inadvertently impaled him.||\"Two down...\" You turn, and then for the first time you clap eyes on Skarvench himself. He stands astride the rail, grasping a grappling-line in one hand and a pistol in the other, whipping his sea-dogs into a killing frenzy with his evil laughter. His broad back and gangling limbs make him look like a massive crow. His beard is as long and lank as seaweed, and a single eye blazes beneath his bald brow -- the other is covered by a leather patch.||He is raising his pistol. You are rooted to the spot under his baleful stare. It can't be fear you're feeling surely...||\"Ah, matey,\" he says with a brown-toothed grin. \"Got to kill you again, 'ave I?\"||Again..? You have no time to ponder this enigma. In the next instant, he fires his pistol and your whole world goes black.||--||You sit up with a gasp, sweat soaking your clothes.||\"You've 'ad that dream again, eh?\"||You look around, memory trickling back as the dream recedes. The slow creaking of a ship's timbers, the unhurried heave of the waves... you are in the stuffy confines of the Belle Dame's bowels. Sailors snore fitfully around you, catching some sleep between chores. In the glimmer of an oil lamp sits Old Marshy, the ship's carpenter, whittling at a stick of wood. He glances across at you, shaking his head sadly. \"It was two years ago. Don't know why you can't stop 'aving the dreams.\"||\"Dreams? Nightmares!\" you say, mopping the sweat away. As you do, you feel the scar across your forehead where Skarvench's bullet struck you. A finger's breadth to the right -- one less tot of rum for Skarvench's breakfast that fateful morning! -- and your brains would have been blown out. As it is the bullet only grazed you, leaving the visible mark on your head and the scar of hatred deep in your heart.||Now that the nightmare has washed away, you recall the two years that have passed since that day. When you were first brought aboard the Belle Dame, Skarvench deemed you too insignificant to ransom and too close to death to be worth pressing into service. He would have cast you into the deep and never had a qualm -- that was the fate of most who survived the battle -- but Old Marshy undertook to nurse you back to health. You can well remember the weeks it took to get your strength back -- weeks experienced like glimpses in broken glass, because of fever. You remember Old Marshy holding the wooden spoons of gruel to your lips until his thin arms trembled with tiredness, urging you to eat. You remember the shouts of the pirates as they toiled in the rigging, and their drunken laughter under the stars at night. And most of all you remember Skarvench, looming through your thoughts like the embodiment of cruelty, striding the deck and waiting for you to die.||You did not die; thanks to Old Marshy you regained your strength. But death might have been better than the living hell you have had to endure these two years as an ordinary seaman aboard the cruellest ship to sail the Carab Sea. Skarvench metes out discipline as the whim takes him, revelling in the suffering of others; pain is his wine, and death his meat. Often you have had to stand by and watch a man whipped for the slightest mistake. Sometimes you have felt that whip yourself -- all to raucous laughter of Skarvench and his vicious pirate band.||\"All hands on deck!\" Hearing the command, you shake the other sailors awake and hurry up out of the dingy confines of the orlop deck into the blaze of daylight.||Skarvench stands on the poopdeck. The ox-like first mate, Porbuck gives you a shove and growls, \"You , get up in the rigging.\" As you climb, you glance out to sea. A small ship lies off the port bow and the Belle Dame is rapidly closing on her. You see a tall wooden crucifix standing amidships; she has no cannon. That is foolhardy. \"Go to sea on a prayer,\" as the adage goes, \"but take a keg of powder too.\"||You understand the reason for the other ship's lack of weaponry when you get a better view of the men lining her rail. They're all monks!||Skarvench's voice goes snarling across the water. \"Heave to or be blown out o' the water!\" he calls. \"We'll be takin' your treasure, holy or not!\"||\"We have no treasure,\" calls back one of the monks. \"We are poor brothers of the Saviour, travelling to the New World to spread His message to the heathen.\"||Skarvench smiles -- always a sign of his bad temper -- and says, \"Is that so? Well, I know of no place more heathen than the ocean bed.\" He leans on the poopdeck rail and calls to the master gunner: \"Mister Borograve, prepare to give 'em a broadside. I want their shaved heads sent forty fathoms deep, where heaven can't hear their mealy-mouthed prayers!\"||The monks know they cannot outrun the Belle Dame. As Borograve orders the cannons primed, they begin to sing a hymn. It is a glorious and peaceful sound that reminds you of the meadows and villages of your homeland. Most of the sailors pause in their duties, overcome by the melancholy beauty of the song. Even one or two of the pirates look uneasy at what they are about to do.||\"Prepare to fire,\" says Skarvench, keen as a hound at the scent of a kill.||\"No!\" A carpenter's hammer goes flying through the air and strikes Skarvench's head with a crack loud enough to carry up to where you sit in the rigging. Skarvench remains as steady as a rock, his hand flashing out with the startling speed to snatch the hammer out of the air as it falls. then he turns. His face is a mask of white fury. The fact that there is a stream of blood flowing from his temple only makes him look all the more terrible. His gaze bores along the deck and finds:||\"Mister Marsh! This your hammer, is it?\"||Old Marshy quails, his one jot of boldness used up. \"B-but, Cap'n... they're holy men! I don't think...||Skarvench tastes his own blood on his lip and savours it with his tongue. He gestures to a couple of pirates, and Old Marshy is seized and dragged up to the poopdeck. \"Lay his head on the rail there, lads,\" says Skarvench in a voice like honeyed venom. He raises the hammer. \"You're right, Mister Marsh; you don't think. That's the trouble with having nothin' in your brain-pan, see?\"||Far too late, you realise what Skarvench is going to do. You give a gasp and start down through the rigging. But even as you act, you know there is nothing you can do...||The hammer smashes down. It sounds like a wineflask breaking. The ordinary seamen look away in horror. The pirates grin gleefully like their captain, excited by the grisly sight. The corpse slumps to the deck.||\"God curse you, Skarvench,\" you mutter under your breath as you reach the foot of the mast. \"I'll see you dead for that.\"||\"You're not alone in wishing that,\" whispers a voice, \"but I'd stow such talk unless you want your own skull under the hammer next.\"||You look around to see three of the crew -- Grimes, Oakley and Blutz -- men who, like you, were taken off plundered ships and force to work for the pirates. \"We've a plan,\" continues Grimes in a low voice. \"If we stay aboard this devil ship our days are surely numbered, so tonight we plan to jump ship. We're scheduled to take the evening watch. We'll lower the jollyboat with a few supplies, then strike out towards Port Leshand.\"||\"Five hundred leagues of open ocean in a tiny boat like that!\" you gasp. \"It's near certain death.\"||\"Better than certain death, which is what we can expect here,\" mutters Oakley. \"Look, you've got a reputation of being a handy customer to have along in a tight spot. To be honest, we haven't got much of a chance without you. Now, are you with us?\"||You glare back up at the tall stooped figure on the poopdeck. He stamps to and fro, the brain-smeared hammer still in his hand, annoyed that the monks made their getaway while he was distracted by Old Marshy. You'll make him pay for his crimes one day, but you know the moment is not yet right.||You turn to Grimes and the others and give a swift nod. \"I'm with you.\"">
 
@@ -1676,21 +1710,8 @@
 	(CONTINUE STORY155)
 	(FLAGS LIGHTBIT)>
 
-<ROUTINE STORY116-PRECHOICE ("AUX" QUANTITY)
-	<COND (<IN? ,PROVISIONS ,PLAYER>
-		<SET QUANTITY <GETP ,PROVISIONS ,P?QUANTITY>>
-		<COND (<G? .QUANTITY 0>
-			<SET QUANTITY <- .QUANTITY 1>>
-			<PUTP ,PROVISIONS ,P?QUANTITY .QUANTITY>
-			<COND (<G=? .QUANTITY 1>
-				<EMPHASIZE "[Your supply of provisions decreased by 1]">
-			)(ELSE
-				<EMPHASIZE "[You've exhausted your supply of provisions]">
-			)>
-			<STORY-JUMP ,STORY426>
-		)>
-		<COND (<L? .QUANTITY 1> <REMOVE ,PROVISIONS>)>
-	)>>
+<ROUTINE STORY116-PRECHOICE ()
+	<CONSUME-PROVISIONS 1 ,STORY426>>
 
 <CONSTANT STORY117-GIVELIST <LTABLE SWORD PISTOL MAGIC-AMULET MAGIC-WAND CRUCIFIX TOOLKIT ALL-MONEY>>
 
@@ -1960,24 +1981,10 @@
 	(DEATH T)
 	(FLAGS LIGHTBIT)>
 
-<ROUTINE STORY135-PRECHOICE ("AUX" QUANTITY)
+<ROUTINE STORY135-PRECHOICE ()
 	<LOSE-LIFE 1 DIED-OF-HUNGER ,STORY212>
 	<COND (<G? ,LIFE-POINTS 0>
-		<COND (<IN? ,PROVISIONS ,PLAYER>
-			<SET QUANTITY <GETP ,PROVISIONS ,P?QUANTITY>>
-			<COND (<G? .QUANTITY 0>
-				<SET QUANTITY <- .QUANTITY 1>>
-				<PUTP ,PROVISIONS ,P?QUANTITY .QUANTITY>
-				<COND (<L? .QUANTITY 1>
-					<EMPHASIZE "[You've exhausted your supply of provisions]">
-					<REMOVE ,PROVISIONS>
-				)(ELSE
-					<EMPHASIZE "[Your supply of provisions decreased by 1]">
-				)>
-				<STORY-JUMP ,STORY212>
-				<RETURN>
-			)>
-		)>
+		<COND (<CONSUME-PROVISIONS 1 ,STORY212> <RETURN>)>
 		<COND (<IN? ,MONKEY ,PLAYER>
 			<CRLF>
 			<TELL "Eat the monkey (if you are heartless or desperate enough)?">
@@ -2019,24 +2026,11 @@
 	(CONTINUE STORY175)
 	(FLAGS LIGHTBIT)>
 
-<ROUTINE STORY137-PRECHOICE ("AUX" QUANTITY)
+<ROUTINE STORY137-PRECHOICE ()
 	<COND (,USED-CHARMS-TO-FLOAT
 		<EMPHASIZE "However, there is no cause for alarm.">
 	)>
-	<COND (<IN? ,PROVISIONS ,PLAYER>
-		<SET QUANTITY <GETP ,PROVISIONS ,P?QUANTITY>>
-		<COND (<G? .QUANTITY 0>
-			<SET QUANTITY <- .QUANTITY 1>>
-			<PUTP ,PROVISIONS ,P?QUANTITY .QUANTITY>
-			<COND (<G=? .QUANTITY 1>
-				<EMPHASIZE "[Your supply of provisions decreased by 1]">
-			)(ELSE
-				<EMPHASIZE "[You've exhausted your supply of provisions]">
-			)>
-			<STORY-JUMP ,STORY156>
-		)>
-		<COND (<L? .QUANTITY 1> <REMOVE ,PROVISIONS>)>
-	)>>
+	<CONSUME-PROVISIONS 1 ,STORY156>>
 
 <CONSTANT TEXT138 "A strong breeze stretches your sails wide against the sky, driving you on towards your destiny. But you have no time to brood on what the future may hold; you have a ship to command. Seeing the way her prow cleaves the water, and the jaunty courage of your crew as they go about their chores, your heart brims with optimism. Soon Skarvench will see his last sunset in his life -- of that you feel sure.">
 <CONSTANT TEXT138-CONTINUED "More than a week goes by. On the ninth day, you stand on the deck watching the sun slide out of the sky. Long blazing beams of orange light turn the green waves to liquid gold. And then -- in the blink of an eye -- this idyllic scene is transformed. A purple murk rises from the western horizon, blotting out the afternoon sun behind thick thunderclouds. A cold gust blows in your face, setting the sails to a pensive fluttering like frightened birds. You know well the taste of that chill wind; it is the harbinger of the hurricane.||\"This is but the twitch of the lion's tail compared to what will come,\" mutters Grimes. \"We'll have to put about.\" He calls to the crew: \"Strike the main topsail.\"||You turn. \"Belay that striking order. Lash it!\"||Oakley stares at you. \"Skipper, the hurricane'll tear us apart.\"||The first rain spits into your face, icily intense. \"'We're going in, hurricane or not. God is the master of the heavens and all the world -- but, by all that's holy, I'm the master of this ship!">
@@ -2563,15 +2557,8 @@
 	(CONTINUE STORY269)
 	(FLAGS LIGHTBIT)>
 
-<ROUTINE STORY174-PRECHOICE ("AUX" QUANTITY)
-	<COND (<IN? ,PROVISIONS ,PLAYER>
-		<SET QUANTITY <+ <GETP ,PROVISIONS ,P?QUANTITY> 2>>
-		<PUTP ,PROVISIONS ,P?QUANTITY .QUANTITY>
-	)(ELSE
-		<SET QUANTITY 2>
-		<PUTP ,PROVISIONS ,P?QUANTITY .QUANTITY>
-		<TAKE-ITEM ,PROVISIONS>
-	)>
+<ROUTINE STORY174-PRECHOICE ()
+	<ADD-PROVISIONS 2>
 	<COND (<IN? ,CODEWORD-PROSPERO ,CODEWORDS> <STORY-JUMP ,STORY250>)>>
 
 <CONSTANT TEXT175 "Your head swims; your limbs tremble with weakness. Looking into Oakley's face, you give a croak of bleak amusement. \"Saints alive, man, you look as though you'd been keelhauled!\"||He manages a wry half-smile- \"You think you do don't?\" Staggering over to slump beside you, he adds, \"We're not for long for this world now now, are we, mate?\"||You gaze into the west, almost all hope gone.">
@@ -2814,94 +2801,74 @@
 	)>
 	<RETURN>>
 
+<CONSTANT TEXT191 "You come face to face with the sailmaster. For a moment he stands there in simple perplexity. As an ordinary seaman you are not supposed to be in this part of the ship. \"What are you doing..?\" he starts to say.">
+<CONSTANT TEXT191-END "You are helpless to prevent him from altering the other pirates, who rush out of Skarvench's cabin to seize you. Your adventure ends before it even began">
+<CONSTANT CHOICES191 <LTABLE "attack him before he can sound the alarm using" "or" "fall back">>
+
 <ROOM STORY191
 	(IN ROOMS)
 	(DESC "191")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT191)
+	(CHOICES CHOICES191)
+	(DESTINATIONS <LTABLE STORY286 STORY248 STORY305>)
+	(REQUIREMENTS <LTABLE SKILL-SWORDPLAY SKILL-BRAWLING SKILL-CUNNING>)
+	(PRECHOICE STORY191-PRECHOICE)
+	(TYPES <LTABLE R-SKILL R-SKILL R-SKILL>)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY191-PRECHOICE ()
+	<COND (<OR <CHECK-SKILL ,SKILL-SWORDPLAY> <CHECK-SKILL ,SKILL-BRAWLING> <CHECK-SKILL ,SKILL-CUNNING>>
+		<PUTP ,STORY191 ,P?DEATH F>
+	)(ELSE
+		<TELL TEXT191-END>
+		<TELL ,PERIOD-CR>
+	)>>
+
+<CONSTANT TEXT192 "With a dexterity that amazes your companions, you scale the cliffs like a monkey and have soon hurdle down enough coconuts to keep you all supplied for days. You scramble back down to the beach amid cheers of delight.||\"Well done,\" says Oakley. He is smiling, but you notice he turns to cast a wary look along the shore. \"Now I suggest we lose no time loading these aboard and casting off. I've no wish to run into the natives hereabouts.\"">
+<CONSTANT CHOICES192 <LTABLE "leave this island and head west as Oakley suggests" "explore further">>
 
 <ROOM STORY192
 	(IN ROOMS)
 	(DESC "192")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT192)
+	(CHOICES CHOICES192)
+	(DESTINATIONS <LTABLE STORY116 STORY211>)
+	(TYPES TWO-NONES)
+	(PRECHOICE STORY192-PRECHOICE)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY192-PRECHOICE ()
+	<ADD-PROVISIONS 2>>
+
+<CONSTANT TEXT193 "\"No, you're wrong,\" you tell Blutz. \"Look at most of the island. It's well covered in vegetation, right?\" That volcano has most likely been hissing and spitting for years, but if there had been any major eruption then the jungle wouldn't have grown up to that extent.\"||\"All the same,\" says Grimes, \"let's not dally longer than we have to. The sight of those lava-covered slopes puts me in mind of Stan's brimstone fires!\"">
+<CONSTANT CHOICES193 <LTABLE "go ashore" "row on westwards">>
 
 <ROOM STORY193
 	(IN ROOMS)
 	(DESC "193")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT193)
+	(CHOICES CHOICES193)
+	(DESTINATIONS <LTABLE STORY174 STORY135>)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT194 "Despite the thick jungle, you reach the tower quickly by following a stone pathway that leads through the undergrowth. You emerge into a wide grass-covered plaza and facing you is a white marble palace with a high tower. You move cautiously closer and Oakley runs his hand over the monumental carvings beside the entrance. They show a queen or priestess dispatching her enemies into luridly depicted hells.||\"How was this stone brought here?\" Grimes wonders aloud. \"It's not local to the island, if I'm any judge.\"||\"You're right,\" says a woman's voice. \"I brought it here by magic.\"">
 
 <ROOM STORY194
 	(IN ROOMS)
 	(DESC "194")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT194)
+	(CONTINUE STORY251)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT195 "It seems that the witch's exertions have weakened the spell she cast to bury your jollyboat. Or perhaps desperation lends you unprecedented strength. Whatever the reason, you manage to dig the boat out of the sand and drag it down to the water's edge. Piling in, you put out to sea at once.">
 
 <ROOM STORY195
 	(IN ROOMS)
 	(DESC "195")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT195)
+	(CONTINUE STORY137)
 	(FLAGS LIGHTBIT)>
 
 <ROOM STORY196
