@@ -75,6 +75,7 @@
 	<PUTP ,STORY215 ,P?DEATH T>
 	<PUTP ,STORY216 ,P?DEATH T>
 	<PUTP ,STORY219 ,P?DEATH T>
+	<PUTP ,STORY225 ,P?DEATH T>
 	<RETURN>>
 
 <CONSTANT DIED-IN-COMBAT "You died in combat">
@@ -3277,184 +3278,128 @@
 	(DEATH T)
 	(FLAGS LIGHTBIT)>
 
+<CONSTANT TEXT221 "A few judicious rounds bought in a dockside tavern soon sets tongues wagging. \"Aye, I've heard it's the Queen herself who'll be visiting next month,\" ventures a longshoreman. \"That's why security's been tightened up. It stands to reason, don't it. The governor don't want nothing to go wrong while she's here, or he might end up begging on the streets instead of living in splendour up at the fort.\"||Unfortunately other ears have overheard your enquiries. As you leave the tavern, footsteps ring on the cobbled street behind you. Before you have time to turn, you feel the unpleasantly familiar touch of cold steel against your neck. \"I'm sure the governor will want to know about the keen interest you're taking in Her Majesty's visit,\" says a voice full of honeyed menace. \"Why don't you come and have a chat with him about it?\"||\"Why bother the man?\" you reply. \"He has a lot to deal with at the moment.\"||The knife prices your skin. \"I wouldn't like to have to press the point,\" says the voice in the darkness behind you.||You give a gulp. \"In that case, lead on.\"">
+
 <ROOM STORY221
 	(IN ROOMS)
 	(DESC "221")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT221)
+	(CONTINUE STORY126)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT222 "By the onset of the second night, severe gales are driving freezing rain down onto your unprotected heads. You huddle together for warmth, but it is still impossible to snatch more than a few minutes of fitful sleep.">
+<CONSTANT TEXT222-CONTINUED "One person had to remain awake at all times to bail water, and in fact this unending task is not as bad as trying to rest -- at least the activity keeps you warm and helps prevent you from getting cramp.||The dawn is grey and cheerless, marked by a greyish pearl-like glimmer beyond the eastern clouds. It might as well be dusk for all the solace it gives you. The rain settles into a persistent, chilling drizzle. \"At least we have fresh drinking water,\" you say, collecting it in your cupped hands. \"As long as the rain keeps up we don't die of thirst.\"||\"I almost wish we would,\" moans Blutz miserable. \"Another night like that and I'll be praying for death.\"||\"Shut your whining mouth,\" snaps Oakley. \"It's going to get a lot worse than this.\"">
 
 <ROOM STORY222
 	(IN ROOMS)
 	(DESC "222")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT222)
+	(PRECHOICE STORY222-PRECHOICE)
+	(CONTINUE STORY007)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY222-PRECHOICE ()
+	<LOSE-LIFE 4 "You died from the bitter cold" ,STORY222>
+	<IF-ALIVE TEXT222-CONTINUED>
+	<COND (<AND <IS-ALIVE> <CHECK-SKILL ,SKILL-SEAFARING>> <STORY-JUMP ,STORY259>)>>
+
+<CONSTANT TEXT223 "Putting his spectacles back on, the scholar gratefully shakes you by the hand. \"This is a place for gentlemen of fortune, not gentlemen of letters,\" you tell him. \"I recommend you head on to a lawful port as soon as possible.\"||He shakes his head. \"But I've travelled all the way from Glorianne in search of someone: the wizard William Wild.\"||You nod. \"I've heard of him. Why should you expect to find here?\"||\"I'm told he sailed for the colonies with Queen Titania. I left after they did, but my ship must have made better headway because it seems the Queen is still at sea and won't reach the colonies for several weeks.\"||\"It's as you say, but you're mistaken if you think they'll put into port here. Selenice is not under Gloriannic rule.\"||He flutters his hands impatiently. \"I know that. But it occurs to me that Dr Wild's half-brother, a man called Skarvench, might know where he's bound.\"||The others have come over to join you. \"So Skarvench is half-brother to the Queen's wizard!\" says Oakley with a whistle. \"No doubt such news portends mischief.\"||\"Why do you want to find Wild?\" Blutz asks the scholar.||\"He paid me to do some astronomical calculations for him. He wanted to know when a certain eclipse of the moon would occur, as apparently he had certain plans which would be disrupted if the eclipse happened to early. Well, I gave him the results, but after he sailed I double-checked my calculations and it turns out I made an error. I told Dr Wild the eclipse would be at two o'clock on midsummer night, but in fact it will be slightly earlier, at midnight.\"||Assuring the scholar that you will deliver his message personally, you escort him to the harbour and put him aboard a ship bound for Glorianne.">
 
 <ROOM STORY223
 	(IN ROOMS)
 	(DESC "223")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT223)
+	(CONTINUE STORY374)
+	(CODEWORD CODEWORD-HORAL)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT224 "He said no man can use the key. Pointing to the lock in the middle of the chain, you try to make the monkey understand what you want it to do -- but to no avail. \"Go on, you little fleabag!\" you yell in exasperation, but its only reaction to this is to give itself a cursory scratch and go on squatting there on the edge of the coracle, blinking at you.||\"Begging your pardon, skipper,\" says Blutz, \"but you can't order a monkey about like you would an ordinary seaman. You've got to talk more gentle, like.\"||\"Gentle?\" you say, amazed.||\"Aye,\" Blutz nods. \"It's a thing skippers know nothing about. Let me try.\" He turns to the monkey, \"Now then, Mister Chatter, be a good bloke and unlock the harbour chain so your shipmates can sail through.\"||And blow you down if this doesn't do the trick. The monkey clambers along the chain and you hear the click of a key as its paws turn an invisible object in the lock. The chain falls aside and the monkey comes scurrying back, shrieking gleefully.||\"Imagine if captains had to take such a tone with their crew,\" you mutter. \"A ship's deck would be as blooming genteel as a church!\"||\"Don't worry, skipper,\" says Grimes as the coracle glides into the harbour. \"It might work a treat with monkeys, but sailors will always need a bit of yelling at.\"">
 
 <ROOM STORY224
 	(IN ROOMS)
 	(DESC "224")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT224)
+	(CONTINUE STORY205)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT225 "The surviving marines are rounded up and bound. Grimes is all for going aboard the ship and user her as your new vessel. Blutz soon points out the drawback in this idea: \"We'd be hunted down by the entire Gloriannic navy! That's going to make it rather hard to save the Gloriannic Queen, isn't it?\"||\"The Queen be hanged!\" cries one of the crew. \"We've got treasure, and now that we've seized a warship it'll be easy to keep our coffers filled. I'm for a life of solid piracy. Forget revenge, abandon honour -- let rum and gold be our goals!\"">
+<CONSTANT TEXT225-CONTINUED "You still envisage yourself as the Queen's saviour and Skarvench's nemesis. You cut the warship adrift and sail the Lady Shalott back to Selenice">
 
 <ROOM STORY225
 	(IN ROOMS)
 	(DESC "225")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT225)
+	(PRECHOICE STORY225-PRECHOICE)
+	(CONTINUE STORY016)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY225-PRECHOICE ()
+	<CRLF>
+	<TELL "Do you consent to this?">
+	<COND (<NOT <YES?>>
+		<PUTP ,STORY225 ,P?DEATH F>
+		<CRLF>
+		<TELL TEXT225-CONTINUED>
+		<TELL ,PERIOD-CR>
+	)>>
+
+<CONSTANT TEXT226 "Dropping to your knees, you draw a circle around you in the sand and usher your shipmates to stand within it. Then, holding forth the focus of your protection, you begin to recite: \"They return at evening, and swords are in their lips, but let them growl and wander up and down for their blood; they shall not be satisfied. Though a host should encamp against me, my heart shall not fear; when they come upon me to eat up my flesh they shall stumble and fall. For I will sing of power. Yea, in my refuge I will sing aloud in the morning..!\"||All through the night your ordeal continues. Your voice grows hoarse, and whenever you quaver in your chant one of the vampires lunges forward, trying to snatch you out of the circle. But at long last, just when all hope seems lost, a flicker of grey light trembles on the eastern horizon.||\"The dawn!\" shouts Blutz. \"Thank God!\"||The vampires gnash their fangs and turn like a pack of dogs, skulking back towards their coffins. \"aye, it's sunrise and we must retreat,\" says El Draque in a voice of icy anger. \"But do not rifle my treasure by day, for he that does will suffer my curse. My vengeance will reach out for him beyond the grave.\"||Wit that, he drops back into the hole. When you venture over, emboldened by the spreading daylight, yo see the corpses all back in their boxes. Now you must decide how much you fear his parting threat.">
 
 <ROOM STORY226
 	(IN ROOMS)
 	(DESC "226")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT226)
+	(PRECHOICE STORY226-PRECHOICE)
+	(CONTINUE STORY396)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY226-PRECHOICE ()
+	<CRLF>
+	<TELL "Take the silver ingots that the corpses are lying on?">
+	<COND (<YES?>
+		<GAIN-CODEWORD ,CODEWORD-MALEFIC>
+	)>>
+
+<CONSTANT TEXT227 "Your poor ship has taken all the damage she can stand. Listing hard over, her prow begins to sink beneath the waves. \"Man the lifeboats!\" shouts Oakley. \"Abandon ship!\"||Grimes takes your arm. \"Skipper, all's lost now. There's nothing left for us but to save ourselves.\"||You hesitate. Honour demands that a captain go down with his ship, but that is not what roots you to the spot. Instead it is your bitter disappointment at failing to scupper your foe. Who knows what wickedness he will now wreak, and you are powerless to stop him.||Whether or not you flee the sinking ship...">
 
 <ROOM STORY227
 	(IN ROOMS)
 	(DESC "227")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT227)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT228 "Taking hold of the rope, you pull yourself up. Mist surrounds you, dampening your clothes. There is an eerie chill here, suspended in a miasmic white void. The moon shimmers above as though seen in a stagnant pond. The shouts of your men echo leadenly up through the gloom.||The rope stirs. You look up to see a shape descending out of the moonlit vapour towards you. It is Skarvench, hanging like a great black spider on its web. Let him come. You will show him that this is no mere fly he has to face.">
 
 <ROOM STORY228
 	(IN ROOMS)
 	(DESC "228")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT228)
+	(CONTINUE STORY323)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT229 "You know well that the art of concealment rests on distracting the attention. Even as the door starts to swing open, you reach across and unlatch the cabin porthole. Then, scattering a few maps and charts onto the floor from the table where they were lying, you take cover in a heap of oilskins behind the door.||Not a moment too soon. The bald stocky figure of the sailmaster stands in the doorway, lantern in his hand. Seeing the open porthole he gives a growl of annoyance and rushes to close it, worried that salt spray could damage his precious navigation charts. Then he gathers up some papers, puts them under his arm, and crosses to Skarvench's cabin.||You emerge from your hiding place and peek across the passage. The door of Skarvench's cabin stands ajar, and you can hear him going over the charts with the sailmaster. Now is your chance. Seeing a toolkit beside the door, you take it: your rowing-boat may very well need repairs. There is no time to look for other items. You sneak back along the passage and up on deck.">
 
 <ROOM STORY229
 	(IN ROOMS)
 	(DESC "229")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT229)
+	(CONTINUE STORY172)
+	(ITEM TOOLKIT)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT230 "You find only a couple of small crabs which between them amount to barely more than a mouthful. Blutz gazes at them hungrily, flabby jowls sagging in dismay. \"Not worth dividing them up,\" he groans. \"Who's going to be the lucky one, then?\"||As usual, the others instinctively look to you for leadership. Your own stomach is growling as much as anyone's.">
+<CONSTANT CHOICES230 <LTABLE "award yourself the crabs" "you can let one of the others have them.">>
 
 <ROOM STORY230
 	(IN ROOMS)
 	(DESC "230")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT230)
+	(CHOICES CHOICES230)
+	(DESTINATIONS <LTABLE STORY268 STORY287>)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
 
 <ROOM STORY231

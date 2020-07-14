@@ -14,6 +14,10 @@
     (DESC "Icarus")
     (SYNONYM ICARUS)>
 
+<OBJECT CODEWORD-MALEFIC
+    (DESC "Malefic")
+    (SYNONYM MALEFIC)>
+
 <OBJECT CODEWORD-MARATHON
     (DESC "Marathon")
     (SYNONYM MARATHON)>
