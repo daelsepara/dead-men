@@ -67,6 +67,8 @@
 	<PUT <GETP ,STORY177 ,P?DESTINATIONS> 2 ,STORY404>
 	<PUTP ,STORY182 ,P?DEATH T>
 	<PUTP ,STORY191 ,P?DEATH T>
+	<PUTP ,STORY197 ,P?DEATH T>
+	<PUTP ,STORY200 ,P?DEATH T>
 	<RETURN>>
 
 <CONSTANT DIED-IN-COMBAT "You died in combat">
@@ -2871,95 +2873,94 @@
 	(CONTINUE STORY137)
 	(FLAGS LIGHTBIT)>
 
+<CONSTANT TEXT196 "A shot rings out. A man falls dead. It is a sad, grim, brutally sudden scene which has been played out many times on the stage of life. As always, the onlookers stand for a moment, stunned, waiting for Death to withdraw into the wings so the action can resume.||The moment passes. The natives are not awed by your ability to kill at a distance -- they have seen firearms before, and know it is no miracle. There is an angry shout, and a thrown rock grazes your hand. The pistol is knocked to the ground. The natives stand watching you, ominously tense, torn between shock, grief and rage.">
+<CONSTANT CHOICES196 <LTABLE "get out while you can, abandoning your pistol" "you stand and fight">>
+
 <ROOM STORY196
 	(IN ROOMS)
 	(DESC "196")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT196)
+	(CHOICES CHOICES196)
+	(DESTINATIONS <LTABLE STORY177 STORY215>)
+	(TYPES TWO-NONES)
+	(PRECHOICE STORY196-PRECHOICE)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY196-PRECHOICE ()
+	<LOSE-ITEM ,PISTOL>>
+
+<CONSTANT TEXT197 "Gradually you leave behind the icy rain that has been your constant accompaniment throughout the journey. The southern waters into which the mermaid is now taking you are calmer, the weather warmer. Even so, the comfort only allows you time to regret your other deprivations - not the least of which is hunger.">
+<CONSTANT TEXT197-CONTINUED "You see a fleece of white cloud, then a green-tinged hump of land comes in sight. \"Yonder is Red Skull Island,\" announces the mermaid. \"Here, food and water are yours for the taking -- subject only to those laws of ownership which pertain throughout the surface world.\" With a sly wink which raises belated misgivings in your mind, she releases the tow-rope and slides beneath the waves.">
 
 <ROOM STORY197
 	(IN ROOMS)
 	(DESC "197")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT197)
+	(PRECHOICE STORY197-PRECHOICE)
+	(CONTINUE STORY173)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY197-PRECHOICE()
+	<COND (<IN? ,MONKEY ,PLAYER>
+		<CRLF>
+		<TELL "Eat the monkey (if you are heartless or desperate enough)?">
+		<COND (<YES?>
+			<REMOVE ,MONKEY>
+		)(ELSE
+			<LOSE-LIFE 2 DIED-OF-HUNGER ,STORY197>
+		)>
+	)(ELSE
+		<LOSE-LIFE 2 DIED-OF-HUNGER ,STORY197>
+	)>
+	<IF-ALIVE TEXT197-CONTINUED>>
+
+<CONSTANT TEXT198 "You hesitate, hands hovering over the wealth of spilled treasure. You are spoiled for choice. Simple riches would buy you a ship of your own, in which you could track down and challenge the foul Skarvench. On the the other hand, you cannot help noticing some special items among the treasure -- artefacts whose real value lies not in their monetary worth, but in the magical power they might posses.||Mandrigard snores, stirring in his sleep. He might awaken at any moment. You must decide.">
+<CONSTANT CHOICES198 <LTABLE "take items of simple monetary value" "favour items which look to be magical in nature">>
 
 <ROOM STORY198
 	(IN ROOMS)
 	(DESC "198")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT198)
+	(CHOICES CHOICES198)
+	(DESTINATIONS <LTABLE STORY274 STORY293>)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT199 "\"Can you hear me, shipmate?||Blutz's face swims out of a murky void. Your first thought is: what's he doing under the sea? The next moment you sit bold upright, convulsing as you cough sea-water out of your lungs.||\"We thought you were lost,\" says Oakley in a voice filled with wonder. \"Since you went down with that giant crab, we hadn't seen a sign of you. That was almost an hour ago. Then you came bobbing up near the boat and we hauled you in.\"||\"It's a miracle you aren't drowned,\" says Grimes.||You look down to see your fingers clutched tightly around your magic amulet. It is the one thing you managed to hold on to; all your possessions are gone. You cannot remember how, but you guess that your last act before losing consciousness must have been to work a charm against drowning. That explains why you are not dead. But Grimes is still partly right, because it's a miracle that the current carried you back to your friends.||The crab is long gone, but it is still not safe to stay in the vicinity.">
+<CONSTANT CHOICES199 <LTABLE "carry on westwards on your present course" "steer north in the hope of striking the island chain">>
 
 <ROOM STORY199
 	(IN ROOMS)
 	(DESC "199")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT199)
+	(CHOICES CHOICES199)
+	(DESTINATIONS <LTABLE STORY047 STORY066>)
+	(PRECHOICE STORY199-PRECHOICE)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY199-PRECHOICE ()
+	<RESET-POSSESSIONS>
+	<MOVE ,MAGIC-AMULET ,PLAYER>>
+
+<CONSTANT TEXT200 "Sleep gradually gives way to awareness. Daylight bathes you, slowly warming the chill from your bones. Suddenly your eyes snap open. You have slept long past dawn and the sun is now high in the sky.. You rise and stretch, feeling curiously giddy and drained of strength. The others are the same. You remark on how haggard they look, bloodshot eyes staring from bloodless faces. You all look and feel as though you had been drugged.||\"Something's bitten me on the neck...\" growls Oakley, gingerly touching the wound and examining the sticky smear of blood on his fingers.||\"Me too,\" says Blutz.||All four of you have been bitten -- a double puncture mare, deep and raw. No mosquito could have made those bites. And now you notice something else: the raft and its sinister occupant have vanished during the night">
 
 <ROOM STORY200
 	(IN ROOMS)
 	(DESC "200")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(PRECHOICE STORY200-PRECHOICE)
+	(CONTINUE STORY332)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY200-PRECHOICE ()
+	<LOSE-LIFE 4 "You died some time during the night" ,STORY200>
+	<COND (<G? ,LIFE-POINTS 0>
+		<CRLF>
+		<TELL TEXT200>
+		<TELL ,PERIOD-CR>
+	)>>
 
 <ROOM STORY201
 	(IN ROOMS)
