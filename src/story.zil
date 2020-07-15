@@ -78,6 +78,7 @@
 	<PUTP ,STORY225 ,P?DEATH T>
 	<PUTP ,STORY231 ,P?DEATH T>
 	<PUTP ,STORY237 ,P?DEATH T>
+	<PUTP ,STORY254 ,P?DEATH T>
 	<RETURN>>
 
 <CONSTANT DIED-IN-COMBAT "You died in combat">
@@ -1903,7 +1904,7 @@
 	(TYPES <LTABLE R-NONE R-NONE R-NONE R-SKILL R-CODEWORD R-NONE>)
 	(FLAGS LIGHTBIT)>
 
-<CONSTANT TEXT128 "Pretending not to have noticed the three ruffians, you go up to the scholar and greet him like an old friend: \"Ah, here you are! I've been searching high and low. Captain Skarvench has been most concerned for your safety.\"||\"Eh..?\" says the scholar, peering at you with large watery eyes. \"I donøt know -- \" You hastily silence him with a poke between his ribs.||The ruffians are looking on nervously. \"Um, did you say Skarvench?\" says one of them at last, a sickly half-smile curdling on his rough features.||\"Why, yes,\" you reply, turning as if noticing them for the first time. \"This gentleman is his new ship's surgeon. The captain's been waiting for him to arrive in Selenice. Have you fellows been looking after him? That's very gracious. Tell me your names -- the captain may wish to reward you when he hears about this.\"||There is the sound of three very audible gulps. \"Er... think nothin' of it,\" says one of the men, handing back the scholar's spectacles. \"We got to be goin', ain't we, lads?\" And they are out of the door in less time than it takes to drain a tot of rum.">
+<CONSTANT TEXT128 "Pretending not to have noticed the three ruffians, you go up to the scholar and greet him like an old friend: \"Ah, here you are! I've been searching high and low. Captain Skarvench has been most concerned for your safety.\"||\"Eh..?\" says the scholar, peering at you with large watery eyes. \"I don't know -- \" You hastily silence him with a poke between his ribs.||The ruffians are looking on nervously. \"Um, did you say Skarvench?\" says one of them at last, a sickly half-smile curdling on his rough features.||\"Why, yes,\" you reply, turning as if noticing them for the first time. \"This gentleman is his new ship's surgeon. The captain's been waiting for him to arrive in Selenice. Have you fellows been looking after him? That's very gracious. Tell me your names -- the captain may wish to reward you when he hears about this.\"||There is the sound of three very audible gulps. \"Er... think nothin' of it,\" says one of the men, handing back the scholar's spectacles. \"We got to be goin', ain't we, lads?\" And they are out of the door in less time than it takes to drain a tot of rum.">
 
 <ROOM STORY128
 	(IN ROOMS)
@@ -2130,7 +2131,7 @@
 		<EMPHASIZE "There is nothing you can do to save yourself.">
 	)>>
 
-<CONSTANT TEXT143 "Rising to your feet, you perform as elegant an imitation of a courtly bow as your uncouth background and the cramped conditions will allow. \"Of course, we had nearly forgotten our manners. Long privation can do that to the best of us --\"||\"Yes, yes!\" says Mortice eagerly, gripping the side of your boat.||Oakleyøs brow furrows into a frown and he looks on the point of saying something, but not before you have completed your mock ritual with the words: \"Mister Mortice, you have my permission to come aboard our little vessel.\"||Instantly there is a flutter of tattered rags and a soft thud as he lands beside you in a jollyboat. You are taken aback. He moved so fast! With a toothy smile, he says, \"You lot get some rest. I'll keep watch a while">
+<CONSTANT TEXT143 "Rising to your feet, you perform as elegant an imitation of a courtly bow as your uncouth background and the cramped conditions will allow. \"Of course, we had nearly forgotten our manners. Long privation can do that to the best of us --\"||\"Yes, yes!\" says Mortice eagerly, gripping the side of your boat.||Oakley's brow furrows into a frown and he looks on the point of saying something, but not before you have completed your mock ritual with the words: \"Mister Mortice, you have my permission to come aboard our little vessel.\"||Instantly there is a flutter of tattered rags and a soft thud as he lands beside you in a jollyboat. You are taken aback. He moved so fast! With a toothy smile, he says, \"You lot get some rest. I'll keep watch a while">
 
 <ROOM STORY143
 	(IN ROOMS)
@@ -2762,7 +2763,7 @@
 	(TYPES THREE-NONES)
 	(FLAGS LIGHTBIT)>
 
-<CONSTANT TEXT187 "The captain and his marines wait like hawks for your decision. You can sense Oakley and the others readying themselves for a fight, but you know that both honour and common-sense demand that you give in to these conditions.||\"All right, tell your men to load the Queen's gold aboard your ship.\" After he has issued the order, your resentment is still smouldering. \"I expect you'd have preferred us to fight,\" you say. \"You enjoy killing pirates, I'll bet.\"||He shrugs as if your opinion means nothing. \"Killing pirates is my duty. But you're not a pirate are you? Youøre a privateer, and it's not my job to quarrel with privateers. Not so long as they pay the Queen her due.\"||He returns to his warship and turns in the direction of Leshand. \"Any orders? asks Grimes as you watch the warship sail away.||\"Yes, Mister Grimes. Lay in a course for Selenice while we still have a few doubloons in our hold.\"">
+<CONSTANT TEXT187 "The captain and his marines wait like hawks for your decision. You can sense Oakley and the others readying themselves for a fight, but you know that both honour and common-sense demand that you give in to these conditions.||\"All right, tell your men to load the Queen's gold aboard your ship.\" After he has issued the order, your resentment is still smouldering. \"I expect you'd have preferred us to fight,\" you say. \"You enjoy killing pirates, I'll bet.\"||He shrugs as if your opinion means nothing. \"Killing pirates is my duty. But you're not a pirate are you? You're a privateer, and it's not my job to quarrel with privateers. Not so long as they pay the Queen her due.\"||He returns to his warship and turns in the direction of Leshand. \"Any orders? asks Grimes as you watch the warship sail away.||\"Yes, Mister Grimes. Lay in a course for Selenice while we still have a few doubloons in our hold.\"">
 
 <ROOM STORY187
 	(IN ROOMS)
@@ -3688,94 +3689,71 @@
 	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
 
+<CONSTANT TEXT251 "She emerges from the shadows of the entrance: a stately figure with skin the colour of burnished oak and hair like a shower of green stars. Her clothing and accent are not those of a Carab native, but seem to evoke the mysteries of an ancient civilization. \"I am Ejada, witch-queen of this isle,\" she tells you. \"I demand tribute from all who come to my shores, but my demands are not excessive. All I'll take is the soul of one of you, to be sacrificed at dawn to my mother the Earth Goddess.\"||\"Send your own soul to hell!\" yells Oakley, snatching up a rock and dashing forward. Ejada calmly sweeps her arm, knocking Oakley to the ground as though he'd run into a tree branch.||\"Return here in the hour before dawn,\" Ejada goes on. \"By then you must have decided which of you will give up his soul.||Helping Oakley to his feet, you return to find the jollyboat sunk deep into the sand of the beach. You try digging it up, but it only sinks deeper. \"That's that, then,\" sobs Blutz. \"The witch's magic has trapped us here. We'll have to choose who's to die!\"">
+<CONSTANT CHOICES251 <LTABLE "make a raft" "got to her at dawn as she told you to" "try hiding from her">>
+
 <ROOM STORY251
 	(IN ROOMS)
 	(DESC "251")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT251)
+	(CHOICES CHOICES251)
+	(DESTINATIONS <LTABLE STORY308 STORY327 STORY346>)
+	(REQUIREMENTS <LTABLE SKILL-SEAFARING NONE NONE>)
+	(TYPES <LTABLE R-SKILL R-NONE R-NONE>)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT252 "The warship stands much taller than your own vessel, making your few cannon-shots largely ineffective. Your shells smack into the warship's strong oaken flanks with hardly more effect than grape-shot. If only you could score a hit on the enemy's rigging.||The warship does not return fire. Those mighty guns could easily blast you to kindling, but she is steering instead so as to pull alongside for a boarding action.">
+<CONSTANT CHOICES252 <LTABLE "use" "use" "or alternatively you could use a" "or a" "failing any of these options, stand by to repel boarders">>
 
 <ROOM STORY252
 	(IN ROOMS)
 	(DESC "252")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT252)
+	(CHOICES CHOICES252)
+	(DESTINATIONS <LTABLE STORY035 STORY054 STORY263 STORY282 STORY073>)
+	(REQUIREMENTS <LTABLE SKILL-SPELLS SKILL-AGILITY THUNDERCLOUD-FAN BRONZE-HELMET NONE>)
+	(TYPES <LTABLE R-SKILL R-SKILL R-ITEM R-ITEM R-NONE>)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT253 "The islanders stare in horror at the red death's head daubed across your face. Several of them step forward with raised spears, angry defiance slowly replacing their initial shock. It is Grimes who realises the cause: \"Those other natives must be their enemies. And they think you're one of 'em.\"">
+<CONSTANT CHOICES253 <LTABLE "shout your way out of this" "try fighting your way through them back to the water" "resort to" "try wiping off the red dye and offering gifts to mollify them">>
 
 <ROOM STORY253
 	(IN ROOMS)
 	(DESC "253")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT253)
+	(CHOICES CHOICES253)
+	(DESTINATIONS <LTABLE STORY196 STORY215 STORY234 STORY291>)
+	(REQUIREMENTS <LTABLE SKILL-MARKSMANSHIP NONE SKILL-CUNNING NONE>)
+	(TYPES <LTABLE R-SKILL R-NONE R-SKILL R-NONE>)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT254 "Throughout a tempestuous night, Oakley screams verse after verse of his morbid dirge, vying with the thunder's roar until his voice is as hoarse as the croak of a dying man. You can tell from the looks on the others' faces that they have been infected by Oakley's mod. Desperation at your sorry plight has now been worn down to hopelessness and new horror.||\"Dawn,\" says Grimes, nodding towards a dreary grey gleam beyond the soot-coloured clouds. \"I doubt we'll live to see another.\"||The day goes on, and you grow weaker.">
 
 <ROOM STORY254
 	(IN ROOMS)
 	(DESC "254")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT254)
+	(PRECHOICE STORY254-PRECHOICE)
+	(CONTINUE STORY273)
+	(CODEWORD CODEWORD-CHANCERY)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY254-PRECHOICE ()
+	<LOSE-LIFE 1 DIED-GREW-WEAKER ,STORY254>>
+
+<CONSTANT TEXT255 "Decide which item you will use:">
+<CONSTANT CHOICES255 <LTABLE "use a butcher's" "a" "a toolkit" "otherwise">>
 
 <ROOM STORY255
 	(IN ROOMS)
 	(DESC "255")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT255)
+	(CHOICES CHOICES255)
+	(DESTINATIONS <LTABLE STORY331 STORY350 STORY369 STORY388>)
+	(REQUIREMENTS <LTABLE CLEAVER CRUCIFIX <LTABLE SKILL-CUNNING TOOLKIT> NONE>)
+	(TYPES <LTABLE R-ITEM R-ITEM R-SKILL-ITEM R-NONE>)
 	(FLAGS LIGHTBIT)>
 
 <ROOM STORY256
