@@ -2591,7 +2591,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY174-PRECHOICE ()
-	<ADD-PROVISIONS 2>
+	<ADD-PROVISIONS <GET-NUMBERS "How many provisions to take" 1 2>>
 	<COND (<CHECK-CODEWORD ,CODEWORD-PROSPERO> <STORY-JUMP ,STORY250>)>>
 
 <CONSTANT TEXT175 "Your head swims; your limbs tremble with weakness. Looking into Oakley's face, you give a croak of bleak amusement. \"Saints alive, man, you look as though you'd been keelhauled!\"||He manages a wry half-smile- \"You think you do don't?\" Staggering over to slump beside you, he adds, \"We're not for long for this world now now, are we, mate?\"||You gaze into the west, almost all hope gone.">
@@ -2871,7 +2871,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY192-PRECHOICE ()
-	<ADD-PROVISIONS 2>>
+	<ADD-PROVISIONS <GET-NUMBERS "How many provisions to take" 1 2>>>
 
 <CONSTANT TEXT193 "\"No, you're wrong,\" you tell Blutz. \"Look at most of the island. It's well covered in vegetation, right?\" That volcano has most likely been hissing and spitting for years, but if there had been any major eruption then the jungle wouldn't have grown up to that extent.\"||\"All the same,\" says Grimes, \"let's not dally longer than we have to. The sight of those lava-covered slopes puts me in mind of Stan's brimstone fires!\"">
 <CONSTANT CHOICES193 <LTABLE "go ashore" "row on westwards">>
@@ -4007,7 +4007,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY272-PRECHOICE ()
-	<ADD-PROVISIONS 2>
+	<ADD-PROVISIONS <GET-NUMBERS "How many provisions to take" 1 2>>
 	<TELL TEXT272-CONTINUED>
 	<TELL ,PERIOD-CR>
 	<COND (<IN? ,BOOK-OF-CHARTS ,PLAYER>
