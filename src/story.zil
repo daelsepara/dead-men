@@ -79,6 +79,8 @@
 	<PUTP ,STORY231 ,P?DEATH T>
 	<PUTP ,STORY237 ,P?DEATH T>
 	<PUTP ,STORY254 ,P?DEATH T>
+	<PUTP ,STORY266 ,P?DEATH F>
+	<PUTP ,STORY267 ,P?DEATH T>
 	<RETURN>>
 
 <CONSTANT DIED-IN-COMBAT "You died in combat">
@@ -3809,184 +3811,149 @@
 	(CODEWORD CODEWORD-MAMMON)
 	(FLAGS LIGHTBIT)>
 
+<CONSTANT TEXT261 "You look at the corkscrew in your hand. \"Of course! This is how we'll get our ship.\"||The others watch you with rekindled concern. \"Maybe you ought to lie down for a bit, skipper?\" suggests Blutz. \"You took a nasty knock back there.\"||In answer you give only a triumphant laugh, setting out towards the harbour with a determined stride they are hard pressed to match. Now you see clearly that it was divine providence that guided your hand to the corkscrew -- the same divine providence that deflected the bullet and saved your life. The force of conviction bears you on like a gale until you stand on the quayside, a smile playing on your lips as you gaze at the lapping waves.||The others come up just as you are withdrawing the cork from the bottle. They gasp in astonishment to see a weird green vapour billow out, spreading to lie in a thick fog-bank beside the quay. A wind rises, stirs the fog, then dissipates it like a puff of steam.||Someone mutters an oath. Where the green fog hung moments before, a ship now lies -- moored -- a fine gilded galleon with a figurehead in the shape of a lion's head. Cannons fashioned to resemble leonine paws adorn her flanks. Her furled sails blaze like sunlit clouds against the azure of the sky.||\"A magic ship..!\" breathes blutz. \"What'll we call her?\"||\"She's the Providence,\" you reply. \"Gentlemen, shall we go aboard?\"">
+
 <ROOM STORY261
 	(IN ROOMS)
 	(DESC "261")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT261)
+	(PRECHOICE STORY261-PRECHOICE)
+	(CONTINUE STORY184)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY261-PRECHOICE ()
+	<TAKE-VESSEL ,PROVIDENCE>>
+
+<CONSTANT TEXT262 "The ring sparkles in the rich moonlight. The gold looks almost green, the jewelled eyes have a submarine glow. \"Who could doubt it is the very image of Leviathan, greatest of sea serpents?\" You are struck almost breathless in awe. \"See, it all but shines with power! I feel I have only to call upon the serpent by name, and he'll rise up from the depths and sweep this chain asunder.\"||Every sailor has heard the ancient myths of Leviathan, the sea monster born out of primordial chaos.||\"as it says in the Book of Job: \"Iron he counts as straw, and brass as rotten wood,\" puts in Oakley.||Grimes turns to you with a dour look. \"It is also said: \"If ever thou think to rouse him, consider the struggle that awaits thee and let it be.\" And in Isaiah is he not called \"the fleeing serpent, twisting serpent\"? Do not call him up from the deep, I pray you, or we are all dead mean.\"">
+<CONSTANT CHOICES262 <LTABLE "insist on using the magic ring" "or not">>
 
 <ROOM STORY262
 	(IN ROOMS)
 	(DESC "262")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT262)
+	(CHOICES CHOICES262)
+	(DESTINATIONS <LTABLE STORY281 STORY072>)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT263 "One sweep of the magic fan is enough to produce a powerful gale. The warship's sails snap taut and she is sent veering away with white-flecked billows surging high up around her heaving prow. It is as though the sea a cannon-shot from your bows is being churned up by a mighty storm, while the water around you has only a gentle swell. Your own canvas catches just a strong clear breeze that drives you safely away, while the warship is borne far astern in the grip of the storm.||You find the thundercloud fan has gone, vanishing once its power was expended.">
 
 <ROOM STORY263
 	(IN ROOMS)
 	(DESC "263")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT263)
+	(PRECHOICE STORY263-PRECHOICE)
+	(CONTINUE STORY016)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY263-PRECHOICE ()
+	<LOSE-ITEM ,THUNDERCLOUD-FAN>>
+
+<CONSTANT TEXT264 "El Draque clutches you to him. You are powerless to resist; you feel like a sleepwalker.He presses his lips against your throat, and a moment of cold pain is followed by a spreading glow of warmth. Drowsiness clouds your mind as you spiral down into a whirlpool of dark oblivion. You will awaken into the half living world of the undead, cursed to roam the seas without a soul in search of human blood.|||You failed to save the Queen. You failed to slay Skarvench. You failed even to earn yourself a clean quick death.">
 
 <ROOM STORY264
 	(IN ROOMS)
 	(DESC "264")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT264)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT265 "A single sweep of the fan summons a strong wind. The fog swirls and parts, swiftly dispersing into wispy tendrils. You now clearly sight both the crippled Rose and, closer to you, the Moon Dog. She is standing at two o'clock off your starboard bow, just in cannon range. You have the weather gauge, meaning that the wind is blowing from behind you towards the Moon Dog -- the ideal position for a sea battle.||\"Now we have a choice,\" says Oakley. \"We can sail in to board her, or stand off and rake her with our guns. \"What's it to be, skipper?\"||As captain it is your decision.">
+<CONSTANT CHOICES265 <LTABLE "steer in towards the Moon Dog" "unlimber your cannons">>
 
 <ROOM STORY265
 	(IN ROOMS)
 	(DESC "265")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT265)
+	(CHOICES CHOICES265)
+	(DESTINATIONS <LTABLE STORY322 STORY341>)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT266 "A deck plank creaks behind you. You turn to see a thin scholarly-looking figure with a neat goatee beard. You have never met him before, but his arcanely patterned robes and peaked cap mark him out unmistakeably. His the Queen's court wizard, Dr Wild.||\"You've been quite troublesome, so my brother tells me,\" he says in a mock-mild voice.||You look at the wand in his hand, already flickering with sorcerous energy. \"I've hardly got started yet,\" you tell him.||You were hoping to goad him into talking while you edged closer, but he is too wily for that. Instead of replying, he only smiles and gives an almost regretful shake on his head. Waving the wand, he conjures a phantasmal green harpoon out of thin air and hurls it at your chest.">
 
 <ROOM STORY266
 	(IN ROOMS)
 	(DESC "266")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT266)
+	(PRECHOICE STORY266-PRECHOICE)
+	(CONTINUE STORY304)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY266-PRECHOICE ()
+	<COND (<CHECK-SKILL ,SKILL-CHARMS>
+		<EMPHASIZE "You have magically deflected the harpoon.">
+		<PUTP ,STORY266 ,P?DEATH F>
+	)(ELSE
+		<LOSE-LIFE 3 "The magic harpoon pierces your flesh and you have died." ,STORY266>
+		<IF-ALIVE "The magic harpoon pierces your flesh but you survived.">
+	)>
+	<COND (<IS-ALIVE>
+		<COND (<CHECK-SKILL ,SKILL-SPELLS> <STORY-JUMP ,STORY285>)>
+	)>>
+
+<CONSTANT TEXT267 "\"Well, if it ain't me prodigal orphans!\" chortles Skarvench, drawing his sword and pistol as he sees you break from the undergrowth. \"You ran off without collectin' your back pay, mates, so he's a little something on account, like.\" So saying, he levels his pistol and pulls the trigger.||Pain lances through your shoulder as the shot tears flesh and splinters bone. But sheer hatred of your foe drives you on. A red haze sparkles across your vision, and Skarvench's grinning face is like a painting in blood on the back of your eyes as you race forward with a savage snarl.">
 
 <ROOM STORY267
 	(IN ROOMS)
 	(DESC "267")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT267)
+	(PRECHOICE STORY267-PRECHOICE)
+	(CONTINUE STORY023)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY267-PRECHOICE ()
+	<LOSE-LIFE 8 DIED-IN-COMBAT ,STORY267>
+	<COND (<IS-ALIVE>
+		<CRLF>
+		<COND (<AND <CHECK-SKILL ,SKILL-SWORDPLAY> <CHECK-SKILL ,SKILL-MARKSMANSHIP>>
+			<TELL "You still have a chance of victory">
+		)(ELSE
+			<PUTP ,STORY267 ,P?DEATH T>
+			<TELL "You sell your life dearly in a slaughter">
+		)>
+		<TELL ,PERIOD-CR>
+	)>>
+
+<CONSTANT TEXT268 "Your companions look on with sour sidelong glances as you hungrily devour the crabs. You stare back at them defiantly until they turn away. After all, didn't they leave the decision to you? As leader, you must try to keep your strength up.">
+<CONSTANT CHOICES268 <LTABLE "decide it is time to continue on your way" "whether it is worth exploring more of the island">>
 
 <ROOM STORY268
 	(IN ROOMS)
 	(DESC "268")
 	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(CHOICES CHOICES268)
+	(DESTINATIONS <LTABLE STORY116 STORY211>)
+	(PRECHOICE STORY268-PRECHOICE)
+	(TYPES TWO-NONES)
+	(CODEWORD CODEWORD-CHANCERY)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY268-PRECHOICE ()
+	<GAIN-LIFE 1>>
+
+<CONSTANT TEXT269 "\"In God's name, the devil's caught up with us!\" says Oakley with a gasp of horror as the four of you return to the shore.||You were bringing up the rear and are still pushing your way out of the undergrowth. Hearing this oath, you hurry to catch up and see what it is that has stopped Oakley and the others dead in their tracks. When you do, it is as though the chill wind of a midwinter night had blown for an instant through the sweltering heat of this tropical jungle. For, out at sea but coming nearer by the minute, lies Skarvench's ship: the dreaded Belle Dame. Drenched in the blood-red light of sunset, it is a sight that closes icy fingers of fear around your heart.||\"They're making anchorage outside the cove,\" says Grimes, shielding his gaze against the low sun. \"It's too shallow for them to bring her right in, lucky for us. They won't know we're here yet. Maybe we'll have a chance of slipping away under cover of darkness.\"||You rub your jaw, mulling over the other options. Despite your hatred of Skarvench -- and yes, you admit it: your fear of him - you are curious to know why he's come here. \"We could haul the jollyboat up into the jungle and hide it,\" you suggest. \"Then if Skarvench sends a party ashore, we can spy on them.\"||\"Foolishness,\" avers Oakley. \"I agree with hiding the boat, but then we should go deep into the jungle and lie low until Skarvench has left. Let's stay clear of him and his cronies.\"||What will you do:">
+<CONSTANT CHOICES269 <LTABLE "try to get off the island after dark" "spy on Skarvench's shore party" "stay out of sight until they're long gone">>
 
 <ROOM STORY269
 	(IN ROOMS)
 	(DESC "269")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT269)
+	(CHOICES CHOICES269)
+	(DESTINATIONS <LTABLE STORY307 STORY326 STORY288>)
+	(TYPES THREE-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT270 "Drawing your pistol, you shoot one of the natives dead just as he is raising his spear to thrust at you.||The loud bang startles the other natives. They rush back a few paces, screeching in astonishment. When they see blood spreading from the corpse of the native you shot, they start to make a weird moaning sound and tremble with fright.||\"It seems they've never seen firearms before,\" grunts Oakley. \"Trouble is, you just used your one shot.\"||\"They don't know that, do they,\" you reply. \"Come on, everyone -- let's get down to the beach. Don't rush unduly, but don't dawdle either.\"">
 
 <ROOM STORY270
 	(IN ROOMS)
 	(DESC "270")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT270)
+	(CONTINUE STORY400)
+	(CODEWORD CODEWORD-FETISH)
 	(FLAGS LIGHTBIT)>
 
 <ROOM STORY271

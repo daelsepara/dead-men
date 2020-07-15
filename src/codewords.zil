@@ -6,6 +6,10 @@
     (DESC "Detrude")
     (SYNONYM DETRUDE)>
 
+<OBJECT CODEWORD-FETISH
+    (DESC "Fetish")
+    (SYNONYM FETISH)>
+
 <OBJECT CODEWORD-HORAL
     (DESC "Horal")
     (SYNONYM HORAL)>
