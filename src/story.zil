@@ -1,3 +1,5 @@
+<INSERT-FILE "numbers">
+
 <GLOBAL CHARACTERS-ENABLED T>
 
 <CONSTANT BAD-ENDING "The adventure is over. You quest for glory ends here.">
@@ -43,6 +45,8 @@
 	<PUT <GETP ,STORY164 ,P?DESTINATIONS> 5 ,STORY409>
 	<PUT <GETP ,STORY177 ,P?DESTINATIONS> 2 ,STORY404>
 	<PUT <GETP ,STORY202 ,P?DESTINATIONS> 5 ,STORY409>
+	<PUT <GETP ,STORY272 ,P?DESTINATIONS> 3 ,STORY348>
+	<PUT <GETP ,STORY278 ,P?DESTINATIONS> 6 ,STORY409>
 	<PUTP ,STORY005 ,P?DEATH T>
 	<PUTP ,STORY006 ,P?DEATH T>
 	<PUTP ,STORY013 ,P?DEATH T>
@@ -81,6 +85,9 @@
 	<PUTP ,STORY254 ,P?DEATH T>
 	<PUTP ,STORY266 ,P?DEATH F>
 	<PUTP ,STORY267 ,P?DEATH T>
+	<PUTP ,STORY271 ,P?DEATH T>
+	<PUTP ,STORY275 ,P?DEATH T>
+	<PUTP ,STORY277 ,P?DEATH T>
 	<RETURN>>
 
 <CONSTANT DIED-IN-COMBAT "You died in combat">
@@ -104,16 +111,25 @@
 	)>
 	<RETURN>>
 
-<ROUTINE ADD-PROVISIONS ("OPT" AMOUNT "AUX" QUANTITY)
+<ROUTINE ADD-QUANTITY (OBJECT "OPT" AMOUNT CONTAINER "AUX" QUANTITY CURRENT)
+	<COND (<NOT .OBJECT> <RETURN>)>
+	<COND (<NOT .CONTAINER> <SET CONTAINER ,PLAYER>)>
 	<COND (<NOT .AMOUNT> <SET AMOUNT 1>)>
-	<COND (<IN? ,PROVISIONS ,PLAYER>
-		<SET QUANTITY <+ <GETP ,PROVISIONS ,P?QUANTITY> .AMOUNT>>
-		<PUTP ,PROVISIONS ,P?QUANTITY .QUANTITY>
+	<COND (<EQUAL? .CONTAINER ,PLAYER>
+		<DO (I 1 .AMOUNT)
+			<TAKE-ITEM .OBJECT>
+		>
 	)(ELSE
-		<SET QUANTITY .AMOUNT>
-		<PUTP ,PROVISIONS ,P?QUANTITY .QUANTITY>
-		<TAKE-ITEM ,PROVISIONS>
+		<SET CURRENT <GETP .OBJECT ,P?QUANTITY>>
+		<SET QUANTITY <+ .CURRENT .AMOUNT>>
+		<PUTP .OBJECT ,P?QUANTITY .QUANTITY>
 	)>>
+
+<ROUTINE ADD-PROVISIONS ("OPT" AMOUNT)
+	<ADD-QUANTITY ,PROVISIONS .AMOUNT ,PLAYER>>
+
+<ROUTINE ADD-DIAMONDS ("OPT" AMOUNT)
+	<ADD-QUANTITY ,DIAMOND .AMOUNT ,PLAYER>>
 
 <ROUTINE CONSUME-PROVISIONS ("OPT" AMOUNT JUMP "AUX" QUANTITY RETURN-VALUE)
 	<SET RETURN-VALUE F>
@@ -3956,184 +3972,178 @@
 	(CODEWORD CODEWORD-FETISH)
 	(FLAGS LIGHTBIT)>
 
+<CONSTANT TEXT271 "Your fist comes up and smashes into Ejada's jaw with agonizing force. Agonizing to you, that is. As you reel back, clutching your knuckles and groaning with pain, she laughs languidly and sweeps her arm out, dashing you to the point without apparent effort.">
+<CONSTANT TEXT271-CONTINUED "You take stock of your situation. Hand-to-hand combat with her is futile as punching an oak tree.">
+<CONSTANT CHOICES271 <LTABLE "try using a wand" "a pistol" "else make a run for it">>
+
 <ROOM STORY271
 	(IN ROOMS)
 	(DESC "271")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT271)
+	(CHOICES CHOICES271)
+	(DESTINATIONS <LTABLE STORY384 STORY317 STORY005>)
+	(REQUIREMENTS <LTABLE SKILL-SPELLS SKILL-MARKSMANSHIP NONE>)
+	(PRECHOICE STORY271-PRECHOICE)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY271-PRECHOICE ("AUX" (DMG 4))
+	<COND (<IN? ,FEATHER-SHIELD ,PLAYER> <SET DMG 2>)>
+	<LOSE-LIFE .DMG DIED-IN-COMBAT ,STORY271>
+	<IF-ALIVE TEXT271-CONTINUED>>
+
+<CONSTANT TEXT272 "The natives bring you baked root-bread, fruit and gourds full of fresh water. You can take enough provisions for two meals.">
+<CONSTANT TEXT272-CONTINUED "They also take a look at your battered craft and help to patch up any damage, demonstrating amazing skill with no tools other than bamboo and wooden leaves.||With the help of sign language, the chief explains to you that not many ocean-going vessels visit this island. If you were to stay here you might be marooned for months. On the other hand, he offers to escort you southwards to the main shipping-lane, where you might meet up with a ship bound for civilization. You soon realise that this would not be a free service, however. He expects a gift of some kind">
+<CONSTANT CHOICES272 <LTABLE "give the chief a gift in return for being escorted south" "head on towards Leshand without his help" "stay on the island and wait for rescue">>
 
 <ROOM STORY272
 	(IN ROOMS)
 	(DESC "272")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT272)
+	(CHOICES CHOICES272)
+	(DESTINATIONS <LTABLE STORY310 STORY177 STORY348>)
+	(PRECHOICE STORY272-PRECHOICE)
+	(TYPES THREE-NONES)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY272-PRECHOICE ()
+	<ADD-PROVISIONS 2>
+	<TELL TEXT272-CONTINUED>
+	<TELL ,PERIOD-CR>
+	<COND (<IN? ,BOOK-OF-CHARTS ,PLAYER>
+		<PUT <GETP ,STORY272 ,P?DESTINATIONS> 3 ,STORY329>
+	)(ELSE
+		<PUT <GETP ,STORY272 ,P?DESTINATIONS> 3 ,STORY348>
+	)>>
+
+<CONSTANT TEXT273 "Towards sunset the storm finally blows over, leaving the clouds in the west lying like blots of blood across the steel rim of the sea.||The four of you are by now slumped in the bottom of the boat, as limp as corpses on a trestle. Your lips are black and blistered, your flesh fish-white and swollen with sores. Blutz gnaws his knuckle until it bleeds, jut to feel moisture on his tongue. After looking up at the sky Grimes starts to shiver, either from dread of the onrushing night or because he is in the first stages for fever.||A shadow shimmers against the last light of day. A ship's sails show purple-black against the red haze. \"We're saved!\" gasps Oakley, raising his hands to hail the ship. \"Ahoy there!\"">
+<CONSTANT CHOICES273 <LTABLE "call out to the ship through the gathering dusk" "advise Oakley to keep quiet until she's passed">>
 
 <ROOM STORY273
 	(IN ROOMS)
 	(DESC "273")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT273)
+	(CHOICES CHOICES273)
+	(DESTINATIONS <LTABLE STORY311 STORY330>)
+	(PRECHOICE STORY273-PRECHOICE)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY273-PRECHOICE ()
+	<COND (<CHECK-SKILL ,SKILL-FOLKLORE> <STORY-JUMP ,STORY292>)>>
+
+<CONSTANT TEXT274 "You select a number of diamonds, each the size of a walnut.||\"They're worth a queen's ransom!\" gasps Blutz as he sees you gather the jewels together.||\"Perhaps that's what we should call the ship we're going to buy them with,\" you reply smiling. \"The Queen's Ransom.\"||Leaving Mandrigard to sleep over his still-lavish treasure hoard, you tiptoe out of the cabin and ascend to the deck.">
 
 <ROOM STORY274
 	(IN ROOMS)
 	(DESC "274")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT274)
+	(PRECHOICE TEXT274-PRECHOICE)
+	(CONTINUE STORY217)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE GET-NUMBERS (MESSAGE "OPT" MINIMUM MAXIMUM "AUX" COUNT)
+	<REPEAT ()
+		<CRLF>
+		<TELL .MESSAGE>
+		<COND (<AND .MINIMUM .MAXIMUM>
+			<TELL " (" N .MINIMUM "-" N .MAXIMUM ")">
+		)>
+		<TELL "?">
+		<READLINE>
+		<COND (<EQUAL? <GETB ,LEXBUF 1> 1> <SET COUNT <CONVERT-TO-NUMBER 1 10>>
+			<COND (.MINIMUM .MAXIMUM
+				<COND (<AND <G=? .COUNT .MINIMUM> <L=? .COUNT .MAXIMUM>> <RETURN>)>
+			)(<G? .COUNT 0>
+				<RETURN>
+			)>
+		)>
+	>
+	<RETURN .COUNT>>
+
+<ROUTINE TEXT274-PRECHOICE ("AUX" (COUNT 0))
+	<ADD-DIAMONDS <GET-NUMBERS "How many diamonds to take" 1 3>>>
+
+<CONSTANT TEXT275 "Hunger saps your strength. You spend the night half in slumber and half in a dead faint. Cold sweat soaks your clothes. Even sunrise fails to warm the chill out of your bones, and as you crouch at the back of the boat shivering you realise you are running a fever.">
 
 <ROOM STORY275
 	(IN ROOMS)
 	(DESC "275")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT275)
+	(PRECHOICE STORY275-PRECHOICE)
+	(CONTINUE STORY256)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY275-PRECHOICE ()
+	<LOSE-LIFE 1 DIED-GREW-WEAKER ,STORY275>>
+
+<CONSTANT TEXT276 "Casting off, you row away from the raft with all haste. It dwindles into the distance until it is visible only as a moonlit speck far to stern. Mortice is still to be seen jumping in rage, appearing like a guttering candle-flame in the distant darkness. His last curse comes like a sight of wind across the water: \"El Draque drink your blood, you swabs...\" and then there is silence and unbroken night.||At last you deem it safe to sleep. Tomorrow you pray you will sight another vessel. How much longer can you survive otherwise?">
 
 <ROOM STORY276
 	(IN ROOMS)
 	(DESC "276")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT276)
+	(CONTINUE STORY332)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT277 "\"A pretty sunrise,\" says Oakley painfully through swollen lips. \"It'll likely be the last we see in this life.\"||Grimes nods. \"It's warm enough where we're going, my merry lads.\"||You give a grunt of disapproval. \"Don't tempt the Devil with your grim jokes, Mister Grimes. He might think you're wishing out loud, and come to collect you personally. We're bound for a better harbour than that, I think. Hellfire isn't for honest scoundrels like us, but for rank fiends of Skarvench's cut.\"">
 
 <ROOM STORY277
 	(IN ROOMS)
 	(DESC "277")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT277)
+	(PRECHOICE STORY277-PRECHOICE)
+	(CONTINUE STORY120)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY277-PRECHOICE ()
+	<LOSE-LIFE 2 DIED-GREW-WEAKER ,STORY275>>
+
+<CONSTANT TEXT278 "You have always made sure of nurturing a network of paid informers in large towns such as Leshand, and now your foresight reaps dividends. You soon discover that Skarvench recently collected all outstanding debts and redeemed his treasures for hard cash. The evidence points to some sort of ambitious project for which he will need every bit of finance that he can muster.||\"I've heard he's engaged a shipwright in Port Selenice,\" one of your informants tells you. \"A special commission it was, for a ship to be called the Moon Dog. Got a lot of odd features.\"||\"Such as?\"||He leans closer, dropping his voice to a whisper. \"Gun ports along the keel! And other things, even weirder than that. Perhaps ol' Skarvench has gone mad -- but heaven help us all if so, for a mad dog is no nicer than a sane one.\"||As you turn away, the informant snatches at your sleeve. \"Here, what about my pay?\"||You tug away from his grip. \"For that tittle-tattle you've just told me? It's common knowledge that I could've had from any gossip in town. That's not what I pay you for, and you know it.\"||Ignoring his grumbles, you walk away. There are other rumours you might look into.">
+<CONSTANT CHOICES278 <LTABLE "look into rumours concerning El Draque" "or Queen Titania" "or alternatively, you could go shopping" "find someone who can identify magical items" "apply for a letter of marque" "pay a visit to Master Capstick" "you have now completed all your business in Leshand">>
 
 <ROOM STORY278
 	(IN ROOMS)
 	(DESC "278")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT278)
+	(CHOICES CHOICES278)
+	(DESTINATIONS <LTABLE STORY164 STORY202 STORY012 STORY031 STORY409 STORY069 STORY107>)
+	(REQUIREMENTS <LTABLE NONE NONE NONE NONE NONE <LTABLE CODEWORD-MARATHON> NONE>)
+	(TYPES <LTABLE R-NONE R-NONE R-NONE R-NONE R-NONE R-CODEWORD R-NONE>)
+	(PRECHOICE STORY278-PRECHOICE)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY278-PRECHOICE ()
+	<COND (<CHECK-SKILL ,SKILL-ROGUERY>
+		<PUT <GETP ,STORY278 ,P?DESTINATIONS> 6 ,STORY050>
+	)(ELSE
+		<PUT <GETP ,STORY278 ,P?DESTINATIONS> 6 ,STORY409>
+	)>>
+
+<CONSTANT TEXT279 "\"I got it fair and square, by the law of the sea,\" snorts Mandrigard. \"Took it from a marble hall atop an island cliff, and no hand was raised against me and my merry lads. But as we went -- not a man Jack of us able to straighten his back under the weight of loot, mind you -- and old fool of a priest called after us with a curse. He told us we'd know no rest sailing the ocean's breadth for ever more, and never able to find port nor set foot ashore so long as our hands were tainted with the theft of sacred treasures.\"||He pauses draining his wine-cup yet again. It occurs to you that you have not seen him refill it from the jug, but it never seems empty.||Rain rattles on the shutters across the cabin window. The ship's timbers groan and sigh as she sails on before the wind.">
+<CONSTANT CHOICES279 <LTABLE "ask Mandrigard anything else" "explore the rest of his ship">>
 
 <ROOM STORY279
 	(IN ROOMS)
 	(DESC "279")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT279)
+	(CHOICES CHOICES279)
+	(DESTINATIONS <LTABLE STORY046 STORY065>)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT280 "Leading your comrades out of town, you walk to a secluded cove along the beach. \"What have we come here for?\" asks Blutz. \"Is it a smugglers' cove?\"||Grimes nods approvingly. \"A good idea, if so. Any smugglers who try to avoid the port levy in Selenice can hardly go whining to the Brethren if we seize their contraband.\"||\"No, there aren't any smugglers,\" you say. \"But if I'm right, it's here we'll get our ship.\" You wait at the fringe of the beach with sea foam at your feet. Sunset first sets the sky afire, then drains it of colour. Finally, raising the conch-shell horn to your lips, you blow a low note. It resounds out into the velvet dusk, rolling eerily across the water.||You lower the horn, but it continues to sound. The note gets deeper and louder. It is throbbing in your hands now, pulsing with magical energy. \"It's going to explode!\" shrieks Blutz in sudden alarm. \"Get rid of it, skipper!\" Before you can stop him, he has snatched the horn and lobbed it far out into the waves.||The sound continues to build under the water, like the deepest rumbling note of a submerged organ. You avert your eyes, hands pressed to your ears, as a titanic blast sends a waterspout gushing into the air. Droplets of brine shower down around you. You look back out to sea. Something has bobbed up from the sea bed and is coming towards you: a coracle formed of a giant half-shell drawn by a shark and a dolphin. These strange steeds are tethered to the coracle with seaweed fronds, like horses pulling a carriage. \"Climb aboard,\" says the shark in a sharp voice. \"We'll take you to Neptune's harbour.\"||The dolphin has a softer tone: \"But beware, as you must find your own vessel for the journey back.\"">
+<CONSTANT CHOICES280 <LTABLE "board the coracle" "refuse">>
 
 <ROOM STORY280
 	(IN ROOMS)
 	(DESC "280")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT280)
+	(CHOICES CHOICES280)
+	(DESTINATIONS <LTABLE STORY233 STORY203>)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
 
 <ROOM STORY281

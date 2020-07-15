@@ -534,20 +534,30 @@
     <CRLF>
     <RETURN>>
 
-<ROUTINE TAKE-ITEM (ITEM)
+<ROUTINE TAKE-ITEM (ITEM "AUX" QUANTITY)
     <COND (.ITEM
         <CRLF>
         <TELL "[You gained ">
         <HLIGHT ,H-BOLD>
-        <TELL T .ITEM>
+        <TELL A .ITEM>
         <HLIGHT 0>
         <TELL "]" CR>
-        <COND (<AND <EQUAL? <COUNT-POSSESSIONS> LIMIT-POSSESSIONS> <NOT <IN? .ITEM ,PLAYER>>>
+        <COND (<G=? <COUNT-POSSESSIONS> LIMIT-POSSESSIONS>
             <CRLF>
             <TELL "You are carrying too many items" ,PERIOD-CR>
             <DROP-REPLACE-ITEM .ITEM>
         )(ELSE
-            <MOVE .ITEM ,PLAYER>
+            <SET QUANTITY <GETP .ITEM ,P?QUANTITY>>
+            <COND (<IN? .ITEM ,PLAYER>
+                <COND (.QUANTITY
+                    <PUTP .ITEM ,P?QUANTITY <+ .QUANTITY 1>>
+                )>
+            )(ELSE
+                <COND (.QUANTITY
+                    <PUTP .ITEM ,P?QUANTITY 1>
+                )>
+                <MOVE .ITEM ,PLAYER>
+            )>
         )>
     )>>
 
@@ -566,13 +576,18 @@
     )>
     <RTRUE>>
 
-<ROUTINE COUNT-CONTAINER (CONTAINER "AUX" COUNT ITEM)
+<ROUTINE COUNT-CONTAINER (CONTAINER "AUX" COUNT ITEM QUANTITY)
     <SET COUNT 0>
     <SET ITEM <FIRST? .CONTAINER>>
     <REPEAT ()
         <COND (<NOT .ITEM> <RETURN>)>
         <COND (<NOT <FSET? .ITEM ,NDESCBIT>>
-            <SET COUNT <+ .COUNT 1>>
+            <SET QUANTITY <GETP .ITEM ,P?QUANTITY>>
+            <COND (<G? .QUANTITY 0>
+                <SET COUNT <+ .COUNT .QUANTITY>>
+            )(ELSE
+                <SET COUNT <+ .COUNT 1>>
+            )>
         )>
         <SET .ITEM <NEXT? .ITEM>>
     >
@@ -589,7 +604,7 @@
 <ROUTINE COUNT-POSSESSIONS ()
     <RETURN <COUNT-CONTAINER ,PLAYER>>>
 
-<ROUTINE DROP-REPLACE-ITEM (OBJ "AUX" KEY COUNT ITEM CHOICE)
+<ROUTINE DROP-REPLACE-ITEM (OBJ "AUX" KEY COUNT ITEM CHOICE QUANTITY)
     <COND (<AND .OBJ <G=? <COUNT-POSSESSIONS> LIMIT-POSSESSIONS>>
         <REPEAT ()
             <CRLF>
@@ -598,11 +613,16 @@
             <SET ITEM <FIRST? ,PLAYER>>
             <REPEAT ()
                 <COND (<NOT .ITEM> <RETURN>)>
-                <SET COUNT <+ .COUNT 1>>
-                <HLIGHT ,H-BOLD>
-                <TELL N .COUNT>
-                <HLIGHT 0>
-                <TELL " - " T .ITEM  CR>
+                <COND (<NOT <FSET? .ITEM ,NDESCBIT>>
+                    <SET COUNT <+ .COUNT 1>>
+                    <HLIGHT ,H-BOLD>
+                    <TELL N .COUNT>
+                    <HLIGHT 0>
+                    <TELL " - " T .ITEM>
+                    <SET QUANTITY <GETP .ITEM ,P?QUANTITY>>
+                    <COND (.QUANTITY <TELL " (" N .QUANTITY ")">)>
+                    <CRLF>
+                )>
                 <SET .ITEM <NEXT? .ITEM>>
             >
             <HLIGHT ,H-BOLD>
@@ -619,8 +639,26 @@
                     <COND (<YES?>
                         <COND (<CHECK-DROPS .ITEM>
                             <TELL "You dropped " T .ITEM " and took " T .OBJ CR>
-                            <REMOVE .ITEM>
-                            <MOVE .OBJ ,PLAYER>
+                            <COND (<NOT <EQUAL? .ITEM .OBJ>>
+                                <SET QUANTITY <GETP .ITEM ,P?QUANTITY>>
+                                <COND (.QUANTITY
+                                    <SET QUANTITY <- .QUANTITY 1>>
+                                    <COND (<G? .QUANTITY 0>
+                                        <PUTP .ITEM ,P?QUANTITY .QUANTITY>
+                                    )(ELSE
+                                        <REMOVE .ITEM>
+                                    )>
+                                )(ELSE
+                                    <REMOVE .ITEM>
+                                )>
+                                <COND (<IN? .OBJ ,PLAYER>
+                                    <SET QUANTITY <GETP .OBJ ,P?QUANTITY>>
+                                    <COND (.QUANTITY
+                                        <PUTP .OBJ ,P?QUANTITY <+ .QUANTITY 1>>
+                                    )>
+                                )>
+                                <MOVE .OBJ ,PLAYER>
+                            )>
                             <RETURN>
                         )>
                     )>
@@ -630,7 +668,10 @@
                 <TELL "Drop " T .OBJ "?">
                 <COND (<YES?>
                     <TELL "You dropped " T .OBJ CR>
-                    <REMOVE .OBJ>
+                    <SET QUANTITY <GETP .OBJ ,P?QUANTITY>>
+                    <COND (<NOT .QUANTITY>
+                        <REMOVE .OBJ>
+                    )>
                     <RETURN>
                 )>
             )>
@@ -643,8 +684,10 @@
         <SET ITEMS <FIRST? ,PLAYER>>
         <REPEAT ()
             <COND (.ITEMS
-                <SET COUNT <+ .COUNT 1>>
-                <COND (<EQUAL? .COUNT .ITEM> <RETURN>)>
+                <COND (<NOT <FSET? .ITEMS ,NDESCBIT>>
+                    <SET COUNT <+ .COUNT 1>>
+                    <COND (<EQUAL? .COUNT .ITEM> <RETURN>)>
+                )>
             )(ELSE
                 <RETURN>
             )>
