@@ -3560,184 +3560,132 @@
 	(DEATH T)
 	(FLAGS LIGHTBIT)>
 
+<CONSTANT TEXT241 "You raise your fists and step quickly forward, ready to give the demon-witch a sound thrashing if she doesn't lift her spell and allow you to leave the island. For her part, she gives you a disdainful smile and places her hands on her hips, tilting her chin back mockingly. \"Come, mortal,\" she says. \"plant your best punch. Then I'll take my turn, and we'll see who's left standing after that.\"">
+<CONSTANT CHOICES241 <LTABLE "take a swing at her as she's inviting you to" "try grappling with her -- either with an armlock" "or to lift her over your head for a body slam" "you can surrender before she gives you a beating you might not survive if you're afraid that you are outclassed">>
+
 <ROOM STORY241
 	(IN ROOMS)
 	(DESC "241")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT241)
+	(CHOICES CHOICES241)
+	(DESTINATIONS <LTABLE STORY271 STORY290 STORY309 STORY119>)
+	(TYPES FOUR-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT242 "You sit up suddenly with a groan. Your chest feels as though you've been kicked by a horse, but by rights you ought to be dead.||Shaking your head to clear it, you look down and discover that Skarvench's bullet was deflected by the article hanging at your breast. Instead of hitting your heart, it glanced off the metal and only left a long red gash.||Grime's face comes into focus. \"How long have ?I been out cold?\" you ask him, each breath making you wince in pain.||\"At least quarter of an hour, skipper.\"||Quite a crowd has gathered around you, As you stagger groggily to your feat, you find you're still holding the corkscrew. \"A fat lot of good this did me.\"||Oakley cracks a grind, relieved to see you're alright. \"I dunno, you might've had his remaining eye out with it if you'd been a bit closer.\"||And elderly pirate steps out of the crowd. You recognize him as a respected man in the disreputable community of Selenice. \"Skarvench broke the Brethren's law,\" he says. \"He's an outcast now. No port on the Carab will give him shelter.\"||Blutz is nursing a lump on his head. His nostrils flare in rage as he cries, \"If Skarvench succeeds in abducting Queen Titania he'll be rich enough to buy his own port!||\"He won't,\" you say in a voice laced with icy determination.">
 
 <ROOM STORY242
 	(IN ROOMS)
 	(DESC "242")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT242)
+	(PRECHOICE STORY242-PRECHOICE)
+	(CONTINUE STORY343)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY242-PRECHOICE ()
+	<CRLF>
+	<TELL "Take corkscrew?">
+	<COND (<YES?> <TAKE-ITEM ,CORKSCREW>)>>
+
+<CONSTANT TEXT243 "A key that no one can see or touch? The ocean god's riddle leaves you baffled until you remember the hornpipe in your pocket. Putting it to your lips, you play a snatch of an old sea shanty. As you do, the chain unlocks itself, falling aside to admit your boat into the harbour.||\"Well, son of a gun!\" says Blutz. \"It was a musical key that was needed, then.\"">
 
 <ROOM STORY243
 	(IN ROOMS)
 	(DESC "243")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT243)
+	(CONTINUE STORY205)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT244 "Clutching your letter of marque, you emerge into the sunshine with the happy air of scholars who have just been awarded their diploma. Outwardly you retain the weather-beaten faces and grimy clothes of common street ruffians, but the document in your hands proclaims otherwise. Now you are licensed privateers - proud sea warriors in the conflict with the rapacious kingdom of Sidonia!||\"Now all we need is a ship,\" says Blutz.||The rest of you whirl and glare at him, the contended smiles wiped off your faces in an instant. Trust the fat oaf to bring you down to earth with a bump.">
 
 <ROOM STORY244
 	(IN ROOMS)
 	(DESC "244")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT244)
+	(PRECHOICE STORY244-PRECHOICE)
+	(CONTINUE STORY107)
+	(ITEM LETTER-OF-MARQUE)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY244-PRECHOICE ()
+	<COND (<CHECK-CODEWORD ,CODEWORD-MARATHON> <STORY-JUMP ,STORY069>)>>
+
+<CONSTANT TEXT245 "El Draque raises his arms and comes forward to embrace you. It could almost be the gesture of one greeting a long-lost friend -- if not for the fangs that gleam like talons beneath his white lips.||A seagull wheels high above in the cloudless indigo sky, its wings catching a last flicker of sunlight. You see one chance. Your sword flashes in the grey dusk too fast for the eye to follow. For an instant El Draque stands rooted to the spot, arms outstretched, not yet aware of what you've done. Then a torrent of mingled hate and anguish and disbelief washes across his pale contorted features as he looks down to see your sword hilt protruding from his chest. He falls and crumbles to a pile of ash, and as he does the other vampires slump to the ground also. A ghastly keening rises from their lips as they slowly dissolve, leaving nothing but a miasmal stench and dark patches in the sand.||You are about to retrieve your sword, but Blutz advises you to leave it where it is. \"I've heard vampires can reform themselves even from lifeless dust.\" he says with a shudder.">
+<CONSTANT TEXT245-CONTINUED "Then hurriedly loading the silver ingots aboard the Lady of Shalott, you set sail for Selenice">
 
 <ROOM STORY245
 	(IN ROOMS)
 	(DESC "245")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT245)
+	(PRECHOICE STORY245-PRECHOICE)
+	(CONTINUE STORY016)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY245-PRECHOICE ()
+	<COND (<IN? ,SWORD ,PLAYER>
+		<LOSE-ITEM ,SWORD>
+	)(<IN? ,SHARKS-TOOTH-SWORD ,PLAYER>
+		<LOSE-ITEM ,SHARKS-TOOTH-SWORD>
+	)(<IN? ,CLEAVER ,PLAYER>
+		<LOSE-ITEM ,CLEAVER>
+	)>
+	<CRLF>
+	<TELL TEXT245-CONTINUED>
+	<TELL ,PERIOD-CR>>
+
+<CONSTANT TEXT246 "Without the lunar wind to fill her sails, the Moon Dog drops quickly. You hear her splash down some distance off your starboard bow.||\"Now Skarvench is a seaborne like us,\" says Oakley with a fierce smile. \"If not for this damned fog, we could give him a battle he'd not soon forget.\"">
+<CONSTANT CHOICES246 <LTABLE "use a" "disperse the fog" "otherwise">>
 
 <ROOM STORY246
 	(IN ROOMS)
 	(DESC "246")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT246)
+	(CHOICES CHOICES246)
+	(DESTINATIONS <LTABLE STORY265 STORY284 STORY303>)
+	(REQUIREMENTS <LTABLE THUNDERCLOUD-FAN SKILL-SPELLS NONE>)
+	(TYPES <LTABLE R-ITEM R-SKILL R-NONE>)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT247 "Darting quickly over into the hold, you break open a travelling chest bearing the royal seal. You scatter the packed clothes and jewels that are inside until you find what you are looking for: one of the Queen's voluminous gowns. Pulling this on, you hurry back on deck, drawing amazed stares from your comrades.||\"Good grief, skipper!\" says Oakley with a wry smile. \"You makes a bloomin' pretty queen, and no mistake!\"||\"Get out of sight, all of you,\" you tell them. Then, lying in to wait behind the overturned water-barrel, you watch until the rope begins to stir. Someone is descending. You see him slide down the rope as loathsome as a great black spider -- Skarvench himself! Choking back the urge to attack him at once, you wait until he reaches the deck before pretending to stumble out of your hiding-place.||\"Oho!\" he cries. \"The precious baggage herself! It's right handy of you to make my job so easy, yer majesty.\" So saying, he reaches out and hefts you over his shoulder. \"Whuf! You're a weighty lass. But a spell on biscuit an' water'll soon take some o' that ample flesh off your bones. That an' the cat, o' course!\"||You wait until he has carried you halfway up the rope. You may as well let the brigand wear himself out before you kill him. Now you are suspended in a weird misty void between sea and sky, with just the faint haze of moonshine to light your final confrontation. You wrest out of his grasp, seize the rope, and throw off your disguise.||\"You!\" gasps Skarvench.">
 
 <ROOM STORY247
 	(IN ROOMS)
 	(DESC "247")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT247)
+	(CONTINUE STORY323)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT248 "There is a meaty smack as your fist connects with this solar plexus. He makes a soft sucking sound and falls like a fish out of water. Stooping, you deliver a punch to the jaw that lays him out cold. Freezing, you listen tensely but the conversation in Skarvench's cabin continues as before. Nobody heard anything. Still, you had better not tarry here any longer.">
 
 <ROOM STORY248
 	(IN ROOMS)
 	(DESC "248")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT248)
+	(CONTINUE STORY172)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT249 "Reaching the top of the cliffs, you stand atop a spar of rock which gives you a clear view of the interior of the Island. Lush jungle clings to the flanks of a sharply peaked mountain in the centre. The summit of the mountain is hidden by a haze of cloud. Nearer at hand you spy succulent fruits. From beyond the curtain of foliage comes the burgling of a brook.">
+<CONSTANT CHOICES249 <LTABLE "collect provisions" "explore the interior of the island" "return to the boat and resume your journey">>
 
 <ROOM STORY249
 	(IN ROOMS)
 	(DESC "249")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT249)
+	(CHOICES CHOICES249)
+	(DESTINATIONS <LTABLE STORY306 STORY325 STORY116>)
+	(TYPES THREE-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT250 "\"This seems a bountiful enough place -- indeed, a very Eden,\" says Grimes. \"Why don't we tarry here a while, shipmates, and get our strengths back for the long haul to Port Leshand?\"||Blutz casts another nervous glance towards the centre of the island. Rearing above the treetops is the high cone of the volcano, ashen smoke lying above it like a thunderhead. \"I'm not so sure.\" he says.">
+<CONSTANT CHOICES250 <LTABLE "vote for spending a few days here" "you should be on your way">>
 
 <ROOM STORY250
 	(IN ROOMS)
 	(DESC "250")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT250)
+	(CHOICES CHOICES250)
+	(DESTINATIONS <LTABLE STORY288 STORY135>)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
 
 <ROOM STORY251
