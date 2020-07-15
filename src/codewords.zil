@@ -18,6 +18,10 @@
     (DESC "Malefic")
     (SYNONYM MALEFIC)>
 
+<OBJECT CODEWORD-MAMMON
+    (DESC "Mamomn")
+    (SYNONYM MAMMON)>
+    
 <OBJECT CODEWORD-MARATHON
     (DESC "Marathon")
     (SYNONYM MARATHON)>

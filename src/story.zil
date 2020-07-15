@@ -3756,94 +3756,57 @@
 	(TYPES <LTABLE R-ITEM R-ITEM R-SKILL-ITEM R-NONE>)
 	(FLAGS LIGHTBIT)>
 
+<CONSTANT TEXT256 "Throughout another night and day you are swept westwards by the strong sea current. Sometime after dusk, as night shrouds the vast expanse of water and closes walls of darkness around the tiny confines of your boat, you hear a voice hailing you: \"Ho there! Who is it? I hear your oars -- speak up!\"||Blutz peers out into the darkness. \"I think I see him,\" he whispers to the rest of you. \"A lone figure on a raft. Must've been shipwrecked.\"||\"Shall we row over and pick him up?\" says Grimes.||Predictably, Oakley is against this. \"We have enough bad luck to go around as it is. Why add another hungry mouth to an already overcrowded boat?\"">
+<CONSTANT CHOICES256 <LTABLE "row over to the man on the raft" "agree with Oakley that you should ignore him">>
+
 <ROOM STORY256
 	(IN ROOMS)
 	(DESC "256")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT256)
+	(CHOICES CHOICES256)
+	(DESTINATIONS <LTABLE STORY294 STORY313>)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT257 "The shot rings out in the night and a puff of gunsmoke drifts like silver fog in the moonlight. As the smoke clears you see to your astonishment has not fallen. He is just standing there with a ghastly bloodless grin, eyes blazing like a ship's lanterns. Then you notice something else -- the bullet didn't miss him. There is a gaping hole through his chest. For a long moment no-one moves a muscle. Silence gives the scene an air of unreality.||\"He's not a living man!\" gasps Blutz at last. \"He's one of the undead!\"">
+<CONSTANT CHOICES257 <LTABLE "launch a barehanded assault on Mortice" "attack him with a sword" "you'd rather avoid a confrontation, and could just the line mooring his raft to the jollyboat">>
 
 <ROOM STORY257
 	(IN ROOMS)
 	(DESC "257")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT257)
+	(CHOICES CHOICES257)
+	(DESTINATIONS <LTABLE STORY219 STORY238 STORY276>)
+	(REQUIREMENTS <LTABLE NONE SKILL-SWORDPLAY NONE>)
+	(TYPES <LTABLE R-NONE R-SKILL R-NONE>)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT258 "You arrive at Leshand harbour to find the town awash with troops. It is not long before you hear the news that has stirred up such panic. \"The nefarious buccaneer Skarvench has captured the Queen of Glorianne,\" a stevedore tells you as he unpacks the ship's cargo. \"He's demanding a million doubloons in ransom, otherwise, he'll make a gift of her to her arch-enemy the King of Sidonia.\"||\"Woeful news!\" groans Oakley. \"The Sidonians will likely break her on the wheel, or tie her to an anchor and send her to sup with Davy Jones! If only we could have done something to prevent it.\"||You could have, but you frolicked too long in an island paradise. Now your part in history is at an end.">
 
 <ROOM STORY258
 	(IN ROOMS)
 	(DESC "258")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT258)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT259 "You are able to jury-rig a weather cloth using strips torn from everyone's clothing. When this is fitted around the boat it has the effect of raising the freeboard, helping to keep the water from sloshing over the sides. You also inspect the planking and make sure that any cracks where the boat is taking in water are plugged with wadding.||\"Will we stay afloat through another storm like last night's though?\" asks Grimes when he sees you taking these measures.||You shrug. \"Pray for better weather.\"">
 
 <ROOM STORY259
 	(IN ROOMS)
 	(DESC "259")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT259)
+	(CONTINUE STORY026)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT260 "You reply with a discreet smile and draw the official aside, adopting the conspiratorial tone of one elegantly mannered knave to another. By promising him a lavish share of any treasure you take from Sidonian galleons, you finally manage to convince him to issue you with a letter of marque.">
 
 <ROOM STORY260
 	(IN ROOMS)
 	(DESC "260")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT260)
+	(CONTINUE STORY244)
+	(CODEWORD CODEWORD-MAMMON)
 	(FLAGS LIGHTBIT)>
 
 <ROOM STORY261
