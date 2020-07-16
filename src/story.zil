@@ -89,6 +89,7 @@
 	<PUTP ,STORY275 ,P?DEATH T>
 	<PUTP ,STORY277 ,P?DEATH T>
 	<PUTP ,STORY290 ,P?DEATH T>
+	<PUTP ,STORY296 ,P?DEATH T>
 	<RETURN>>
 
 <CONSTANT DIED-IN-COMBAT "You died in combat">
@@ -2593,7 +2594,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY174-PRECHOICE ()
-	<ADD-PROVISIONS <GET-NUMBERS "How many provisions to take" 1 2>>
+	<ADD-PROVISIONS <GET-NUMBER "How many provisions to take" 1 2>>
 	<COND (<CHECK-CODEWORD ,CODEWORD-PROSPERO> <STORY-JUMP ,STORY250>)>>
 
 <CONSTANT TEXT175 "Your head swims; your limbs tremble with weakness. Looking into Oakley's face, you give a croak of bleak amusement. \"Saints alive, man, you look as though you'd been keelhauled!\"||He manages a wry half-smile- \"You think you do don't?\" Staggering over to slump beside you, he adds, \"We're not for long for this world now now, are we, mate?\"||You gaze into the west, almost all hope gone.">
@@ -2872,7 +2873,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY192-PRECHOICE ()
-	<ADD-PROVISIONS <GET-NUMBERS "How many provisions to take" 1 2>>>
+	<ADD-PROVISIONS <GET-NUMBER "How many provisions to take" 1 2>>>
 
 <CONSTANT TEXT193 "\"No, you're wrong,\" you tell Blutz. \"Look at most of the island. It's well covered in vegetation, right?\" That volcano has most likely been hissing and spitting for years, but if there had been any major eruption then the jungle wouldn't have grown up to that extent.\"||\"All the same,\" says Grimes, \"let's not dally longer than we have to. The sight of those lava-covered slopes puts me in mind of Stan's brimstone fires!\"">
 <CONSTANT CHOICES193 <LTABLE "go ashore" "row on westwards">>
@@ -4012,7 +4013,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY272-PRECHOICE ()
-	<ADD-PROVISIONS <GET-NUMBERS "How many provisions to take" 1 2>>
+	<ADD-PROVISIONS <GET-NUMBER "How many provisions to take" 1 2>>
 	<TELL TEXT272-CONTINUED>
 	<TELL ,PERIOD-CR>
 	<COND (<IN? ,BOOK-OF-CHARTS ,PLAYER>
@@ -4047,7 +4048,7 @@
 	(CONTINUE STORY217)
 	(FLAGS LIGHTBIT)>
 
-<ROUTINE GET-NUMBERS (MESSAGE "OPT" MINIMUM MAXIMUM "AUX" COUNT)
+<ROUTINE GET-NUMBER (MESSAGE "OPT" MINIMUM MAXIMUM "AUX" COUNT)
 	<REPEAT ()
 		<CRLF>
 		<TELL .MESSAGE>
@@ -4067,7 +4068,7 @@
 	<RETURN .COUNT>>
 
 <ROUTINE TEXT274-PRECHOICE ("AUX" (COUNT 0))
-	<ADD-DIAMONDS <GET-NUMBERS "How many diamonds to take" 1 3>>>
+	<ADD-DIAMONDS <GET-NUMBER "How many diamonds to take" 1 3>>>
 
 <CONSTANT TEXT275 "Hunger saps your strength. You spend the night half in slumber and half in a dead faint. Cold sweat soaks your clothes. Even sunrise fails to warm the chill out of your bones, and as you crouch at the back of the boat shivering you realise you are running a fever.">
 
@@ -4368,94 +4369,83 @@
 	<TELL TEXT295-CONTINUED>
 	<CRLF>>
 
+<CONSTANT TEXT296 "Inspired by your example, your friends lay about them with gusto as the natives charge to the attack with spears and clubs. The fighting rages fiercely and, although sicked at the need for bloodshed, you soon realise that it must continue until you have defeated or driven off all the natives. If you tried to retreat down the ladder while there were still natives on the clifftops, they could easily pick you off by dropping rocks.||After a short and brutal exchange of blows, most of the natives lie senseless and the remainder are fleeing in terror.">
+
 <ROOM STORY296
 	(IN ROOMS)
 	(DESC "296")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT296)
+	(PRECHOICE STORY296-PRECHOICE)
+	(CONTINUE STORY116)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY296-PRECHOICE ("AUX" (DMG 4))
+	<COND (<CHECK-SKILL ,SKILL-SWORDPLAY> <SET DMG 2>)>
+	<LOSE-LIFE .DMG DIED-IN-COMBAT ,STORY296>>
+
+<CONSTANT TEXT297 "You settle on a cheap dive close to the shanty town as the best place to find news of Skarvench. There, under a luridly painted sign depicting a man hung upside-down, the evil pirate captain has whiled away many an hour ashore in gambling and rum-soaked revelry.||Raucous laughter issues through the open door, but the whole tavern goes silent for a moment as you step inside. Dozens of ugly faces turn to stare as you saunter across the sawdust-strewn planks of the floor.||\"Like an angle passing,\" you remark to your friends, recalling the old superstition.||\"Aye,\" mutters Grimes under his breath, \"the Angel of Death. Let's scarper, mates. This is no place to loiter in. It's a den of vicious sea-rats.\"||Slowly the babble of drunken chatter returns, but many sullen eyes remain fixed on you.">
+<CONSTANT CHOICES297 <LTABLE "stay here despite the danger" "leave to seek out rumours concerning either El Draque" "or Queen Titania" "you are finished with listening to rumours">>
 
 <ROOM STORY297
 	(IN ROOMS)
 	(DESC "297")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT297)
+	(CHOICES CHOICES297)
+	(DESTINATIONS <LTABLE STORY146 STORY183 STORY221 STORY392>)
+	(TYPES FOUR-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT298 "There is nothing you can do to evade capture. Dragged back in hemp bonds to the Belle Dame, you are hauled up on deck and tossed like sacrificial offerings in front of Skarvench. In the stark moonlight, his black beard and white face make him look the very picture of Satan himself. \"Bilge-rotten blasted fiend!\" you yell at him. \"You can't force honest men to live a villain's life!\"||He scowls and spits. \"Aye, you're right mate. Honest toil's what you four thrive on, ain't it? You aren't buccaneer material -- I see that now. Well, I'll give you honest toil- How'd ye like scrape the barnacles off the hull, for starters?\"||Lashed to ropes, the four of you are swing overboard and dragged back and forth along the keel of the ship. Soon the flesh is ragged on your bruised bones, and brine floods into your anguished lungs. Darkness closes over you and for the last time. It is the end.">
 
 <ROOM STORY298
 	(IN ROOMS)
 	(DESC "298")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT298)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
 
 <ROOM STORY299
 	(IN ROOMS)
 	(DESC "299")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(EVENTS STORY299-EVENTS)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY299-EVENTS ("AUX" (DIAMONDS 0) (QUANTITY 0))
+	<COND (<IN? ,DIAMOND ,PLAYER>
+		<SET QUANTITY <GETP ,DIAMOND ,P?QUANTITY>>
+		<COND (<G? .QUANTITY 1>
+			<REPEAT ()
+				<SET DIAMONDS <GET-NUMBER "How many diamonds are you willing to spend to buy a ship" 1 3>>
+				<TELL "Are you sure?">
+				<COND (<YES?>
+					<RETURN>
+				)>
+			>
+			<SET QUANTITY <- .QUANTITY .DIAMONDS>>
+			<PUTP ,DIAMOND ,P?QUANTITY .QUANTITY>
+			<COND (<L=? .QUANTITY 0> <LOSE-ITEM ,DIAMOND>)>
+			<COND (<EQUAL? .DIAMONDS 3> <RETURN ,STORY337>)>
+			<COND (<EQUAL? .DIAMONDS 2> <RETURN ,STORY356>)>
+			<RETURN ,STORY375>
+		)(ELSE
+			<LOSE-ITEM ,DIAMOND>
+			<RETURN ,STORY375>
+		)>
+	)>
+	<RETURN ,STORY299>>
+
+<CONSTANT TEXT300 "Somehow you have to get a bigger ship, as your current one is no match for Skarvench's heavily-armed galleon. Sitting in your cabin aboard the Lady of Shalott, you mull over the options open to you.">
+<CONSTANT CHOICES300 <LTABLE "look for El Draque's treasure" "sail in search of the ship frozen in ice" "make some money from plain dishonest piracy">>
 
 <ROOM STORY300
 	(IN ROOMS)
 	(DESC "300")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT300)
+	(CHOICES CHOICES300)
+	(DESTINATIONS <LTABLE STORY319 STORY338 STORY357>)
+	(REQUIREMENTS <LTABLE <LTABLE CODEWORD-RAVEN> <LTABLE CODEWORD-AUGUST> NONE>)
+	(TYPES <LTABLE R-CODEWORD R-CODEWORD R-NONE>)
 	(FLAGS LIGHTBIT)>
 
 <ROOM STORY301
