@@ -141,6 +141,7 @@
 			<SET QUANTITY <- .QUANTITY .AMOUNT>>
 			<PUTP ,PROVISIONS ,P?QUANTITY .QUANTITY>
 			<COND (<G=? .QUANTITY 1>
+				<CRLF>
 				<HLIGHT ,H-BOLD>
 				<TELL "[Your supply of provisions decreased by " N .AMOUNT "]" CR>
 				<HLIGHT 0>
@@ -172,7 +173,7 @@
 	(CONTINUE STORY001)
 	(FLAGS LIGHTBIT)>
 
-<CONSTANT TEXT001 "You know that you will need supplies to have any chance of survival on the open sea. It means taking a big risk, since you will have to go right past the officers' cabins, but there is no help for it. While your comrades keep a nervous vigil, fearing discovery at any moment, you creep aft and descend below decks. The only light in the passage is the glow of an oil-lamp shining from the half-open door of Skarvench's cabin. As you skulk forward through the shadows, you hear the voice of the pirate captain raised in typically drunken bluster:||\"What, my merry lads, is the easiest route to fortune, would you say?\"||\"Why, piracy, Cap'n,\" you hear one of the men answer hurriedly.||\"Aye, piracy, right enough,\"roars Skarvench. \"but what's the most profitable form of piracy, I'm askin' you? Why, 'tis kidnap and ransom, that's what. There's no cargo takes up so little space nor fetches so high a price as live human baggage -- so long as you choose the right person. Even you daft lubbers must've heard how Toliver Crimp earned himself a thousand doubloons last summer when he ransomed the Viceroy's nephew -- \"||\"A thousand doubloons!\" cry the pirates in unison.||\"A spit in the ocean compared to what I've got planned! I'll be earning us a king's ransom -- or a queen's ransom, rather, if you wants to split hairs on it -- when I capture the best prize of all. I'm talking about that pretty young Queen Titania of Glorianne, my hearties, who'll soon be sailing here on a tour of the colonies!\"||You were just tiptoeing past the door, glad of Skarvench's ranting as it kept you from being overheard, but this news roots you to the spot. Can Skarvench really mean to set his sights so high? The kidnapping of a monarch is surely beyond the limits of even his voracious ambition. Everyone knows that the Queen Titania is well guarded by her loyal admiral, Lord Calidor, whose naval tactics have sent many a foe to the sea's bottom. And no trickery or poison can prevail against her while she is protected by her wizardly counsellor, Dr. Wild. Skarvench's plan seems impossible, and yet you have suffered enough harsh experience of the man aboard his ship to know that , although unmatched for cruelty and greed, he is nobody's fool. He must really think he has a chance of carrying off the Queen!||You glance across the passage to the sailmaster's cabin. No light shows under the door. The sailmaster must still be in the gallery with  most of the other pirates. Now is your chance to sneak into the empty cabin and gather a few items for your voyage -- and God knows, your comrades must be getting anxious for you to return. At any moment one of the pirates might go up on deck and your bid for freedom would be discovered. But Skarvench is still boasting of his madcap scheme, and despite your best instincts you feel compelled to eavesdrop further.">
+<CONSTANT TEXT001 "You know that you will need supplies to have any chance of survival on the open sea. It means taking a big risk, since you will have to go right past the officers' cabins, but there is no help for it. While your comrades keep a nervous vigil, fearing discovery at any moment, you creep aft and descend below decks. The only light in the passage is the glow of an oil-lamp shining from the half-open door of Skarvench's cabin. As you skulk forward through the shadows, you hear the voice of the pirate captain raised in typically drunken bluster:||\"What, my merry lads, is the easiest route to fortune, would you say?\"||\"Why, piracy, Cap'n,\" you hear one of the men answer hurriedly.||\"Aye, piracy, right enough,\"roars Skarvench. \"but what's the most profitable form of piracy, I'm askin' you? Why, 'tis kidnap and ransom, that's what. There's no cargo takes up so little space nor fetches so high a price as live human baggage -- so long as you choose the right person. Even you daft lubbers must've heard how Toliver Crimp earned himself a thousand doubloons last summer when he ransomed the Viceroy's nephew -- \"||\"A thousand doubloons!\" cry the pirates in unison.||\"A spit in the ocean compared to what I've got planned! I'll be earning us a king's ransom -- or a queen's ransom, rather, if you wants to split hairs on it -- when I capture the best prize of all. I'm talking about that pretty young Queen Titania of Glorianne, my hearties, who'll soon be sailing here on a tour of the colonies!\"||You were just tiptoeing past the door, glad of Skarvench's ranting as it kept you from being overheard, but this news roots you to the spot. Can Skarvench really mean to set his sights so high? The kidnapping of a monarch is surely beyond the limits of even his voracious ambition. Everyone knows that the Queen Titania is well guarded by her loyal admiral, Lord Calidor, whose naval tactics have sent many a foe to the sea's bottom. And no trickery or poison can prevail against her while she is protected by her wizardly counsellor, Dr. Wild. Skarvench's plan seems impossible, and yet you have suffered enough harsh experience of the man aboard his ship to know that , although unmatched for cruelty and greed, he is nobody's fool. He must really think he has a chance of carrying off the Queen!||You glance across the passage to the sailmaster's cabin. No light shows under the door. The sailmaster must still be in the gallery with most of the other pirates. Now is your chance to sneak into the empty cabin and gather a few items for your voyage -- and God knows, your comrades must be getting anxious for you to return. At any moment one of the pirates might go up on deck and your bid for freedom would be discovered. But Skarvench is still boasting of his madcap scheme, and despite your best instincts you feel compelled to eavesdrop further.">
 <CONSTANT CHOICES001 <LTABLE "stay where you are and listen to what Skarvench says" "look in the sailmaster's cabin for supplies" "decide to hurry straight up on the deck">>
 
 <ROOM STORY001
@@ -801,7 +802,7 @@
 <ROUTINE STORY044-PRECHOICE ()
 	<TAKE-VESSEL ,OCTAVIUS>>
 
-<CONSTANT TEXT045 "Mermaids are like all faerie creatures in being motivated by caprice. They  can be cruel or kind, as the whim takes them. It is well known that they sometimes seek the company of mortal men, whom they entice with their beauty and promise of secret wealth, because they constantly yearn to draw a little of the surface world's warmth and vitality into their own submerged realm of twilit silence. Few who have succumbed to a mermaid's lures survive to tell the tale. There are cases of men who have tarried a while under the sea, then returned with the gift of second sight -- for the mermaids are able to grant knowledge of future events. Such cases are rare. A more likely fate is to be washed up ton the beach, leeched of breath by the mermaid's kiss, dead face forever frozen in fearful rapture of having heard the mermaid's secrets and witnessed her unearthly beauty.||You know one more thing. Any question put to a mermaid must be answered truthfully if the questioner has a firm grip on her. In that respect, too, she is like any other faerie creature.">
+<CONSTANT TEXT045 "Mermaids are like all faerie creatures in being motivated by caprice. They can be cruel or kind, as the whim takes them. It is well known that they sometimes seek the company of mortal men, whom they entice with their beauty and promise of secret wealth, because they constantly yearn to draw a little of the surface world's warmth and vitality into their own submerged realm of twilit silence. Few who have succumbed to a mermaid's lures survive to tell the tale. There are cases of men who have tarried a while under the sea, then returned with the gift of second sight -- for the mermaids are able to grant knowledge of future events. Such cases are rare. A more likely fate is to be washed up ton the beach, leeched of breath by the mermaid's kiss, dead face forever frozen in fearful rapture of having heard the mermaid's secrets and witnessed her unearthly beauty.||You know one more thing. Any question put to a mermaid must be answered truthfully if the questioner has a firm grip on her. In that respect, too, she is like any other faerie creature.">
 
 <ROOM STORY045
 	(IN ROOMS)
@@ -932,7 +933,7 @@
 	(CONTINUE STORY396)
 	(FLAGS LIGHTBIT)>
 
-<CONSTANT TEXT056 "Driven on by remorseless determination, you hardly notice the stirrings of mutiny. At all hours of the day and night you are to be seen pacing the deck, marking the wind and sea currents in you log-book or using a cross-staff to plot the position of the stars. The crew dare not question your judgement now -- they  fear they would never get home without you.||At last your steadfastness is rewarded with a cry of \"Ice ho!\" from the deck. You race up the companion-way and give a great shout of triumph as you catch sight of the blow blue hump of an iceberg dead ahead.">
+<CONSTANT TEXT056 "Driven on by remorseless determination, you hardly notice the stirrings of mutiny. At all hours of the day and night you are to be seen pacing the deck, marking the wind and sea currents in you log-book or using a cross-staff to plot the position of the stars. The crew dare not question your judgement now -- they fear they would never get home without you.||At last your steadfastness is rewarded with a cry of \"Ice ho!\" from the deck. You race up the companion-way and give a great shout of triumph as you catch sight of the blow blue hump of an iceberg dead ahead.">
 
 <ROOM STORY056
 	(IN ROOMS)
@@ -1086,14 +1087,12 @@
 	(STORY TEXT068)
 	(CHOICES CHOICES068)
 	(DESTINATIONS <LTABLE STORY087 STORY049>)
-	(TYPES TWO-NONES)
 	(PRECHOICE STORY068-PRECHOICE)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
 
-<CONSTANT STORY068-GIVELIST <LTABLE SWORD SHARKS-TOOTH-SWORD PISTOL MAGIC-WAND MAGIC-AMULET SHIP-IN-BOTTLE CONCH-SHELL-HORN BAT-SHAPED-TALISMAN BLACK-KITE DIAMOND TOOLKIT HEALING-POTION BRONZE-HELMET CRUCIFIX DRAGON-RING>>
-
 <ROUTINE STORY068-PRECHOICE ()
-	<GIVE-FROM-LIST STORY068-GIVELIST STORY068-UNABLE STORY068-UNWILLING 2 ,STORY144>>
+	<GIVE-FROM-LIST <LTABLE SWORD SHARKS-TOOTH-SWORD PISTOL MAGIC-WAND MAGIC-AMULET SHIP-IN-BOTTLE CONCH-SHELL-HORN BAT-SHAPED-TALISMAN BLACK-KITE DIAMOND TOOLKIT HEALING-POTION BRONZE-HELMET CRUCIFIX DRAGON-RING> STORY068-UNABLE STORY068-UNWILLING 2 ,STORY144>>
 
 <CONSTANT TEXT069 "Capstick has a fine house on Halyard Street, in one of the richest parts of town. Smartening yourselves up to look as respectable as possible, you ignore the sidelong glances and haughty sniffs of the wealthy passers-by, marching straight up to present yourselves at the front door. The servant who answers the door at first mistakes you for beggars, but once you've corrected that small misunderstanding he shows you through his master's study.||Capstick is sitting by the fire with a book. Seeing you, he gives his great belly-shaking laugh and leaps up to greet you, commanding the servant to bring a bottle of sherry.||\"Freshly taken off a Sidonian merchantman,\" he says shortly, lifting his glass to savour the smoky gold liquid before drinking. \"And..\" he smacks his lips, refills your glasses \"all the better for being plundered off one of those rascals, eh?\"||Soon the conversation turns to the matters you discussed aboard the Jewel of Heaven. At this, Capstick's face falls. \"I have sour news,\" he tells you. \"I must sail for Glorianne in two days' time, and so I'll be unable to partner you in your attack on that devil Skarvench. Moreover I've told the tale to several high officials, but no one believes it's true.\"||You give a glum nod. \"Who can blame them, given the source of your information? We are vagabond ex-pirates, which is not the best pedigree for reliable testimony.\"||\"But I believe you, by God!\" He produces an envelope and hands it to you. \"This is a deed of ownership for a sloop that I own in Port Selenice. She's just a small craft, but better than no ship at all. Go to Selenice, get together a crew, and see if you can't beat this Skarvench at his own game.\"||Thanking Capstick for his help, you take your leave. \"I'm only sorry not to be sailing with you,\" are his parting words.">
 
@@ -1266,7 +1265,7 @@
 	(CONTINUE STORY014)
 	(FLAGS LIGHTBIT)>
 
-<CONSTANT TEXT083 "Touching your magical amulet, you utter the words of a brief incantation that will deflect any curse the mermaid might attempt.||At this she pouts. \"Such crude magic.\"||\"Crude, perhaps, my  lady,\" you return with a gallant flourish, \"but I have always found it no less effective for that\"">
+<CONSTANT TEXT083 "Touching your magical amulet, you utter the words of a brief incantation that will deflect any curse the mermaid might attempt.||At this she pouts. \"Such crude magic.\"||\"Crude, perhaps, my lady,\" you return with a gallant flourish, \"but I have always found it no less effective for that\"">
 <CONSTANT CHOICES083 <LTABLE "bring her under hypnotic control" "tell Blutz to let her go at once" "ask her what lies ahead on your journey" "ask her about the best course you can take to Port Leshand">>
 
 <ROOM STORY083
@@ -1468,7 +1467,7 @@
 	(ITEM MONKEY)
 	(FLAGS LIGHTBIT)>
 
-<CONSTANT TEXT097 "Taking turns at the oars, you row westwards  under the glare of a fierce sun. Soon your lips are parched, your necks blistered red in the heat. Everyone's spirits were at first buoyed up by the relief you felt at escaping from Skarvench's grasp, but soon you begin to wilt with the awful gnawing of discouragement and doubt. Will you survive long enough to reach land, or will the little jollyboat become your floating coffin?">
+<CONSTANT TEXT097 "Taking turns at the oars, you row westwards under the glare of a fierce sun. Soon your lips are parched, your necks blistered red in the heat. Everyone's spirits were at first buoyed up by the relief you felt at escaping from Skarvench's grasp, but soon you begin to wilt with the awful gnawing of discouragement and doubt. Will you survive long enough to reach land, or will the little jollyboat become your floating coffin?">
 <CONSTANT TEXT097-CONTINUED "Around noon of the second day you catch sight of Red Skull Island. \"Well?\" mutters Grimes through thirst-blackened lips. \"Do we risk going ashore? There might be fresh water... and food.\"||\"Aye says Oakley.\" \"And it's us that might be the food, if there are cannibals in these parts.\"||They look to you to make the final decision.">
 <CONSTANT CHOICES097 <LTABLE "go ashore" "sail on towards the next island">>
 
@@ -1716,7 +1715,7 @@
 	(CONTINUE STORY171)
 	(FLAGS LIGHTBIT)>
 
-<CONSTANT TEXT115 "\"You ask me how I can be sure of Queen Titania's itinerary, my lads?\" growls Skarvench. \"You ask how I can whistle up a storm to scatter her escort fleet, then as quickly becalm her flagship in a bank of fog? And maybe you'll ask how I'll descend from the skies on a rope to whisk the pretty little package away before her soldiers even know what's what? Oh, what a bunch of scurvy doubting dogs you are, to be sure! There's one simple answer to all such cynical questions, and that's this: her wizard, William Wild, is my half-brother. He's  in on the scheme, y'see.\"||You have heard enough. The whole world knows of the court wizard Dr Wild and the boundless trust placed in him by Queen Titania. If he plots betrayal, she is in real danger and not all her soldiers can save her.||A floorboard creaks from further along the passage. You look around sharply. Someone is coming.">
+<CONSTANT TEXT115 "\"You ask me how I can be sure of Queen Titania's itinerary, my lads?\" growls Skarvench. \"You ask how I can whistle up a storm to scatter her escort fleet, then as quickly becalm her flagship in a bank of fog? And maybe you'll ask how I'll descend from the skies on a rope to whisk the pretty little package away before her soldiers even know what's what? Oh, what a bunch of scurvy doubting dogs you are, to be sure! There's one simple answer to all such cynical questions, and that's this: her wizard, William Wild, is my half-brother. He's in on the scheme, y'see.\"||You have heard enough. The whole world knows of the court wizard Dr Wild and the boundless trust placed in him by Queen Titania. If he plots betrayal, she is in real danger and not all her soldiers can save her.||A floorboard creaks from further along the passage. You look around sharply. Someone is coming.">
 <CONSTANT CHOICES115 <LTABLE "hide in the sailmaster's cabin" "else stand your ground">>
 
 <ROOM STORY115
@@ -1745,8 +1744,6 @@
 <ROUTINE STORY116-PRECHOICE ()
 	<CONSUME-PROVISIONS 1 ,STORY426>>
 
-<CONSTANT STORY117-GIVELIST <LTABLE SWORD PISTOL MAGIC-AMULET MAGIC-WAND CRUCIFIX TOOLKIT ALL-MONEY>>
-
 <CONSTANT TEXT117 "They bring forward a shield woven of brightly coloured feathers and a wooden sword studded with shark's teeth which they offer in exchange.||Oakley gives a snort of disgust when he sees these. \"They're not worth a tenth of what we gave them!\"||\"Maybe you shouldn't accept these gifts,\" cautions Blutz, catching your sleeve. \"The natives might get angry. Maybe it's just a token gesture and they don't really want to part with them.\"">
 <CONSTANT TEXT117-TURNNASTY "They start to turn nasty and you realise you had better run for it.">
 
@@ -1758,7 +1755,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY117-PRECHOICE ("AUX" GIVE-RESULT)
-	<SET GIVE-RESULT <GIVE-FROM-LIST STORY117-GIVELIST UNABLE-TO-PART UNWILLING-TO-PART>>
+	<SET GIVE-RESULT <GIVE-FROM-LIST <LTABLE SWORD PISTOL MAGIC-AMULET MAGIC-WAND CRUCIFIX TOOLKIT ALL-MONEY> UNABLE-TO-PART UNWILLING-TO-PART>>
 	<COND (<OR <EQUAL? .GIVE-RESULT GIVE-UNWILLING> <EQUAL? .GIVE-RESULT GIVE-UNABLE>>
 		<EMPHASIZE TEXT117-TURNNASTY>
 		<STORY-JUMP ,STORY041>
@@ -2218,7 +2215,7 @@
 	(CONTINUE STORY337)
 	(FLAGS LIGHTBIT)>
 
-<CONSTANT TEXT149 "He examines the letter, then hands it back. \"All's in order,\" he says. His manner is far from friendly, but at least the expression of icy menace is gone from  his eyes. He orders the marines to lower their weapons. You cannot help noticing that the marine sergeant keeps his pistol cocked, however. \"I will take delivery of Her Majesty's share of your plunder,\" says the captain curtly. \"This will save you the trouble of sailing to Leshand to hand it over.\"||You show him to the hold, where he makes an inventory of your treasure and then divides a sizeable pile from it -- nearly a quarter of all your spoils. \"You're levying a harsh tax,\" you say, pointing at the pile.||For the first time his face shows a smile. It is like a crack appearing on thin ice. \"You're mistaken. That pile is what you get to keep. We're taking all the rest.\"||You barely choke back a gasp. He means to take three-quarters of your treasure! You will barely have enough left to buy a decent ship.">
+<CONSTANT TEXT149 "He examines the letter, then hands it back. \"All's in order,\" he says. His manner is far from friendly, but at least the expression of icy menace is gone from his eyes. He orders the marines to lower their weapons. You cannot help noticing that the marine sergeant keeps his pistol cocked, however. \"I will take delivery of Her Majesty's share of your plunder,\" says the captain curtly. \"This will save you the trouble of sailing to Leshand to hand it over.\"||You show him to the hold, where he makes an inventory of your treasure and then divides a sizeable pile from it -- nearly a quarter of all your spoils. \"You're levying a harsh tax,\" you say, pointing at the pile.||For the first time his face shows a smile. It is like a crack appearing on thin ice. \"You're mistaken. That pile is what you get to keep. We're taking all the rest.\"||You barely choke back a gasp. He means to take three-quarters of your treasure! You will barely have enough left to buy a decent ship.">
 <CONSTANT CHOICES149 <LTABLE "use" "if not then either you allow him to take the Queen's share" "else to fight to keep what you have">>
 
 <ROOM STORY149
@@ -2346,7 +2343,7 @@
 	(CONTINUE STORY389)
 	(FLAGS LIGHTBIT)>
 
-<CONSTANT TEXT159 "The mermaid splashes grey spume with her tail, writhing angrily in Blutz's grip and spitting like a snake. But she answers you none the less: \"Set your prow south if food and  comfort are your aim, for the islands there more hospitable to land-dwellers than these storm-churned seas. Your present course westward will take you to a baleful rendezvous, and one you are unlikely to get away from in once piece.\"||\"I don't like the sound of that,\" says Blutz. \"But tell us more about the isles to the south. Aren't there any dangers there?\"||\"There is the witch Ejada,\" replies the mermaid. \"She seeks souls for her god, and such is her power that none can strike her down while her feet remain planted on solid earth --\"||Suddenly flinging a handful of brine into Blutz's face, she pulls free of his grip, leaving only two or three coral-coloured hairs twined between his stubby fingers.">
+<CONSTANT TEXT159 "The mermaid splashes grey spume with her tail, writhing angrily in Blutz's grip and spitting like a snake. But she answers you none the less: \"Set your prow south if food and comfort are your aim, for the islands there more hospitable to land-dwellers than these storm-churned seas. Your present course westward will take you to a baleful rendezvous, and one you are unlikely to get away from in once piece.\"||\"I don't like the sound of that,\" says Blutz. \"But tell us more about the isles to the south. Aren't there any dangers there?\"||\"There is the witch Ejada,\" replies the mermaid. \"She seeks souls for her god, and such is her power that none can strike her down while her feet remain planted on solid earth --\"||Suddenly flinging a handful of brine into Blutz's face, she pulls free of his grip, leaving only two or three coral-coloured hairs twined between his stubby fingers.">
 
 <ROOM STORY159
 	(IN ROOMS)
@@ -2459,13 +2456,15 @@
 
 <ROUTINE STORY166-PRECHOICE ()
 	<COND (<IN? ,SWORD ,PLAYER>
-		<REMOVE ,SWORD>
+		<LOSE-ITEM ,SWORD>
 	)(<IN? ,SHARKS-TOOTH-SWORD ,PLAYER>
-		<REMOVE ,SHARKS-TOOTH-SWORD>
+		<LOSE-ITEM ,SHARKS-TOOTH-SWORD>
 	)(<IN? ,CLEAVER ,PLAYER>
-		<REMOVE ,CLEAVER>
+		<LOSE-ITEM ,CLEAVER>
+	)(<IN? ,RUSTY-SWORD ,PLAYER>
+		<LOSE-ITEM ,RUSTY-SWORD>
 	)>
-	<COND (<IN? ,PISTOL ,PLAYER> <REMOVE ,PISTOL>)>
+	<COND (<IN? ,PISTOL ,PLAYER> <LOSE-ITEM ,PISTOL>)>
 	<SETG MONEY 0>
 	<UPDATE-STATUS-LINE>>
 
@@ -2679,7 +2678,7 @@
 	(CODEWORD CODEWORD-CHANCERY)
 	(FLAGS LIGHTBIT)>
 
-<ROUTINE  STORY179-PRECHOICE ()
+<ROUTINE STORY179-PRECHOICE ()
 	<COND (,RUN-ONCE
 		<GAIN-MONEY 10000>
 	)>>
@@ -3478,7 +3477,7 @@
 	(CONTINUE STORY272)
 	(FLAGS LIGHTBIT)>
 
-<CONSTANT TEXT235 "The storm rolls over you, tossing your jollyboat halfway to the clouds with each wave. The sea becomes thick with icy froth. The sky is a flickering lantern -- one moment blue-white and bright as daybreak, then blacker than the underworld in the thunderous space between lightning flashes.||Wretchedly sick, weak with exhaustion and hunger, the four of you struggle to keep the little craft from submerging. Oakley sings wildly into the sheets of rain as he bails water with cupped hands:||\"Oh, the Coffin Lid heaves to and fro,|tossed by storms and gales,|What's that thunder now I hear:|four hearts thudding full o' fear?|Or Death's bone fingers  drawing near|and banging in the nails?\"||Grimes and Blutz both look to be near the end of their tether. Oakley's gallows song is not helping their nerves. Nor yours, for that matter.">
+<CONSTANT TEXT235 "The storm rolls over you, tossing your jollyboat halfway to the clouds with each wave. The sea becomes thick with icy froth. The sky is a flickering lantern -- one moment blue-white and bright as daybreak, then blacker than the underworld in the thunderous space between lightning flashes.||Wretchedly sick, weak with exhaustion and hunger, the four of you struggle to keep the little craft from submerging. Oakley sings wildly into the sheets of rain as he bails water with cupped hands:||\"Oh, the Coffin Lid heaves to and fro,|tossed by storms and gales,|What's that thunder now I hear:|four hearts thudding full o' fear?|Or Death's bone fingers drawing near|and banging in the nails?\"||Grimes and Blutz both look to be near the end of their tether. Oakley's gallows song is not helping their nerves. Nor yours, for that matter.">
 <CONSTANT CHOICES235 <LTABLE "try to shut Oakley up and risk provoking a fight" "do nothing and then morale will drain away entirely.">>
 
 <ROOM STORY235
@@ -3551,11 +3550,13 @@
 
 <ROUTINE STORY238-EVENTS ()
 	<COND (<IN? ,SWORD ,PLAYER>
-		<REMOVE ,SWORD>
+		<LOSE-ITEM ,SWORD>
 	)(<IN? ,SHARKS-TOOTH-SWORD ,PLAYER>
-		<REMOVE ,SHARKS-TOOTH-SWORD>
+		<LOSE-ITEM ,SHARKS-TOOTH-SWORD>
 	)(<IN? ,CLEAVER ,PLAYER>
-		<REMOVE ,CLEAVER>
+		<LOSE-ITEM ,CLEAVER>
+	)(<IN? ,RUSTY-SWORD ,PLAYER>
+		<LOSE-ITEM ,RUSTY-SWORD>
 	)>
 	<RETURN ,STORY276>>
 
@@ -3649,6 +3650,8 @@
 		<LOSE-ITEM ,SHARKS-TOOTH-SWORD>
 	)(<IN? ,CLEAVER ,PLAYER>
 		<LOSE-ITEM ,CLEAVER>
+	)(<IN? ,RUSTY-SWORD ,PLAYER>
+		<LOSE-ITEM ,RUSTY-SWORD>
 	)>
 	<CRLF>
 	<TELL TEXT245-CONTINUED>
@@ -4190,7 +4193,7 @@
 	(CONTINUE STORY321)
 	(FLAGS LIGHTBIT)>
 
-<CONSTANT TEXT284 "A steady wind arises quickly in answer to your magical summons. It is not so  strong -- you dare not tamper with elements too much -- but it is enough for your purposes. The fog swirls nd breaks apart, swiftly dispersing into wispy tendrils. You now have a clear view of both the crippled Rose and, nearer to you, Skarvench's ship the Moon Dog. She is standing at two o'clock off your starboard bow, just within cannon range. You have the weather gauge, meaning that the wind is blowing from behind you towards the Moon Dog -- the ideal position for a sea battle.||\"Now we have a choice,\" says Oakley. \"We can sail in for boarding, or stand off and rake her with our guns. What's it to be skipper?\"||A snap decision is needed.">
+<CONSTANT TEXT284 "A steady wind arises quickly in answer to your magical summons. It is not so strong -- you dare not tamper with elements too much -- but it is enough for your purposes. The fog swirls nd breaks apart, swiftly dispersing into wispy tendrils. You now have a clear view of both the crippled Rose and, nearer to you, Skarvench's ship the Moon Dog. She is standing at two o'clock off your starboard bow, just within cannon range. You have the weather gauge, meaning that the wind is blowing from behind you towards the Moon Dog -- the ideal position for a sea battle.||\"Now we have a choice,\" says Oakley. \"We can sail in for boarding, or stand off and rake her with our guns. What's it to be skipper?\"||A snap decision is needed.">
 <CONSTANT CHOICES284 <LTABLE "steer in towards the Moon Dog" "unlimber your cannons">>
 
 <ROOM STORY284
@@ -4259,7 +4262,7 @@
 	<TELL TEXT288-CONTINUED>
 	<TELL ,PERIOD-CR>>
 
-<CONSTANT TEXT289 "In the glimmering predawn, as your little boat drifts gently on across the still ocean, you  have your first chance to take stock of your situation. You must judge every factor with great care from now on: even the smallest mistake could spell disaster, and you will need every scrap of luck and cleverness if you are to make it to civilized lands alive.||First, your companions on the voyage. Grimes, lanky and lantern-jawed, is a lugubrious fellow but despite his habit of expecting the worst he is a good man to have aboard, being neither timid nor quarrelsome. Oakley is tough and smart but abrasive -- a possible challenge to your leadership, if you fail to assert yourself. All the same, you have been in enough tough scrapes together in the past to know that you can count on him too. Blutz is the weak link of the group; a timid, clumsy little scuttlebutt of a man. But you know that he can be clever and resourceful when he has to be.||The three of them look at you and Oakley says, \"Well, where shall we point our prow?\".||On the map:|* Port Leshand (more than 500 leagues west)|* Smoking Islands, (less than 100 leagues southwest)">
+<CONSTANT TEXT289 "In the glimmering predawn, as your little boat drifts gently on across the still ocean, you have your first chance to take stock of your situation. You must judge every factor with great care from now on: even the smallest mistake could spell disaster, and you will need every scrap of luck and cleverness if you are to make it to civilized lands alive.||First, your companions on the voyage. Grimes, lanky and lantern-jawed, is a lugubrious fellow but despite his habit of expecting the worst he is a good man to have aboard, being neither timid nor quarrelsome. Oakley is tough and smart but abrasive -- a possible challenge to your leadership, if you fail to assert yourself. All the same, you have been in enough tough scrapes together in the past to know that you can count on him too. Blutz is the weak link of the group; a timid, clumsy little scuttlebutt of a man. But you know that he can be clever and resourceful when he has to be.||The three of them look at you and Oakley says, \"Well, where shall we point our prow?\".||On the map:|* Port Leshand (more than 500 leagues west)|* Smoking Islands, (less than 100 leagues southwest)">
 <CONSTANT CHOICES289 <LTABLE "steer straight for Port Leshand" "steer a course through the Smoking Islands" "steer south of the islands, keeping well clear of them">>
 
 <ROOM STORY289
@@ -4291,95 +4294,79 @@
 	<LOSE-LIFE 2 DIED-IN-COMBAT ,STORY290>
 	<IF-ALIVE TEXT290-CONTINUED>>
 
+<CONSTANT TEXT291 "They will accept any of the following: a sword, a pistol, a wand, an amulet, a ship in a bottle, a conch-shell horn, a bat-shaped talisman, or a black kite.">
+
 <ROOM STORY291
 	(IN ROOMS)
 	(DESC "291")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT291)
+	(PRECHOICE STORY291-PRECHOICE)
+	(CONTINUE STORY272)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY291-PRECHOICE ("AUX" GIVE-RESULT)
+	<SET GIVE-RESULT <GIVE-FROM-LIST <LTABLE SWORD SHARKS-TOOTH-SWORD PISTOL MAGIC-WAND MAGIC-AMULET SHIP-IN-BOTTLE CONCH-SHELL-HORN BAT-SHAPED-TALISMAN BLACK-KITE> UNABLE-TO-PART UNWILLING-TO-PART 1>>
+	<COND (<EQUAL? .GIVE-RESULT GIVE-UNWILLING GIVE-UNABLE>
+		<EMPHASIZE "Their mood starts to turn nasty.">
+		<STORY-JUMP ,STORY215>
+	)>>
+
+<CONSTANT TEXT292 "A dim flicker of memory makes you shudder. Watching the tall black sails against the sunset, you are reminded of an ancient mariner's legend that tells of the doomed Captain Mandrigard, master of a vessel called the Larnassos. After stealing the sacred treasures of the Temple of Dionysus, he was cursed never to set foot on shore again \"while his hand was still sullied with theft.\". According to myth, his crew found some way to escape the curse but Mandrigard himself never did, and he still sails the seven seas to this day. Anyone who sets foot aboard the Larnassos now is cursed to stay on for ever.">
+<CONSTANT CHOICES292 <LTABLE "hail the ship" "let her go by in the dusk">>
 
 <ROOM STORY292
 	(IN ROOMS)
 	(DESC "292")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT292)
+	(CHOICES CHOICES292)
+	(DESTINATIONS <LTABLE STORY311 STORY330>)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT293 "You have soon gathered a small pile of items that catch your eye. These include a conch-shell horn, an ancient bronze helmet, a ring in the form of a dragon, a fan with the shape and colouring of a thunder cloud.||\"Yes, any of this lot could well be magical,\" agrees Oakley, scrutinizing your selection. Like you, he has the practiced adventurer's instinct for such things. \"How many shall we take?\"||After a brief conference, you decide to take only two items. By pirates' code you should not steal from the captain of a vessel that has shown you hospitality. But weighed against that is the fact that Mandrigard knowingly lured you into the same curse that has trapped him here.||\"Sometimes I hanker for the old-fashioned days of piracy,\" complains Blutz, \"when we'd count plain wealth as treasure and didn't look for a patina of magic to tart it up.\" He is looking longingly at a diamond the size of a walnut which lies on the captain's table.||So the items to choose from are: a diamond, a conch-shell horn, a bronze helmet, a dragon ring, and a thundercloud fan. ">
+<CONSTANT TEXT293-CONTINUED "Then you hurry out of the cabin before Mandrigard wakes up">
 
 <ROOM STORY293
 	(IN ROOMS)
 	(DESC "293")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT293)
+	(PRECHOICE STORY293-PRECHOICE)
+	(CONTINUE STORY217)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY293-PRECHOICE ()
+	<SELECT-FROM-LIST <LTABLE DIAMOND CONCH-SHELL-HORN BRONZE-HELMET DRAGON-RING THUNDERCLOUD-FAN> 5 2>
+	<TELL TEXT293-CONTINUED>
+	<TELL ,PERIOD-CR>
+	<COND (<CHECK-SKILL ,SKILL-FOLKLORE> <STORY-JUMP ,STORY139>)>>
+
+<CONSTANT TEXT294 "You row nearer, watching as the raft and its occupant slowly take shape out of the gloom. He is an old man, thin and wizened as a bent stick, whose eyes shine with a pale moon-coloured light. Dark crusted stains in his beard make you wonder if he has resorted to drinking salt water, until you notice the full bucket and long box of provisions beside him on the raft.||His mouth cracks open in a long-toothed cackle. \"The fates be praised! Here am I adrift, poor old Timmy Mortice, an' here come four stalwarts to rescue me. 'Tis a miracle! Come aboard and share my water, mates, an' let's swap our stories.\"">
+<CONSTANT CHOICES294 <LTABLE "start by telling him how you come be in your present state" "begin by asking him about himself">>
 
 <ROOM STORY294
 	(IN ROOMS)
 	(DESC "294")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT294)
+	(CHOICES CHOICES294)
+	(DESTINATIONS <LTABLE STORY029 STORY048>)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT295 "The box is filled with yellow bones and tatters of wet rag. Choking back your disgust, you reach in to rummage  amongst these until you discover a few items of treasure. There is a bat-shaped talisman, a rusty sword, and a diamond almost as big as a walnut.">
+<CONSTANT TEXT295-CONTINUED "Blutz is still staring around nervously. \"I don't get it,\" he says. \"What happened to the old codger?\"||Oakley lifts the skull out of the box and gazes at it for a moment, then throws it far off into the darkness. You see it gleam in the moonlight, then there is a splash. \"Gone for good, I reckon,\" says Oakley. \"Let's help ourselves to some of the food he had.\"||Grimes shakes his head. \"It's gone off. The water too.\"||You push past him, but he is right. Mortice's provisions are now rancid and mould-covered, showing every sign of being months old. The water in the barrel is no more than stagnant green murk.||Returning to your boat, you jettison the raft and row a good distance before finally settling down for the night.||\"We're going to have to pray a ship comes along tomorrow,\" says Oakley as you drift off to sleep. \"I don't think we can hold out much longer.\"">
 
 <ROOM STORY295
 	(IN ROOMS)
 	(DESC "295")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT295)
+	(PRECHOICE STORY295-PRECHOICE)
+	(CONTINUE STORY332)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY295-PRECHOICE ()
+	<SELECT-FROM-LIST <LTABLE BAT-SHAPED-TALISMAN RUSTY-SWORD DIAMOND> 3 3>
+	<TELL TEXT295-CONTINUED>
+	<CRLF>>
 
 <ROOM STORY296
 	(IN ROOMS)
