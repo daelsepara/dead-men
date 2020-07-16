@@ -88,6 +88,7 @@
 	<PUTP ,STORY271 ,P?DEATH T>
 	<PUTP ,STORY275 ,P?DEATH T>
 	<PUTP ,STORY277 ,P?DEATH T>
+	<PUTP ,STORY290 ,P?DEATH T>
 	<RETURN>>
 
 <CONSTANT DIED-IN-COMBAT "You died in combat">
@@ -1151,7 +1152,8 @@
 	)(<CHECK-SKILL ,SKILL-BRAWLING>
 		<SET DMG 3>
 	)>
-	<LOSE-LIFE .DMG DIED-IN-COMBAT ,STORY073>>
+	<LOSE-LIFE .DMG DIED-IN-COMBAT ,STORY073>
+	<RESET-TEMP-SKILLS>>
 
 <CONSTANT TEXT074 "It is only a matter of minutes before you hear the sound you were dreading: an ominous scraping as the ship lurches to a halt. \"That tears it!\" says Grimes. \"We've run aground.\"||A hasty inspection reveals that you have run the keel onto a sandbank. There is no damage to the hull, but you will have to wait until high tide to get off again. By now the fog is closing tightly around the bay, blotting out any sight of the island.||\"We may as well sit it out until dawn,\" you decide.">
 
@@ -2546,7 +2548,8 @@
 	)(<CHECK-SKILL ,SKILL-BRAWLING>
 		<SET DMG 3>
 	)>
-	<LOSE-LIFE .DMG DIED-IN-COMBAT ,STORY171>>
+	<LOSE-LIFE .DMG DIED-IN-COMBAT ,STORY171>
+	<RESET-TEMP-SKILLS>>
 
 <CONSTANT TEXT172 "The others are waiting for you on deck. In the slanting rays of the setting moon you make out the furtive silhouettes of Grimes, tall and gaunt; Oakley, strong as a tar barrel; and fat little Blutz.||They have the jollyboat swung out over the side. Stealthily you lower it into the water, working in deep silence like four burglars intent on a night's business. From the below wafts the sound of a hornpipe and snatches of revelry as the crew sing sea shanties in the galley. Climbing down to the jollyboat, you shove off from the side and row with muffled oars away from the brooding bulk of Belle Dame. The moon slips below the western horizon, leaving the night studded with stars. There is no wind and the sea is as flat as a pane of glass. As the sounds of jollity fade into the distance, only the soft splash of your oars remains to disturb the eerie quiet.">
 
@@ -2828,7 +2831,6 @@
 	)>
 	<COND (<NOT <CHECK-SKILL ,SKILL-SWORDPLAY>>
 		<PUT TEMP-SKILLS .COUNT ,SKILL-SWORDPLAY>
-		<SET COUNT <+ .COUNT 1>>
 		<EMPHASIZE "You have temporarily gained SWORDPLAY">
 	)>
 	<RETURN>>
@@ -4146,185 +4148,148 @@
 	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
 
+<CONSTANT TEXT281 "Despite Grime's earnest entreaties, you decide to call upon the power of Leviathan. The decision alone is enough. As you raise the hand bearing the ring -- even before you can speak the serpent's name -- you sense something dark and monstrous rising from the illimitable depths. Waves rear like mountains to blot out the sky. The wind shrieks in fear and flees in all directions.||Leviathan rises out of the water. His body is a tower of bronze scales, each the size of a shield, green with brine stain. Phosphorescent venom drips from his gaping jaws in a torrent of liquid white fire. Dank poisonous vapour curls up from the black caves of his nostrils.||You realise your mistake at once -- you could never hope to command an entity so fearsome. As you cower in the boat, you see one more thing that strikes you full of mortal terror; on the face of the colossus there is now a look of fear. Even he will be hard-pressed to stand against Leviathan, and in their titanic battle four tiny mortals will be trodden underfoot, sent plunging into the ocean depths. You have brought your own doom upon you.">
+
 <ROOM STORY281
 	(IN ROOMS)
 	(DESC "281")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT281)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT282 "The instant you place the helmet on your brow, your mind becomes a maelstrom of bloody battle-images. All manner of martial tricks, tactics and harsh killing-lore are now second nature to you. You are as tough, wily and fearless as any Spartan warrior.">
 
 <ROOM STORY282
 	(IN ROOMS)
 	(DESC "282")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT282)
+	(PRECHOICE STORY282-PRECHOICE)
+	(CONTINUE STORY073)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY282-PRECHOICE ("AUX" COUNT)
+	<RESET-TEMP-SKILLS>
+	<SET COUNT 1>
+	<COND (<NOT <CHECK-SKILL ,SKILL-BRAWLING>>
+		<PUT TEMP-SKILLS .COUNT ,SKILL-BRAWLING>
+		<SET COUNT <+ .COUNT 1>>
+		<EMPHASIZE "You have temporarily gained BRAWLING">
+	)>
+	<COND (<NOT <CHECK-SKILL ,SKILL-SWORDPLAY>>
+		<PUT TEMP-SKILLS .COUNT ,SKILL-SWORDPLAY>
+		<EMPHASIZE "You have temporarily gained SWORDPLAY">
+	)>
+	<RETURN>>
+
+<CONSTANT TEXT283 "The words have hardly left your lips when he gives an exultant shriek of laughter and launches himself up the side, scaling towards the rail with the speed of a spider running up a wall. Behind him, the two oarsmen throw off their cowls and also begin to climb. You see faces pale as candlewax gleaming in the lantern-light, and long sharp teeth bared in naked bloodlust.||Then an even more horrific sight at last draws a cry of fear from your lips, as a dozen other figures erupt out of the black water and start to make their way up the side of the ship. These are more grotesque than the first three, with ravaged faces of bare bone and grave-mould- Barnacles crust their tarnished breastplates and their once-fine coats hang about them like tattered shrouds.||\"All hands on deck!\" you manage to call out, at last freeing yourself from the paralysis of terror as the first of the monsters reaches the rail. \"We're being boarded by vampires!\"">
 
 <ROOM STORY283
 	(IN ROOMS)
 	(DESC "283")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT283)
+	(CONTINUE STORY321)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT284 "A steady wind arises quickly in answer to your magical summons. It is not so  strong -- you dare not tamper with elements too much -- but it is enough for your purposes. The fog swirls nd breaks apart, swiftly dispersing into wispy tendrils. You now have a clear view of both the crippled Rose and, nearer to you, Skarvench's ship the Moon Dog. She is standing at two o'clock off your starboard bow, just within cannon range. You have the weather gauge, meaning that the wind is blowing from behind you towards the Moon Dog -- the ideal position for a sea battle.||\"Now we have a choice,\" says Oakley. \"We can sail in for boarding, or stand off and rake her with our guns. What's it to be skipper?\"||A snap decision is needed.">
+<CONSTANT CHOICES284 <LTABLE "steer in towards the Moon Dog" "unlimber your cannons">>
 
 <ROOM STORY284
 	(IN ROOMS)
 	(DESC "284")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT284)
+	(CHOICES CHOICES284)
+	(DESTINATIONS <LTABLE STORY322 STORY341>)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT285 "\"You would match your magic against mine?\" sneers Wild. \"You fool -- didn't the hurricane I summoned give you any inkling of my power?\"||\"It was impressive,\" you admit. \"More than I could achieve at least with any hope of controlling it. But I think you're bluffing, Doctor; I think that hurricane took most of your power. That and the fog. Now we're evenly matched.\"||A web of fiery tendrils shoots from your wand, igniting Wild's robes. As the flames lick up to engulf him, he gives a single scream like nothing you've ever heard from a human throat, then stumbles back against the rail and falls into the sea.||\"Don't congratulate yourself too soon.\" You whirl to see an elderly aristocratic-looking man standing in the companion-way with sword and pistol. It can only be Admiral Calidor, commander of the Queen's navy. \"Well, don't just stand there,\" he continues. \"I heard enough to guess you're on our side, whoever you are; now's your chance to prove it. Stand by to repel boarders!\"||He gestures, and you look up to see Skarvench and his pirates sliding down out of the mist like spiders on their webs. Marines rush up on deck to give battle. Calidor himself closes with the lumbering figure of Porbuck.||The fight rages all around you, but you stride oblivious across the deck. There is only one foe you must face -- and now you see him, looming out of the eerie mist, and all your hatred wells up in a mighty roar: \"Skarvench\"||\"Ah, mate,\" he says with a strange smile. \"Ready to die, are ye?\"">
 
 <ROOM STORY285
 	(IN ROOMS)
 	(DESC "285")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT285)
+	(CONTINUE STORY171)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT286 "Your sword flashes out, taking his life before he knows it. With hands pressed to his pierced heart, mouth opening and closing like a fish out of water, he sinks to the floor and expires in silence. You waste no pity on him. He has done the evil Skarvench's every bidding without a qualm for all these years, happy to collude in wickedness even if not bold enough to do wicked deeds of his own. You turn away from the body and hurry up on deck.">
 
 <ROOM STORY286
 	(IN ROOMS)
 	(DESC "286")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT286)
+	(CONTINUE STORY172)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT287 "You decide to let Blutz eat the crabs. He is the least sturdy of the four of you, and even a meagre meal will help keep his spirits up. As Blutz tucks in, deftly cracking the shells on a rock and shredding the tough flesh with his teeth, Grimes catches your eye and nods sagely. He agrees with your judgement.">
+<CONSTANT CHOICES287 <LTABLE "go exploring" "get back in the boat and head on to the next island">>
 
 <ROOM STORY287
 	(IN ROOMS)
 	(DESC "287")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT287)
+	(CHOICES CHOICES287)
+	(DESTINATIONS <LTABLE STORY211 STORY116>)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT288 "You spend nearly a week on the island, sustained by nature's bounty and an ample supply of fresh rainwater draining down off the slopes of the volcano.">
+<CONSTANT TEXT288-GAME "You supplement your diet with game and make a full recovery">
+<CONSTANT TEXT288-SUBSIST "You are not able to supplement your diet with game but you still subsist comfortably enough as you are by gathering nuts and berries">
+<CONSTANT TEXT288-CONTINUED "At last, by common consent, you decide if it is time to move on. The volcano is producing occasional ominous growls from deep in the earth, and you have no desire to still be here when it finally erupts. Climbing aboard your boat, the four of you resume your arduous voyage towards Port Leshand">
 
 <ROOM STORY288
 	(IN ROOMS)
 	(DESC "288")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT288)
+	(PRECHOICE STORY288-PRECHOICE)
+	(CONTINUE STORY135)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY288-PRECHOICE ()
+	<CRLF>
+	<COND (<OR <CHECK-SKILL ,SKILL-WILDERNESS-LORE> <CHECK-SKILL ,SKILL-MARKSMANSHIP>>
+		<SETG LIFE-POINTS ,MAX-LIFE-POINTS>
+		<TELL TEXT288-GAME>
+	)(ELSE
+		<TELL TEXT288-SUBSIST>
+		<GAIN-LIFE 1>
+	)>
+	<UPDATE-STATUS-LINE>
+	<TELL ,PERIOD-CR>
+	<TELL TEXT288-CONTINUED>
+	<TELL ,PERIOD-CR>>
+
+<CONSTANT TEXT289 "In the glimmering predawn, as your little boat drifts gently on across the still ocean, you  have your first chance to take stock of your situation. You must judge every factor with great care from now on: even the smallest mistake could spell disaster, and you will need every scrap of luck and cleverness if you are to make it to civilized lands alive.||First, your companions on the voyage. Grimes, lanky and lantern-jawed, is a lugubrious fellow but despite his habit of expecting the worst he is a good man to have aboard, being neither timid nor quarrelsome. Oakley is tough and smart but abrasive -- a possible challenge to your leadership, if you fail to assert yourself. All the same, you have been in enough tough scrapes together in the past to know that you can count on him too. Blutz is the weak link of the group; a timid, clumsy little scuttlebutt of a man. But you know that he can be clever and resourceful when he has to be.||The three of them look at you and Oakley says, \"Well, where shall we point our prow?\".||On the map:|* Port Leshand (more than 500 leagues west)|* Smoking Islands, (less than 100 leagues southwest)">
+<CONSTANT CHOICES289 <LTABLE "steer straight for Port Leshand" "steer a course through the Smoking Islands" "steer south of the islands, keeping well clear of them">>
 
 <ROOM STORY289
 	(IN ROOMS)
 	(DESC "289")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT289)
+	(CHOICES CHOICES289)
+	(DESTINATIONS <LTABLE STORY002 STORY021 STORY040>)
+	(TYPES THREE-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT290 "Closing with your foe, you seize her at wrist and elbow and try to bend her arm around behind her back. You have used the selfsame hold on some of the nastiest bullies to sail the seven seas, and you remember one fellow in particular -- a scar-faced gorilla called Gutshredder Turnbull -- weeping like a baby as he begged you to let go.||Against Ejada, the armlock is useless. You might as well be trying to break the branch of an oak tree. After a brief tussle, she flings you to the ground with a painful jolt. She gives a scornful laugh.">
+<CONSTANT TEXT290-CONTINUED "You leap ready to renew the attack. But how can you overcome a foe with seemingly limitless strength?">
+<CONSTANT CHOICES290 <LTABLE "try a straightforward punch" "or a body slam" "use" "or" "otherwise, maybe you should just beat a hasty retreat">>
 
 <ROOM STORY290
 	(IN ROOMS)
 	(DESC "290")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT290)
+	(CHOICES CHOICES290)
+	(DESTINATIONS <LTABLE STORY271 STORY309 STORY384 STORY317 STORY005>)
+	(REQUIREMENTS <LTABLE NONE NONE SKILL-SPELLS SKILL-MARKSMANSHIP NONE>)
+	(PRECHOICE STORY290-PRECHOICE)
+	(TYPES <LTABLE R-NONE R-NONE R-SKILL R-SKILL R-NONE>)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY290-PRECHOICE ()
+	<LOSE-LIFE 2 DIED-IN-COMBAT ,STORY290>
+	<IF-ALIVE TEXT290-CONTINUED>>
 
 <ROOM STORY291
 	(IN ROOMS)
