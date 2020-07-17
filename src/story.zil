@@ -13,7 +13,7 @@
 
 <ROUTINE SPECIAL-INTERRUPT-ROUTINE (KEY)
 	<COND (<EQUAL? .KEY INTERRUPT-KEY-CAPS INTERRUPT-KEY>
-		<COND (<IN? ,HEALING-POTION ,PLAYER>
+		<COND (<CHECK-ITEM ,HEALING-POTION>
 			<CRLF><CRLF>
 			<TELL "Drink healing potion?">
 			<COND (<YES?>
@@ -91,6 +91,8 @@
 	<PUTP ,STORY290 ,P?DEATH T>
 	<PUTP ,STORY296 ,P?DEATH T>
 	<PUTP ,STORY304 ,P?DEATH T>
+	<PUTP ,STORY314 ,P?DEATH T>
+	<PUTP ,STORY317 ,P?DEATH T>
 	<RETURN>>
 
 <CONSTANT DIED-IN-COMBAT "You died in combat">
@@ -137,7 +139,7 @@
 <ROUTINE CONSUME-PROVISIONS ("OPT" AMOUNT JUMP "AUX" QUANTITY RETURN-VALUE)
 	<SET RETURN-VALUE F>
 	<COND (<NOT .AMOUNT> <SET AMOUNT 1>)>
-	<COND (<IN? ,PROVISIONS ,PLAYER>
+	<COND (<CHECK-ITEM ,PROVISIONS>
 		<SET QUANTITY <GETP ,PROVISIONS ,P?QUANTITY>>
 		<COND (<G? .QUANTITY 0>
 			<SET QUANTITY <- .QUANTITY .AMOUNT>>
@@ -162,6 +164,17 @@
 		<COND (,CURRENT-VEHICLE <REMOVE ,CURRENT-VEHICLE>)>
 		<MOVE .VESSEL ,VEHICLES>
 		<SETG CURRENT-VEHICLE .VESSEL>
+	)>>
+
+<ROUTINE LOSE-SWORD ()
+	<COND (<CHECK-ITEM ,SWORD>
+		<LOSE-ITEM ,SWORD>
+	)(<CHECK-ITEM  ,SHARKS-TOOTH-SWORD>
+		<LOSE-ITEM ,SHARKS-TOOTH-SWORD>
+	)(<CHECK-ITEM ,CLEAVER>
+		<LOSE-ITEM ,CLEAVER>
+	)(<CHECK-ITEM ,RUSTY-SWORD>
+		<LOSE-ITEM ,RUSTY-SWORD>
 	)>>
 
 <CONSTANT PROLOGUE-TEXT "\"Pirates!\" The roar of cannonfire thunders across the waves as word leaves the captain's lips. Hurtling out of the billowing plumes of smoke come a barrage of iron shells. Each is larger than a man's fist, and strikes with a force that splinters the oak beams of your ship and shatters men's skulls like eggs. The mainmast takes a direct hit and topples, crushing the sailors standing under it.||A grappling hook latches onto the rail. The pirates are getting ready to board you. Rushing to the side, you see their sinister vessel drawing alongside, black sails flapping in the breeze like a carrion-bird's wings. Her prow has the face of a medieval gargoyle. You read the name painted on her bows: the Belle Dame. But there is no look of beauty about her, nor hint of mercy on the faces of the eager brigands lining her rail.||A crewman standing beside you utters a groan of fear. \"It's Skarvench's ship.\"||\"Who's he?\" you ask, having to shout over the din of cannon shots and the pirates' battle-cries.||He stares at you as though you are a simpleton, and then remembers that this is your first voyage to the New World. \"The worst man that ever lived,\" is his blunt reply. And then the ships come together and the pirates are upon you.||Rushing headlong into the terrified crew, the pirates cleave a swathe of gory death across the ship's deck, their cutlasses rising and falling like scythes. You see the ship's officers fighting valiantly to defend the helm, but they are hopelessly outnumbered and soon butchered at their post. The fierce grins on the pirate's faces tell you that they expect easy pickings. You narrow your eyes as anger wells up inside you. You know that you will die today, but you feel no fear -- only a cold determination to sell your life dearly. Two pirates lunge at you. You duck the swing of the first, catch his arm and throw him against his crony. The sword intended for you ends up in a pirate's belly, and his knife comes up by reflex to slash at the man who has inadvertently impaled him.||\"Two down...\" You turn, and then for the first time you clap eyes on Skarvench himself. He stands astride the rail, grasping a grappling-line in one hand and a pistol in the other, whipping his sea-dogs into a killing frenzy with his evil laughter. His broad back and gangling limbs make him look like a massive crow. His beard is as long and lank as seaweed, and a single eye blazes beneath his bald brow -- the other is covered by a leather patch.||He is raising his pistol. You are rooted to the spot under his baleful stare. It can't be fear you're feeling surely...||\"Ah, matey,\" he says with a brown-toothed grin. \"Got to kill you again, 'ave I?\"||Again..? You have no time to ponder this enigma. In the next instant, he fires his pistol and your whole world goes black.||--||You sit up with a gasp, sweat soaking your clothes.||\"You've 'ad that dream again, eh?\"||You look around, memory trickling back as the dream recedes. The slow creaking of a ship's timbers, the unhurried heave of the waves... you are in the stuffy confines of the Belle Dame's bowels. Sailors snore fitfully around you, catching some sleep between chores. In the glimmer of an oil lamp sits Old Marshy, the ship's carpenter, whittling at a stick of wood. He glances across at you, shaking his head sadly. \"It was two years ago. Don't know why you can't stop 'aving the dreams.\"||\"Dreams? Nightmares!\" you say, mopping the sweat away. As you do, you feel the scar across your forehead where Skarvench's bullet struck you. A finger's breadth to the right -- one less tot of rum for Skarvench's breakfast that fateful morning! -- and your brains would have been blown out. As it is the bullet only grazed you, leaving the visible mark on your head and the scar of hatred deep in your heart.||Now that the nightmare has washed away, you recall the two years that have passed since that day. When you were first brought aboard the Belle Dame, Skarvench deemed you too insignificant to ransom and too close to death to be worth pressing into service. He would have cast you into the deep and never had a qualm -- that was the fate of most who survived the battle -- but Old Marshy undertook to nurse you back to health. You can well remember the weeks it took to get your strength back -- weeks experienced like glimpses in broken glass, because of fever. You remember Old Marshy holding the wooden spoons of gruel to your lips until his thin arms trembled with tiredness, urging you to eat. You remember the shouts of the pirates as they toiled in the rigging, and their drunken laughter under the stars at night. And most of all you remember Skarvench, looming through your thoughts like the embodiment of cruelty, striding the deck and waiting for you to die.||You did not die; thanks to Old Marshy you regained your strength. But death might have been better than the living hell you have had to endure these two years as an ordinary seaman aboard the cruellest ship to sail the Carab Sea. Skarvench metes out discipline as the whim takes him, revelling in the suffering of others; pain is his wine, and death his meat. Often you have had to stand by and watch a man whipped for the slightest mistake. Sometimes you have felt that whip yourself -- all to raucous laughter of Skarvench and his vicious pirate band.||\"All hands on deck!\" Hearing the command, you shake the other sailors awake and hurry up out of the dingy confines of the orlop deck into the blaze of daylight.||Skarvench stands on the poopdeck. The ox-like first mate, Porbuck gives you a shove and growls, \"You , get up in the rigging.\" As you climb, you glance out to sea. A small ship lies off the port bow and the Belle Dame is rapidly closing on her. You see a tall wooden crucifix standing amidships; she has no cannon. That is foolhardy. \"Go to sea on a prayer,\" as the adage goes, \"but take a keg of powder too.\"||You understand the reason for the other ship's lack of weaponry when you get a better view of the men lining her rail. They're all monks!||Skarvench's voice goes snarling across the water. \"Heave to or be blown out o' the water!\" he calls. \"We'll be takin' your treasure, holy or not!\"||\"We have no treasure,\" calls back one of the monks. \"We are poor brothers of the Saviour, travelling to the New World to spread His message to the heathen.\"||Skarvench smiles -- always a sign of his bad temper -- and says, \"Is that so? Well, I know of no place more heathen than the ocean bed.\" He leans on the poopdeck rail and calls to the master gunner: \"Mister Borograve, prepare to give 'em a broadside. I want their shaved heads sent forty fathoms deep, where heaven can't hear their mealy-mouthed prayers!\"||The monks know they cannot outrun the Belle Dame. As Borograve orders the cannons primed, they begin to sing a hymn. It is a glorious and peaceful sound that reminds you of the meadows and villages of your homeland. Most of the sailors pause in their duties, overcome by the melancholy beauty of the song. Even one or two of the pirates look uneasy at what they are about to do.||\"Prepare to fire,\" says Skarvench, keen as a hound at the scent of a kill.||\"No!\" A carpenter's hammer goes flying through the air and strikes Skarvench's head with a crack loud enough to carry up to where you sit in the rigging. Skarvench remains as steady as a rock, his hand flashing out with the startling speed to snatch the hammer out of the air as it falls. then he turns. His face is a mask of white fury. The fact that there is a stream of blood flowing from his temple only makes him look all the more terrible. His gaze bores along the deck and finds:||\"Mister Marsh! This your hammer, is it?\"||Old Marshy quails, his one jot of boldness used up. \"B-but, Cap'n... they're holy men! I don't think...||Skarvench tastes his own blood on his lip and savours it with his tongue. He gestures to a couple of pirates, and Old Marshy is seized and dragged up to the poopdeck. \"Lay his head on the rail there, lads,\" says Skarvench in a voice like honeyed venom. He raises the hammer. \"You're right, Mister Marsh; you don't think. That's the trouble with having nothin' in your brain-pan, see?\"||Far too late, you realise what Skarvench is going to do. You give a gasp and start down through the rigging. But even as you act, you know there is nothing you can do...||The hammer smashes down. It sounds like a wineflask breaking. The ordinary seamen look away in horror. The pirates grin gleefully like their captain, excited by the grisly sight. The corpse slumps to the deck.||\"God curse you, Skarvench,\" you mutter under your breath as you reach the foot of the mast. \"I'll see you dead for that.\"||\"You're not alone in wishing that,\" whispers a voice, \"but I'd stow such talk unless you want your own skull under the hammer next.\"||You look around to see three of the crew -- Grimes, Oakley and Blutz -- men who, like you, were taken off plundered ships and force to work for the pirates. \"We've a plan,\" continues Grimes in a low voice. \"If we stay aboard this devil ship our days are surely numbered, so tonight we plan to jump ship. We're scheduled to take the evening watch. We'll lower the jollyboat with a few supplies, then strike out towards Port Leshand.\"||\"Five hundred leagues of open ocean in a tiny boat like that!\" you gasp. \"It's near certain death.\"||\"Better than certain death, which is what we can expect here,\" mutters Oakley. \"Look, you've got a reputation of being a handy customer to have along in a tight spot. To be honest, we haven't got much of a chance without you. Now, are you with us?\"||You glare back up at the tall stooped figure on the poopdeck. He stamps to and fro, the brain-smeared hammer still in his hand, annoyed that the monks made their getaway while he was distracted by Old Marshy. You'll make him pay for his crimes one day, but you know the moment is not yet right.||You turn to Grimes and the others and give a swift nod. \"I'm with you.\"">
@@ -238,7 +251,7 @@
 
 <ROUTINE STORY005-PRECHOICE ("AUX" (DMG 6))
 	<COND (<CHECK-SKILL ,SKILL-CHARMS> <SET DMG <- .DMG 2>>)>
-	<COND (<IN? ,FEATHER-SHIELD ,PLAYER> <SET DMG <- .DMG 2>>)>
+	<COND (<CHECK-ITEM ,FEATHER-SHIELD> <SET DMG <- .DMG 2>>)>
 	<LOSE-LIFE .DMG DIED-EJADA-SORCERY ,STORY005>>
 
 <CONSTANT TEXT006 "All the pent-up emotion of your crew explodes in an excited roar as they go leaping onto the deck of the enemy ship with you at their head. The pirates stand ready to meet your boarding party, but the pounding they took from your guns has sapped their morale and the battle seems a forgone conclusion. Gunshots crack deafeningly all around you, and you are half blinded by the thick clouds of smoke and sprays of blood, but you charge right into the thick of the fray with a cry of, \"Have at them, lads!\"">
@@ -510,7 +523,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY024-PRECHOICE ()
-	<COND (<IN? ,LETTER-OF-MARQUE ,PLAYER> <STORY-JUMP ,STORY092>)>>
+	<COND (<CHECK-ITEM ,LETTER-OF-MARQUE> <STORY-JUMP ,STORY092>)>>
 
 <CONSTANT TEXT025 "With a groan of protesting timbers, your ship lurches to a dead halt as her prow smashes into the Moon Dog's side. Your sailors cast grappling-hooks, catching the other ship's rail and pulling them together for the final battle.">
 
@@ -1252,7 +1265,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY081-PRECHOICE ("AUX" (DMG 6))
-	<COND (<IN? ,FEATHER-SHIELD ,PLAYER> <SET DMG <- .DMG 3>>)>
+	<COND (<CHECK-ITEM ,FEATHER-SHIELD> <SET DMG <- .DMG 3>>)>
 	<COND (<CHECK-SKILL ,SKILL-CHARMS> <SET DMG <- .DMG 1>>)>
 	<COND (,RUN-ONCE <LOSE-LIFE .DMG DIED-EJADA-SORCERY ,STORY081>)>>
 
@@ -1369,7 +1382,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY089-PRECHOICE ()
-	<COND (<IN? ,WEASEL ,PLAYER> <STORY-JUMP ,STORY076>)>>
+	<COND (<CHECK-ITEM ,WEASEL> <STORY-JUMP ,STORY076>)>>
 
 <CONSTANT TEXT090 "You fetch a foaming stoop of ale. After fastidiously transferring the contents to his odd saucer-shaped goblet, he turns his blind gaze on you. \"You were with that Skarvench, weren't ye?\"||\"How did you --?\" begins Blutz.||He holds up his hand. \"I hears a thing or two. Like about Skarvench doin' in old Marshy. I sailed with Marshy, lads, once upon a time, and Skarvench weren't fit to spit upon his shoes. Talkin' of Skarvench, you know the new ship he's had built, the Moon Dog? Fitted with silver sails that came in a crate all the way from Glorianne. An' why did Skarvench keep askin' around about full moons an' cloud cover an' such -- ain't tide tables good enough for him no more? Makes you wonder, mates. Is it lunacy, or is there method in his madness?\"||He's a fine one to talk about lunacy,\" whispers Grimes as you get up to leave.||\"I heard that too!\" screeches Greymalkin after you. \"Ye'd do well to pay heed to what I told you, if ye want to live. Watch out for that basilisk he had shipped aboard an an' all.\"">
 <CONSTANT CHOICES090 <LTABLE "step in to save the scholar from being bullied" "go to the shipyard">>
@@ -1440,7 +1453,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY094-PRECHOICE ()
-	<COND (<AND <CHECK-CODEWORD ,CODEWORD-HORAL> <IN? ,POCKET-WATCH ,PLAYER>> <STORY-JUMP ,STORY189>)>>
+	<COND (<AND <CHECK-CODEWORD ,CODEWORD-HORAL> <CHECK-ITEM ,POCKET-WATCH>> <STORY-JUMP ,STORY189>)>>
 
 <CONSTANT TEXT095 "Calmly levelling your pistol, you shoot the end off the taper. \"By all that's unholy!\" sears Skarvench. \"I never seen such a shot!\"||Neither have you, but you do not let surprise cost you your momentary advantage. You race in before Skarvench can relight the fuse, and in seconds the two of you are locked in a fight to death.">
 
@@ -1665,15 +1678,11 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY110-PRECHOICE ()
-	<COND (<OR <AND <IN? ,CORKSCREW ,PLAYER> <IN? ,SHIP-IN-BOTTLE ,PLAYER>>
-		<IN? ,DEED-OF-OWNERSHIP ,PLAYER>
-		<IN? ,DIAMOND ,PLAYER>>
+	<COND (<OR <AND <CHECK-ITEM ,CORKSCREW> <CHECK-ITEM ,SHIP-IN-BOTTLE>> <CHECK-ITEM ,DEED-OF-OWNERSHIP> <CHECK-ITEM ,DIAMOND>>
 		<PUTP ,STORY110 ,P?DEATH F>
-		<CRLF>
-		<TELL "Now you must look for another way to obtain a vessel:">
-		<CRLF>
+		<TELL CR "Now you must look for another way to obtain a vessel:" CR>
 	)(ELSE
-		<TELL CR "You have no hope of catching up with Skarvench." CR>
+		<TELL CR "You have no hope of catching up with Skarvench" ,PERIOD-CR>
 	)>>
 
 <CONSTANT TEXT111 "A rope is slung over the yardarm. The warship captain personally ties the end into a noose. As he puts it over your head, you cannot resist a few futile words of defiance. \"You enjoy your job, don't you?\" you snarl at him.||He gazes back at you coolly. \"I serve my Queen and country. That is all; there's nothing personal about this.\" He turns to the marines holding the end of the rope and gives a curt nod. You are hauled aloft to kick out your life under the shadow of you own ship's yardarm. It is a fate that awaits many pirates, and a far cry from the glorious destiny you dreamed of.">
@@ -2014,7 +2023,7 @@
 	<LOSE-LIFE 1 DIED-OF-HUNGER ,STORY212>
 	<COND (<IS-ALIVE>
 		<COND (<CONSUME-PROVISIONS 1 ,STORY212> <RETURN>)>
-		<COND (<IN? ,MONKEY ,PLAYER>
+		<COND (<CHECK-ITEM ,MONKEY>
 			<CRLF>
 			<TELL "Eat the monkey (if you are heartless or desperate enough)?">
 			<COND (<YES?>
@@ -2098,7 +2107,7 @@
 	<COND (<YES?>
 		<SET ITEMS <GET STORY139-LIST 0>>
 		<DO (I 1 .ITEMS)
-			<COND (<IN? <GET .ITEMS .I> ,PLAYER>
+			<COND (<CHECK-ITEM <GET .ITEMS .I>>
 				<REMOVE <GET .ITEMS .I>>
 			)>
 		>
@@ -2159,7 +2168,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY143-PRECHOICE ()
-	<COND (<OR <IN? ,CRUCIFIX ,PLAYER> <CHECK-SKILL ,SKILL-CHARMS>> <STORY-JUMP ,STORY181>)>>
+	<COND (<OR <CHECK-ITEM ,CRUCIFIX> <CHECK-SKILL ,SKILL-CHARMS>> <STORY-JUMP ,STORY181>)>>
 
 <CONSTANT TEXT144 "You hide out deep in the hinterland of the island, surviving off berries and fruit. Eventually you deem it safe to make your way back to the native village. Peering out from the sheltering foliage, you find that the Belle Dame has sailed off. The coast is clear.||\"That fiend!\" rages Oakley. \"No doubt he's off to wreak more wickedness in the world. Are we really going to sit here sucking coconuts while he goes unpunished?\"||You all agree it is high time you pressed on with your journey. The natives are now too scared to repeat the offer of an escort; you're on your own.">
 
@@ -2455,16 +2464,8 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY166-PRECHOICE ()
-	<COND (<IN? ,SWORD ,PLAYER>
-		<LOSE-ITEM ,SWORD>
-	)(<IN? ,SHARKS-TOOTH-SWORD ,PLAYER>
-		<LOSE-ITEM ,SHARKS-TOOTH-SWORD>
-	)(<IN? ,CLEAVER ,PLAYER>
-		<LOSE-ITEM ,CLEAVER>
-	)(<IN? ,RUSTY-SWORD ,PLAYER>
-		<LOSE-ITEM ,RUSTY-SWORD>
-	)>
-	<COND (<IN? ,PISTOL ,PLAYER> <LOSE-ITEM ,PISTOL>)>
+	<LOSE-SWORD>
+	<COND (<CHECK-ITEM ,PISTOL> <LOSE-ITEM ,PISTOL>)>
 	<SETG MONEY 0>
 	<UPDATE-STATUS-LINE>>
 
@@ -2488,11 +2489,11 @@
 		<CRLF>
 		<SKILL-SWAP <LTABLE SKILL-BRAWLING>>
 	)>
-	<COND (<AND <IN? ,CORKSCREW ,PLAYER> <IN? ,SHIP-IN-BOTTLE ,PLAYER>>
+	<COND (<AND <CHECK-ITEM ,CORKSCREW> <CHECK-ITEM ,SHIP-IN-BOTTLE>>
 		<STORY-JUMP ,STORY261>
-	)(<IN? ,DEED-OF-OWNERSHIP ,PLAYER>
+	)(<CHECK-ITEM ,DEED-OF-OWNERSHIP>
 		<STORY-JUMP ,STORY318>
-	)(<IN? ,DIAMOND ,PLAYER>
+	)(<CHECK-ITEM ,DIAMOND>
 		<STORY-JUMP ,STORY299>
 	)(ELSE
 		<EMPHASIZE "Returning to town, you have exhausted all your options. You have no hope of catching up with Skarvench.">
@@ -2561,7 +2562,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY172-PRECHOICE ()
-	<COND (<OR <CHECK-SKILL ,SKILL-SEAFARING> <IN? ,BOOK-OF-CHARTS ,PLAYER>>
+	<COND (<OR <CHECK-SKILL ,SKILL-SEAFARING> <CHECK-ITEM ,BOOK-OF-CHARTS>>
 		<STORY-JUMP ,STORY381>
 	)(<CHECK-SKILL ,SKILL-CHARMS>
 		<STORY-JUMP ,STORY399>
@@ -2718,9 +2719,7 @@
 
 <ROUTINE STORY182-PRECHOICE ()
 	<COND (<AND <CHECK-SKILL ,SKILL-SWORDPLAY> <CHECK-SKILL ,SKILL-MARKSMANSHIP>>
-		<COND (,RUN-ONCE
-			<LOSE-LIFE 5 DIED-IN-COMBAT ,STORY182>
-		)>
+		<COND (,RUN-ONCE <LOSE-LIFE 5 DIED-IN-COMBAT ,STORY182>)>
 	)(ELSE
 		<CRLF>
 		<TELL TEXT182-DEATH>
@@ -2937,7 +2936,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY197-PRECHOICE()
-	<COND (<IN? ,MONKEY ,PLAYER>
+	<COND (<CHECK-ITEM ,MONKEY>
 		<CRLF>
 		<TELL "Eat the monkey (if you are heartless or desperate enough)?">
 		<COND (<YES?>
@@ -3038,11 +3037,11 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY203-PRECHOICE ()
-	<COND (<AND <IN? ,CORKSCREW ,PLAYER> <IN? ,SHIP-IN-BOTTLE ,PLAYER>>
+	<COND (<AND <CHECK-ITEM ,CORKSCREW> <CHECK-ITEM ,SHIP-IN-BOTTLE>>
 		<STORY-JUMP ,STORY261>
-	)(<IN? ,DEED-OF-OWNERSHIP ,PLAYER>
+	)(<CHECK-ITEM ,DEED-OF-OWNERSHIP>
 		<STORY-JUMP ,STORY318>
-	)(<IN? ,DIAMOND ,PLAYER>
+	)(<CHECK-ITEM ,DIAMOND>
 		<STORY-JUMP ,STORY299>
 	)(ELSE
 		<EMPHASIZE "But you have already exhausted all your options. Your cause is hopeless.">
@@ -3549,15 +3548,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY238-EVENTS ()
-	<COND (<IN? ,SWORD ,PLAYER>
-		<LOSE-ITEM ,SWORD>
-	)(<IN? ,SHARKS-TOOTH-SWORD ,PLAYER>
-		<LOSE-ITEM ,SHARKS-TOOTH-SWORD>
-	)(<IN? ,CLEAVER ,PLAYER>
-		<LOSE-ITEM ,CLEAVER>
-	)(<IN? ,RUSTY-SWORD ,PLAYER>
-		<LOSE-ITEM ,RUSTY-SWORD>
-	)>
+	<LOSE-SWORD>
 	<RETURN ,STORY276>>
 
 <CONSTANT TEXT239 "The captain listens to your tale with equal measures of horror disbelief. \"It's a hard tale to swallow,\" he says at last, \"but I've heard this fellow Skarvench is full of hubris.\"||\"It's no mere pipedream,\" says Grimes. \"Skarvench is cunning and ruthless. If he's set his sights on such a prize, you can be sure he has a good plan.\"||The captain scratches his head. \"It is true that the Queen's flagship is bound for the colonies,\" he admits. \"But I only heard the news myself as I was about to set sail from Glorianne, so Skarvench must have spies in high places. I'd help if I could, but my vessel is only a merchantman and would fare badly against a fully-armed pirate ship.\"||He finally agrees to set you off in Port Selenice, where you have your best chance of enlisting aid against Skarvench. Then, wishing you well, he resumes his journey towards Leshand.">
@@ -3644,15 +3635,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY245-PRECHOICE ()
-	<COND (<IN? ,SWORD ,PLAYER>
-		<LOSE-ITEM ,SWORD>
-	)(<IN? ,SHARKS-TOOTH-SWORD ,PLAYER>
-		<LOSE-ITEM ,SHARKS-TOOTH-SWORD>
-	)(<IN? ,CLEAVER ,PLAYER>
-		<LOSE-ITEM ,CLEAVER>
-	)(<IN? ,RUSTY-SWORD ,PLAYER>
-		<LOSE-ITEM ,RUSTY-SWORD>
-	)>
+	<LOSE-SWORD>
 	<CRLF>
 	<TELL TEXT245-CONTINUED>
 	<TELL ,PERIOD-CR>>
@@ -3993,8 +3976,10 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY271-PRECHOICE ("AUX" (DMG 4))
-	<COND (<IN? ,FEATHER-SHIELD ,PLAYER> <SET DMG 2>)>
-	<LOSE-LIFE .DMG DIED-IN-COMBAT ,STORY271>
+	<COND (,RUN-ONCE
+		<COND (<CHECK-ITEM ,FEATHER-SHIELD> <SET DMG 2>)>
+		<LOSE-LIFE .DMG DIED-IN-COMBAT ,STORY271>
+	)>
 	<IF-ALIVE TEXT271-CONTINUED>>
 
 <CONSTANT TEXT272 "The natives bring you baked root-bread, fruit and gourds full of fresh water. You can take enough provisions for two meals.">
@@ -4015,7 +4000,7 @@
 	<ADD-PROVISIONS <GET-NUMBER "How many provisions to take" 1 2>>
 	<TELL TEXT272-CONTINUED>
 	<TELL ,PERIOD-CR>
-	<COND (<IN? ,BOOK-OF-CHARTS ,PLAYER>
+	<COND (<CHECK-ITEM ,BOOK-OF-CHARTS>
 		<PUT <GETP ,STORY272 ,P?DESTINATIONS> 3 ,STORY329>
 	)(ELSE
 		<PUT <GETP ,STORY272 ,P?DESTINATIONS> 3 ,STORY348>
@@ -4291,7 +4276,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY290-PRECHOICE ()
-	<LOSE-LIFE 2 DIED-IN-COMBAT ,STORY290>
+	<COND (,RUN-ONCE <LOSE-LIFE 2 DIED-IN-COMBAT ,STORY290>)>
 	<IF-ALIVE TEXT290-CONTINUED>>
 
 <CONSTANT TEXT291 "They will accept any of the following: a sword, a pistol, a wand, an amulet, a ship in a bottle, a conch-shell horn, a bat-shaped talisman, or a black kite.">
@@ -4411,7 +4396,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY299-EVENTS ("AUX" (DIAMONDS 0) (QUANTITY 0))
-	<COND (<IN? ,DIAMOND ,PLAYER>
+	<COND (<CHECK-ITEM ,DIAMOND>
 		<SET QUANTITY <GETP ,DIAMOND ,P?QUANTITY>>
 		<COND (<G? .QUANTITY 1>
 			<REPEAT ()
@@ -4490,7 +4475,7 @@
 	(TYPES <LTABLE R-ITEM R-NONE>)
 	(FLAGS LIGHTBIT)>
 
-<CONSTANT TEXT304 "A shot cracks out through the mist-shrouded deck, splintering the wand in Wild's hand. You and he both turn, equally amazed, as a tall figure steps out of the companion-way hatch. He holds a smoking pistol, and from his aristocratic manner you guess he must be Admiral Lord Calidor, commander of the Queen's navy. \"Wild,\" he says curtly, \"your twig's split.\" He must know he's just made the luckiest shot in history, but with typical Gloriannic aplomb he shows no sign of it.||\"Admiral,\" begins Wild in a wheedling voice, \"this pirate villain --\"||\"Forget it, Wild,\" says Calidor, reloading his pistol. \"I'm wise to your game.\" A squad of marines pour past him onto the deck. \"Sergeant, Dr Wild is to be placed under arrest on a charge of high treason.\"||Sudden Wildøs facade of genteel urbanity crumbles. Howling in rage, he whips out a dagger and throws it. It catches you in the arm and you stagger back with a grunt of surprise rather than pain.">
+<CONSTANT TEXT304 "A shot cracks out through the mist-shrouded deck, splintering the wand in Wild's hand. You and he both turn, equally amazed, as a tall figure steps out of the companion-way hatch. He holds a smoking pistol, and from his aristocratic manner you guess he must be Admiral Lord Calidor, commander of the Queen's navy. \"Wild,\" he says curtly, \"your twig's split.\" He must know he's just made the luckiest shot in history, but with typical Gloriannic aplomb he shows no sign of it.||\"Admiral,\" begins Wild in a wheedling voice, \"this pirate villain --\"||\"Forget it, Wild,\" says Calidor, reloading his pistol. \"I'm wise to your game.\" A squad of marines pour past him onto the deck. \"Sergeant, Dr Wild is to be placed under arrest on a charge of high treason.\"||Sudden Wild's facade of genteel urbanity crumbles. Howling in rage, he whips out a dagger and throws it. It catches you in the arm and you stagger back with a grunt of surprise rather than pain.">
 <CONSTANT TEXT304-CONTINUED "Wild turns and leaps overboard into the leas. Whether it is suicide or whether he has a plan of escape, you may never know. You have more pressing concerns. Swarming down the rope from the Moon Dog, baying like phantoms taking human form out of the mist, come Skarvench and his men. Calidor and his marines stand ready for a battle-royal, but you press ahead of them, lunging towards Skarvench as he lands on the deck. Now you will settle your feud once and for all.">
 
 <ROOM STORY304
@@ -4506,7 +4491,7 @@
 	<LOSE-LIFE 1 "You died from the attack" ,STORY304>
 	<IF-ALIVE TEXT304-CONTINUED>>
 
-<CONSTANT TEXT305 "You step forward smartly and take him by the elbow. \"Ah, Mister Fitzhugh,\" you say. \"Come along, the cap'n wants us on deck. Weøre to steer a course for Glorianne.\"||He starts to follow you up the companion-way steps, but casts a dubious look back towards Skarvench's cabin. \"Eh? Glorianne? But that's a journey of months! He said nothing to me of this.\"||You shrug. \"We've got to get the Queen, haven't we?\"||Fitzhugh hesitates. He's not sure what to think. As he starts back towards Skarvench's cabin to check your story, you settle the matter by coshing him over the back of the neck. He slumps to the floor, and you hurry away to join your comrades.">
+<CONSTANT TEXT305 "You step forward smartly and take him by the elbow. \"Ah, Mister Fitzhugh,\" you say. \"Come along, the cap'n wants us on deck. We're to steer a course for Glorianne.\"||He starts to follow you up the companion-way steps, but casts a dubious look back towards Skarvench's cabin. \"Eh? Glorianne? But that's a journey of months! He said nothing to me of this.\"||You shrug. \"We've got to get the Queen, haven't we?\"||Fitzhugh hesitates. He's not sure what to think. As he starts back towards Skarvench's cabin to check your story, you settle the matter by coshing him over the back of the neck. He slumps to the floor, and you hurry away to join your comrades.">
 
 <ROOM STORY305
 	(IN ROOMS)
@@ -4606,184 +4591,174 @@
 		<MOVE ,ALL-MONEY ,PLAYER>
 	)>>
 
+<CONSTANT TEXT311 "The ship's prow looms overhead, her tall sails standing like the shadows of midnight against the greying sky. After a long moment during which you begin to fear she is but a drifting ghost-ship, a figure appears at the rail and calls down to you, \"Come board, strangers.\"||A rope ladder is flung down. You look at your companions. They seem to share your unease, but what choice is there? If you stay in the foundering jollyboat your chance of survival is scant. Grabbing the saying ladder, you ascend until you are level with the rail. The vessel's captain is standing there. He holds out his hand to help you aboard, but something in his eager haunted gaze makes you flinch.||\"Come on deck!\" he insists. \"Here's my hand.\"">
+<CONSTANT CHOICES311 <LTABLE "try some trickery" "go aboard" "climb back down to the jollyboat and shove off">>
+
 <ROOM STORY311
 	(IN ROOMS)
 	(DESC "311")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT311)
+	(CHOICES CHOICES311)
+	(DESTINATIONS <LTABLE STORY353 STORY422 STORY330>)
+	(REQUIREMENTS <LTABLE SKILL-AGILITY NONE NONE>)
+	(TYPES <LTABLE R-SKILL R-NONE R-NONE>)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT312 "A look of grim resignation comes into your eyes. You lift your wand to the sky as though about to conduct a symphony of the elements. The others see this and take a step back, suddenly alarmed at the aura of power surrounding their friend.\"Are are you going to do?\" asks Oakley.||\"We're under a curse,\" you tell him simply. \"I mean to call the one who laid the curse.\"||So saying, you begin to chant the words of a summoning spell. Cold green light glows at the tip of your wand. As your incantation grows in strength, the heavens flash and growl in stern reply, discharging mighty thunderbolts through the turbid clouds. The masts are limned in a sharp unearthly glare. The deck pitches wildly as the ship is swirled and swung by a gale that dredges up waves thirty feet high. Roaring winds blast the rain down onto you in freezing sheets as the full fury of the storm writhes within the fetters of your spell. A pillar of lightning drops into the sea less than a cannon-shot away, sizzling white fire blazing through the wet darkness, prompting looks of panic on the faces of your friends.||\"For God's sake, stop!\" screams Oakley above the noise of the storm. \"You're brining the wrath of Heaven down on us.\"||Suddenly the wind drops. The thunderclouds, piled up like black fortresses in the sky, quieten their rumbling. The rain falls as before in a light gossamer spray. No not as before; this is not rain. It has a sweet heady taste and stains the deck with mauve rivulets. Blutz tilts up his face to the sky and gives a cry of wonder: \"Lads, 'tis raining wine!\"||A throaty feral roar makes you whirl. Across the deck you behold an imposing robed figure, standing in an ivy-twined chariot drawn by four giant panthers. He has skin like gold and eyes of jewelled brilliance, and ringlets of blue hair frame his broad face. It was the panthers' roar you heard, but ow the figure speaks, and his voice is no less wild or daunting: \"You summoned me.\"||You drop to your knees, glancing back over your shoulder to hiss at the others. \"Bow down as if he was the father of all the ship's captains - and sharpish, shipmates. This is the god Dionysus.\"">
 
 <ROOM STORY312
 	(IN ROOMS)
 	(DESC "312")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT312)
+	(CONTINUE STORY059)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT313 "Muffling your oars, you row off under the cover of darkness. Even so, the man on the raft hears you. \"Avast there!\" he cries hoarsely. \"Don't leave me! Come back!\"||At long last these pleas are swallowed up by distance. You look around the boat. Each of your companions has a glum shamefaced look. \"What could we have done for him, anyhow?\" says Oakley.||Blutz nods readily at this. \"That's right. He's probably no worse off than we are. The current is making most of our headway, not rowing -- a raft's almost as good as a boat in these waters.\"|\"And in any case we had nothing to share with him but misfortune,\" mutters Grimes.||You too feel a twinge of regret, but not because you have any pity for the man on the raft. It is only that you just realised he might have had food and drink that he could share with the four of you.\"">
 
 <ROOM STORY313
 	(IN ROOMS)
 	(DESC "313")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT313)
+	(CONTINUE STORY332)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT314 "Mortice's nails are sharp, ragged, and caked with grave-clod. He rakes them across your throat, drawing a spurt of blood.">
+<CONSTANT TEXT314-CONTINUED "He seizes you and hefts you off your feet. You are helpless in his grasp; he has the strength of six men. Giving vent to a spine-chilling roar, he swings you over his head and throws you into the sea.||Oakley has lost no time in cutting the rope that moored the raft to the jollyboat. Blutz meanwhile has grabbed one of the oars and now thrusts it towards you. Floundering to the surface, you spit out a mouthful of seawater and stretch your hands towards the oar">
+<CONSTANT TEXT314-LOSESWORD "But you are not that good a swimmer and are forced to drop the sword to save your life">
 
 <ROOM STORY314
 	(IN ROOMS)
 	(DESC "314")
 	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(PRECHOICE STORY314-PRECHOICE)
+	(CONTINUE STORY276)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY314-PRECHOICE ()
+	<LOSE-LIFE 2 DIED-GREW-WEAKER ,STORY276>
+	<COND (<IS-ALIVE>
+		<CRLF>
+		<TELL TEXT314-CONTINUED>
+		<TELL ,PERIOD-CR>
+		<COND (<NOT <CHECK-SKILL ,SKILL-SEAFARING>>
+			<CRLF>
+			<TELL TEXT314-LOSESWORD>
+			<TELL ,PERIOD-CR>
+			<LOSE-SWORD>
+		)>
+	)>>
+
+<CONSTANT TEXT315 "You draw the fan from your sleeve and wave it. Skarvench stares, a cruel laugh shivering his tall frame. \"Showin' yourself for the limp-wrist you are, eh, ye slippery swab? Or is it that you're finding things gettin' too hot for you? By Garn, I'll give you hot. I'll roast your gizzard before the sun rises on another day!\"||You lower the fan. There is a change in the air: a sudden taste of something on the wind. Skarvench senses it too. His seafaring instincts are second to none, and recognition freezes his ugly smirk. He turns, looking out to sea, sniffing the breeze. \"Hurricane!\" he whispers, aghast.||The sky turns from blue to a dingy sulphurous yellow, bruised by livid blotches of cloud. Out to sea, the waves froth and churn as a storm wind comes sweeping in like a giant's fist. You see it strike the Belle Dame where she lies at anchor, snapping her sails taut and bucking her to and fro like a toy.||\"To the boat!\" screams Skarvench. \"This wind will reef us if we don't put out to sea.\" As he and his men scurry to their rowboat, he pauses just long enough to turn and shake his fist. \"You'll be sorry! Aye, you'll beg for death afore I'm through with ye!\"||His words are drowned out by the wind. As the storm sweeps on, bearing the Belle before it, you notice that the thundercloud fan has vanished. Deciding that you had better be long gone by  the time Skarvench returns here, you put out to sea in your ramshackle vessel.">
 
 <ROOM STORY315
 	(IN ROOMS)
 	(DESC "315")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT315)
+	(PRECHOICE STORY315-PRECHOICE)
+	(CONTINUE STORY177)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY315-PRECHOICE ()
+	<LOSE-ITEM ,THUNDERCLOUD-FAN>>
+
+<CONSTANT TEXT316 "Doctor Scriptor chuckles softly to himself as he inspects the horn. You cannot help thinking that he really is a rather weird old cove, but certainly no one can beat him when it comes to identifying magic treasures.||\"Oh ho, this is a fine prize,\" he declares. \"The Horn of Poseidon. Go down to the shore and blow it, so the tale goes, and a phantom boat will arise out of the waves and take you to the god's gate. But it also said that no mortal can see or touch the key that will open that gate. Now, as to my fee...||He demands a doubloon for what he's told you so far. Alternatively you can also sell him the horn for 20 doubloons.">
+<CONSTANT CHOICES316 <LTABLE "now ask him to identify a" "a" "or a" "it is time for you to leave">>
 
 <ROOM STORY316
 	(IN ROOMS)
 	(DESC "316")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT316)
+	(CHOICES CHOICES316)
+	(DESTINATIONS <LTABLE STORY373 STORY354 STORY335 STORY392>)
+	(REQUIREMENTS <LTABLE DRAGON-RING BRONZE-HELMET BAT-SHAPED-TALISMAN NONE>)
+	(PRECHOICE STORY316-PRECHOICE)
+	(TYPES <LTABLE R-ITEM R-ITEM R-ITEM R-NONE>)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY316-PRECHOICE ()
+	<COND (,RUN-ONCE
+		<CRLF>
+		<TELL "Pay Doctor Scriptor one doubloon for what he's told you so far?">
+		<COND (<YES?>
+			<COND (<G? ,MONEY 0>
+				<SETG MONEY <- ,MONEY 1>>
+				<CRLF>
+				<TELL "Sell the " D ,CONCH-SHELL-HORN " for 20 doubloons?">
+				<COND (<YES?>
+					<SETG MONEY <+ ,MONEY 20>>
+					<LOSE-ITEM ,CONCH-SHELL-HORN>
+				)>
+			)(ELSE
+				<HLIGHT ,H-BOLD>
+				<TELL "You have no " D, CURRENCY " left and was forced to leave" ,PERIOD-CR>
+				<HLIGHT 0>
+				<STORY-JUMP ,STORY392>
+			)>
+		)(ELSE
+			<EMPHASIZE "You refused to pay his fees and was asked to leave.">
+			<STORY-JUMP ,STORY392>
+		)>
+	)>>
+
+<CONSTANT TEXT317 "The bullet hits Ejada square between the eyes but has no more effect than if you'd fired it into the bole of an oak tree. She winces and says with a confident smile, \"Your best shot? Try mine.\"||She lunges forward, her fingers driving up to the pit of your stomach with sickening force.">
+<CONSTANT CHOICES317 <LTABLE "now use" "a wand" "turn and flee">>
 
 <ROOM STORY317
 	(IN ROOMS)
 	(DESC "317")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT317)
+	(CHOICES CHOICES317)
+	(DESTINATIONS <LTABLE STORY241 STORY384 STORY005>)
+	(REQUIREMENTS <LTABLE SKILL-BRAWLING SKILL-SPELLS NONE>)
+	(PRECHOICE STORY317-PRECHOICE)
+	(TYPES <LTABLE R-SKILL R-SKILL R-NONE>)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY317-PRECHOICE ("AUX" (DMG 4))
+	<COND (,RUN-ONCE
+		<COND (<CHECK-ITEM ,FEATHER-SHIELD>
+			<SET DMG 2>
+		)>
+		<LOSE-LIFE .DMG DIED-IN-COMBAT ,STORY317>
+		<COND (<AND <IS-ALIVE> <CHECK-ITEM ,FEATHER-SHIELD>>
+			<TELL CR CT ,FEATHER-SHIELD " deflects some of the damage" ,PERIOD-CR>
+		)>
+	)>>
+
+<CONSTANT TEXT318 "You present the deed of ownership to the harbour master and he leads you along the quay in the direction of a sterling galleon whose proud figurine juts imposingly against the sun. \"Why, she's magnificent!\" says Blutz, starting up the gangplank- \"We'll soon blast Skarvench out of the water in this beauty, shipmates.\"||\"Avast there, ye fat swab!\" snarls a man from the deck, shaking his fist. \"Get off me gangplank afore ye breaks it!\"||The harbour master had gone striding on ahead. Hearing the commotion, he comes back and tugs your sleeve, pointing to a  much smaller vessel at the end of the dockside. \"No,\" he says, \"that is your ship.\"||You look her up and down without enthusiasm. She sits slightly lopsided in the water, and her few guns show patches of rust. You cannot imagine a small sloop like that tackling Skarvench's mighty galleon.||Oakley pats you on the shoulder. \"Buck up, skipper. We'll just have to make the best of her.\"||You nod in agreement and go aboard to inspect your first command: the Lady of Shalott.">
 
 <ROOM STORY318
 	(IN ROOMS)
 	(DESC "318")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT318)
+	(PRECHOICE STORY318-PRECHOICE)
+	(CONTINUE STORY300)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY318-PRECHOICE ()
+	<TAKE-VESSEL ,LADY-OF-SHALOTT>>
+
+<CONSTANT TEXT319 "With your companions' help, you examine the sea charts and plot your course. Where will you steer?">
+<CONSTANT CHOICES319 <LTABLE "steer to Tortoise Island" "to Port Leshand" "to Crossbones Island">>
 
 <ROOM STORY319
 	(IN ROOMS)
 	(DESC "319")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT319)
+	(CHOICES CHOICES319)
+	(DESTINATIONS <LTABLE STORY186 STORY339 STORY358>)
+	(TYPES THREE-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT320 "Selenice is a veritable haven for pirates, and a large and experienced crew flocks to your cause. Some have heard of your exploits and are eager to join the quest for gold and glory. Others, having learned of your hatred of Skarvench take grim pleasure in joining the battle against him; they, like you, have old scores to settle.||While you are signing on the last few crewmen, Blutz comes bustling along the dock full of urgent news. \"I met a bloke in a tavern,\" he manages to pant out, leaning on a stanchion to recover his breath. \"He was employed as a pilot to steer Queen Titania's convoy past the Smoking Islands. He told me the convoy's heading for Port Tudor where they'll sit out the hurricane season.\"||\"The hurricane season!\" scoffs Oakley. \"The hurricane's not due for a month.\"||Blutz shakes his head. \"This bloke I was talking to said they think it's going to hit early this year. Apparently the Queen's wizard cast a horoscope and he's sure of it.\"||Grimes grabs you by the shoulder. \"Skipper, you know what this means. If Skarvench intends to go through with his attack on the Queen's convoy, he'll have to do it before they reach Port Tudor.\"||\"By thunder, you're right! All hands to their posts -- we sail for Port Tudor, and there isn't a moment to lose!\"">
 
 <ROOM STORY320
 	(IN ROOMS)
 	(DESC "320")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT320)
+	(CONTINUE STORY138)
 	(FLAGS LIGHTBIT)>
 
 <ROOM STORY321

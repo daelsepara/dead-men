@@ -308,6 +308,10 @@
 <ROUTINE CHECK-CODEWORDS (CODEWORDS)
     <RETURN <CHECK-ALL .CODEWORDS ,CODEWORDS>>>
 
+<ROUTINE CHECK-ITEM (ITEM)
+    <COND (<NOT .ITEM> <RTRUE>)>
+    <RETURN <IN? .ITEM ,PLAYER>>>
+
 <ROUTINE CHECK-MONEY (AMOUNT)
     <COND (<G? .AMOUNT 0>
         <COND (<L? ,MONEY .AMOUNT>
@@ -323,7 +327,7 @@
 
 <ROUTINE CHECK-POSSESSIONS (ITEM)
     <COND (.ITEM
-        <COND (<NOT <IN? .ITEM ,PLAYER>>
+        <COND (<NOT <CHECK-ITEM .ITEM>>
             <NOT-POSSESSED .ITEM>
             <RFALSE>
         )>
@@ -359,7 +363,7 @@
     <COND (<NOT .REQUIREMENTS> <RTRUE>)>
     <SET COUNT <GET .REQUIREMENTS 0>>
     <DO (I 1 .COUNT)
-        <COND (<IN? <GET .REQUIREMENTS .I> ,PLAYER> <RTRUE>)>
+        <COND (<CHECK-ITEM <GET .REQUIREMENTS .I>> <RTRUE>)>
     >
     <RFALSE>>
 
@@ -548,7 +552,7 @@
             <DROP-REPLACE-ITEM .ITEM>
         )(ELSE
             <SET QUANTITY <GETP .ITEM ,P?QUANTITY>>
-            <COND (<IN? .ITEM ,PLAYER>
+            <COND (<CHECK-ITEM .ITEM>
                 <COND (.QUANTITY
                     <PUTP .ITEM ,P?QUANTITY <+ .QUANTITY 1>>
                 )>
@@ -651,7 +655,7 @@
                                 )(ELSE
                                     <REMOVE .ITEM>
                                 )>
-                                <COND (<IN? .OBJ ,PLAYER>
+                                <COND (<CHECK-ITEM .OBJ>
                                     <SET QUANTITY <GETP .OBJ ,P?QUANTITY>>
                                     <COND (.QUANTITY
                                         <PUTP .OBJ ,P?QUANTITY <+ .QUANTITY 1>>
