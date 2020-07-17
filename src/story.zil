@@ -97,6 +97,8 @@
 	<PUTP ,STORY321 ,P?DEATH T>
 	<PUTP ,STORY323 ,P?DEATH T>
 	<PUTP ,STORY331 ,P?DEATH T>
+	<PUTP ,STORY343 ,P?DEATH T>
+	<PUTP ,STORY346 ,P?DEATH T>
 	<RETURN>>
 
 <CONSTANT DIED-IN-COMBAT "You died in combat">
@@ -201,7 +203,7 @@
 <ROUTINE LOSE-SWORD ()
 	<COND (<CHECK-ITEM ,SWORD>
 		<LOSE-ITEM ,SWORD>
-	)(<CHECK-ITEM  ,SHARKS-TOOTH-SWORD>
+	)(<CHECK-ITEM ,SHARKS-TOOTH-SWORD>
 		<LOSE-ITEM ,SHARKS-TOOTH-SWORD>
 	)(<CHECK-ITEM ,CLEAVER>
 		<LOSE-ITEM ,CLEAVER>
@@ -1710,6 +1712,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY110-PRECHOICE ()
+	<PUTP ,STORY110 ,P?DEATH T>
 	<COND (<OR <AND <CHECK-ITEM ,CORKSCREW> <CHECK-ITEM ,SHIP-IN-BOTTLE>> <CHECK-ITEM ,DEED-OF-OWNERSHIP> <CHECK-ITEM ,DIAMOND>>
 		<PUTP ,STORY110 ,P?DEATH F>
 		<TELL CR "Now you must look for another way to obtain a vessel:" CR>
@@ -2513,6 +2516,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY167-PRECHOICE ()
+	<PUTP ,STORY167 ,P?DEATH T>
 	<COND (<NOT <CHECK-SKILL ,SKILL-SEAFARING>>
 		<CRLF>
 		<HLIGHT ,H-BOLD>
@@ -2528,7 +2532,7 @@
 	)(<CHECK-ITEM ,DIAMOND>
 		<STORY-JUMP ,STORY299>
 	)(ELSE
-		<EMPHASIZE "Returning to town, you have exhausted all your options. You have no hope of catching up with Skarvench.">
+		<TELL CR "Returning to town, you have exhausted all your options. You have no hope of catching up with Skarvench" ,PERIOD-CR>
 		<RETURN>
 	)>
 	<PUTP ,STORY167 ,P?DEATH F>
@@ -3069,6 +3073,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY203-PRECHOICE ()
+	<PUTP ,STORY203 ,P?DEATH T>
 	<COND (<AND <CHECK-ITEM ,CORKSCREW> <CHECK-ITEM ,SHIP-IN-BOTTLE>>
 		<STORY-JUMP ,STORY261>
 	)(<CHECK-ITEM ,DEED-OF-OWNERSHIP>
@@ -3076,7 +3081,7 @@
 	)(<CHECK-ITEM ,DIAMOND>
 		<STORY-JUMP ,STORY299>
 	)(ELSE
-		<EMPHASIZE "But you have already exhausted all your options. Your cause is hopeless.">
+		<TELL CR "But you have already exhausted all your options. Your cause is hopeless" ,PERIOD-CR>
 		<RETURN>
 	)>
 	<PUTP ,STORY203 ,P?DEATH F>>
@@ -4369,7 +4374,7 @@
 	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
 
-<CONSTANT TEXT295 "The box is filled with yellow bones and tatters of wet rag. Choking back your disgust, you reach in to rummage  amongst these until you discover a few items of treasure. There is a bat-shaped talisman, a rusty sword, and a diamond almost as big as a walnut.">
+<CONSTANT TEXT295 "The box is filled with yellow bones and tatters of wet rag. Choking back your disgust, you reach in to rummage amongst these until you discover a few items of treasure. There is a bat-shaped talisman, a rusty sword, and a diamond almost as big as a walnut.">
 <CONSTANT TEXT295-CONTINUED "Blutz is still staring around nervously. \"I don't get it,\" he says. \"What happened to the old codger?\"||Oakley lifts the skull out of the box and gazes at it for a moment, then throws it far off into the darkness. You see it gleam in the moonlight, then there is a splash. \"Gone for good, I reckon,\" says Oakley. \"Let's help ourselves to some of the food he had.\"||Grimes shakes his head. \"It's gone off. The water too.\"||You push past him, but he is right. Mortice's provisions are now rancid and mould-covered, showing every sign of being months old. The water in the barrel is no more than stagnant green murk.||Returning to your boat, you jettison the raft and row a good distance before finally settling down for the night.||\"We're going to have to pray a ship comes along tomorrow,\" says Oakley as you drift off to sleep. \"I don't think we can hold out much longer.\"">
 
 <ROOM STORY295
@@ -4681,7 +4686,7 @@
 		)>
 	)>>
 
-<CONSTANT TEXT315 "You draw the fan from your sleeve and wave it. Skarvench stares, a cruel laugh shivering his tall frame. \"Showin' yourself for the limp-wrist you are, eh, ye slippery swab? Or is it that you're finding things gettin' too hot for you? By Garn, I'll give you hot. I'll roast your gizzard before the sun rises on another day!\"||You lower the fan. There is a change in the air: a sudden taste of something on the wind. Skarvench senses it too. His seafaring instincts are second to none, and recognition freezes his ugly smirk. He turns, looking out to sea, sniffing the breeze. \"Hurricane!\" he whispers, aghast.||The sky turns from blue to a dingy sulphurous yellow, bruised by livid blotches of cloud. Out to sea, the waves froth and churn as a storm wind comes sweeping in like a giant's fist. You see it strike the Belle Dame where she lies at anchor, snapping her sails taut and bucking her to and fro like a toy.||\"To the boat!\" screams Skarvench. \"This wind will reef us if we don't put out to sea.\" As he and his men scurry to their rowboat, he pauses just long enough to turn and shake his fist. \"You'll be sorry! Aye, you'll beg for death afore I'm through with ye!\"||His words are drowned out by the wind. As the storm sweeps on, bearing the Belle before it, you notice that the thundercloud fan has vanished. Deciding that you had better be long gone by  the time Skarvench returns here, you put out to sea in your ramshackle vessel.">
+<CONSTANT TEXT315 "You draw the fan from your sleeve and wave it. Skarvench stares, a cruel laugh shivering his tall frame. \"Showin' yourself for the limp-wrist you are, eh, ye slippery swab? Or is it that you're finding things gettin' too hot for you? By Garn, I'll give you hot. I'll roast your gizzard before the sun rises on another day!\"||You lower the fan. There is a change in the air: a sudden taste of something on the wind. Skarvench senses it too. His seafaring instincts are second to none, and recognition freezes his ugly smirk. He turns, looking out to sea, sniffing the breeze. \"Hurricane!\" he whispers, aghast.||The sky turns from blue to a dingy sulphurous yellow, bruised by livid blotches of cloud. Out to sea, the waves froth and churn as a storm wind comes sweeping in like a giant's fist. You see it strike the Belle Dame where she lies at anchor, snapping her sails taut and bucking her to and fro like a toy.||\"To the boat!\" screams Skarvench. \"This wind will reef us if we don't put out to sea.\" As he and his men scurry to their rowboat, he pauses just long enough to turn and shake his fist. \"You'll be sorry! Aye, you'll beg for death afore I'm through with ye!\"||His words are drowned out by the wind. As the storm sweeps on, bearing the Belle before it, you notice that the thundercloud fan has vanished. Deciding that you had better be long gone by the time Skarvench returns here, you put out to sea in your ramshackle vessel.">
 
 <ROOM STORY315
 	(IN ROOMS)
@@ -4737,7 +4742,7 @@
 		)>
 	)>>
 
-<CONSTANT TEXT318 "You present the deed of ownership to the harbour master and he leads you along the quay in the direction of a sterling galleon whose proud figurine juts imposingly against the sun. \"Why, she's magnificent!\" says Blutz, starting up the gangplank- \"We'll soon blast Skarvench out of the water in this beauty, shipmates.\"||\"Avast there, ye fat swab!\" snarls a man from the deck, shaking his fist. \"Get off me gangplank afore ye breaks it!\"||The harbour master had gone striding on ahead. Hearing the commotion, he comes back and tugs your sleeve, pointing to a  much smaller vessel at the end of the dockside. \"No,\" he says, \"that is your ship.\"||You look her up and down without enthusiasm. She sits slightly lopsided in the water, and her few guns show patches of rust. You cannot imagine a small sloop like that tackling Skarvench's mighty galleon.||Oakley pats you on the shoulder. \"Buck up, skipper. We'll just have to make the best of her.\"||You nod in agreement and go aboard to inspect your first command: the Lady of Shalott.">
+<CONSTANT TEXT318 "You present the deed of ownership to the harbour master and he leads you along the quay in the direction of a sterling galleon whose proud figurine juts imposingly against the sun. \"Why, she's magnificent!\" says Blutz, starting up the gangplank- \"We'll soon blast Skarvench out of the water in this beauty, shipmates.\"||\"Avast there, ye fat swab!\" snarls a man from the deck, shaking his fist. \"Get off me gangplank afore ye breaks it!\"||The harbour master had gone striding on ahead. Hearing the commotion, he comes back and tugs your sleeve, pointing to a much smaller vessel at the end of the dockside. \"No,\" he says, \"that is your ship.\"||You look her up and down without enthusiasm. She sits slightly lopsided in the water, and her few guns show patches of rust. You cannot imagine a small sloop like that tackling Skarvench's mighty galleon.||Oakley pats you on the shoulder. \"Buck up, skipper. We'll just have to make the best of her.\"||You nod in agreement and go aboard to inspect your first command: the Lady of Shalott.">
 
 <ROOM STORY318
 	(IN ROOMS)
@@ -4873,7 +4878,7 @@
 	(TYPES <LTABLE R-NONE R-NONE R-NONE R-SKILL>)
 	(FLAGS LIGHTBIT)>
 
-<CONSTANT TEXT328 "After a hard-fought battle you finally get in a killing blow. To your amazement, Ejada does not fall like any mortal opponent. Instead she gives a deep groan and sags forward like a puppet with its strings cut. Green sap spurts from the wound you've made above  her heart, and her long virid tresses wither like plucked blooms.\"Blow me down if she wasn't some sort o' plant!\" says Grimes, touching her cheek. \"Feels like wood rather than flesh.\"||You shrug and sheathe your sword. \"She did say she was the Earth Goddess's daughter.\"||A hasty exploration of Ejada's palace soon uncovers several treasures: a magic wand, a healing potion, a ship in a bottle, and a black kite. The potion can be drunk once at any time to restore your Life Points score to normal (press D). The other items may or may not come in handy later.">
+<CONSTANT TEXT328 "After a hard-fought battle you finally get in a killing blow. To your amazement, Ejada does not fall like any mortal opponent. Instead she gives a deep groan and sags forward like a puppet with its strings cut. Green sap spurts from the wound you've made above her heart, and her long virid tresses wither like plucked blooms.\"Blow me down if she wasn't some sort o' plant!\" says Grimes, touching her cheek. \"Feels like wood rather than flesh.\"||You shrug and sheathe your sword. \"She did say she was the Earth Goddess's daughter.\"||A hasty exploration of Ejada's palace soon uncovers several treasures: a magic wand, a healing potion, a ship in a bottle, and a black kite. The potion can be drunk once at any time to restore your Life Points score to normal (press D). The other items may or may not come in handy later.">
 <CONSTANT TEXT328-CONTINUED "Returning to the boat, you put to see without further delay">
 
 <ROOM STORY328
@@ -5053,7 +5058,7 @@
 	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
 
-<CONSTANT TEXT340 "Several limbs lie like dead fishes across the deck -- not just those of the vampires, but also some torn from their sockets of your poor sailors, who now lie screaming as their lifeblood gushes across the planks.||Three of the vampires still stand, but your spirited defence of your vessel has cowed them. They crouch back against the rail. Then keeping their eyes fixed on you, they drop to their knees with a hideous mewling sound to lick up some of the spilled blood. \"Merciful God...\" croaks Grimes. Although not a squeamish man, he turns away and retches with disgust.||The remaining vampires rise and face you across the carnage. Of all the crew only yourself, Grimes, Oakley and Blutz are still standing -- and the fight has gone out of you at the sight of such horrors. For their part, the vampires make no move but only stare at you and lick their gore-spattered lips. At last their leader speaks. He is a pallid but unblemished creature with eyes like old ice. \"I am El Draque. Never have I been bested, but tonight I will concede you've fought me to a stand off. We'll go and leave you in peace, but I'll add this warning.  Do not touch the treasure in our coffins, or you'll carry my curse for the rest of your days.\"||He drops back over the side with the other two. There is no splash, nor any sign of them when you go to the rail to look. There is just the swirling fog. The fallen vampires dissolve from the deck into a miasmic murk which only disperses with the sunrise. You take stock of the dead and injured among your crew, then hold a council with your officers to decide whether to take the treasure or not.">
+<CONSTANT TEXT340 "Several limbs lie like dead fishes across the deck -- not just those of the vampires, but also some torn from their sockets of your poor sailors, who now lie screaming as their lifeblood gushes across the planks.||Three of the vampires still stand, but your spirited defence of your vessel has cowed them. They crouch back against the rail. Then keeping their eyes fixed on you, they drop to their knees with a hideous mewling sound to lick up some of the spilled blood. \"Merciful God...\" croaks Grimes. Although not a squeamish man, he turns away and retches with disgust.||The remaining vampires rise and face you across the carnage. Of all the crew only yourself, Grimes, Oakley and Blutz are still standing -- and the fight has gone out of you at the sight of such horrors. For their part, the vampires make no move but only stare at you and lick their gore-spattered lips. At last their leader speaks. He is a pallid but unblemished creature with eyes like old ice. \"I am El Draque. Never have I been bested, but tonight I will concede you've fought me to a stand off. We'll go and leave you in peace, but I'll add this warning. Do not touch the treasure in our coffins, or you'll carry my curse for the rest of your days.\"||He drops back over the side with the other two. There is no splash, nor any sign of them when you go to the rail to look. There is just the swirling fog. The fallen vampires dissolve from the deck into a miasmic murk which only disperses with the sunrise. You take stock of the dead and injured among your crew, then hold a council with your officers to decide whether to take the treasure or not.">
 
 <ROOM STORY340
 	(IN ROOMS)
@@ -5071,184 +5076,154 @@
 		<STORY-JUMP ,STORY016>
 	)>>
 
+<CONSTANT TEXT341 "The Moon Dog manoeuvres slowly nearer, pushing against the wind. She is taking damage all the time from your cannons , but the wind causes your own ship to heel over slightly , so that most of your shots strike the enemy's hull rather than the sails. You have not yet crippled the Moon Dog, and now she is turning for a broadside.">
+<CONSTANT CHOICES341 <LTABLE "stand and take it" "pull astern of the enemy for boarding" "move off out of range of their cannons">>
+
 <ROOM STORY341
 	(IN ROOMS)
 	(DESC "341")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT341)
+	(CHOICES CHOICES341)
+	(DESTINATIONS <LTABLE STORY019 STORY038 STORY057>)
+	(TYPES THREE-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT342 "Skarvench utters a single cry like the croak of a carrion bird, then goes plunging down to his death on the deck below. You climb back down not a moment too soon, for the rope is suddenly jerked out of your hands and goes coiling up into the mist.||\"They've had enough, now their captain's dead,\" says Grimes as you watch the outlines of the Moon Dog recede up into the sky.||\"I'd have liked to get that Curshaw -- and Porbuck as well,\" mutters Oakley. \"I've still got scores to settle with those two.\"||You clasp their arms and nod towards the broken body of Skarvench lying on the deck. \"Don't be downcast, lads. Tomorrow's another day, and no doubt we'll catch up with those villains sooner or later, but we've done sterling work tonight!\"||\"Indeed you have,\" says an aristocratic voice. You turn to see a tall distinguished-looking Gloriannic gentleman who can only be Admiral Calidor, commander of the Queen's navy. Behind him are a squad of royal marines. \"If you hadn't shown up,\" he continues, \"who knows if we could have been able to cope with those pirates. We've only just managed to subdue their accomplice, the sorcerer William Wild.\"||\"My lord,\" you say, bowing, \"they were after the Queen herself.\"||Calidor smiles. \"I know. And, speaking of the Queen...\"">
 
 <ROOM STORY342
 	(IN ROOMS)
 	(DESC "342")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT342)
+	(CONTINUE STORY427)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT343 "You make your way outside, where there are more onlookers attracted by news of the shooting. \"Are you the one Skarvench shot?\" asks an old man, seeing the blood on your chest.||\"Aye,\" you say, and you tell him the tale of your lucky escape. He looks at the article that saved your life. \"A valuable investment. I must buy one myself.\"||Blutz chips in: \"Listen, old man, did you see where Skarvench went?\"||\"Less of the 'old' if you please, fatty,\" says the old man bristling. \"And to answer your query, he and his men went of chortling their way down this very street in the direction of the waterfront.\"||Oakley cries out an oath. \"They'll have set sail! We need a ship of our own.\"">
 
 <ROOM STORY343
 	(IN ROOMS)
 	(DESC "343")
 	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(PRECHOICE STORY343-PRECHOICE)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY343-PRECHOICE ()
+	<PUTP ,STORY343 ,P?DEATH T>
+	<COND (<AND <CHECK-ITEM ,SHIP-IN-BOTTLE> <CHECK-ITEM ,CORKSCREW>>
+		<STORY-JUMP ,STORY261>
+	)(<CHECK-ITEM ,CONCH-SHELL-HORN>
+		<STORY-JUMP ,STORY280>
+	)(<CHECK-ITEM ,DEED-OF-OWNERSHIP>
+		<STORY-JUMP ,STORY318>
+	)(<AND <CHECK-ITEM ,DIAMOND> <G? <GETP ,DIAMOND ,P?QUANTITY> 0>>
+		<STORY-JUMP ,STORY299>
+	)(ELSE
+		<TELL CR "You have no hope of catching Skarvench and your adventure grinds to an abrupt end" ,PERIOD-CR>
+		<RETURN>
+	)>
+	<PUTP ,STORY343 ,P?DEATH F>>
+
+<CONSTANT TEXT344 "You return to the cliffs to find a dozen islanders standing at the top of the vine ladder. They wear grass skirts and each has a red skull-like mask painted across his face. \"That's how the island got its name,\" mutters Oakley out of the corner of his mouth.||\"Maybe so,\" whispers Grimes. \"Or maybe they're headhunters.\"||You approach cautiously, uncertain of the islanders' intentions. They watch you in silence and then one of them bares his lips in a ferocious grin. Blutz gives a small moan and goes weak at the knees, and you catch his arm to give him support. To your horror, the islander's front teeth are filed to sharp points!">
+<CONSTANT CHOICES344 <LTABLE "try to fight your way past them" "offer them gifts" "you can ignore them and just start to descend the ladder">>
 
 <ROOM STORY344
 	(IN ROOMS)
 	(DESC "344")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT344)
+	(CHOICES CHOICES344)
+	(DESTINATIONS <LTABLE STORY363 STORY372 STORY400>)
+	(TYPES THREE-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT345 "The cutters are hard on your stern, and your sorry little band are all too weakened by the privation to outrun them. Realising this, you tell your friends to steer in close to the shoreline -- where earlier, beneath the crystal-clear water, you noticed the jagged outline of submerged rocks.||It is a gamble. You might run onto the rocks yourselves. But to fall into Skarvench's hands would be even more certain disaster. Luckily your jollyboat passes safely over the reef, but when the pursuing cutters reach it there is a harsh scraping sound followed by a telltale splintering. The pirates' jeering shouts turn to cries of alarm.||You look back. As you guessed, the cutters were overladen. Lying lower in the water than your jollyboat, they have run aground. The pirates shake their fists, but they have no hope of catching you now. The Belle Dame must remain at anchor till the tide turns, while you row on throughout the night.">
 
 <ROOM STORY345
 	(IN ROOMS)
 	(DESC "345")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT345)
+	(CONTINUE STORY135)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT346 "You hide deep in the woods. As the silvery gleam of the predawn sky fills the shadows between the leaves, you suddenly hear an imperious command shouted from far off. It is the voice of the witch. At her order, the palm bend to seize the four of you and you are passed from branch to branch through the forest to be deposited roughly on the ground in front of the palace.">
 
 <ROOM STORY346
 	(IN ROOMS)
 	(DESC "346")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT346)
+	(PRECHOICE STORY346-PRECHOICE)
+	(CONTINUE STORY327)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY346-PRECHOICE ()
+	<LOSE-LIFE 1 DIED-EJADA-SORCERY ,STORY346>>
+
+<CONSTANT TEXT347 "No sooner has night fallen than an uncanny chill closes around you. An unspoken fear impels all of you to stagger back from the hole you have dug. You watch aghast as a shimmering mist forms in the air above the boxes. Then looming shadows are thrown against the mist -- as suddenly as if blinds had been thrown up on an open window -- and a host of pale ragged figures come shambling forward. Some have skin of tallow, others are ravaged by grave-mould. Spots of rust mark their armour, and their coats hang about them like decaying shrouds.||The foremost of this frightful throng steps forth. His face is the colour of clay, making his acid blue eyes all the more startling. Baring his sharp teeth in a macabre grin, he issues his greeting in a rasping voice. \"So there are still a few who'd dare to steal from El Draque. I admire your brass, my lads. And now, let's spill a little blood and drink a gory toast to the last day of your lives, and then mayhap I'll let you join my jolly band.\"">
+<CONSTANT CHOICES347 <LTABLE "use a sword" "otherwise">>
 
 <ROOM STORY347
 	(IN ROOMS)
 	(DESC "347")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT347)
+	(CHOICES CHOICES347)
+	(DESTINATIONS <LTABLE STORY245 STORY264>)
+	(REQUIREMENTS <LTABLE SKILL-SWORDPLAY NONE>)
+	(PRECHOICE STORY347-PRECHOICE)
+	(TYPES <LTABLE R-SKILL R-NONE>)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY347-PRECHOICE ()
+	<COND (<OR <CHECK-SKILL ,SKILL-CHARMS> <CHECK-ITEM ,CRUCIFIX>> <STORY-JUMP ,STORY226>)>>
+
+<CONSTANT TEXT348 "Each day the natives bring you food and water, treating you like honoured guests. By night you sing under the stars; by day you doze in warm sea breezes. Life is full of ease and contentment. Only one thought mars your pleasure at this regal luxury: that somewhere out there across the broad seas, Skarvench still lives to work his evil ways.||Almost a month goes by. At last a ship appears on the horizon. By now rest and good food have stored your strength and you leap to your feet, waving palm leaves and yelling at the top of your lungs. The ship diverts here course and a rowboat is sent to fetch you from ashore.||The captain, a Gloriannic merchant named Quintal, greets you heartily as you come board. Handing you mugs of ale, he tells you his ship is bound for Leshand. Although Leshand was your original objective, you know that time is now of the essence if you're to have nay chance of foiling Skarvench's scheme to abduct Queen Titania.">
+<CONSTANT CHOICES348 <LTABLE "confide in Captain Quintal" "keep quiet and allow him to take you to Leshand as planned">>
 
 <ROOM STORY348
 	(IN ROOMS)
 	(DESC "348")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT348)
+	(CHOICES CHOICES348)
+	(DESTINATIONS <LTABLE STORY239 STORY258>)
+	(PRECHOICE STORY348-PRECHOICE)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY348-PRECHOICE ()
+	<COND (,RUN-ONCE
+		<SETG ,LIFE-POINTS ,MAX-LIFE-POINTS>
+		<UPDATE-STATUS-LINE>
+	)>>
+
+<CONSTANT TEXT349 "A shrieking gale rises out of the east to blow you onward, but at least there is an end to the numbing rain that has pestered you for so much of the voyage. Making good headway through high frothing waves, your worst hardship becomes nausea at being hurled up and down in your flimsy craft. Even so, hunger gnaws at your insides and your longing for food and water becomes overwhelming.">
 
 <ROOM STORY349
 	(IN ROOMS)
 	(DESC "349")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT349)
+	(PRECHOICE STORY349-PRECHOICE)
+	(CONTINUE STORY387)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY349-PRECHOICE ()
+	<LOSE-LIFE 1 DIED-OF-HUNGER ,STORY349>
+	<COND (<IS-ALIVE>
+		<COND (<CHECK-ITEM ,MONKEY>
+			<CRLF>
+			<TELL "Eat the monkey (if you are heartless or desperate enough)?">
+			<COND (<YES?>
+				<STORY-JUMP ,STORY368>
+			)>
+		)>
+	)>>
+
+<CONSTANT TEXT350 "Your fervent prayers go unanswered. As the four of you kneel there on the deck, heads reverently bowed, Blutz gives a sudden sob. \"God's abandoned us, shipmates!\" he weeps. \"We're cursed.\"||\"Aye,\" cracks a voice through the gusting wind. \"Cursed to sail adrift under a heedless heaven for all eternity!\"||You turn, shocked to see Mandrigard standing on the poopdeck, his turban lost, hair flying wildly and robes snapping about him. Rain streaks his colourless face. He stumps forward, his whalebone leg creaking the deck timbers under his weight. A grog bottle is in his hand, and he sloshes its contents as he laughs at you: \"Prayer, is it you're at? Ah, you poor fools, haven't you yet guessed the truth? This is purgatory, mates! There's no praying your way out of this mess. Here there's no living or dying, no rest, no atonement, nor answer to your orisons! This is how it'll be, now and forever, aboard the damned ship Larnassos!||His screaming laughter rises to the cloud-filled sky, and with a feeling of mounting horror you realise he is right. You have brought the curse upon your heads. Now you will sail the seas throughout eternity.">
 
 <ROOM STORY350
 	(IN ROOMS)
 	(DESC "350")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT350)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
 
 <ROOM STORY351
