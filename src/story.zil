@@ -90,6 +90,7 @@
 	<PUTP ,STORY277 ,P?DEATH T>
 	<PUTP ,STORY290 ,P?DEATH T>
 	<PUTP ,STORY296 ,P?DEATH T>
+	<PUTP ,STORY304 ,P?DEATH T>
 	<RETURN>>
 
 <CONSTANT DIED-IN-COMBAT "You died in combat">
@@ -267,8 +268,6 @@
 		<CRLF>
 		<LOSE-LIFE 1 "You died from the bullet wound" ,STORY006>
 	)>>
-
-<GLOBAL USED-CHARMS-TO-FLOAT F>
 
 <CONSTANT TEXT007 "It is impossible to prevent it from leaking. Already dangerously low in the water, it now requires two people to bail constantly.">
 
@@ -1093,7 +1092,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY068-PRECHOICE ()
-	<GIVE-FROM-LIST <LTABLE SWORD SHARKS-TOOTH-SWORD PISTOL MAGIC-WAND MAGIC-AMULET SHIP-IN-BOTTLE CONCH-SHELL-HORN BAT-SHAPED-TALISMAN BLACK-KITE DIAMOND TOOLKIT HEALING-POTION BRONZE-HELMET CRUCIFIX DRAGON-RING> STORY068-UNABLE STORY068-UNWILLING 2 ,STORY144>>
+	<GIVE-FROM-LIST <LTABLE SWORD SHARKS-TOOTH-SWORD CLEAVER RUSTY-SWORD PISTOL MAGIC-WAND MAGIC-AMULET SHIP-IN-BOTTLE CONCH-SHELL-HORN BAT-SHAPED-TALISMAN BLACK-KITE DIAMOND TOOLKIT HEALING-POTION BRONZE-HELMET CRUCIFIX DRAGON-RING> STORY068-UNABLE STORY068-UNWILLING 2 ,STORY144>>
 
 <CONSTANT TEXT069 "Capstick has a fine house on Halyard Street, in one of the richest parts of town. Smartening yourselves up to look as respectable as possible, you ignore the sidelong glances and haughty sniffs of the wealthy passers-by, marching straight up to present yourselves at the front door. The servant who answers the door at first mistakes you for beggars, but once you've corrected that small misunderstanding he shows you through his master's study.||Capstick is sitting by the fire with a book. Seeing you, he gives his great belly-shaking laugh and leaps up to greet you, commanding the servant to bring a bottle of sherry.||\"Freshly taken off a Sidonian merchantman,\" he says shortly, lifting his glass to savour the smoky gold liquid before drinking. \"And..\" he smacks his lips, refills your glasses \"all the better for being plundered off one of those rascals, eh?\"||Soon the conversation turns to the matters you discussed aboard the Jewel of Heaven. At this, Capstick's face falls. \"I have sour news,\" he tells you. \"I must sail for Glorianne in two days' time, and so I'll be unable to partner you in your attack on that devil Skarvench. Moreover I've told the tale to several high officials, but no one believes it's true.\"||You give a glum nod. \"Who can blame them, given the source of your information? We are vagabond ex-pirates, which is not the best pedigree for reliable testimony.\"||\"But I believe you, by God!\" He produces an envelope and hands it to you. \"This is a deed of ownership for a sloop that I own in Port Selenice. She's just a small craft, but better than no ship at all. Go to Selenice, get together a crew, and see if you can't beat this Skarvench at his own game.\"||Thanking Capstick for his help, you take your leave. \"I'm only sorry not to be sailing with you,\" are his parting words.">
 
@@ -4448,185 +4447,164 @@
 	(TYPES <LTABLE R-CODEWORD R-CODEWORD R-NONE>)
 	(FLAGS LIGHTBIT)>
 
+<CONSTANT TEXT301 "On returning to Port Selenice you go straight to Master Kemp's shipyard, where your treasure secures you a fair-sized galleon in place of your small sloop. You check her out from stern to stern, and despite finding a few faults you have a good instinct about her. Patting one of the cannons, you say. \"This is the ship for us. \"What's she called, Master Kemp?\"||\"My friend,\" he replies, \"she is the Shivered Timber.\"">
+
 <ROOM STORY301
 	(IN ROOMS)
 	(DESC "301")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT301)
+	(PRECHOICE STORY301-PRECHOICE)
+	(CONTINUE STORY184)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY301-PRECHOICE ()
+	<TAKE-VESSEL ,SHIVERED-TIMBER>>
+
+<CONSTANT TEXT302 "He looks you long and hard in the eyes, then turns away with a snarl and a muttered oath. \"Davy Jones's teeth! This one's will is too strong.\" He glances back up at you, but the earlier mask of pleasantry is now entirely peeled away to reveal a look of pure murderous hatred. \"Very well. We cannot come up uninvited. But be warned, you frail thing of daylight and warm blood: do not touch my treasure. For if you do, I promise you a curse that will harry you into the grave and haunt you even beyond it. This I swear, or my name's not El Draque\"||They melt away into the mist -- the tall figure, the boat, and the two oarsmen, all faded to nothing. By dawn you're not even sure it ever happened. But when you start to order the treasure brought aboard, you remember El Draque's parting words. Maybe it was a dream -- but can't a ghost in a dream lay curses just as easily?">
+<CONSTANT TEXT302-TREASURE "You loaded the treasure aboard first before sailing">
 
 <ROOM STORY302
 	(IN ROOMS)
 	(DESC "302")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT302)
+	(PRECHOICE STORY302-PRECHOICE)
+	(CONTINUE STORY016)
+	(CODEWORD CODEWORD-MALEFIC)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY302-PRECHOICE ()
+	<CRLF>
+	<TELL "Sail without taking the treasure?">
+	<COND (<YES?> <STORY-JUMP ,STORY396>)>>
+
+<CONSTANT TEXT303 "\"The Rose is at the centre of Skarvench's web,\" you realise. \"That's where we'll find him.\"||You cannot safely take your ship on into the fog. Instead, you take a small party in one of the cutters and begin to row as quickly as possible towards the centre of the fogbank. \"It seems to be issuing from the Rose herself,\" says Oakley. \"And I've never seen fog so thick. I can barely see Blutz sitting in the stern back there, and he's not easy to miss!\"||\"Stow that personal talk, if you please, Mister Oakley!\" protests Blutz from the back of the boat. Despite the grim danger you are facing, every man in the cutter allows himself a chuckle.||\"Mister Blutz's girth is entirely a natural phenomenon,\" says the ever sober-minded Grimes. \"I can't say the same for this fog. And moonlight is returning: the Moon Dog will be airborne again by now. Let's hope we're in time.\"||The Rose looms ahead. You catch hold of her access ladder and secure your cutter, then lead the way up.">
+<CONSTANT CHOICES303 <LTABLE "use a" "otherwise">>
 
 <ROOM STORY303
 	(IN ROOMS)
 	(DESC "303")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT303)
+	(CHOICES CHOICES303)
+	(DESTINATIONS <LTABLE STORY190 STORY209>)
+	(REQUIREMENTS <LTABLE BRONZE-HELMET NONE>)
+	(TYPES <LTABLE R-ITEM R-NONE>)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT304 "A shot cracks out through the mist-shrouded deck, splintering the wand in Wild's hand. You and he both turn, equally amazed, as a tall figure steps out of the companion-way hatch. He holds a smoking pistol, and from his aristocratic manner you guess he must be Admiral Lord Calidor, commander of the Queen's navy. \"Wild,\" he says curtly, \"your twig's split.\" He must know he's just made the luckiest shot in history, but with typical Gloriannic aplomb he shows no sign of it.||\"Admiral,\" begins Wild in a wheedling voice, \"this pirate villain --\"||\"Forget it, Wild,\" says Calidor, reloading his pistol. \"I'm wise to your game.\" A squad of marines pour past him onto the deck. \"Sergeant, Dr Wild is to be placed under arrest on a charge of high treason.\"||Sudden Wildøs facade of genteel urbanity crumbles. Howling in rage, he whips out a dagger and throws it. It catches you in the arm and you stagger back with a grunt of surprise rather than pain.">
+<CONSTANT TEXT304-CONTINUED "Wild turns and leaps overboard into the leas. Whether it is suicide or whether he has a plan of escape, you may never know. You have more pressing concerns. Swarming down the rope from the Moon Dog, baying like phantoms taking human form out of the mist, come Skarvench and his men. Calidor and his marines stand ready for a battle-royal, but you press ahead of them, lunging towards Skarvench as he lands on the deck. Now you will settle your feud once and for all.">
 
 <ROOM STORY304
 	(IN ROOMS)
 	(DESC "304")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT304)
+	(PRECHOICE STORY304-PRECHOICE)
+	(CONTINUE STORY171)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY304-PRECHOICE ()
+	<LOSE-LIFE 1 "You died from the attack" ,STORY304>
+	<IF-ALIVE TEXT304-CONTINUED>>
+
+<CONSTANT TEXT305 "You step forward smartly and take him by the elbow. \"Ah, Mister Fitzhugh,\" you say. \"Come along, the cap'n wants us on deck. Weøre to steer a course for Glorianne.\"||He starts to follow you up the companion-way steps, but casts a dubious look back towards Skarvench's cabin. \"Eh? Glorianne? But that's a journey of months! He said nothing to me of this.\"||You shrug. \"We've got to get the Queen, haven't we?\"||Fitzhugh hesitates. He's not sure what to think. As he starts back towards Skarvench's cabin to check your story, you settle the matter by coshing him over the back of the neck. He slumps to the floor, and you hurry away to join your comrades.">
 
 <ROOM STORY305
 	(IN ROOMS)
 	(DESC "305")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT305)
+	(CONTINUE STORY172)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT306 "You need to venture only a little way into the jungle to collect armfuls of fruit and nuts. You also drink from a freshwater stream until your bellies are stretched like topgallants in a high wind. \"Phew!\" says Oakley, rolling back on the grass. \"That was the sweetest drop I ever tasted, mates. But now I reckon we ought to be getting on our way.\"">
 
 <ROOM STORY306
 	(IN ROOMS)
 	(DESC "306")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT306)
+	(PRECHOICE STORY306-PRECHOICE)
+	(CONTINUE STORY344)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY306-PRECHOICE ()
+	<ADD-PROVISIONS 3>>
+
+<CONSTANT TEXT307 "Clouds cover the sharp silver horns of the moon as, with muffled oars, you pull out of the cove and row beneath the black bows of Skarvench's anchored vessel.||\"Like tiptoeing past the face of a sleeping dragon,\" whispers Oakley with characteristic grim humour.||\"Oh no,\" says Blutz suddenly, \"I'm going to -- ACHOOOO!\"||Silently cursing this stroke of bad luck, the four of you crouch low in the boat and pray that the lookout on deck didn't hear the sneeze. But those prayers go unheeded. You can see the man's face appear at the rail, peering out into the darkness. A glance up at the sky assures you that fate really has no mercy: the moon is about to emerge from behind a cloud. When it does, the lookout cannot miss spotting you.">
+<CONSTANT CHOICES307 <LTABLE "try something" "otherwise">>
 
 <ROOM STORY307
 	(IN ROOMS)
 	(DESC "307")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT307)
+	(CHOICES CHOICES307)
+	(DESTINATIONS <LTABLE STORY364 STORY383>)
+	(REQUIREMENTS <LTABLE SKILL-SWORDPLAY NONE>)
+	(TYPES <LTABLE R-SKILL R-NONE>)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT308 "With the help of others you put together a makeshift raft, even rigging a rough sail from interwoven palm leaves. You have to work fast, knowing that you have only the space of a single night, and you are not sure the raft will hold together long enough for you to reach the next island.">
+<CONSTANT CHOICES308 <LTABLE "put to sea on the raft" "try hiding in the jungle" "go to the witch's place at dawn">>
+<GLOBAL USED-CHARMS-TO-FLOAT F>
 
 <ROOM STORY308
 	(IN ROOMS)
 	(DESC "308")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT308)
+	(CHOICES CHOICES308)
+	(DESTINATIONS <LTABLE STORY137 STORY346 STORY327>)
+	(PRECHOICE STORY308-PRECHOICE)
+	(TYPES THREE-NONES)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY308-PRECHOICE ()
+	<COND (<CHECK-SKILL ,SKILL-CHARMS>
+		<CRLF>
+		<TELL "Do you want to use your magic amulet to keep it seaworthy?">
+		<COND(<YES?>
+			<SETG USED-CHARMS-TO-FLOAT T>
+		)>
+	)>>
+
+<CONSTANT TEXT309 "Ejada twists in your grasp, fighting back with a strength that seems incredible for a person with her slimly supple frame. It is like holding on a python. But at last you succeed in getting her in a firm grip and dragging her off her feet. As you lift her up above your head, you are surprised to notice green roots trailing from the soles of her bare feet. Now that those roots have been tugged out of the ground they are withering fast -- and at the same time you can feel Ejada getting weaker. Her mightily pounding blows fade to soft slaps, her roars of anger become faint moans as she cries for quarter.">
 
 <ROOM STORY309
 	(IN ROOMS)
 	(DESC "309")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT309)
+	(CONTINUE STORY157)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT310 "You must give the chief one of these items: a sword, a pistol, a wand, an amulet, a ship in a bottle, a conch-shell horn, a bat-shaped talisman, a black kite or all your money.">
+<CONSTANT TEXT310-CONTINUED "Then, with two well-stocked canoes accompanying you, you strike south from Pandanus Island. After only a few days, you are delighted to see a ship appear on the eastern horizon. Gradually taking shape out of the morning haze, she draws closer until you can make out her comely gilded figurehead and the name painted across her bows: the Jewel of Heaven. Grimes is more interested in the colours she's flying. \"A Gloriannic ship, by God's grace! We're saved!\"||Bidding farewell to the islanders who have brought you this far, you are grateful to be taken aboard the Jewel of Heaven. Even so, Blutz speaks for you all as he watches your little craft, now abandoned, go drifting off across the swell. \"She brought us through it against all the odds, mates. You can never say more for any vessel.\"||And, to the bewilderment of the sailors, you raise your arms to salute the ramshackle craft bobbing off into the distance">
 
 <ROOM STORY310
 	(IN ROOMS)
 	(DESC "310")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT310)
+	(PRECHOICE STORY310-PRECHOICE)
+	(CONTINUE STORY370)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY310-PRECHOICE ("AUX" GIVE-RESULT)
+	<SET GIVE-RESULT <GIVE-FROM-LIST <LTABLE SWORD SHARKS-TOOTH-SWORD CLEAVER RUSTY-SWORD PISTOL MAGIC-WAND MAGIC-AMULET SHIP-IN-BOTTLE CONCH-SHELL-HORN BAT-SHAPED-TALISMAN BLACK-KITE ALL-MONEY> UNABLE-TO-PART UNWILLING-TO-PART>>
+	<COND (<EQUAL? .GIVE-RESULT GIVE-UNWILLING GIVE-UNABLE>
+		<EMPHASIZE "You must choose again.">
+		<STORY-JUMP ,STORY272>
+	)(ELSE
+		<COND (<IN? ,ALL-MONEY ,GIVEBAG>
+			<COND (<L? ,MONEY 1>
+				<EMPHASIZE "You cannot spare any. You must choose again.">
+				<MOVE ,ALL-MONEY ,PLAYER>
+				<STORY-JUMP ,STORY272>
+				<RETURN>
+			)>
+			<SETG ,MONEY 0>
+			<UPDATE-STATUS-LINE>
+		)>
+		<CRLF>
+		<TELL TEXT310-CONTINUED>
+		<TELL ,PERIOD-CR>
+		<MOVE ,ALL-MONEY ,PLAYER>
+	)>>
 
 <ROOM STORY311
 	(IN ROOMS)
