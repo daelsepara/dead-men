@@ -96,6 +96,7 @@
 	<PUTP ,STORY317 ,P?DEATH T>
 	<PUTP ,STORY321 ,P?DEATH T>
 	<PUTP ,STORY323 ,P?DEATH T>
+	<PUTP ,STORY331 ,P?DEATH T>
 	<RETURN>>
 
 <CONSTANT DIED-IN-COMBAT "You died in combat">
@@ -105,6 +106,32 @@
 <CONSTANT DIED-EJADA-SORCERY "You have died from the Ejada's sorcery">
 
 <CONSTANT FOUR-TREASURES <LTABLE MAGIC-WAND HEALING-POTION SHIP-IN-BOTTLE BLACK-KITE>>
+
+<ROUTINE SCRIPTOR-BUY-SELL (ITEM LEAVE "OPT" SELL-PRICE)
+	<COND (<NOT .ITEM> <RETURN>)>
+	<CRLF>
+	<TELL "Pay Doctor Scriptor one doubloon for what he's told you so far?">
+	<COND (<YES?>
+		<COND (<G? ,MONEY 0>
+			<SETG MONEY <- ,MONEY 1>>
+			<COND (<AND .SELL-PRICE <G? .SELL-PRICE 0>>
+			<CRLF>
+				<TELL "Sell the " D .ITEM " for " N .SELL-PRICE " " D ,CURRENCY "?">
+				<COND (<YES?>
+					<SETG MONEY <+ ,MONEY .SELL-PRICE>>
+					<LOSE-ITEM .ITEM>
+				)>
+			)>
+		)(ELSE
+			<HLIGHT ,H-BOLD>
+			<TELL "You have no " D, CURRENCY " left and was forced to leave" ,PERIOD-CR>
+			<HLIGHT 0>
+			<STORY-JUMP .LEAVE>
+		)>
+	)(ELSE
+		<EMPHASIZE "You refused to pay his fees and was asked to leave.">
+		<STORY-JUMP .LEAVE>
+	)>>
 
 <ROUTINE DAMAGE-SHIP (DMG "OPT" SURVIVED DESTROYED "AUX" STARS)
 	<COND (,CURRENT-VEHICLE
@@ -4682,29 +4709,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY316-PRECHOICE ()
-	<COND (,RUN-ONCE
-		<CRLF>
-		<TELL "Pay Doctor Scriptor one doubloon for what he's told you so far?">
-		<COND (<YES?>
-			<COND (<G? ,MONEY 0>
-				<SETG MONEY <- ,MONEY 1>>
-				<CRLF>
-				<TELL "Sell the " D ,CONCH-SHELL-HORN " for 20 doubloons?">
-				<COND (<YES?>
-					<SETG MONEY <+ ,MONEY 20>>
-					<LOSE-ITEM ,CONCH-SHELL-HORN>
-				)>
-			)(ELSE
-				<HLIGHT ,H-BOLD>
-				<TELL "You have no " D, CURRENCY " left and was forced to leave" ,PERIOD-CR>
-				<HLIGHT 0>
-				<STORY-JUMP ,STORY392>
-			)>
-		)(ELSE
-			<EMPHASIZE "You refused to pay his fees and was asked to leave.">
-			<STORY-JUMP ,STORY392>
-		)>
-	)>>
+	<COND (,RUN-ONCE <SCRIPTOR-BUY-SELL ,CONCH-SHELL-HORN ,STORY392 20>)>>
 
 <CONSTANT TEXT317 "The bullet hits Ejada square between the eyes but has no more effect than if you'd fired it into the bole of an oak tree. She winces and says with a confident smile, \"Your best shot? Try mine.\"||She lunges forward, her fingers driving up to the pit of your stomach with sickening force.">
 <CONSTANT CHOICES317 <LTABLE "now use" "a wand" "turn and flee">>
@@ -4892,7 +4897,10 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY329-EVENTS ()
-	<COND (<CHECK-CODEWORD ,CODEWORD-PROSPERO> <REMOVE ,CODEWORD-PROSPERO> <RETURN ,STORY348>)>
+	<COND (<CHECK-CODEWORD ,CODEWORD-PROSPERO>
+		<REMOVE ,CODEWORD-PROSPERO>
+		<RETURN ,STORY348>
+	)>
 	<RETURN ,STORY030>>
 
 <CONSTANT TEXT330 "With sails towering against the darkling sky, the ship sails past on her endless voyage. Seemingly she casts a deep bone-racking chill in her wake, and all of you shiver as you watch her fade into the night.||\"A backwards blessing on this cold,\" mutters Grimes through chattering teeth. \"Let's head south, mates. Better a slow journey in warmer waters than to be flung up to scrape the icy hull of heaven.\"">
@@ -4915,185 +4923,153 @@
 		<PUT <GETP ,STORY330 ,P?DESTINATIONS> 2 ,STORY349>
 	)>>
 
+<CONSTANT TEXT331 "You raise the cleaver, a grim look setting your features like stone. \"Who's to be first?\" you ask.||Blutz's lip trembles. He looks like a large timid hamster when he says, \"Eh? What do you mean?\"||\"It's obvious mate,\" puts i Grimes, nodding towards the water tank full of decomposed hands. \"The only way off this island is to sacrifice a hand.\"||Oakley nods. \"That's what the sailors must've done. I don't know if it was the pain and loss that cancelled out their guilt. Maybe it was just a way of getting around the letter of the curse - y'know, chopping off the hand that did the fateful deed. Who's to say? But I see a tank full o' hands and no bodies to go with them, so they must've got away, mustn't they\"||Each of you in turn submits to the cleaver, depositing your severed hand in the water tank with the others. It is a gruesome sacrifice, but your only way of circumventing the curse.">
+<CONSTANT TEXT331-CONTINUED "Don't look so sick, mate,\" says Oakley to Blutz. \"All the best pirates are wearing hooks these days.\"||Chuckling bleakly at this, you clamber back down to the jollyboat tethered alongside and start to row away">
+
 <ROOM STORY331
 	(IN ROOMS)
 	(DESC "331")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT331)
+	(PRECHOICE STORY331-PRECHOICE)
+	(CONTINUE STORY136)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY331-PRECHOICE ()
+	<LOSE-LIFE 1 DIED-GREW-WEAKER ,STORY331>
+	<COND (<IS-ALIVE>
+		<COND (<CHECK-SKILL ,SKILL-AGILITY> <REMOVE ,SKILL-AGILITY>)>
+		<CRLF>
+		<TELL TEXT331-CONTINUED>
+		<TELL ,PERIOD-CR>
+	)>>
+
+<CONSTANT TEXT332 "After so long at sea you would have expected to sight a ship by now. A nasty suspicion begins to obsess your thoughts: that you have drifted far south of the main trade route, and that you now have no hope of being picked up. Talking it over the others, you find that Grimes and Oakley are for turning north, possibly in the hope of reaching the Smoking Islands. There you could forage for food and water. Blutz thinks you should stick to your present course. \"Ships are scarce because the hurricane season starts in a month or so\", he reasons, \"but I still say that if we keep heading west we'll be picked up soon.\"||Oakley snorts impatiently. \"The hurricane isn't due for at least eight weeks! No, the reason we've not seen a ship is because we're too far south.\"">
+<CONSTANT CHOICES332 <LTABLE "steer northwards" "stay on a westbound course">>
 
 <ROOM STORY332
 	(IN ROOMS)
 	(DESC "332")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT332)
+	(CHOICES CHOICES332)
+	(DESTINATIONS <LTABLE STORY135 STORY351>)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT333 "The smooth steely outlines and the cloudy blue colour of the iceberg tell you that it is old ice, which will have lost its salt content over the years and should be safe to drink.">
 
 <ROOM STORY333
 	(IN ROOMS)
 	(DESC "333")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT333)
+	(CONTINUE STORY352)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT334 "Is it sixth sense or wishful thinking that guides your fingers to the talisman? You can only guess at its power, but you mutter a silent plea, invoking the talisman's magic to come to your aid now.||A shadow falls across the beach, as though a cloud covered the sun. The shadow deepens. The sailors -- all of them hardened veterans of the sea -- lookup up at the sky with faces like frightened children. The sound that escapes their lips is the voice of fear, born of the most primitive terror of all. The dark.||A black wing of shadow draws across the face of the sun. The day is plunged into night. In the confusion, you race off along the beach and put out to sea in your small vessel. Skarvench's bellows of rage roll across the water behind you, but his men are too terrified to follow his orders. Knowing that the pirates will search for you between here and Leshand, you set a southerly course. As the eclipse passes and the daylight comes trickling back, the island is already far behind.||You notice that the bat-shaped talisman has vanished.">
 
 <ROOM STORY334
 	(IN ROOMS)
 	(DESC "334")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT334)
+	(PRECHOICE STORY334-PRECHOICE)
+	(CONTINUE STORY367)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY334-PRECHOICE ()
+	<LOSE-ITEM ,BAT-SHAPED-TALISMAN>>
+
+<CONSTANT TEXT335 "Doctor Scriptor examines the talisman for several minutes before giving his opinion. \"This is the likeness of the Bat of Night, a mythic creature. Under my spy-glass it displays a greenish tinge, indicating that some magic still remains. Possibly its power would work once. Twice at most.\"||\To do what?\" asks Blutz.||\"Your guess is as good as mine,\" replies Scriptor blandly. \"Perhaps it helps you to see in the dark? Now, my fee for the assessment is one doubloon, as you very well know.\"||He hands you back the talisman.">
+<CONSTANT CHOICES335 <LTABLE "now ask him to identify either a" "a" "or a" "it is time for you to leave">>
 
 <ROOM STORY335
 	(IN ROOMS)
 	(DESC "335")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT335)
+	(CHOICES CHOICES335)
+	(DESTINATIONS <LTABLE STORY373 STORY354 STORY316 STORY392>)
+	(REQUIREMENTS <LTABLE DRAGON-RING BRONZE-HELMET CONCH-SHELL-HORN NONE>)
+	(TYPES <LTABLE R-ITEM R-ITEM R-ITEM R-NONE>)
+	(PRECHOICE STORY335-PRECHOICE)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY335-PRECHOICE ()
+	<COND (,RUN-ONCE <SCRIPTOR-BUY-SELL ,BAT-SHAPED-TALISMAN ,STORY392>)>>
+
+<CONSTANT TEXT336 "The pedlar is a thin fellow with a pigtail and a silver ring on his ear. On his shoulder crouches a weasel which is attached to wrist by a length of twine. As you approach, the pedlar whisks the tarpaulin off his cart and begins describing the jumble of items he has, tossing each aside and grabbing another almost as quickly as he can reel off the prices.||\"Steady on, matey,\" grumbles Oakley. \"I can hardly keep up. What were you askin' for this here cutlass, now?\"">
 
 <ROOM STORY336
 	(IN ROOMS)
 	(DESC "336")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT336)
+	(PRECHOICE STORY336-PRECHOICE)
+	(CONTINUE STORY410)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY336-PRECHOICE ()
+	<COND (<CHECK-SKILL ,SKILL-STREETWISE> <STORY-JUMP ,STORY393>)>>
+
+<CONSTANT TEXT337 "Master Kemp the shipbuilder is delighted to provide you with a magnificent warship fitted with eighty cannons. \"She is the Meteor,\" he says. \"I built her for a customer some months ago, but sadly he was apprehended in Port Worshen before he could take delivery. Now he's to be seen on Execution dock -- food for rooks, God help his soul -- and his fine is yours.\"||\"Perhaps we should change the name?\" suggests Oakley. \"Meteor was the original owner's choice, not ours.\"">
+<CONSTANT CHOICES337 <LTABLE "change the vessel's name" "leave it as it is">>
 
 <ROOM STORY337
 	(IN ROOMS)
 	(DESC "337")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT337)
+	(CHOICES CHOICES337)
+	(DESTINATIONS <LTABLE STORY411 STORY184>)
+	(PRECHOICE STORY337-PRECHOICE)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY337-PRECHOICE ()
+	<TAKE-VESSEL ,METEOR>
+	<COND (<CHECK-SKILL ,SKILL-FOLKLORE> <STORY-JUMP ,STORY394>)>>
+
+<CONSTANT TEXT338 "You have little enough to go on -- just a hazarded guess at the iceberg's last position, and your best estimate of how far the prevailing current might have carried it by now. It is going to be like looking for a needle in a haystack, as your comrades are swift to point out.||\"But when that proverbial needle is made of gold, so to speak, and has a diamond set into it,\" you reply to their objections, \"surely then the task's worth attempting?\"">
+<CONSTANT CHOICES338 <LTABLE "steer due south" "south-west" "or south-east" "alternatively, you could abandon your plan to search for the iceberg and try your hand at piracy instead">>
 
 <ROOM STORY338
 	(IN ROOMS)
 	(DESC "338")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT338)
+	(CHOICES CHOICES338)
+	(DESTINATIONS <LTABLE STORY378 STORY056 STORY207 STORY357>)
+	(PRECHOICE STORY338-PRECHOICE)
+	(TYPES FOUR-NONES)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY338-PRECHOICE ()
+	<COND (<CHECK-SKILL ,SKILL-SEAFARING> <STORY-JUMP ,STORY359>)>>
+
+<CONSTANT TEXT339 "You sign on a small crew. A good following wind carries you to Leshand in six days. Disappointment awaits you there, however, as no-one has any idea where El Draque's treasure lies buried. \"Sure, an' if I knew,\" says one old tar you speak to, \"would I not be after fetchin' it meself?\"||At these words, his drinking companions all cross themselves, and mouths that are more accustomed to hard swearing mumble a swift prayer. \"Don't pay any heed to old Bunratty's talk!\" cries another man. \"Anyone who went seeking El Draque's treasure might as well pawn their souls to the Devil on the day they set sail.\" ´Blutz is quite discomfited by all this, and you are surprised to see as you leave the inn that even Grimes and Oakley are wide-eyed and pale. \"Come on, skipper,\" urges Oakley. \"It's pretty clear there's something eerie about this El Draque. Why, he's supposed to be dead and gone but a lot of folk still seem mortally afraid of him for all that!\"||\"Let's put to sea and try a little piracy,\" suggests Grimes. \"We'd soon have enough put by to get ourselves a decent warship.\"">
+<CONSTANT CHOICES339 <LTABLE "insist on continuing the hunt for El Draque's treasure" "agree to Grime's suggestion">>
 
 <ROOM STORY339
 	(IN ROOMS)
 	(DESC "339")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT339)
+	(CHOICES CHOICES339)
+	(DESTINATIONS <LTABLE STORY377 STORY357>)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT340 "Several limbs lie like dead fishes across the deck -- not just those of the vampires, but also some torn from their sockets of your poor sailors, who now lie screaming as their lifeblood gushes across the planks.||Three of the vampires still stand, but your spirited defence of your vessel has cowed them. They crouch back against the rail. Then keeping their eyes fixed on you, they drop to their knees with a hideous mewling sound to lick up some of the spilled blood. \"Merciful God...\" croaks Grimes. Although not a squeamish man, he turns away and retches with disgust.||The remaining vampires rise and face you across the carnage. Of all the crew only yourself, Grimes, Oakley and Blutz are still standing -- and the fight has gone out of you at the sight of such horrors. For their part, the vampires make no move but only stare at you and lick their gore-spattered lips. At last their leader speaks. He is a pallid but unblemished creature with eyes like old ice. \"I am El Draque. Never have I been bested, but tonight I will concede you've fought me to a stand off. We'll go and leave you in peace, but I'll add this warning.  Do not touch the treasure in our coffins, or you'll carry my curse for the rest of your days.\"||He drops back over the side with the other two. There is no splash, nor any sign of them when you go to the rail to look. There is just the swirling fog. The fallen vampires dissolve from the deck into a miasmic murk which only disperses with the sunrise. You take stock of the dead and injured among your crew, then hold a council with your officers to decide whether to take the treasure or not.">
 
 <ROOM STORY340
 	(IN ROOMS)
 	(DESC "340")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT340)
+	(PRECHOICE STORY340-PRECHOICE)
+	(CONTINUE STORY396)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY340-PRECHOICE ()
+	<CRLF>
+	<TELL "Take the treasure?">
+	<COND (<YES?>
+		<GAIN-CODEWORD ,CODEWORD-MALEFIC>
+		<STORY-JUMP ,STORY016>
+	)>>
 
 <ROOM STORY341
 	(IN ROOMS)
