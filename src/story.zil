@@ -47,6 +47,7 @@
 	<PUT <GETP ,STORY202 ,P?DESTINATIONS> 5 ,STORY409>
 	<PUT <GETP ,STORY272 ,P?DESTINATIONS> 3 ,STORY348>
 	<PUT <GETP ,STORY278 ,P?DESTINATIONS> 6 ,STORY409>
+	<PUT <GETP ,STORY330 ,P?DESTINATIONS> 2 ,STORY349>
 	<PUTP ,STORY005 ,P?DEATH T>
 	<PUTP ,STORY006 ,P?DEATH T>
 	<PUTP ,STORY013 ,P?DEATH T>
@@ -93,6 +94,8 @@
 	<PUTP ,STORY304 ,P?DEATH T>
 	<PUTP ,STORY314 ,P?DEATH T>
 	<PUTP ,STORY317 ,P?DEATH T>
+	<PUTP ,STORY321 ,P?DEATH T>
+	<PUTP ,STORY323 ,P?DEATH T>
 	<RETURN>>
 
 <CONSTANT DIED-IN-COMBAT "You died in combat">
@@ -101,7 +104,9 @@
 <CONSTANT DIED-OF-THIRST "You go mad from thirst">
 <CONSTANT DIED-EJADA-SORCERY "You have died from the Ejada's sorcery">
 
-<ROUTINE DAMAGE-SHIP (DMG SURVIVED DESTROYED "AUX" STARS)
+<CONSTANT FOUR-TREASURES <LTABLE MAGIC-WAND HEALING-POTION SHIP-IN-BOTTLE BLACK-KITE>>
+
+<ROUTINE DAMAGE-SHIP (DMG "OPT" SURVIVED DESTROYED "AUX" STARS)
 	<COND (,CURRENT-VEHICLE
 		<CRLF>
 		<HLIGHT ,H-BOLD>
@@ -111,8 +116,8 @@
 		<SET STARS <- .STARS .DMG>>
 		<COND (<L? .STARS 0> <SET .STARS 0>)>
 		<PUTP ,CURRENT-VEHICLE ,P?STARS .STARS>
-		<COND (<G? .STARS 0> <STORY-JUMP .SURVIVED>)>
-		<STORY-JUMP .DESTROYED>
+		<COND (<G? .STARS 0> <COND (.SURVIVED <STORY-JUMP .SURVIVED>)> <RETURN>)>
+		<COND (.DESTROYED <STORY-JUMP .DESTROYED>)>
 	)>
 	<RETURN>>
 
@@ -2338,7 +2343,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY157-PRECHOICE ()
-	<SELECT-FROM-LIST <LTABLE MAGIC-WAND HEALING-POTION SHIP-IN-BOTTLE BLACK-KITE> 4 4>
+	<SELECT-FROM-LIST FOUR-TREASURES 4 4>
 	<CRLF>
 	<TELL TEXT157-CONTINUED>
 	<TELL ,PERIOD-CR>>
@@ -4761,185 +4766,154 @@
 	(CONTINUE STORY138)
 	(FLAGS LIGHTBIT)>
 
+<CONSTANT TEXT321 "The vampires come at you in a crazed rush, knowing no fear in their longing to taste your warm rich blood. They feel no pain either, taking the blow of your valiant sailors as though they were stings of gnats. For a moment you feel a stab of hopelessness, shrinking back as the tide of defeat threatens to engulf you, but then you see the grim desperate faces of your brave lads as they battle the monsters. Your passion wells up in a great roar that thunders across the deck. \"This is my ship, by hell and high water, and I'll suffer a thousand deaths before I'll allow a bunch of bloodsucking lubbers to wrest her from me!\"||Your example inspires the crew to fresh efforts and they lay about them with their sabres, chopping bloodless limbs from undead bodies. And still the vampires come, all undaunted by this macabre butchery...">
+
 <ROOM STORY321
 	(IN ROOMS)
 	(DESC "321")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT321)
+	(PRECHOICE STORY321-PRECHOICE)
+	(CONTINUE STORY340)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY321-PRECHOICE ("AUX" (DMG 8))
+	<COND (<CHECK-SKILL ,SKILL-SWORDPLAY>
+		<SET DMG 4>
+	)(<OR <CHECK-SKILL ,SKILL-MARKSMANSHIP> <CHECK-SKILL ,SKILL-BRAWLING>>
+		<SET DMG 6>
+	)>
+	<LOSE-LIFE .DMG DIED-IN-COMBAT ,STORY321>>
+
+<CONSTANT TEXT322 "Cannonballs whistle out of the night, splintering timber and crushing bones. You see one of your crewmen give a short cry and go sailing out of the rigging to his doom. A shell goes thundering past only paces from where you're standing, but you remain ice cool as you close in on your foe.">
+<CONSTANT CHOICES322 <LTABLE "either stay to windward of the Moon Dog" "sail to her lee side">>
 
 <ROOM STORY322
 	(IN ROOMS)
 	(DESC "322")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT322)
+	(CHOICES CHOICES322)
+	(DESTINATIONS <LTABLE STORY379 STORY360>)
+	(PRECHOICE STORY322-PRECHOICE)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY322-PRECHOICE ()
+	<COND (,RUN-ONCE <DAMAGE-SHIP 1 NONE ,STORY227>)>>
+
+<CONSTANT TEXT323 "\"I don't know how you escaped my bullet,\" growls Skarvench, \"but this time I'm going to make sure of the matter. I'll chop off your head and stick it on a marline-spike to look at as I go to sleep each night!\"||You give him no answer. Clutching hold of the rope with one hand, you save your strength for the most desperate struggle of your life.">
 
 <ROOM STORY323
 	(IN ROOMS)
 	(DESC "323")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT323)
+	(PRECHOICE STORY323-PRECHOICE)
+	(CONTINUE STORY342)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY323-PRECHOICE ("AUX" (DMG 5))
+	<COND (<OR <CHECK-SKILL ,SKILL-SWORDPLAY> <CHECK-SKILL ,SKILL-MARKSMANSHIP>>
+		<SET DMG 2>
+	)(<CHECK-SKILL ,SKILL-BRAWLING>
+		<SET DMG 3>
+	)>
+	<LOSE-LIFE .DMG DIED-IN-COMBAT ,STORY323>
+	<RESET-TEMP-SKILLS>>
+
+<CONSTANT TEXT324 "Skarvenchstands over you. You see his face as though it was reflected in a pool of blood. His voice roars and surges in your ears: \"...among the dead men...\"||The image clouds and clots, then the red haze turns to blackness as your grip on life gives way. You have met your doom at the hands of your arch-foe, and now there is no one to stop him.">
 
 <ROOM STORY324
 	(IN ROOMS)
 	(DESC "324")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT324)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT325 "Making your way towards the sound of running water, you push the thick undergrowth aside to discover a sparkling stream. After slaking your thirst you follow the stream inland until you come to a clearing where an ancient stone monolith stands surrounded by creepers and green-filtered sunlight. Tiny gnats flit about like motes of golden dust as you inquisitively scrape away the moss covering the monolith so as to examine its carvings. Although weathered, some of the carvings can still be made out, although none of you has any idea what they represent.||The forest is full of errie sounds. Blutz looks about nervously. \"Shouldn't we be getting back to the boat?\" he says.">
 
 <ROOM STORY325
 	(IN ROOMS)
 	(DESC "325")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT325)
+	(CONTINUE STORY344)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT326 "You hide the jollyboat and lie in wait until the next morning, when Skarvench comes ashore in a rowboat with five other men: his quartermaster -- the whippet-thin villain named Curshaw, his lumbering first mate Porbuck, Borograve the master gunner, and two seamen carrying spades.||You crouch in the cover of the bushes and watch this sinister band making their way purposefully through the trees, with Skarvench striding ahead, pacing out distances and from time to time referring to a map he is carrying. Blutz gives a muffled gasp. \"They've come to dig up some treasure!\" he realises.||Oakley narrows his eyes. It is all he can do not to leap up from your hiding place and charge at Skarvench, so filled with hatred are his memories. But much as you year for revenge on the evil pirate captain, you know that to attack him now in your weakened state would mean almost certain death. It would be wiser to bide your time.">
+<CONSTANT CHOICES326 <LTABLE "either stay in hiding and spy on Skarvench" "else give the go-ahead to attack him">>
 
 <ROOM STORY326
 	(IN ROOMS)
 	(DESC "326")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT326)
+	(CHOICES CHOICES326)
+	(DESTINATIONS <LTABLE STORY004 STORY267>)
+	(PRECHOICE STORY326-PRECHOICE)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY326-PRECHOICE ()
+	<COND (<CHECK-ITEM ,MONKEY> <STORY-JUMP ,STORY099>)>>
+
+<CONSTANT TEXT327 "Ejada stands in front of her palace and surveys you with a haughty eye. In her gilded finery and bejewelled head-dress, with her limbs like a statue's .and her star sapphire gaze, she looks every inch a goddess.||She raises a flint knife. \"My mother the Earth is thirsty for a mortal soul. Which of you shall I send to her?\"||This is the moment of truth.">
+<CONSTANT CHOICES327 <LTABLE "make a run for it" "fight her" "each offer a portion of your soul" "use magic against her">>
 
 <ROOM STORY327
 	(IN ROOMS)
 	(DESC "327")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT327)
+	(CHOICES CHOICES327)
+	(DESTINATIONS <LTABLE STORY005 STORY365 STORY119 STORY384>)
+	(REQUIREMENTS <LTABLE NONE NONE NONE SKILL-SPELLS>)
+	(TYPES <LTABLE R-NONE R-NONE R-NONE R-SKILL>)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT328 "After a hard-fought battle you finally get in a killing blow. To your amazement, Ejada does not fall like any mortal opponent. Instead she gives a deep groan and sags forward like a puppet with its strings cut. Green sap spurts from the wound you've made above  her heart, and her long virid tresses wither like plucked blooms.\"Blow me down if she wasn't some sort o' plant!\" says Grimes, touching her cheek. \"Feels like wood rather than flesh.\"||You shrug and sheathe your sword. \"She did say she was the Earth Goddess's daughter.\"||A hasty exploration of Ejada's palace soon uncovers several treasures: a magic wand, a healing potion, a ship in a bottle, and a black kite. The potion can be drunk once at any time to restore your Life Points score to normal (press D). The other items may or may not come in handy later.">
+<CONSTANT TEXT328-CONTINUED "Returning to the boat, you put to see without further delay">
 
 <ROOM STORY328
 	(IN ROOMS)
 	(DESC "328")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT328)
+	(PRECHOICE STORY328-PRECHOICE)
+	(CONTINUE STORY137)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY328-PRECHOICE ()
+	<SELECT-FROM-LIST FOUR-TREASURES 4 4>
+	<CRLF>
+	<TELL TEXT328-CONTINUED>
+	<TELL ,PERIOD-CR>>
 
 <ROOM STORY329
 	(IN ROOMS)
 	(DESC "329")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(EVENTS STORY329-EVENTS)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY329-EVENTS ()
+	<COND (<CHECK-CODEWORD ,CODEWORD-PROSPERO> <REMOVE ,CODEWORD-PROSPERO> <RETURN ,STORY348>)>
+	<RETURN ,STORY030>>
+
+<CONSTANT TEXT330 "With sails towering against the darkling sky, the ship sails past on her endless voyage. Seemingly she casts a deep bone-racking chill in her wake, and all of you shiver as you watch her fade into the night.||\"A backwards blessing on this cold,\" mutters Grimes through chattering teeth. \"Let's head south, mates. Better a slow journey in warmer waters than to be flung up to scrape the icy hull of heaven.\"">
+<CONSTANT CHOICES330 <LTABLE "agree with the plan to turn south" "insist on pressing westwards">>
 
 <ROOM STORY330
 	(IN ROOMS)
 	(DESC "330")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT330)
+	(CHOICES CHOICES330)
+	(DESTINATIONS <LTABLE STORY135 STORY349>)
+	(TYPES TWO-NONES)
+	(PRECHOICE STORY330-PRECHOICE)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY330-PRECHOICE ()
+	<COND (<CHECK-CODEWORD ,CODEWORD-PECCANT>
+		<PUT <GETP ,STORY330 ,P?DESTINATIONS> 2 ,STORY386>
+	)(ELSE
+		<PUT <GETP ,STORY330 ,P?DESTINATIONS> 2 ,STORY349>
+	)>>
 
 <ROOM STORY331
 	(IN ROOMS)

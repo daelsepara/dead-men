@@ -150,7 +150,7 @@
     (FLAGS TAKEBIT)>
 
 <OBJECT SHIP-IN-BOTTLE
-    (DESC "ship-in-bottle")
+    (DESC "ship in a bottle")
     (SYNONYM SHIP)
     (ADJECTIVE BOTTLED)
     (FLAGS TAKEBIT)>
