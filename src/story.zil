@@ -111,6 +111,8 @@
 	<PUTP ,STORY402 ,P?DEATH T>
 	<PUTP ,STORY408 ,P?DEATH T>
 	<PUTP ,STORY415 ,P?DEATH T>
+	<PUTP ,STORY417 ,P?DEATH T>
+	<PUTP ,STORY419 ,P?DEATH T>
 	<RETURN>>
 
 <CONSTANT DIED-IN-COMBAT "You died in combat">
@@ -3636,7 +3638,7 @@
 	(TYPES FOUR-NONES)
 	(FLAGS LIGHTBIT)>
 
-<CONSTANT TEXT242 "You sit up suddenly with a groan. Your chest feels as though you've been kicked by a horse, but by rights you ought to be dead.||Shaking your head to clear it, you look down and discover that Skarvench's bullet was deflected by the article hanging at your breast. Instead of hitting your heart, it glanced off the metal and only left a long red gash.||Grime's face comes into focus. \"How long have ?I been out cold?\" you ask him, each breath making you wince in pain.||\"At least quarter of an hour, skipper.\"||Quite a crowd has gathered around you, As you stagger groggily to your feat, you find you're still holding the corkscrew. \"A fat lot of good this did me.\"||Oakley cracks a grind, relieved to see you're alright. \"I dunno, you might've had his remaining eye out with it if you'd been a bit closer.\"||And elderly pirate steps out of the crowd. You recognize him as a respected man in the disreputable community of Selenice. \"Skarvench broke the Brethren's law,\" he says. \"He's an outcast now. No port on the Carab will give him shelter.\"||Blutz is nursing a lump on his head. His nostrils flare in rage as he cries, \"If Skarvench succeeds in abducting Queen Titania he'll be rich enough to buy his own port!||\"He won't,\" you say in a voice laced with icy determination.">
+<CONSTANT TEXT242 "You sit up suddenly with a groan. Your chest feels as though you've been kicked by a horse, but by rights you ought to be dead.||Shaking your head to clear it, you look down and discover that Skarvench's bullet was deflected by the article hanging at your breast. Instead of hitting your heart, it glanced off the metal and only left a long red gash.||Grimes' face comes into focus. \"How long have ?I been out cold?\" you ask him, each breath making you wince in pain.||\"At least quarter of an hour, skipper.\"||Quite a crowd has gathered around you, As you stagger groggily to your feat, you find you're still holding the corkscrew. \"A fat lot of good this did me.\"||Oakley cracks a grind, relieved to see you're alright. \"I dunno, you might've had his remaining eye out with it if you'd been a bit closer.\"||And elderly pirate steps out of the crowd. You recognize him as a respected man in the disreputable community of Selenice. \"Skarvench broke the Brethren's law,\" he says. \"He's an outcast now. No port on the Carab will give him shelter.\"||Blutz is nursing a lump on his head. His nostrils flare in rage as he cries, \"If Skarvench succeeds in abducting Queen Titania he'll be rich enough to buy his own port!||\"He won't,\" you say in a voice laced with icy determination.">
 
 <ROOM STORY242
 	(IN ROOMS)
@@ -4187,7 +4189,7 @@
 	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
 
-<CONSTANT TEXT281 "Despite Grime's earnest entreaties, you decide to call upon the power of Leviathan. The decision alone is enough. As you raise the hand bearing the ring -- even before you can speak the serpent's name -- you sense something dark and monstrous rising from the illimitable depths. Waves rear like mountains to blot out the sky. The wind shrieks in fear and flees in all directions.||Leviathan rises out of the water. His body is a tower of bronze scales, each the size of a shield, green with brine stain. Phosphorescent venom drips from his gaping jaws in a torrent of liquid white fire. Dank poisonous vapour curls up from the black caves of his nostrils.||You realise your mistake at once -- you could never hope to command an entity so fearsome. As you cower in the boat, you see one more thing that strikes you full of mortal terror; on the face of the colossus there is now a look of fear. Even he will be hard-pressed to stand against Leviathan, and in their titanic battle four tiny mortals will be trodden underfoot, sent plunging into the ocean depths. You have brought your own doom upon you.">
+<CONSTANT TEXT281 "Despite Grimes' earnest entreaties, you decide to call upon the power of Leviathan. The decision alone is enough. As you raise the hand bearing the ring -- even before you can speak the serpent's name -- you sense something dark and monstrous rising from the illimitable depths. Waves rear like mountains to blot out the sky. The wind shrieks in fear and flees in all directions.||Leviathan rises out of the water. His body is a tower of bronze scales, each the size of a shield, green with brine stain. Phosphorescent venom drips from his gaping jaws in a torrent of liquid white fire. Dank poisonous vapour curls up from the black caves of his nostrils.||You realise your mistake at once -- you could never hope to command an entity so fearsome. As you cower in the boat, you see one more thing that strikes you full of mortal terror; on the face of the colossus there is now a look of fear. Even he will be hard-pressed to stand against Leviathan, and in their titanic battle four tiny mortals will be trodden underfoot, sent plunging into the ocean depths. You have brought your own doom upon you.">
 
 <ROOM STORY281
 	(IN ROOMS)
@@ -5061,7 +5063,7 @@
 	<COND (<CHECK-SKILL ,SKILL-SEAFARING> <STORY-JUMP ,STORY359>)>>
 
 <CONSTANT TEXT339 "You sign on a small crew. A good following wind carries you to Leshand in six days. Disappointment awaits you there, however, as no-one has any idea where El Draque's treasure lies buried. \"Sure, an' if I knew,\" says one old tar you speak to, \"would I not be after fetchin' it meself?\"||At these words, his drinking companions all cross themselves, and mouths that are more accustomed to hard swearing mumble a swift prayer. \"Don't pay any heed to old Bunratty's talk!\" cries another man. \"Anyone who went seeking El Draque's treasure might as well pawn their souls to the Devil on the day they set sail.\" ´Blutz is quite discomfited by all this, and you are surprised to see as you leave the inn that even Grimes and Oakley are wide-eyed and pale. \"Come on, skipper,\" urges Oakley. \"It's pretty clear there's something eerie about this El Draque. Why, he's supposed to be dead and gone but a lot of folk still seem mortally afraid of him for all that!\"||\"Let's put to sea and try a little piracy,\" suggests Grimes. \"We'd soon have enough put by to get ourselves a decent warship.\"">
-<CONSTANT CHOICES339 <LTABLE "insist on continuing the hunt for El Draque's treasure" "agree to Grime's suggestion">>
+<CONSTANT CHOICES339 <LTABLE "insist on continuing the hunt for El Draque's treasure" "agree to Grimes' suggestion">>
 
 <ROOM STORY339
 	(IN ROOMS)
@@ -6181,94 +6183,78 @@
 	<LOSE-LIFE 3 DIED-IN-COMBAT ,STORY415>
 	<IF-ALIVE TEXT415-CONTINUED>>
 
+<CONSTANT TEXT416 "Grimes gazes back into the east, where a pale gold glimmer heralds the approach of dawn. \"God curse that Skarvench!\" he declares suddenly. \"I wish I'd had the chance to slice open his foul heart as he slept.\"||Oakley nods. \"Even that might not have been enough to stop the fiend from coming after us.\"||\"Coming after us?\" says Blutz nervously. \"Do you think he will?\"||You have to agree with Oakley. Skarvench is not the kind of man to let others cross him. The fact that you four have got free of his clutches will enrage him as much as the theft of the jollyboat. He might well give chase -- and if he catches up with you, your fate will not bear thinking about.||\"What about your magic?\" Blutz asks you. \"Can't you keep him off our stern? Conjure up a tempest to blow the Belle Dame far out to sea!\"||You mull it over. You could cast such a spell, but is mighty magic indeed. It could all too easily get out of control, and even if it works it might leave you too weakened for further sorcery later.">
+<CONSTANT CHOICES416 <LTABLE "attempt it all the same" "not">>
+
 <ROOM STORY416
 	(IN ROOMS)
 	(DESC "416")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT416)
+	(CHOICES CHOICES416)
+	(DESTINATIONS <LTABLE STORY015 STORY289>)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT417 "The grisly sharpened-tooth grins on their faces as they accept your gift leave you uncertain of how you stand. While the gift is passed around for inspection, Oakley says: \"Quick now, lands -- let's get back to the jollyboat before these savages turn nasty.\"||You make a hasty descent of the cliffs, but before you are even halfway down a rock comes sailing past your head. \"Move it,\" you shout to the others, \"or we're all done for!\"||More rocks come dashing down, ad you can now hear a horrid chortling from the natives as they watch their missiles bruise and buffet you. Somehow you manage to keep your hold on the ladder despite this fearful barrage but by the time you reach the bottom you have blood from a dozen cuts.">
+<CONSTANT TEXT417-CONTINUED "You race back as your weary limbs will allow.||\"Let's hope we have more luck on the next island,\" says Grimes">
 
 <ROOM STORY417
 	(IN ROOMS)
 	(DESC "417")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT417)
+	(PRECHOICE STORY417-PRECHOICE)
+	(CONTINUE STORY116)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY417-PRECHOICE ("AUX" (DMG 4))
+	<COND (<CHECK-SKILL ,SKILL-CHARMS> <SET DMG 1>)>
+	<LOSE-LIFE .DMG DIED-BOMBARDMENT ,STORY417>
+	<COND (<IS-ALIVE>
+		<CRLF>
+		<TELL TEXT417-CONTINUED>
+		<TELL ,PERIOD-CR>
+	)>>
+
+<CONSTANT TEXT418 "Waiting until the two cutters are alongside, you suddenly jump to your feet and leap across the nearest one, landing on the side with all your weight. As the cutter lists sickeningly , taking on water, the pirates aboard start to panic. Fearing the cutter is about to capsize, they lurch back over towards the other side. Several fall overboard, abandoning their weapons as they flounder about in the sea. One lunges at you angrily, but you jump over his clutches and he too pitches over the side. The crew of the other cutter meanwhile are forced to veer away sharply to avoid a collision.||The scene degenerates quickly into utter confusion. Some of the pirates in the water try to get aboard the second cutter, their own shipmates clubbing them back from the sides for fear they will sink the already overloaded boat. The first cutter is now drifting in a circle, half the oars floating off in the waves and with a good deal of water sloshing in the bottom of the hull. You are satisfied that the pirates will be too busy for a while to give chase, so you jump nimbly back into the jollyboat and tell your friends to row for all they are worth.||A confused bedlam of yells and curses echoes out over the water after you, but soon you have left the island far behind. The Belle Dame cannot safely manoeuvre clear of the island until daybreak. By that time you intend to have put many leagues between you and your former captain.">
 
 <ROOM STORY418
 	(IN ROOMS)
 	(DESC "418")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT418)
+	(CONTINUE STORY135)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT419 "You drive your sword-point against Ejada's breast in a lunge which is swift, merciless and deadly. But when you step aside waiting for her to fall, you see to your horror that the blade has barely scratched her skin.||\"All bark and no bite, eh?\2 she says with a soft cold laugh. \"My turn now.\"||And so saying she raises her arm, swiping at you with languid grace. The blow seems effortless but carries the force of a cudgel-stroke; you are flung back dazed.">
+<CONSTANT CHOICES419 <LTABLE "use" "a pistol" "a wand" "flee">>
 
 <ROOM STORY419
 	(IN ROOMS)
 	(DESC "419")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT419)
+	(CHOICES CHOICES419)
+	(DESTINATIONS <LTABLE STORY241 STORY317 STORY384 STORY005>)
+	(REQUIREMENTS <LTABLE SKILL-BRAWLING SKILL-MARKSMANSHIP SKILL-SPELLS NONE>)
+	(PRECHOICE STORY419-PRECHOICE)
+	(TYPES <LTABLE R-SKILL R-SKILL R-SKILL R-NONE>)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY419-PRECHOICE ("AUX" (DMG 4))
+	<COND (,RUN-ONCE
+		<COND (<CHECK-ITEM ,FEATHER-SHIELD> <SET DMG 2>)>
+		<LOSE-LIFE .DMG DIED-IN-COMBAT ,STORY419>
+	)>>
+
+<CONSTANT TEXT420 "The captain chuckles. \"Nominally it is a Gloriannic colony, though I daresay there's a half-dozen rogues and ruffians for every honest merchant. The governor of Leshand encourages buccaneers to drop their anchors there, for as a rule they have a lot of gold to spend and this makes the port grow richer. But never show your face in Leshand if you've preyed on Gloriannic ships -- then you'd be seized and hung in chains on the waterfront, see.\"||\"For how long?\" asks Blutz naively.||\"Till you turn soft and drop, like venison,\" laughs the captain.||\"Not for plundering Sidonian ships?\" prompts Oakley.||\"Of course not! They'd like as give you a model for that. Glorianne rejoices at each act of piracy the Sidonians suffer, and the governor of Leshand is happy to hand out letters of marque sanctioning such.\"">
+<CONSTANT CHOICES420 <LTABLE "turn the conversation to piracy" "the war" "or Queen Titania's tour of her colonies" "you've heard enough of the captain's views">>
 
 <ROOM STORY420
 	(IN ROOMS)
 	(DESC "420")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT420)
+	(CHOICES CHOICES420)
+	(DESTINATIONS <LTABLE STORY390 STORY380 STORY403 STORY108>)
+	(TYPES FOUR-NONES)
 	(FLAGS LIGHTBIT)>
 
 <ROOM STORY421
