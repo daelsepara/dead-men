@@ -103,6 +103,7 @@
 	<PUTP ,STORY351 ,P?DEATH T>
 	<PUTP ,STORY362 ,P?DEATH T>
 	<PUTP ,STORY365 ,P?DEATH T>
+	<PUTP ,STORY367 ,P?DEATH T>
 	<RETURN>>
 
 <CONSTANT DIED-IN-COMBAT "You died in combat">
@@ -5459,94 +5460,71 @@
 	(TYPES <LTABLE R-NONE R-ANY>)
 	(FLAGS LIGHTBIT)>
 
+<CONSTANT TEXT366 "The fog thickens about the ship, smudging the outlines of the bay and covering the stars in a filmy veil. From the marshy ground of the shore comes a green unhealthy glow, just visible between the drifting palls of mist. Blutz gazes this eerie phosphorescence and says through chattering, \"Will o' wisps. Spirits of men who droned at sea and were washed up here.\"||You are due to take the first watch, with Blutz relieving you at eight bells. It strikes you that his nerves may not stand at midnight vigil, and maybe it would be better if he exchanged watches with you.">
+<CONSTANT CHOICES366 <LTABLE "let Blutz take the midnight watch" "take it yourself">>
+
 <ROOM STORY366
 	(IN ROOMS)
 	(DESC "366")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT366)
+	(CHOICES CHOICES366)
+	(DESTINATIONS <LTABLE STORY112 STORY131>)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT367 "As you go south you begin to strike the warm east current marking the main shipping lane. \"Here we have a chance of rescue,\" declares Oakley. His tone is confident enough -- an attempt to inspire good cheer -- but the rigors of the voyage are again taking their toll.">
 
 <ROOM STORY367
 	(IN ROOMS)
 	(DESC "367")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT367)
+	(PRECHOICE STORY367-CHOICES)
+	(CONTINUE STORY125)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY367-CHOICES ()
+	<LOSE-LIFE 1 DIED-OF-HUNGER ,STORY367>
+	<COND (<IS-ALIVE>
+		<CONSUME-PROVISIONS 1 ,STORY106>
+	)>>
+
+<CONSTANT TEXT368 "\"Poor little fellow, it seems unfair after he's been with us so long,\" bleats Blutz.||You agree in principle, but seamen soon learn that practical necessities must outweigh sentiment. \"We could eat you instead if you'd rather spare the monkey, Mister Blutz.\"||\"Aye,\" says Grimes, jabbing him good-naturedly in the ribs. \"And you'd make a better meal too. Wouldn't he, mates?\"||In the event, despite the shedding of a maudlin tear or two, it is the monkey who ends up on your plates. The meal is cold and gristly, but better than nothing.">
 
 <ROOM STORY368
 	(IN ROOMS)
 	(DESC "368")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT368)
+	(PRECHOICE STORY368-PRECHOICE)
+	(CONTINUE STORY405)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY368-PRECHOICE ()
+	<LOSE-ITEM ,MONKEY>>
+
+<CONSTANT TEXT369 "You reach into the toolkit and rummage around for a hacksaw. Your reasoning is that the curse prevents you from leaving the deck of the Larnassos. Very well, then you'll take the deck with you when you go -- or part of it, at any rate. Sawing around the outline of your footprints, you give your astonished companions a knowing wink and then climb over the rail. The foot-shaped pieces of plank which you've cut out remain clinging to the soles of your shoes, stuck fast by the magic of the curse.||\"Well, blow me!\" mutters Grimes. Taking the hacksaw, he too saws out his patch of the deck, and the others follow suit. Soon the four of you are climbing back down to the jollyboat tethered alongside.||You may have cleverly circumvented the exact letter of the curse, but do not be too quick to pat yourself on the back. The wooden soles will stay on your feet for ever as an uncanny reminder of your narrow escape. They make a noisy clattering when you walk which will hinder any attempt you might make at stealth.||You row away from the Larnassos until she is swallowed by distance and darkness.">
 
 <ROOM STORY369
 	(IN ROOMS)
 	(DESC "369")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT369)
+	(PRECHOICE STORY369-PRECHOICE)
+	(CONTINUE STORY136)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY369-PRECHOICE ()
+	<COND (<CHECK-SKILL ,SKILL-ROGUERY> <REMOVE ,SKILL-ROGUERY>)>>
+
+<CONSTANT TEXT370 "The captain of the Jewel of Heaven is a bluff good-natured man who roars at his crew with gusto. For their part they seem devoted to him -- and perhaps a little overawed by his forceful nature and matchless knowledge of the sea. You spend several pleasant evenings sitting in his cabin, where the rum flows free after a good supper. \"Hark to that!\" he is wont to say, listening to the water lapping against the hull. \"Did you ever hear a mother with babe in arms sing such a sweet lullaby? Ah, the sweet sighing of the sea -- it's a sound to seal the hushed casket of a man's soul, my merry lads!\"||\"Here aboard your fine ship, I'm happy to agree,\" laughs Oakley. \"When we were drifting in our boat, though, the sea sang us a more mournful tune!\"||The captain is glad to have educated company, and you can strike up conversations on various topics.">
+<CONSTANT CHOICES370 <LTABLE "ask for his opinion on pirates" "on the war between Glorianne and Sidonia" "on Queen Titania's visit to the New World colonies" "for information about Port Leshand">>
 
 <ROOM STORY370
 	(IN ROOMS)
 	(DESC "370")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT370)
+	(CHOICES CHOICES370)
+	(DESTINATIONS <LTABLE STORY390 STORY380 STORY403 STORY420>)
+	(TYPES FOUR-NONES)
 	(FLAGS LIGHTBIT)>
 
 <ROOM STORY371
