@@ -101,6 +101,8 @@
 	<PUTP ,STORY343 ,P?DEATH T>
 	<PUTP ,STORY346 ,P?DEATH T>
 	<PUTP ,STORY351 ,P?DEATH T>
+	<PUTP ,STORY362 ,P?DEATH T>
+	<PUTP ,STORY365 ,P?DEATH T>
 	<RETURN>>
 
 <CONSTANT DIED-IN-COMBAT "You died in combat">
@@ -5383,94 +5385,78 @@
 		<DAMAGE-SHIP 1 NONE ,STORY227>
 	)>>
 
+<CONSTANT TEXT361 "Skarvench opens his mouth, but the only sound that issues forth is a stifled croak. Teetering from a mortal wound, he falls to the deck and lies still.||Seeing the death of their leader, the pirates lose heart for the battle and are soon rounded up. As their muskets are confiscated, Oakley comes over and takes you by the arm. \"You all right, skipper?\" he asks with a look of concern. \"You look in a bad way.\"||\"If you think I look bad, Mister Oakley,\" you reply with a smile of weary triumph, \"you ought to take a look at the other bloke.\"">
+
 <ROOM STORY361
 	(IN ROOMS)
 	(DESC "361")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT361)
+	(CONTINUE STORY427)
 	(FLAGS LIGHTBIT)>
 
 <ROOM STORY362
 	(IN ROOMS)
 	(DESC "362")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(EVENTS STORY362-EVENTS)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
 
+<ROUTINE STORY362-EVENTS ()
+	<COND (<OR <CHECK-ITEM ,POCKET-WATCH> <CHECK-ITEM ,CRUCIFIX> <CHECK-ITEM ,MAGIC-AMULET>>
+		<LOSE-LIFE 3 DIED-IN-COMBAT ,STORY362>
+		<COND (<IS-ALIVE > <RETURN ,STORY242>)>
+	)>
+	<RETURN ,STORY324>>
+
+<CONSTANT CHOICES363 <LTABLE "employ" "or" "use" "otherwise"
+>>
 <ROOM STORY363
 	(IN ROOMS)
 	(DESC "363")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(CHOICES CHOICES363)
+	(DESTINATIONS <LTABLE STORY296 STORY296 STORY270 STORY003>)
+	(REQUIREMENTS <LTABLE SKILL-SWORDPLAY SKILL-BRAWLING SKILL-MARKSMANSHIP NONE>)
+	(TYPES <LTABLE R-SKILL R-SKILL R-SKILL R-NONE>)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT364 "Drastic situations call for drastic remedies. Using a last-ditch trick taught to you  years ago by your father, you hurl your sword at the lookout. It strikes true, penetrating his heart and killing him instantly. He tumbles from the deck without a sound, hitting the water with a limp splash.\"Well aimed,\" says Grimes in a hushed tone of admiration. \"You got him before he could raise the alarm.\"||You nod, regretting the loss of your sword.||Rowing on, you do not relax until the ship has dropped out of sight over the horizon to your stern.">
 
 <ROOM STORY364
 	(IN ROOMS)
 	(DESC "364")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT364)
+	(CONTINUE STORY135)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT CHOICES365 <LTABLE "use" "a pistol" "use" "a magic wand" "make a run for it">>
 
 <ROOM STORY365
 	(IN ROOMS)
 	(DESC "365")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(PRECHOICE STORY365-PRECHOICE)
+	(CHOICES CHOICES365)
+	(DESTINATIONS <LTABLE STORY365-SWORDPLAY STORY317 STORY241 STORY384 STORY005>)
+	(REQUIREMENTS <LTABLE SKILL-SWORDPLAY SKILL-MARKSMANSHIP SKILL-BRAWLING SKILL-SPELLS NONE>)
+	(TYPES <LTABLE R-SKILL R-SKILL R-SKILL R-SKILL R-NONE>)
+	(DEATH T)
+	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY365-PRECHOICE ()
+	<COND (,RUN-ONCE
+		<COND (<NOT <OR <CHECK-SKILL ,SKILL-SWORDPLAY> <CHECK-SKILL ,SKILL-MARKSMANSHIP> <CHECK-SKILL ,SKILL-BRAWLING>>>
+			<LOSE-LIFE 3 DIED-IN-COMBAT ,STORY365>
+		)>
+	)>>
+
+<CONSTANT STORY365-SWORDPLAY-CHOICES <LTABLE "use a" "an ordinary sword">>
+
+<ROOM STORY365-SWORDPLAY
+	(IN ROOMS)
+	(DESC "365")
+	(CHOICES STORY365-SWORDPLAY-CHOICES)
+	(DESTINATIONS <LTABLE STORY402 STORY419>)
+	(REQUIREMENTS <LTABLE SHARKS-TOOTH-SWORD <LTABLE SWORD CLEAVER RUSTY-SWORD>>)
+	(TYPES <LTABLE R-NONE R-ANY>)
 	(FLAGS LIGHTBIT)>
 
 <ROOM STORY366
