@@ -110,6 +110,7 @@
 	<PUTP ,STORY389 ,P?DEATH T>
 	<PUTP ,STORY402 ,P?DEATH T>
 	<PUTP ,STORY408 ,P?DEATH T>
+	<PUTP ,STORY415 ,P?DEATH T>
 	<RETURN>>
 
 <CONSTANT DIED-IN-COMBAT "You died in combat">
@@ -6117,95 +6118,68 @@
 		<MERCHANT PEDLAR-WARES <LTABLE 8 12 11 4 2 15>>
 	)>>
 
+<CONSTANT TEXT411 "You are struck by sudden inspiration. \"Remember what I said when we found that treasure-haul lads? A queen's ransom, it was, and so that's what we'll call her.\"||Oakley directs the shipbuilder's attention to the bows. \"We'll take her, Master Kemp -- only paint in a new name, will you. She's to be called the Queen's Ransom.\"">
+
 <ROOM STORY411
 	(IN ROOMS)
 	(DESC "411")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT411)
+	(PRECHOICE STORY411-PRECHOICE)
+	(CONTINUE STORY184)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY411-PRECHOICE ()
+	<TAKE-VESSEL ,QUEENS-RANSOM>>
+
+<CONSTANT TEXT412 "Blutz reluctantly goes to inform the crew of their captain's decree: that their own share of spoils will be reduced from now on. It is hardly surprising that they greet this news with a chorus of jeers and snarls. However, your desire for revenge on Skarvench blinds you to more immediate dangers until it is too late. In the dead of night, you are suddenly woken by a hand across your mouth and a knife at your throat. A voice says harshly, \"Up on deck with ye!\" and you are dragged from your cabin.||The moonlight reveals a throng of grim faces, pales as ghosts at the thought of the dread deed they are about to do. But you see they are determined. Grimes and your other stalwart friends are shoved forward, bound head to foot.||\"You broke the Brethren's code,\" hisses the ringleader of the mutineers. \"We're entitled to our just share of treasure, see\"||\"You damned fools,\" you growl back at them. \"Release me now: that's an order.\"||\"Give yer orders to the sharks!\" they say, pushing you out along a plank. Prodded with cutlasses, you have nowhere to go but to the end of the plank -- and then far down, into the fathomless depths.">
 
 <ROOM STORY412
 	(IN ROOMS)
 	(DESC "412")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT412)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT413 "You take the shore-boat back to the Lady of Shalott but, with hardly any breeze, she has to be sculled towards the opening of the bay. By now the sun has set and the stars are glittering in a clear sky. Grimes sniffs the air and grimaces, remarking on the foulness of the region. \"That'll be the swamps fringing the bay,\" he mutters. \"A rank and fever-ridden place, this is.\"||Blutz comes hurrying back to the poop deck to report to you. \"A bank of fog is rolling in. It'll be hard getting to open sea, and even when we do there's no wind for the sails.\"||What is to be done?">
+<CONSTANT CHOICES413 <LTABLE "use an amulet" "a wand" "drop anchor and wait until daybreak" "persist in manoeuvring out of the bay" "otherwise">>
 
 <ROOM STORY413
 	(IN ROOMS)
 	(DESC "413")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT413)
+	(CHOICES CHOICES413)
+	(DESTINATIONS <LTABLE STORY107 STORY036 STORY366 STORY055 STORY074>)
+	(REQUIREMENTS <LTABLE SKILL-CHARMS SKILL-SPELLS NONE SKILL-SEAFARING NONE>)
+	(TYPES <LTABLE R-SKILL R-SKILL R-NONE R-SKILL R-NONE>)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT414 "Now that the current has carried the iceberg into warmer latitudes, it is rather smaller than when you last clapped eyes on it. The ship frozen inside is clearly visible now, her gilt and paintwork shimmering mirage-like beyond the pane of ice that entraps her. You can make out the guns ranged along her flanks silent, eternally watchful sentinels. How many years since they last thundered forth their fury, you wonder? How long since wind filled those lank hoarfrosted sails? Since that fine prow last proudly split the waves?||\"The Octavius,\" you murmur, half to yourself, as you draw alongside the iceberg. \"But how will we ever get her out of that ice?\"||\"It would take the whole crew digging with picks from now till the moon goes blue,\" say Grimes.||You nod. The comment is unhelpful, but quite true. You had been counting on the iceberg being more reduced by sun and warm waters by this time. Now that you see it, excavating the Octavius seems an impossible task.||Blutz steps forward. \"Begging your pardon, skipper, but I've got an idea.\" You turn and give him a long dubious look. \"Er.. well, it might take a while, but I think there's a way we can get the ship out of the ice.\"||Oakley interrupts with an exasperated gasp. We're wasting time! The Octavius might as well be thirty fathoms deep for all the chance we've got of sailing her. Let's set to filling our coffers with a spot of good old-fashioned piracy. Then we can sail back and trade in this old tub for a decent warship.\"">
+<CONSTANT CHOICES414 <LTABLE "agree with Oakley" "you thin it's worth trying Blutz's plan">>
 
 <ROOM STORY414
 	(IN ROOMS)
 	(DESC "414")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT414)
+	(CHOICES CHOICES414)
+	(DESTINATIONS <LTABLE STORY376 STORY044>)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT415 "All the pent-up emotion of your crew explodes in an excited roar as they go leaping onto the deck of the enemy ship with you at their head. The pirates stand ready to meet your boarding party, armed with muskets and draw sword, and the fighting is hard and fierce. You are all but deafened by the gunshots going off all around you, half blinded by the thick clouds of smoke and sprays of blood, but you struggle onwards.||A musket shot catches you in the side.">
+<CONSTANT TEXT415-CONTINUED "You ignore the pain and look around. The battle rages back and forth across the deck. Pirates come running at you but you smash them aside. Your only thought now is to find your foe and slay him yourself: you do not want him to die mercifully from a stray bullet.||The moment you catch sight of him, you realize your anxiety was misplaced. The bullets go whistling past his ears, but he stands untouched by fear, arms spread out and laughing like a fiend from the pit. You begin to wonder if he can be killed, or are his hate and madness stronger than death itself?||His single eye fixes on you through the haze of gunsmoke. \"Ah, matey,\" he says. \"Come to see your old ccap'n one last time, eh?\"">
 
 <ROOM STORY415
 	(IN ROOMS)
 	(DESC "415")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT415)
+	(PRECHOICE STORY415-PRECHOICE)
+	(CONTINUE STORY089)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY415-PRECHOICE ()
+	<LOSE-LIFE 3 DIED-IN-COMBAT ,STORY415>
+	<IF-ALIVE TEXT415-CONTINUED>>
 
 <ROOM STORY416
 	(IN ROOMS)
