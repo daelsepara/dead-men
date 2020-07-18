@@ -105,6 +105,8 @@
 	<PUTP ,STORY365 ,P?DEATH T>
 	<PUTP ,STORY367 ,P?DEATH T>
 	<PUTP ,STORY371 ,P?DEATH T>
+	<PUTP ,STORY387 ,P?DEATH T>
+	<PUTP ,STORY389 ,P?DEATH T>
 	<RETURN>>
 
 <CONSTANT DIED-IN-COMBAT "You died in combat">
@@ -5723,94 +5725,82 @@
 <ROUTINE STORY385-PRECHOICE ()
 	<COND (<CHECK-SKILL ,SKILL-SEAFARING> <STORY-JUMP ,STORY109>)>>
 
+<CONSTANT TEXT386 "Your craft is rocked by churning waves and rattled by incessant storm winds. Finally it can take no more. The timbers break apart with a shudder, plunging your sorry little band into the wine-dark waters of the sea. Your last sight is of Blutz, gasping as he claws for a handhold in thin air, calling to you for help. But you cannot help him. You cannot even save yourself.">
+
 <ROOM STORY386
 	(IN ROOMS)
 	(DESC "386")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT386)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT387 "By now your throat feels as though you have been choked with soot. \"Ah, if only the rain would start falling again -- just a light drizzle,\" moans Grimes. \"I'd give my right hand to taste a drop of water.\"||Blutz stares at the heaving sea. His lolling swollen tongue makes him look like a parched dog. \"Perhaps a handful of brine would do no harm?\" he ventures.||\"Don't try it,\" Oakley grunts. \"You'd wither your tongue to the root.\"">
 
 <ROOM STORY387
 	(IN ROOMS)
 	(DESC "387")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT387)
+	(PRECHOICE STORY387-PRECHOICE)
+	(CONTINUE STORY405)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY387-PRECHOICE ()
+	<LOSE-LIFE 2 DIED-OF-THIRST ,STORY387>>
+
+<CONSTANT TEXT388 "Each attempt you make at leaving the ship is thwarted by a powerful force which drags you back to the deck. It is as though invisible spirits were hovering around you and conspiring to prevent your escape. Your efforts become increasingly desperate, until at last you even try jumping overboard into the churning sea. But even this is to no avail -- you are just jerked back to the deck like an iron filing in the pull of a magnet.||\"Well, that's that,\" groans Blutz, flopping back against the rail in a pose of exhaustion and defeat. \"We're doomed never to get off this ship.">
 
 <ROOM STORY388
 	(IN ROOMS)
 	(DESC "388")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT388)
+	(PRECHOICE STORY388-PRECHOICE)
+	(CONTINUE STORY350)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY388-PRECHOICE ()
+	<COND (<CHECK-SKILL ,SKILL-SPELLS> <STORY-JUMP ,STORY312>)>>
+
+<CONSTANT TEXT389 "By wrapping the coconut in his shirt and banging it against the side of the boat, Oakley succeeds in breaking it open without losing any of the precious contents. He laughs delightedly as coconut milk dribbles down his chin. \"As sweet as any nectar of the gods!\" he declares.">
+<CONSTANT TEXT389-CONTINUED "It proves to be a meager banquet in any case, and everyone is soon complaining that their thirst has returned worse than before.||Blazing heat holds you like a vice as the afternoon wears on. At last the sun sinks into the furthest reaches of the sea. As the cool of approaching night revives your sorry band, Grimes sits up and grabs your arm. \"Look, shipmate,\" he says with sudden urgency, \"here's the way I see it. We're not long for this world if something ain't done. I say we should steer further south still. At this time of year you can often find icebergs that have cracked off he pack ice in the thaw.\"||\"So what?\" groans Oakley, rousing himself irritably.||Grimes turns to him. \"Where there's an iceberg there'll be fresh water. Penguins too, if luck's with use.\@||Oakley gives a bleak laugh to hear this. \"Luck? Luck lost sight of our boat long ago, matey!\"">
+<CONSTANT CHOICES389 <LTABLE "agree to Grime's plan to veer south" "you are for sticking on your current course">>
 
 <ROOM STORY389
 	(IN ROOMS)
 	(DESC "389")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT389)
+	(CHOICES CHOICES389)
+	(DESTINATIONS <LTABLE STORY407 STORY424>)
+	(TYPES TWO-NONES)
+	(PRECHOICE STORY389-PRECHOICE)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY389-PRECHOICE ()
+	<COND (,RUN-ONCE
+		<COND (<NOT ,EAT-COCONUT-F>
+			<CRLF>
+			<TELL "You did not eat some of the coconuts" ,PERIOD-CR>
+			<LOSE-LIFE 1 DIED-OF-HUNGER ,STORY389>
+		)>
+	)>
+	<COND (<IS-ALIVE>
+		<PUTP ,STORY389 ,P?DEATH F>
+		<CRLF>
+		<TELL TEXT389-CONTINUED>
+		<CRLF>
+	)>>
+
+<CONSTANT TEXT390 "After hearing some of your experiences aboard the Belle Dame, he nods sagely. \"Aye, that Skarvench is a scurvy pitch-hearted fiend sure enough,\" he agrees. \"One of the worst pirates on the seas, since he cares not which ships he plunders -- those of the accursed Sidonians, or those loyal to Her Gloriannic Majesty. Yet there are other pirates just as greedy, bloodthirsty and full of wickedness. One such is the Sidonian corsair El Draque, who captains the galleon Cold Grue. Bloodthirsty is indeed the word for him, I'm told. It's said he hangs his victims like slaughtered pigs from the yardarm, collecting their lifeblood in a silver goblet to drink by moonlight!\"||The captain pauses, regards his own cup thoughtfully  for a moment, then refills it. \"Piracy's not a bad business,\" he continues, \"so long as you have a clear sense of where your loyalties lie. My advice is to first obtain a letter of marque. Letters of marque are issued by the governors of Gloriannic colonies. Possession of one authorizes you to attack Sidonian ships, in effect enabling you to act as private soldiers of Her Majesty. A fine arrangement which benefits everyone.\"||\"Except the Sidonians, of course,\" you say with a smile.||The captain roars with laughter. \"Aye, the God-cursed bilge suckers\"">
+<CONSTANT CHOICES390 <LTABLE "now ask him about the war" "Queen Titania's tour of her colonies" "Port Leshand" "you are done with talking">>
 
 <ROOM STORY390
 	(IN ROOMS)
 	(DESC "390")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT390)
+	(CHOICES CHOICES390)
+	(DESTINATIONS <LTABLE STORY380 STORY403 STORY420 STORY108>)
+	(TYPES FOUR-NONES)
 	(FLAGS LIGHTBIT)>
 
 <ROOM STORY391
