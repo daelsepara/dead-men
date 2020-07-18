@@ -108,6 +108,7 @@
 	<PUTP ,STORY371 ,P?DEATH T>
 	<PUTP ,STORY387 ,P?DEATH T>
 	<PUTP ,STORY389 ,P?DEATH T>
+	<PUTP ,STORY402 ,P?DEATH T>
 	<RETURN>>
 
 <CONSTANT DIED-IN-COMBAT "You died in combat">
@@ -5764,7 +5765,7 @@
 
 <CONSTANT TEXT389 "By wrapping the coconut in his shirt and banging it against the side of the boat, Oakley succeeds in breaking it open without losing any of the precious contents. He laughs delightedly as coconut milk dribbles down his chin. \"As sweet as any nectar of the gods!\" he declares.">
 <CONSTANT TEXT389-CONTINUED "It proves to be a meager banquet in any case, and everyone is soon complaining that their thirst has returned worse than before.||Blazing heat holds you like a vice as the afternoon wears on. At last the sun sinks into the furthest reaches of the sea. As the cool of approaching night revives your sorry band, Grimes sits up and grabs your arm. \"Look, shipmate,\" he says with sudden urgency, \"here's the way I see it. We're not long for this world if something ain't done. I say we should steer further south still. At this time of year you can often find icebergs that have cracked off he pack ice in the thaw.\"||\"So what?\" groans Oakley, rousing himself irritably.||Grimes turns to him. \"Where there's an iceberg there'll be fresh water. Penguins too, if luck's with use.\@||Oakley gives a bleak laugh to hear this. \"Luck? Luck lost sight of our boat long ago, matey!\"">
-<CONSTANT CHOICES389 <LTABLE "agree to Grime's plan to veer south" "you are for sticking on your current course">>
+<CONSTANT CHOICES389 <LTABLE "agree to Grimes' plan to veer south" "you are for sticking on your current course">>
 
 <ROOM STORY389
 	(IN ROOMS)
@@ -5909,7 +5910,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY398-PRECHOICE ()
-	<DAMAGE-SHIP 1 ,STORY415 ,STORY227>>
+	<DAMAGE-SHIP 1 NONE ,STORY227>>
 
 <CONSTANT TEXT399 "Your small boat is in a sorry condition, weatherbeaten from lying unused and untended on the ship's deck for so long. Worms have made tiny holes in the wood, and the timbers are sun-dried and warped.||Grimes sees you looking at the planking and gives a wry chuckle. \"Aye, not much is she? A sorry little vessel for us to pin our hopes on.\"||\"Our hopes?\" says Oakley with a snort. \"Our lives, man!\"||You touch your amulet and utter the words of an incantation. \"That will help keep us safe from disaster on the high seas,\" you explain to the others. \"It's an old charm to keep the boat seaworthy. Never fails.\"||\"And have you a charm to keep us from dying of thirst?\" grumbles Blutz. But no, there is no such charm.">
 
@@ -5946,94 +5947,77 @@
 		)>
 	)>>
 
+<CONSTANT TEXT401 "Jeers and snarling shouts fill your ears. They sound like a pack of mad dogs. You glance back to see the cutters bearing down on you, crowded with grinning pirates whose cutlasses gleam menacingly in the colourless moonlight. Weakened as you are, you cannot hope to outrun them.">
+
 <ROOM STORY401
 	(IN ROOMS)
 	(DESC "401")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT401)
+	(PRECHOICE STORY401-PRECHOICE)
+	(CONTINUE STORY298)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY401-PRECHOICE ()
+	<COND (<CHECK-SKILL ,SKILL-AGILITY> <STORY-JUMP ,STORY418>)>>
+
+<CONSTANT TEXT402 "As soon as she lays eyes on your strange sword, Ejada's scornful confidence dissolves into uncertainty. \"The prophecy!\" she gasps to herself. \"A sword not mined not from any rock nor forged on any anvil!\"||You lunge in, scoring a bloody gash across her cheek. \"Defend yourself, witch or die.\"||Raising her knife, she strides forward and matches you blow for blow.">
 
 <ROOM STORY402
 	(IN ROOMS)
 	(DESC "402")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT402)
+	(PRECHOICE STORY402-PRECHOICE)
+	(CONTINUE STORY328)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY402-PRECHOICE ("AUX" (DMG 7))
+	<COND (<CHECK-ITEM ,FEATHER-SHIELD> <SET DMG 3>)>
+	<LOSE-LIFE .DMG DIED-IN-COMBAT ,STORY402>>
+
+<CONSTANT TEXT403 "He pauses in the act of raising his cup to his lips and glares at you from under beetling brows. \"Eh?\" he demands. \"What do you know of that? It is supposed to be a secret, and you'd do well not to blab such delicate matters. A wagging tongue is a tongue worth cutting!\" He fingers his sword-hilt, glowering at you sidelong.">
+<CONSTANT CHOICES403 <LTABLE "explain about overhearing Skarvench's plan to kidnap the Queen" "you can keep quiet about the matter">>
 
 <ROOM STORY403
 	(IN ROOMS)
 	(DESC "403")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT403)
+	(CHOICES CHOICES403)
+	(DESTINATIONS <LTABLE STORY011 STORY108>)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT404 "A storm overtakes you, closing its teeth on your vessel with a screech of cracking timbers. Under a sky the colour of brimstone, you cling to the sides and crouch low, teeth bared in terror as you watch the foaming billows race past. The gale lasts half the night, sporadically spitting rails of icy rain down on your heads until your joints feel as stiff as a day-old corpse. When the sun finally rises, you greet it without cheer, knowing that within hours it will have baked you half out of your wits.">
 
 <ROOM STORY404
 	(IN ROOMS)
 	(DESC "404")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT404)
+	(PRECHOICE STORY404-PRECHOICE)
+	(CONTINUE STORY277)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY404-PRECHOICE ("AUX" QUANTITY)
+	<LOSE-LIFE 2 DIED-GREW-WEAKER ,STORY404>
+	<COND (<IS-ALIVE>
+		<COND (<CHECK-ITEM ,PROVISIONS>
+			<GETP ,PROVISIONS ,P?QUANTITY>
+			<COND (<G=? ,PROVISIONS 2>
+				<CONSUME-PROVISIONS 2 ,STORY106>
+			)(<G=? ,PROVISIONS 1>
+				<CONSUME-PROVISIONS 1 ,STORY120>
+			)>
+		)>
+	)>>
+
+<CONSTANT TEXT405 "To the delighted surprise of you all, dawn outlines the shape of high cliffs dead ahead. As gulls wheel idly in the sky above, Blutz cannot contain himself. Weeping with joy, he shouts, \"Land ho! We're home, mates. Thank God and all His blessed saints, we've come through it and we're home!\" He falls to his knees and clasps his hands together. \"Oh, I'll never do wickedness again, not me! I'll say my prayers and do only good deeds for the rest of my days.\"||Oakley leans to you with a grin and speaks behind his hand: \"I'll lay you twenty doubloons to a twist of rope that he forgets that resolution as soon as he claps eyes on a tavern.\"||Following the coast south a short way, you soon come to the familiar and welcome sight of the harbour mouth. You have reached Port Leshand at last!\"">
 
 <ROOM STORY405
 	(IN ROOMS)
 	(DESC "405")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT405)
+	(CONTINUE STORY009)
 	(FLAGS LIGHTBIT)>
 
 <ROOM STORY406
