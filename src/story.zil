@@ -5315,96 +5315,73 @@
 
 <ROUTINE STORY355-PRECHOICE ()
 	<COND (<CHECK-SKILL ,SKILL-STREETWISE> <STORY-JUMP ,STORY071>)>>
-	
+
+<CONSTANT TEXT356 "No sooner has he set eyes on your diamonds than the shipbuilder rushes out from his office to take care of your needs personally. Showing you around the shipyard, he points to a fine new vessel that is just in the last stages of caulking. \"She will be ready to float within a week,\" he declares. \"You have only to specify the name and figurehead of your choice.\"||You stand with hands on hips, beaming at the ship. It feels like love at first sight. \"Name her the Queen's Ransom,\" you say exultantly.||Oakley nods. \"Aye, and make the figurehead a comely mermaid, if you will, Master Shipbuilder.\"">
+
 <ROOM STORY356
 	(IN ROOMS)
 	(DESC "356")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT356)
+	(PRECHOICE STORY356-PRECHOICE)
+	(CONTINUE STORY184)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY356-PRECHOICE ()
+	<TAKE-VESSEL ,QUEENS-RANSOM>>
+
+<CONSTANT TEXT357 "After signing up a small crew, you spend the next few weeks plying the main shipping.lanes in search of spoils. You succeed in waylaying a couple of Sidonian merchantmen, but they prove to have little of worth in their hold. After tallying the profits and deducting each crewman's share, Blutz comes to you. \"At this rate it'll take us months to earn enough for a decent warship, Cap'n,\" he says.||You gnaw your lip -- the only outward sign that you are concerned. Other than that, your face remains an impassive granite mask. Gazing dead ahead, you say, \"You've a suggestion, Mister Blutz?\"||\"Aye, Cap'n. I know you won't like it, seein' as how you hail from Glorianne yourself, but if we didn't just confine ourselves to Sidonian ships -- that is, if we was to plunder Gloriannic vessels too -- we'd earn what we need in half the time.\"||It is your judgement call. What order will you give?">
+<CONSTANT CHOICES357 <LTABLE "give the order \"Continue to prey only on Sidonian ships\"" "\"Attack both Sidonian and Gloriannic ships from now on\"" "\"Reduce the crew's share of the plunder\"">>
 
 <ROOM STORY357
 	(IN ROOMS)
 	(DESC "357")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT357)
+	(CHOICES CHOICES357)
+	(DESTINATIONS <LTABLE STORY376 STORY395 STORY412>)
+	(TYPES THREE-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT358 "Signing on a small crew, you set sail. A strong following wind allows you to make good headway, and you reach the island in under three weeks. There your luck runs out, however, for there is no hint of treasure. Cursing blue fire, you have your men scour the beach and the hinterland for signs -carvings in the bark of a tree, piled stones, skeletons laid in a line, and all the other marks pirates use. But it is all in vain. At last Oakley and the others come to you in your cabin. \"The tide's against us, so to speak, skipper. If we don't put about and return to Selenice right away, Skarvench will have done the deed and we'll have lost our chance.\"||You swear under your breath, but you know Oakley is right. Reluctantly you sail the Lady of Shalott back to Selenice.">
 
 <ROOM STORY358
 	(IN ROOMS)
 	(DESC "358")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT358)
+	(CONTINUE STORY396)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT359 "A combination of relentless determination and unsurpassed navigation skills drives you inexorably towards your goal. At any hour of the day or night you are to be seen upon the poopdeck, taking estimates of the wind and sea currents or using a cross-staff to measure the stars. The crew know of your near legendary status as a master mariner and dare not question your judgement, even though you are steering the ship far off familiar sailing routes.||Finally your perseverance is rewarded with a cry of \"Ice ho!\" from the crow's nest. You race up from your cabin and give a great roar of triumph as you catch sight of the low blue hump of an iceberg dead ahead.">
 
 <ROOM STORY359
 	(IN ROOMS)
 	(DESC "359")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT359)
+	(CONTINUE STORY414)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT360 "You managed to avoid cannon-fire">
+<CONSTANT TEXT360-CLIPPED "You are clipped by cannon-fire">
+<CONSTANT CHOICES360 <LTABLE "steer directly in towards the Moon Dog" "else heave to and let the wind carry her past you">>
 
 <ROOM STORY360
 	(IN ROOMS)
 	(DESC "360")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(CHOICES CHOICES360)
+	(DESTINATIONS <LTABLE STORY398 STORY415>)
+	(PRECHOICE STORY360-PRECHOICE)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY360-PRECHOICE ()
+	<CRLF>
+	<COND (<CHECK-SKILL ,SKILL-SEAFARING>
+		<TELL TEXT360>
+		<TELL ,PERIOD-CR>
+	)(ELSE
+		<TELL TEXT360-CLIPPED>
+		<TELL ,PERIOD-CR>
+		<DAMAGE-SHIP 1 NONE ,STORY227>
+	)>>
 
 <ROOM STORY361
 	(IN ROOMS)
