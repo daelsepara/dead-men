@@ -742,7 +742,11 @@
                         <TELL "Are you sure?">
                         <COND (<YES?>
                             <YOU-GAVE ,ALL-MONEY>
-                            <COND (.JUMP <STORY-JUMP .JUMP>)>
+                            <COND (.JUMP
+                                <STORY-JUMP .JUMP>
+                                <SETG ,MONEY 0>
+                                <MOVE ,ALL-MONEY ,PLAYER>
+                            )>
                             <SET RESULT GIVE-GIVEN>
                             <RETURN>
                         )>

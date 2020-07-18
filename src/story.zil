@@ -1145,7 +1145,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY068-PRECHOICE ()
-	<GIVE-FROM-LIST <LTABLE SWORD SHARKS-TOOTH-SWORD CLEAVER RUSTY-SWORD PISTOL MAGIC-WAND MAGIC-AMULET SHIP-IN-BOTTLE CONCH-SHELL-HORN BAT-SHAPED-TALISMAN BLACK-KITE DIAMOND TOOLKIT HEALING-POTION BRONZE-HELMET CRUCIFIX DRAGON-RING> STORY068-UNABLE STORY068-UNWILLING 2 ,STORY144>>
+	<GIVE-FROM-LIST <LTABLE SWORD CLEAVER RUSTY-SWORD PISTOL MAGIC-WAND MAGIC-AMULET SHIP-IN-BOTTLE CONCH-SHELL-HORN BAT-SHAPED-TALISMAN BLACK-KITE DIAMOND TOOLKIT HEALING-POTION BRONZE-HELMET CRUCIFIX DRAGON-RING> STORY068-UNABLE STORY068-UNWILLING 2 ,STORY144>>
 
 <CONSTANT TEXT069 "Capstick has a fine house on Halyard Street, in one of the richest parts of town. Smartening yourselves up to look as respectable as possible, you ignore the sidelong glances and haughty sniffs of the wealthy passers-by, marching straight up to present yourselves at the front door. The servant who answers the door at first mistakes you for beggars, but once you've corrected that small misunderstanding he shows you through his master's study.||Capstick is sitting by the fire with a book. Seeing you, he gives his great belly-shaking laugh and leaps up to greet you, commanding the servant to bring a bottle of sherry.||\"Freshly taken off a Sidonian merchantman,\" he says shortly, lifting his glass to savour the smoky gold liquid before drinking. \"And..\" he smacks his lips, refills your glasses \"all the better for being plundered off one of those rascals, eh?\"||Soon the conversation turns to the matters you discussed aboard the Jewel of Heaven. At this, Capstick's face falls. \"I have sour news,\" he tells you. \"I must sail for Glorianne in two days' time, and so I'll be unable to partner you in your attack on that devil Skarvench. Moreover I've told the tale to several high officials, but no one believes it's true.\"||You give a glum nod. \"Who can blame them, given the source of your information? We are vagabond ex-pirates, which is not the best pedigree for reliable testimony.\"||\"But I believe you, by God!\" He produces an envelope and hands it to you. \"This is a deed of ownership for a sloop that I own in Port Selenice. She's just a small craft, but better than no ship at all. Go to Selenice, get together a crew, and see if you can't beat this Skarvench at his own game.\"||Thanking Capstick for his help, you take your leave. \"I'm only sorry not to be sailing with you,\" are his parting words.">
 
@@ -1805,7 +1805,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY117-PRECHOICE ("AUX" GIVE-RESULT)
-	<SET GIVE-RESULT <GIVE-FROM-LIST <LTABLE SWORD PISTOL MAGIC-AMULET MAGIC-WAND CRUCIFIX TOOLKIT ALL-MONEY> UNABLE-TO-PART UNWILLING-TO-PART>>
+	<SET GIVE-RESULT <GIVE-FROM-LIST <LTABLE SWORD CLEAVER RUSTY-SWORD PISTOL MAGIC-AMULET MAGIC-WAND CRUCIFIX TOOLKIT ALL-MONEY> UNABLE-TO-PART UNWILLING-TO-PART>>
 	<COND (<OR <EQUAL? .GIVE-RESULT GIVE-UNWILLING> <EQUAL? .GIVE-RESULT GIVE-UNABLE>>
 		<EMPHASIZE TEXT117-TURNNASTY>
 		<STORY-JUMP ,STORY041>
@@ -1813,8 +1813,8 @@
 		<COND (<IN? ,ALL-MONEY ,GIVEBAG>
 			<COND (<L? ,MONEY 1>
 				<EMPHASIZE TEXT117-TURNNASTY>
-				<MOVE ,ALL-MONEY ,PLAYER>
 				<STORY-JUMP ,STORY041>
+				<MOVE ,ALL-MONEY ,PLAYER>
 				<RETURN>
 			)>
 			<SETG ,MONEY 0>
@@ -1828,8 +1828,9 @@
 			<TAKE-ITEM ,FEATHER-SHIELD>
 			<TAKE-ITEM ,SHARKS-TOOTH-SWORD>
 		)>
-		<MOVE ,ALL-MONEY ,PLAYER>
-	)>>
+		
+	)>
+	<MOVE ,ALL-MONEY ,PLAYER>>
 
 <CONSTANT TEXT118 "You drag your boat up the beach under the blandly incurious gaze of the paradise-birds. Blutz gives an excited cry and points, saying, \"Look, above the treetops! It's a tower. A ruddy marble tower, mates.\"||He's right. In the declining golden light of the afternoon, you see a gleaming tower of polished stone. Since there are no creepers growing over it, the place is surely inhabited. But do you want to meet the inhabitant?">
 <CONSTANT CHOICES118 <LTABLE "head for the tower" "gather food and water" "put to sea immediately">>
@@ -4333,7 +4334,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY291-PRECHOICE ("AUX" GIVE-RESULT)
-	<SET GIVE-RESULT <GIVE-FROM-LIST <LTABLE SWORD SHARKS-TOOTH-SWORD PISTOL MAGIC-WAND MAGIC-AMULET SHIP-IN-BOTTLE CONCH-SHELL-HORN BAT-SHAPED-TALISMAN BLACK-KITE> UNABLE-TO-PART UNWILLING-TO-PART 1>>
+	<SET GIVE-RESULT <GIVE-FROM-LIST <LTABLE SWORD CLEAVER RUSTY-SWORD PISTOL MAGIC-WAND MAGIC-AMULET SHIP-IN-BOTTLE CONCH-SHELL-HORN BAT-SHAPED-TALISMAN BLACK-KITE> UNABLE-TO-PART UNWILLING-TO-PART 1>>
 	<COND (<EQUAL? .GIVE-RESULT GIVE-UNWILLING GIVE-UNABLE>
 		<EMPHASIZE "Their mood starts to turn nasty.">
 		<STORY-JUMP ,STORY215>
@@ -4613,7 +4614,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY310-PRECHOICE ("AUX" GIVE-RESULT)
-	<SET GIVE-RESULT <GIVE-FROM-LIST <LTABLE SWORD SHARKS-TOOTH-SWORD CLEAVER RUSTY-SWORD PISTOL MAGIC-WAND MAGIC-AMULET SHIP-IN-BOTTLE CONCH-SHELL-HORN BAT-SHAPED-TALISMAN BLACK-KITE ALL-MONEY> UNABLE-TO-PART UNWILLING-TO-PART>>
+	<SET GIVE-RESULT <GIVE-FROM-LIST <LTABLE SWORD CLEAVER RUSTY-SWORD PISTOL MAGIC-WAND MAGIC-AMULET SHIP-IN-BOTTLE CONCH-SHELL-HORN BAT-SHAPED-TALISMAN BLACK-KITE ALL-MONEY> UNABLE-TO-PART UNWILLING-TO-PART>>
 	<COND (<EQUAL? .GIVE-RESULT GIVE-UNWILLING GIVE-UNABLE>
 		<EMPHASIZE "You must choose again.">
 		<STORY-JUMP ,STORY272>
@@ -4631,8 +4632,8 @@
 		<CRLF>
 		<TELL TEXT310-CONTINUED>
 		<TELL ,PERIOD-CR>
-		<MOVE ,ALL-MONEY ,PLAYER>
-	)>>
+	)>
+	<MOVE ,ALL-MONEY ,PLAYER>>
 
 <CONSTANT TEXT311 "The ship's prow looms overhead, her tall sails standing like the shadows of midnight against the greying sky. After a long moment during which you begin to fear she is but a drifting ghost-ship, a figure appears at the rail and calls down to you, \"Come board, strangers.\"||A rope ladder is flung down. You look at your companions. They seem to share your unease, but what choice is there? If you stay in the foundering jollyboat your chance of survival is scant. Grabbing the saying ladder, you ascend until you are level with the rail. The vessel's captain is standing there. He holds out his hand to help you aboard, but something in his eager haunted gaze makes you flinch.||\"Come on deck!\" he insists. \"Here's my hand.\"">
 <CONSTANT CHOICES311 <LTABLE "try some trickery" "go aboard" "climb back down to the jollyboat and shove off">>
@@ -5273,7 +5274,7 @@
 	(CODEWORD CODEWORD-AUGUST)
 	(FLAGS LIGHTBIT)>
 
-<CONSTANT TEXT353 "Perhaps it is the warning of a sixth sense, perhaps just a groundless fear, but you suddenly how that  not all the riches of the Sidonian Main could tempt you to set foot on that eerily silent deck. Ignoring the captain's outstretched hand, you leap up onto the rail and from there jump to the rigging, making your way with catlike grace until you are astride the yardarm.||Captain Mandrigard takes out his sabre and shake it at you. \"Blast ye, come down from here, ye damned monkey!\" he roars. But you see that he won't be coming up in pursuit of you. Not with his wooden leg.||Seizing the pulleys that support the ship's cutter, or sailing boat, you swing it out over the side and then sever the ropes. The cutter falls with a splash and, as your friends scramble aboard it, you give the captain a dashing salute. \"Thank you, sir, for the fine new boat; please keep our old jollyboat in exchange. But now I must bid you adieu.\"||Mandrigard spits curses that would bring a blush to the Devil himself, but there is nothing he can do. Scrambling down the side of the ship, you join the others in the cutter. \"This is more like it,\" says Blutz appreciatively, slapping the firm timbers. \"She won't sink under us in a hurry!\"">
+<CONSTANT TEXT353 "Perhaps it is the warning of a sixth sense, perhaps just a groundless fear, but you suddenly how that not all the riches of the Sidonian Main could tempt you to set foot on that eerily silent deck. Ignoring the captain's outstretched hand, you leap up onto the rail and from there jump to the rigging, making your way with catlike grace until you are astride the yardarm.||Captain Mandrigard takes out his sabre and shake it at you. \"Blast ye, come down from here, ye damned monkey!\" he roars. But you see that he won't be coming up in pursuit of you. Not with his wooden leg.||Seizing the pulleys that support the ship's cutter, or sailing boat, you swing it out over the side and then sever the ropes. The cutter falls with a splash and, as your friends scramble aboard it, you give the captain a dashing salute. \"Thank you, sir, for the fine new boat; please keep our old jollyboat in exchange. But now I must bid you adieu.\"||Mandrigard spits curses that would bring a blush to the Devil himself, but there is nothing he can do. Scrambling down the side of the ship, you join the others in the cutter. \"This is more like it,\" says Blutz appreciatively, slapping the firm timbers. \"She won't sink under us in a hurry!\"">
 
 <ROOM STORY353
 	(IN ROOMS)
@@ -5421,7 +5422,7 @@
 	(TYPES <LTABLE R-SKILL R-SKILL R-SKILL R-NONE>)
 	(FLAGS LIGHTBIT)>
 
-<CONSTANT TEXT364 "Drastic situations call for drastic remedies. Using a last-ditch trick taught to you  years ago by your father, you hurl your sword at the lookout. It strikes true, penetrating his heart and killing him instantly. He tumbles from the deck without a sound, hitting the water with a limp splash.\"Well aimed,\" says Grimes in a hushed tone of admiration. \"You got him before he could raise the alarm.\"||You nod, regretting the loss of your sword.||Rowing on, you do not relax until the ship has dropped out of sight over the horizon to your stern.">
+<CONSTANT TEXT364 "Drastic situations call for drastic remedies. Using a last-ditch trick taught to you years ago by your father, you hurl your sword at the lookout. It strikes true, penetrating his heart and killing him instantly. He tumbles from the deck without a sound, hitting the water with a limp splash.\"Well aimed,\" says Grimes in a hushed tone of admiration. \"You got him before he could raise the alarm.\"||You nod, regretting the loss of your sword.||Rowing on, you do not relax until the ship has dropped out of sight over the horizon to your stern.">
 
 <ROOM STORY364
 	(IN ROOMS)
@@ -5649,95 +5650,78 @@
 	(TYPES FIVE-NONES)
 	(FLAGS LIGHTBIT)>
 
+<CONSTANT TEXT381 "Your next goal is to reach civilization, and now you weigh up the advantages of each route. The direct westerly course to Port Leshand lies through stormy seas that might easily capsize a small boat like yours. Alternatively, diverting far south would take you into a region where the prevailing ocean currents flow westward, so you could be carried to Leshand faster than if you steered a direct course. The drawback is that your supplies might not last out. One solution to that problem would be to steer the middle course, island-hopping as you head generally west towards Leshand. Then your only worry would be the risk of attack from hostile natives.">
+
 <ROOM STORY381
 	(IN ROOMS)
 	(DESC "381")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT381)
+	(PRECHOICE STORY381-PRECHOICE)
+	(CONTINUE STORY289)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY381-PRECHOICE ()
+	<COND (<CHECK-SKILL ,SKILL-CHARMS>
+		<STORY-JUMP ,STORY399>
+	)(<CHECK-SKILL ,SKILL-SPELLS>
+		<STORY-JUMP ,STORY416>
+	)>>
+
+<CONSTANT TEXT382 "They cluster round eagerly to see what items you have. You must give them one of the following: a sword, a pistol, an amulet, a wand, a crucifix, a toolkit, or all your money.">
+<CONSTANT TEXT382-FIGHT "The natives begin to get angry and you have a fight on your hands.">
 
 <ROOM STORY382
 	(IN ROOMS)
 	(DESC "382")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT382)
+	(PRECHOICE STORY382-PRECHOICE)
+	(CONTINUE STORY363)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY382-PRECHOICE ()
+	<GIVE-FROM-LIST <LTABLE SWORD CLEAVER RUSTY-SWORD PISTOL MAGIC-WAND MAGIC-AMULET CRUCIFIX TOOLKIT ALL-MONEY> TEXT382-FIGHT TEXT382-FIGHT 1 ,STORY417>
+	<MOVE ,ALL-MONEY ,PLAYER>>
+
+<CONSTANT TEXT383 "The moonlight shines down on you like the beam of a lantern. The lookout gapes in an amazement for only a second, then starts yelling at the top of his lungs. You start to row desperately away, but you are still very weak from your ordeal. Looking back, you see that the pirates have lost no time in lowering two cutters into the water and are now rowing hard to intercept you.">
 
 <ROOM STORY383
 	(IN ROOMS)
 	(DESC "383")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT383)
+	(PRECHOICE STORY383-PRECHOICE)
+	(CONTINUE STORY401)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY383-PRECHOICE ()
+	<COND (<CHECK-SKILL ,SKILL-SEAFARING> <STORY-JUMP ,STORY345>)>>
+
+<CONSTANT TEXT384 "Ejada throws back her glossy green hair and laughs. \"A wizardly duel? So be it -- centuries have passed since any mortal mage dared to pit his sorcery against mine!\" So saying, she raises her hands and begins the incantation of a spell.">
+<CONSTANT CHOICES384 <LTABLE "summon a gust of wind to lift her off her feet" "unleash a blast of flame to burn her up">>
 
 <ROOM STORY384
 	(IN ROOMS)
 	(DESC "384")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT384)
+	(CHOICES CHOICES384)
+	(DESTINATIONS <LTABLE STORY062 STORY081>)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT385 "The basilisk: a gigantic bird with dracontine wings, scales instead of feathers, and a long serpentine tail. Its stare alone is enough to kill virtually any living thing. Of all animals, only the weasel is immune to the basilisk's deadly gaze and is capable of killing it.">
+<CONSTANT CHOICES385 <LTABLE "head straight to the shipyard" "first step in to save the scholar from the three bullies">>
 
 <ROOM STORY385
 	(IN ROOMS)
 	(DESC "385")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT385)
+	(CHOICES CHOICES385)
+	(DESTINATIONS <LTABLE STORY374 STORY052>)
+	(PRECHOICE STORY385-PRECHOICE)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY385-PRECHOICE ()
+	<COND (<CHECK-SKILL ,SKILL-SEAFARING> <STORY-JUMP ,STORY109>)>>
 
 <ROOM STORY386
 	(IN ROOMS)
