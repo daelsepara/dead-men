@@ -49,6 +49,7 @@
 	<PUT <GETP ,STORY272 ,P?DESTINATIONS> 3 ,STORY348>
 	<PUT <GETP ,STORY278 ,P?DESTINATIONS> 6 ,STORY409>
 	<PUT <GETP ,STORY330 ,P?DESTINATIONS> 2 ,STORY349>
+	<PUT <GETP ,STORY392 ,P?DESTINATIONS> 1 ,STORY409>
 	<PUTP ,STORY005 ,P?DEATH T>
 	<PUTP ,STORY006 ,P?DEATH T>
 	<PUTP ,STORY013 ,P?DEATH T>
@@ -5803,94 +5804,76 @@
 	(TYPES FOUR-NONES)
 	(FLAGS LIGHTBIT)>
 
+<CONSTANT TEXT391 "The pirates have forgotten to allow for your special talents. As they row towards the Belle Dame, you slip your bonds but hold the ropes up behind you as though still tied. As the rowboat is tying up alongside the ship, you contrive to stumble against Curshaw. \"Satan boil your gums!\" he snaps. \"Watch where you're going.\"||You drop the loose ropes and show him the barrel of the pistol you've just taken out of his belt. \"Watch where you're going, Curshaw,\" you say with deliberate menace. \"If you aren't careful it might be five fathoms straight down.\"||He puts up his hands. So does Porbuck, the slow-witted mate. Waving the pistol, you usher them out of the boat. Clinging to the rope ladder, they glower as you row off.||\"It won't be long before Skarvench gets back aboard and gives chase,\" says Grimes. \"Our best bet to shake him off is to head south.\"||You agree.">
+
 <ROOM STORY391
 	(IN ROOMS)
 	(DESC "391")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT391)
+	(CONTINUE STORY367)
+	(ITEM PISTOL)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT392 "\"We should not spend too long here in Leshand,\" is Oakley's opinion as the four of you walk along the waterfront. \"While we dally, Skarvench advances insidiously towards his final goal.\"||Grimes is of like mind. \"Let's obtain a letter of marque first, though,\" he maintains. \"That way we can earn some money on the high seas. We will need finance to tackle Skarvench, as warships cost money!\"">
+<CONSTANT CHOICES392 <LTABLE "agree about getting a letter of marque" "call on Master Capstick" "you are ready to ship out of Leshand">>
 
 <ROOM STORY392
 	(IN ROOMS)
 	(DESC "392")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT392)
+	(CHOICES CHOICES392)
+	(DESTINATIONS <LTABLE STORY409 STORY069 STORY107>)
+	(REQUIREMENTS <LTABLE NONE <LTABLE CODEWORD-MARATHON> NONE>)
+	(PRECHOICE STORY392-PRECHOICE)
+	(TYPES <LTABLE R-NONE R-CODEWORD R-NONE>)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY392-PRECHOICE ()
+	<COND (<CHECK-SKILL ,SKILL-ROGUERY>
+		<PUT <GETP ,STORY392 ,P?DESTINATIONS> 1 ,STORY050>
+	)(ELSE
+		<PUT <GETP ,STORY392 ,P?DESTINATIONS> 1 ,STORY409>
+	)>>
+
+<CONSTANT TEXT393 "You recognise the man as Twitchy Pinque, a notorious petty thief who wouldn't hesitate to sell his own grandmother -- not that he would get much for her if he did, since she is a known witch  with a soul of pure poison.||Seizing him by the scruff of his grubby neck, you whisper into his ear, \"It's not stolen, this lot, is it, Twitchy? Not selling stolen goods that you've pilfered here in Selenice? That'd be nothing short of pig stupid, I'd say. I'd only have to give a whistle and some of the nastiest pirates in the Carab are going to fall on you like half a ton of ballast. I wonder what they'd do to you, eh, Twitchy?\"||This unorthodox bargaining technique quickly convinces Pinque to drop to rock-bottom prices.||You are dubious about the amulet, but Pinque swears blind it's genuine. \"Belonged to my dear old granny, guv. Still does technically, I suppose, since I never asked her if I could take it.">
+<CONSTANT CHOICES393 <LTABLE "enter the tavern" "go off to see the shipbuilder">>
 
 <ROOM STORY393
 	(IN ROOMS)
 	(DESC "393")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT393)
+	(CHOICES CHOICES393)
+	(DESTINATIONS <LTABLE STORY355 STORY374>)
+	(PRECHOICE STORY393-PRECHOICE)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY393-PRECHOICE ()
+	<COND (,RUN-ONCE
+		<MERCHANT <LTABLE POCKET-WATCH PISTOL SWORD HORNPIPE WEASEL MAGIC-AMULET> <LTABLE 7 8 7 3 2 12>>
+	)>>
+
+<CONSTANT TEXT394 "You are reminded of the Pelican, a high-castled galleon which was renamed the Saint Christopher. Not long after, she heeled over making a sharp turn in strong crosswinds, took in water through her gun ports, and sank with the loss of two hundred crewmen. Since Christopher is usually an auspicious patron saint to name a ship after, the disaster, tin this case can only have been caused by changing the ship's name. When you tell the story to your friends they agree with you. \"She stays the Meteor,\" says Oakley, nodding.">
 
 <ROOM STORY394
 	(IN ROOMS)
 	(DESC "394")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT394)
+	(PRECHOICE STORY394-PRECHOICE)
+	(CONTINUE STORY184)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY394-PRECHOICE ()
+	<TAKE-VESSEL ,METEOR>>
+
+<CONSTANT TEXT395 "You have embarked on a fateful course -- pray that it leads you to fortune, not a rope's end.">
 
 <ROOM STORY395
 	(IN ROOMS)
 	(DESC "395")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT395)
+	(CONTINUE STORY376)
+	(CODEWORD CODEWORD-ICARUS)
 	(FLAGS LIGHTBIT)>
 
 <ROOM STORY396
