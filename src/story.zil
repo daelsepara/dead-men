@@ -3,7 +3,7 @@
 <GLOBAL CHARACTERS-ENABLED T>
 
 <CONSTANT BAD-ENDING "The adventure is over. You quest for glory ends here.">
-<CONSTANT GOOD-ENDING "You are successful in your quest for glory! Congratulations!">
+<CONSTANT GOOD-ENDING "You have brought Skarvench to justice! Further adventure awaits!">
 
 <OBJECT CURRENCY (DESC "doubloons")>
 <OBJECT VEHICLE (DESC "ships")>
@@ -50,6 +50,7 @@
 	<PUT <GETP ,STORY278 ,P?DESTINATIONS> 6 ,STORY409>
 	<PUT <GETP ,STORY330 ,P?DESTINATIONS> 2 ,STORY349>
 	<PUT <GETP ,STORY392 ,P?DESTINATIONS> 1 ,STORY409>
+	<PUT <GETP ,STORY423 ,P?DESTINATIONS> 4 ,STORY409>
 	<PUTP ,STORY005 ,P?DEATH T>
 	<PUTP ,STORY006 ,P?DEATH T>
 	<PUTP ,STORY013 ,P?DEATH T>
@@ -113,6 +114,7 @@
 	<PUTP ,STORY415 ,P?DEATH T>
 	<PUTP ,STORY417 ,P?DEATH T>
 	<PUTP ,STORY419 ,P?DEATH T>
+	<PUTP ,STORY421 ,P?DEATH T>
 	<RETURN>>
 
 <CONSTANT DIED-IN-COMBAT "You died in combat">
@@ -6257,129 +6259,103 @@
 	(TYPES FOUR-NONES)
 	(FLAGS LIGHTBIT)>
 
+<CONSTANT TEXT421 "With no way to keep dry, you see that there is at least a means of staving off the terrible chill. \"Strip off your clothes and soak them in the sea,\" you advise your companions. Since the sea water is warmer than the rain, this help you to avoid the worst discomforts of exposure. Even so, the hardship takes its toll.">
+
 <ROOM STORY421
 	(IN ROOMS)
 	(DESC "421")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT421)
+	(PRECHOICE STORY421-PRECHOICE)
+	(CONTINUE STORY007)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY421-PRECHOICE ()
+	<LOSE-LIFE 2 DIED-GREW-WEAKER ,STORY421>
+	<COND (<AND <IS-ALIVE> <CHECK-SKILL ,SKILL-SEAFARING>>
+		<STORY-JUMP ,STORY259>
+	)>>
+
+<CONSTANT TEXT422 "You have never known such an uncanny hush aboard a ship. The deck, shrouded in a mist of fine drizzle, is silent apart from the creak of the ship's timbers and the rustling of wet sails in the gusting wind.||Blutz is the last to climb aboard, puffing as he hauls his rotund body over the rail. He looks around, blinking uncertain,, and then voices the question that is in all your minds: \"where are your crew?\"||Captain Mandrigard gives a twisted smile when he hears this. He is a long lanky stick of a man, with one leg of flesh and one of carved whalebone. Dressed in silk robes out of another era, he has an emerald-pinned turban wound around his head and a naked sabre hanging at his belt. His skin is the colour of wrought iron, his brow high and wrinkled. When he speaks, you are reminded of the rumbling of a church organ: \"Gone -- deserted, the dogs! I am alone aboard my ship now.\"||He takes you below to his cabin, where you are confronted by a breathtaking wealth of treasure. Gold, silver and sparkling jewels are strewn carelessly across the table. Mandrigard sweeps them contemptuously to the floor and pours goblets of wine for you all, drinking deep without proposing any toast. His own goblet is especially fine: pale yellow onyx with a border of gold around the rim. When he sees you admiring it, he slurps more wine and says, \"Cast your eyes on my treasure if you like. Itøs a fine haul for any corsair, is it not? Oh, but what a price I paid for it!\"">
+<CONSTANT CHOICES422 <LTABLE "ask him to tell you more about the treasure" "discuss passage to Port Leshand" "ask about the crew">>
 
 <ROOM STORY422
 	(IN ROOMS)
 	(DESC "422")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT422)
+	(CHOICES CHOICES422)
+	(DESTINATIONS <LTABLE STORY279 STORY008 STORY027>)
+	(TYPES THREE-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT423 "Leshand is busy port of narrow half-timbered houses with small leaded windows and peaked roofs of olive-green tiles. The town is overlooked by the massive stone garrison fort on the hill above the harbour. It is well known that the governor prefers to rule the colony with a light touch, exercising his authority in as leisurely a manner as possible, openly encouraging buccaneers to put into dock here and spend their loot. But things are different at the moment, and you are stuck by subtle but noticeable changes since your last visit. The buccaneers are here as usual, but in fewer numbers and on markedly better behaviour. The soldiers of the city militia are adorned in clean new tabards, which they wear with expressions of pride. There are even a handful of street-cleaners whom you pass scrubbing at the accumulated grime on the cobblestones.||A good meal and a bath go a long way to refreshing you after weeks at sea.">
+<CONSTANT CHOICES423 <LTABLE "visit Master Capstick's house now" "visit a chandler's for supplies" "seek out someone who can identify strange items" "apply for a letter of marque" "listen for rumours">>
 
 <ROOM STORY423
 	(IN ROOMS)
 	(DESC "423")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT423)
+	(CHOICES CHOICES423)
+	(DESTINATIONS <LTABLE STORY069 STORY012 STORY031 STORY409 STORY088>)
+	(REQUIREMENTS <LTABLE <LTABLE CODEWORD-MARATHON> NONE NONE NONE NONE>)
+	(TYPES <LTABLE R-CODEWORD R-NONE R-NONE R-NONE R-NONE>)
+	(PRECHOICE STORY423-PRECHOICE)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY423-PRECHOICE ()
+	<COND (,RUN-ONCE
+		<GAIN-LIFE 3>
+	)>
+	<COND (<CHECK-SKILL ,SKILL-STREETWISE> <STORY-JUMP ,STORY127>)>
+	<COND (<CHECK-SKILL ,SKILL-ROGUERY>
+		<PUT <GETP ,STORY423 ,P?DESTINATIONS> 4 ,STORY050>
+	)(ELSE
+		<PUT <GETP ,STORY423 ,P?DESTINATIONS> 4 ,STORY409>
+	)>>
+
+<CONSTANT TEXT424 "You awaken cramped and sore, your limbs locked stiff after an uncomfortable and chilly night. Each of your friends gives a weak groan as he wakes, almost as though stricken with grief at having to face another terrible day of scorching heat. No sooner has the sun risen than waves of heat come rolling over the flat mirror of the sea, making you gasp for water. \"I'd give my soul for one drop...\" moans Grimes. \"Half a drop!\"||\"Your soul?\" Oakley manages a short bark of laughter. \"Who'd want your black soul, you old sea dog?\"||They cling together, shaking with gallows humour at this, wheezing between their teeth because belly laughter would crack their desiccated throats.||\"They're hysterical -- half mad!\" snaps Blutz. He stares at you hopelessly. \"Do something, or we'll all die. I don't want to end my days in an open boat, unshriven and unmourned, never to lie in the fresh soil of home!\"">
+<CONSTANT CHOICES424 <LTABLE "try something" "otherwise">>
 
 <ROOM STORY424
 	(IN ROOMS)
 	(DESC "424")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT424)
+	(CHOICES CHOICES424)
+	(DESTINATIONS <LTABLE STORY101 STORY120>)
+	(REQUIREMENTS <LTABLE SKILL-SPELLS NONE>)
+	(TYPES <LTABLE R-SKILL R-NONE>)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT425 "As it turns out, the sun has melted small pools on the iceberg's surface, saving you the effort of chipping blocks of ice to get water. The taste is slightly brackish, but it seems otherwise drinkable. You fill your bellies before heading back to the jollyboat and casting off.||You head west, watching the sun slide down the sky. Then Blutz gives an excited shout and points astern. You all turn, rubbing your eyes when you see a fleck of gold against the indigo eastern sky. To your disbelief and delight, the fleck grows until you can clearly see that it is a topsails of a brigantine bearing directly for you.||Leaping to your feet, you wave and stamp and shout until you see the faces of sailors appear at the rail. They drop sail, steering towards you. \"Ahoy there,\" you hear a voice call as the brigantine draws level with your boat, \"we'll throw down a rope.\" \"Why, this is a glad day!\" says Oakley as you climb up to the deck. \"First a good drink of water, and now a ride home into the bargain!\"">
 
 <ROOM STORY425
 	(IN ROOMS)
 	(DESC "425")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT425)
+	(CONTINUE STORY370)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT426 "The second of the four islands comes in sight: a verdant jungle-clad shoreline dominated by the immense hump of a smouldering volcano. High up on the volcano's slops you can see the dull red gleam of lava. Grey sulphurous smoke sits in a wreath around the cone.||\"We'd be foolhardy to put ashore here,\" maintains Blutz. \"That volcano could erupt and bury us all!\"">
+<CONSTANT CHOICES426 <LTABLE "land" "continue going west">>
 
 <ROOM STORY426
 	(IN ROOMS)
 	(DESC "426")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT426)
+	(CHOICES CHOICES426)
+	(DESTINATIONS <LTABLE STORY174 STORY135>)
+	(PRECHOICE STORY426-PRECHOICE)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY426-PRECHOICE ()
+	<COND (<CHECK-SKILL ,SKILL-WILDERNESS-LORE> <STORY-JUMP ,STORY193>)>>
+
+<CONSTANT TEXT427 "You are taken to Queen Titania's cabin in the aft gallery of the Rose. You are amazed at the sight of such luxury aboard a ship: there is a thick carpet, velvet drapes and even a gilded throne.||The Queen is younger than you expected, slim as a colt and palely pretty, with hair of autumn flame. But there is the ring of purebred royalty in her voice as she greet you. \"You have saved us from a fate that does not bear contemplation,\" she says. \"You have our thanks -- and not not only thanks, but also material reward. Such a valiant mariner should not live a pirate's cruel life. Will you accept a title and a grant of land in Glorianne?\"||\"And there's a commission in the navy waiting for you, too, if you want it,\" puts in Admiral Calidor. He turns and bows to the Queen with his hand to his chest. \"Your pardon, Majesty.\"||\"Not at all, Calidor.\" The Queen smiles -- a vivacious radiant smile, quite at odds with the stuffy panoply of courtly etiquette that surrounds her. Turning back to you, she adds: \"Our esteemed admiral is quite right. You would make a welcome addition to our navy. Well?\"||You are momentarily lost in a private reverie. The offer is tempting, but you have got used to a life of exhilarating adventure. Did you run up against El Draque? You may not have seen the last of him if so. Did you make other enemies along your way? And are there mysteries still for you to explore on the Carab Sea?||You look up at the Queen Titania. She is waiting for your answer.">
 
 <ROOM STORY427
 	(IN ROOMS)
 	(DESC "427")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT427)
+	(VICTORY T)
 	(FLAGS LIGHTBIT)>
-
