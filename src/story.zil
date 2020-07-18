@@ -109,6 +109,7 @@
 	<PUTP ,STORY387 ,P?DEATH T>
 	<PUTP ,STORY389 ,P?DEATH T>
 	<PUTP ,STORY402 ,P?DEATH T>
+	<PUTP ,STORY408 ,P?DEATH T>
 	<RETURN>>
 
 <CONSTANT DIED-IN-COMBAT "You died in combat">
@@ -118,6 +119,7 @@
 <CONSTANT DIED-EJADA-SORCERY "You have died from the Ejada's sorcery">
 
 <CONSTANT FOUR-TREASURES <LTABLE MAGIC-WAND HEALING-POTION SHIP-IN-BOTTLE BLACK-KITE>>
+<CONSTANT PEDLAR-WARES <LTABLE POCKET-WATCH PISTOL SWORD HORNPIPE WEASEL MAGIC-AMULET>>
 
 <ROUTINE SCRIPTOR-BUY-SELL (ITEM LEAVE "OPT" SELL-PRICE)
 	<COND (<NOT .ITEM> <RETURN>)>
@@ -5793,7 +5795,7 @@
 		<CRLF>
 	)>>
 
-<CONSTANT TEXT390 "After hearing some of your experiences aboard the Belle Dame, he nods sagely. \"Aye, that Skarvench is a scurvy pitch-hearted fiend sure enough,\" he agrees. \"One of the worst pirates on the seas, since he cares not which ships he plunders -- those of the accursed Sidonians, or those loyal to Her Gloriannic Majesty. Yet there are other pirates just as greedy, bloodthirsty and full of wickedness. One such is the Sidonian corsair El Draque, who captains the galleon Cold Grue. Bloodthirsty is indeed the word for him, I'm told. It's said he hangs his victims like slaughtered pigs from the yardarm, collecting their lifeblood in a silver goblet to drink by moonlight!\"||The captain pauses, regards his own cup thoughtfully  for a moment, then refills it. \"Piracy's not a bad business,\" he continues, \"so long as you have a clear sense of where your loyalties lie. My advice is to first obtain a letter of marque. Letters of marque are issued by the governors of Gloriannic colonies. Possession of one authorizes you to attack Sidonian ships, in effect enabling you to act as private soldiers of Her Majesty. A fine arrangement which benefits everyone.\"||\"Except the Sidonians, of course,\" you say with a smile.||The captain roars with laughter. \"Aye, the God-cursed bilge suckers\"">
+<CONSTANT TEXT390 "After hearing some of your experiences aboard the Belle Dame, he nods sagely. \"Aye, that Skarvench is a scurvy pitch-hearted fiend sure enough,\" he agrees. \"One of the worst pirates on the seas, since he cares not which ships he plunders -- those of the accursed Sidonians, or those loyal to Her Gloriannic Majesty. Yet there are other pirates just as greedy, bloodthirsty and full of wickedness. One such is the Sidonian corsair El Draque, who captains the galleon Cold Grue. Bloodthirsty is indeed the word for him, I'm told. It's said he hangs his victims like slaughtered pigs from the yardarm, collecting their lifeblood in a silver goblet to drink by moonlight!\"||The captain pauses, regards his own cup thoughtfully for a moment, then refills it. \"Piracy's not a bad business,\" he continues, \"so long as you have a clear sense of where your loyalties lie. My advice is to first obtain a letter of marque. Letters of marque are issued by the governors of Gloriannic colonies. Possession of one authorizes you to attack Sidonian ships, in effect enabling you to act as private soldiers of Her Majesty. A fine arrangement which benefits everyone.\"||\"Except the Sidonians, of course,\" you say with a smile.||The captain roars with laughter. \"Aye, the God-cursed bilge suckers\"">
 <CONSTANT CHOICES390 <LTABLE "now ask him about the war" "Queen Titania's tour of her colonies" "Port Leshand" "you are done with talking">>
 
 <ROOM STORY390
@@ -5836,7 +5838,7 @@
 		<PUT <GETP ,STORY392 ,P?DESTINATIONS> 1 ,STORY409>
 	)>>
 
-<CONSTANT TEXT393 "You recognise the man as Twitchy Pinque, a notorious petty thief who wouldn't hesitate to sell his own grandmother -- not that he would get much for her if he did, since she is a known witch  with a soul of pure poison.||Seizing him by the scruff of his grubby neck, you whisper into his ear, \"It's not stolen, this lot, is it, Twitchy? Not selling stolen goods that you've pilfered here in Selenice? That'd be nothing short of pig stupid, I'd say. I'd only have to give a whistle and some of the nastiest pirates in the Carab are going to fall on you like half a ton of ballast. I wonder what they'd do to you, eh, Twitchy?\"||This unorthodox bargaining technique quickly convinces Pinque to drop to rock-bottom prices.||You are dubious about the amulet, but Pinque swears blind it's genuine. \"Belonged to my dear old granny, guv. Still does technically, I suppose, since I never asked her if I could take it.">
+<CONSTANT TEXT393 "You recognise the man as Twitchy Pinque, a notorious petty thief who wouldn't hesitate to sell his own grandmother -- not that he would get much for her if he did, since she is a known witch with a soul of pure poison.||Seizing him by the scruff of his grubby neck, you whisper into his ear, \"It's not stolen, this lot, is it, Twitchy? Not selling stolen goods that you've pilfered here in Selenice? That'd be nothing short of pig stupid, I'd say. I'd only have to give a whistle and some of the nastiest pirates in the Carab are going to fall on you like half a ton of ballast. I wonder what they'd do to you, eh, Twitchy?\"||This unorthodox bargaining technique quickly convinces Pinque to drop to rock-bottom prices.||You are dubious about the amulet, but Pinque swears blind it's genuine. \"Belonged to my dear old granny, guv. Still does technically, I suppose, since I never asked her if I could take it.">
 <CONSTANT CHOICES393 <LTABLE "enter the tavern" "go off to see the shipbuilder">>
 
 <ROOM STORY393
@@ -5851,7 +5853,7 @@
 
 <ROUTINE STORY393-PRECHOICE ()
 	<COND (,RUN-ONCE
-		<MERCHANT <LTABLE POCKET-WATCH PISTOL SWORD HORNPIPE WEASEL MAGIC-AMULET> <LTABLE 7 8 7 3 2 12>>
+		<MERCHANT PEDLAR-WARES <LTABLE 7 8 7 3 2 12>>
 	)>>
 
 <CONSTANT TEXT394 "You are reminded of the Pelican, a high-castled galleon which was renamed the Saint Christopher. Not long after, she heeled over making a sharp turn in strong crosswinds, took in water through her gun ports, and sank with the loss of two hundred crewmen. Since Christopher is usually an auspicious patron saint to name a ship after, the disaster, tin this case can only have been caused by changing the ship's name. When you tell the story to your friends they agree with you. \"She stays the Meteor,\" says Oakley, nodding.">
@@ -6020,95 +6022,100 @@
 	(CONTINUE STORY009)
 	(FLAGS LIGHTBIT)>
 
+<CONSTANT TEXT406 "You are back in civilization. Now you have time to take stock of your harrowing ordeal. The memory of how you behaved at times gives you little cause for pride, and the dour looks of your companions reflect your inner sense of shame. Nor do you have what it takes to be a leader of men; you know that now. Grimes cannot meet your gaze as he shakes hands with you. \"Best we go our separate ways for a while,\" he mutters. \"Maybe we'll meet again.\"||Blutz is more forthright. \"None of us has come through this business with flying colours, mate. But if we aren't even masters of our own worse nature, how could we ever hope to overcome Skarvench?\"||You are reluctantly forced to agree. Skarvench's soul may be as black as the devil's pitch, but your own is hardly spotlessly pure. Perhaps his baleful influence has made you what you are today: no valiant hero, just a fallible adventurer with a sadly chequered past.">
+
 <ROOM STORY406
 	(IN ROOMS)
 	(DESC "406")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT406)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT407 "Striking southwards in search of icebergs, you enter cooler waters. The climate is still subtropical here, but ocean currents carry meltwater from the polar regions and there is always the possibility of finding icebergs. In a larger vessel they would be a hazard. Now they could be your one chance of survival.||After hours of continually scanning the horizon you are half blind with the sea glare, but at last you catch sight of a great blue crag drifting majestically in the distance. Sunbeams make a thousand spangling stars on its surface. \"There's yer iceberg,\" says Blutz. \"But the thing is, will it be safe to drink?\"||Drawing nearer, you begin to make out a darker outline within the blue-grey ice. Oakley is the first recognize it. \"It's a ship! A blooming ship -- frozen inside the iceberg!\"">
+<CONSTANT CHOICES407 <LTABLE "decide to row over to the iceberg" "carry on west towards Port Leshand">>
 
 <ROOM STORY407
 	(IN ROOMS)
 	(DESC "407")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT407)
+	(CHOICES CHOICES407)
+	(DESTINATIONS <LTABLE STORY352 STORY371>)
+	(PRECHOICE STORY407-PRECHOICE)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY407-PRECHOICE ()
+	<COND (<CHECK-SKILL ,SKILL-SEAFARING> <STORY-JUMP ,STORY333>)>>
+
+<CONSTANT TEXT408 "Curshaw scowls as he sees you looking at him. \"I'll enjoy giving you a taste of the cat,\" he says, referring to the whip used to punish mutineers.||\"You would, you mouse,\" you say, taunting him. \"You only squeak bravely when your victims have their hands tied.\"||Curshaw leaps to his feet, hands bunched into fists. \"I'll cut out your tongue and swallow it whole! I'll fry your gizzard for breakfast!\"||You glance away nonchalantly. \"Big talk, small fry.\"||This is too much for him. Snatching up a paddle, he swings it at your head. It is your cue to explode into action. Still crouching, you duck under the swing and then, while Curshaw totters off-balance, you shoot to your feet and deliver a bone-cracking head butt that lays him flat.||Porbuck lets go of the oars and lumbers towards you -- only to go reeling back as you lash out with two flying kicks in rapid succession. He shakes his head, growls and comes doggedly on to pummel you with his huge fists.||It is a hard fight, testing your skill to the limit. Porbuck is a brutal and powerful fighter who would be difficult to beat even if you didn't have your hands tied.">
+<CONSTANT TEXT408-CONTINUED "You finally flatten Porbuck with a knee to the solar plexus. The others help you tip him and Curshaw overboard. Then the four of you quickly untie one another's bonds and start rowing away">
 
 <ROOM STORY408
 	(IN ROOMS)
 	(DESC "408")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT408)
+	(PRECHOICE STORY408-PRECHOICE)
+	(CONTINUE STORY177)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY408-PRECHOICE ()
+	<LOSE-LIFE 5 DIED-IN-COMBAT ,STORY408>
+	<COND (<IS-ALIVE>
+		<CRLF>
+		<TELL TEXT408-PRECHOICE>
+		<TELL ,PERIOD-CR>
+	)>>
+
+<CONSTANT TEXT409 "A letter of marque would allow you to indulge in a spot of honest piracy -- or rather privateering, as it is called. Such a letter licenses you to act as a private soldier of Her Majesty's navy, with full entitlement to plunder Sidonian treasure-ships.||\"But we'll never be able to get one,\" sighs Blutz after you have all spent some time discussing the idea.||\"That's right,\" growls Oakley. \"I hear it costs almost as much in bribes to get hold of a letter of marque as you're likely to bring in as profit!\"||\"We may as well try, at least,\" you tell them, irritated yo hear such pessimism.||You make your way up the narrow streets to the fort, where you lose no time in applying to the Office of Prejudicial Trade for a letter of marque. A bland-faced fellow in a blue velvet doublet listens to your request, then government is very keen to see private enterprise flourish,\" he murmurs silkily. \"But drawing up a letter of marque is not just a simple matter of putting quill to paper. There are forms to be filled in, credentials to be established, the proper channels to go through, red tape...\" He pretends to stifle a yawn. \"It all takes time. And money.\"||Grimes nudges you and mutters behind his hand. \"He's angling for a bribe skipper.\"">
+<CONSTANT CHOICES409 <LTABLE "bribe official" "resort to" "take your leave to all on Master Capstick" "weigh up your remaining options">>
 
 <ROOM STORY409
 	(IN ROOMS)
 	(DESC "409")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT409)
+	(CHOICES CHOICES409)
+	(DESTINATIONS <LTABLE STORY409-DIAMONDS STORY260 STORY069 STORY107>)
+	(REQUIREMENTS <LTABLE DIAMOND SKILL-CUNNING <LTABLE CODEWORD-MARATHON> NONE>)
+	(TYPES <LTABLE R-TABLE R-SKILL R-CODEWORD R-NONE>)
 	(FLAGS LIGHTBIT)>
+
+<ROOM STORY409-DIAMONDS
+	(IN ROOMS)
+	(DESC "409")
+	(EVENTS STORY409-EVENTS)
+	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY409-EVENTS ("AUX" QUANTITY)
+	<COND (<CHECK-ITEM ,DIAMOND>
+		<SET QUANTITY <GETP ,DIAMOND ,P?QUANTITY>>
+		<COND (<G=? .QUANTITY 1>
+			<SET QUANTITY <- .QUANTITY 1>>
+			<PUTP ,DIAMOND ,P?QUANTITY .QUANTITY>
+			<COND (<L? .QUANTITY 1> <REMOVE ,DIAMOND>)>
+			<RETURN ,STORY244>
+		)>
+	)>
+	<TELL CR "You do not possess a diamond" ,PERIOD-CR>
+	<RETURN ,STORY409>>
+
+<CONSTANT TEXT410 "After a brief bout of haggling you settle on the prices.||You are dubious about the amulet, but the pedlar swears blind it is the genuine article. \"Belonged to my dear old granny, guv. Still does technically, I suppose, since I never asked her if I could take it.">
+<CONSTANT CHOICES410 <LTABLE "enter the tavern" "go off to see the shipbuilder">>
 
 <ROOM STORY410
 	(IN ROOMS)
 	(DESC "410")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT410)
+	(CHOICES CHOICES410)
+	(DESTINATIONS <LTABLE STORY355 STORY374>)
+	(PRECHOICE STORY410-PRECHOICE)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY410-PRECHOICE ()
+	<COND (,RUN-ONCE
+		<MERCHANT PEDLAR-WARES <LTABLE 8 12 11 4 2 15>>
+	)>>
 
 <ROOM STORY411
 	(IN ROOMS)
