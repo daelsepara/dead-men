@@ -5876,95 +5876,75 @@
 	(CODEWORD CODEWORD-ICARUS)
 	(FLAGS LIGHTBIT)>
 
+<CONSTANT TEXT396 "You sail the Lady of Shalott back into Selenice harbour no richer than when you left -- a run of bad luck which hardly bodes well for your chances against Skarvench.||\"We're a laughing stock,\" bemoans Oakley. \"Everyone's talking about the pirates who couldn't find a doubloon to save their lives. The only sailors who'll sign on with us now are old men, cripples and drunks.\"||You receive this news with a grim heart, but do your best to appear confident for the sake of your loyal lieutenants. \"Courage, my lads!\" you cry, brandishing your fist to the heavens. \"Skarvench cannot hide from us, and ow we have the advantage of surprise, for what trouble can be possibly expect from a little sloop like this?\"">
+
 <ROOM STORY396
 	(IN ROOMS)
 	(DESC "396")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT396)
+	(PRECHOICE STORY396-PRECHOICE)
+	(CONTINUE STORY184)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY396-PRECHOICE ()
+	<TAKE-VESSEL ,LADY-OF-SHALOTT>>
+
+<CONSTANT TEXT397 "Heavy sheets of rain sweep across the deck, accompanied by a howling wind, as the sky turns blacker than midnight. The unearthly pallor of St Elmo's Fire tickles along the topgallants, mirroring flickers of sheet lightning behind the coal-coloured clouds. The sails snap and strain as if a hundred invisible demons were trying to uproot the masts, and colossal waves break around the ship's bows.||The sailors are clinging to the rail for dear life as the ship goes pitching and yawing in the gale's grip. Even on the faces of your brave lieutenants you see the frozen grin of stark terror. You leap down onto the deck yourself, hauling yourself along the lines to trim the topsails, then seizing the whipstaff and steering the prow deftly against the oncoming wind. Inspired by your example, the crew resume their duties. The familiar routing helps to banish their worst fears. They no longer feel helpless in the face of the unknown, and they put their trust in you, their peerless captain, to bring them safely through the storm.">
 
 <ROOM STORY397
 	(IN ROOMS)
 	(DESC "397")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT397)
+	(CONTINUE STORY094)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT398 "The crack of cannon-fire signals another broadside from the Moon Dog. The fo'c'sle takes a direct hit, smashing apart like a matchwood toy. You hear the screams of men who are struck by shells, but you must steel yourself to ignore their suffering. This is the crucial moment, as you close into mortal combat with your foe.">
 
 <ROOM STORY398
 	(IN ROOMS)
 	(DESC "398")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT398)
+	(PRECHOICE STORY398-PRECHOICE)
+	(CONTINUE STORY415)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY398-PRECHOICE ()
+	<DAMAGE-SHIP 1 ,STORY415 ,STORY227>>
+
+<CONSTANT TEXT399 "Your small boat is in a sorry condition, weatherbeaten from lying unused and untended on the ship's deck for so long. Worms have made tiny holes in the wood, and the timbers are sun-dried and warped.||Grimes sees you looking at the planking and gives a wry chuckle. \"Aye, not much is she? A sorry little vessel for us to pin our hopes on.\"||\"Our hopes?\" says Oakley with a snort. \"Our lives, man!\"||You touch your amulet and utter the words of an incantation. \"That will help keep us safe from disaster on the high seas,\" you explain to the others. \"It's an old charm to keep the boat seaworthy. Never fails.\"||\"And have you a charm to keep us from dying of thirst?\" grumbles Blutz. But no, there is no such charm.">
 
 <ROOM STORY399
 	(IN ROOMS)
 	(DESC "399")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT399)
+	(PRECHOICE STORY399-PRECHOICE)
+	(CONTINUE STORY289)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY399-PRECHOICE ()
+	<COND (<CHECK-SKILL ,SKILL-SPELLS> <STORY-JUMP ,STORY416>)>>
+
+<CONSTANT TEXT400 "The natives watch in unfathomable silence while you smartly descend the ladder of knotted vines. Apparently they are not ready to launch any assault as yet, since no boulders or spears come hurtling down at you from above. Then you see another group of natives striding along the beach towards you. There are also daubed in blood-red war paint and carry spears and clubs studded with splinters of volcanic rock. There are far too many of them for you to have any hope of fighting your way past to the boat. As they draw nearer, they begin to utter a low chant which is full of ominous intent.||\"Cannibals, or my bones are bleached wood,\" mutters Grimes. \"They mean to stuff us in their cookpot.\"">
+<CONSTANT CHOICES400 <LTABLE "offer them a gift" "use" "use" "just make a dash for the boat">>
 
 <ROOM STORY400
 	(IN ROOMS)
 	(DESC "400")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT400)
+	(CHOICES CHOICES400)
+	(DESTINATIONS <LTABLE STORY117 STORY079 STORY060 STORY041>)
+	(REQUIREMENTS <LTABLE NONE SKILL-CUNNING SKILL-SPELLS NONE>)
+	(PRECHOICE STORY400-PRECHOICE)
+	(TYPES <LTABLE R-NONE R-SKILL R-SKILL R-NONE>)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY400-PRECHOICE ()
+	<COND (,RUN-ONCE
+		<COND (<CHECK-CODEWORD ,CODEWORD-FETISH>
+			<REMOVE ,CODEWORD-FETISH>
+			<STORY-JUMP ,STORY022>
+		)>
+	)>>
 
 <ROOM STORY401
 	(IN ROOMS)
