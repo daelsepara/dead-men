@@ -22,10 +22,6 @@
     (DESC "Icarus")
     (SYNONYM ICARUS)>
 
-<OBJECT CODEWORD-LUX
-    (DESC "Lux")
-    (SYNONYM LUX)>
-
 <OBJECT CODEWORD-MALEFIC
     (DESC "Malefic")
     (SYNONYM MALEFIC)>
@@ -53,7 +49,3 @@
 <OBJECT CODEWORD-SCRIP
     (DESC "Scrip")
     (SYNONYM SCRIP)>
-
-<OBJECT CODEWORD-SPARTA
-    (DESC "Sparta")
-    (SYNONYM SPARTA)>
