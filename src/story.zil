@@ -104,6 +104,7 @@
 	<PUTP ,STORY362 ,P?DEATH T>
 	<PUTP ,STORY365 ,P?DEATH T>
 	<PUTP ,STORY367 ,P?DEATH T>
+	<PUTP ,STORY371 ,P?DEATH T>
 	<RETURN>>
 
 <CONSTANT DIED-IN-COMBAT "You died in combat">
@@ -5527,95 +5528,70 @@
 	(TYPES FOUR-NONES)
 	(FLAGS LIGHTBIT)>
 
+<CONSTANT TEXT371 "What secrets, you muse to yourself, lie locked aboard the ice-bound vessel? It is a mystery that may never be answered. Even a full ship's company armed with picks would take weeks to hack her out of the ice.||You veer away from the iceberg, soon losing it far astern. The hideous incessant sun continues to sap your strength by day. By night you lie groaning in the gravid cold.">
+
 <ROOM STORY371
 	(IN ROOMS)
 	(DESC "371")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT371)
+	(PRECHOICE STORY371-PRECHOICE)
+	(CONTINUE STORY424)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY371-PRECHOICE ()
+	<LOSE-LIFE 2 DIED-GREW-WEAKER ,STORY371>>
+
+<CONSTANT TEXT372 "You are stripped of all your possessions and bundled into the ship's hold to await Skarvench's return. The hatch closes, leaving you in darkness. You can hear rats scurrying about. \"Help untie these bonds,\" you tell the others. \"Then we wait.\"||After several hours you hear Skarvench come board. Feet clump down, creaking the timbers around the hatch over your heads. You hear a voice say, \"Does 'e want 'em up on deck now?\"||\"Not yet,\" replies another man. \"We're to get under way first. Cap'n's keen to reach Selenice an' see if the moonsails 'ave arrived.\"||The ship moves slowly as the anchor cable is winched in. Then you hear the pirates break into song as they hoist the sails and begin to steer out of the bay.||Suddenly there is a jolt and the ship lurches to one side. This is your chance. Hastily forcing the hatch, you emerge on deck to find that the ship has run aground on a reef. \"I knew those alterations I made to the charts would pay off,\" you tell the others with a crafty smile.||Slipping over the side, you swim away unnoticed in the confusion.. Once back at the shore, you lose no time getting your little vessel and putting to sea under cover of the dusk.">
 
 <ROOM STORY372
 	(IN ROOMS)
 	(DESC "372")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT372)
+	(PRECHOICE STORY372-PRECHOICE)
+	(CONTINUE STORY177)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY372-PRECHOICE ()
+	<RESET-CONTAINER ,PLAYER>>
+
+<CONSTANT TEXT373 "Scriptor looks closely at the ring through his jeweller's lens, then hands it back to you with a frown. \"This is a very dangerous item indeed,\" he explains. \"It is cursed, and will bring disaster on anyone who tries to use it.\"||\"How do you use it?\" wonders Blutz, reaching for the ring. \"you snatch it back. \"We don't.\"||Oakley gives the doctor a shrewd look. \"This wouldn't just be your way of getting us to sell the ring cheap, would it, Doc?\" he mutters.||Scriptor splutters with outrage. \"Certainly not! I want nothing to do with it. In fact, I shall not even ask my usual fee of one doubloon for the consultation, since it is unlucky to seek profit from a curse item.\"">
+<CONSTANT CHOICES373 <LTABLE "now ask him to identify a" "a" "or a" "its time you were on your way">>
 
 <ROOM STORY373
 	(IN ROOMS)
 	(DESC "373")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT373)
+	(CHOICES CHOICES373)
+	(DESTINATIONS <LTABLE STORY335 STORY354 STORY316 STORY392>)
+	(REQUIREMENTS <LTABLE BAT-SHAPED-TALISMAN BRONZE-HELMET CONCH-SHELL-HORN NONE>)
+	(TYPES <LTABLE R-ITEM R-ITEM R-ITEM R-NONE>)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT374 "You make your way to the eastern edge of town and along the boardwalk into the shipyard. Labourers scurry to and from ignoring you, for it is their busiest season with the hurricane just a month away. A dozen ships lie here careened -- raised up on dry land and tilted on one side so that repairs or routine maintenance can be carried out. The new vessels stand in stocks further back from the water's edge, in varying degrees of construction. You see stacks of oak planks which are used for the hulls, and long straight pine poles that will become the masts.||The Master Shipbuilder, Kemp, emerges from his workshop and comes hurrying over. He is a spare-framed fellow with grey mutton-chop whiskers around a face coloured red by harsh coast winds and nips of brandy wine. \"Greetings,\" he says. He is on the point of shaking hands when he remembers that his fingers are tarry from caulking the new ships. \"Ah well. How can I help?\"">
+<CONSTANT CHOICES374 <LTABLE "tell him you want to buy a ship" "enquire whether he has done any work for Skarvench recently" "ask him about the ship Cold Grue">>
 
 <ROOM STORY374
 	(IN ROOMS)
 	(DESC "374")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT374)
+	(CHOICES CHOICES374)
+	(DESTINATIONS <LTABLE STORY043 STORY063 STORY082>)
+	(TYPES THREE-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT375 "The shipbuilder shows you a small sloop with ten cannon. \"Is that all you can sell us?\" protests Grimes. \"She's hardly a suitable vessel for hard piracy.\"||The shipbuilder shrugs. \"This is the best I can offer for the price. Her previous owner ran her up and down the SIdonian Main trading in various goods -- the cannons were only installed as a defensive measure against piracy, ironically enough,\" Seeing your disgruntled expression, he adds, \"She does still have a small consignment of salt aboard. It was still in the hold when she came into my hands. I'll throw that in for free.\"||\"Salt? Most generous of you. Still, she'll have to do.\" And, so saying, you take possession of the Lady of Shalott.">
 
 <ROOM STORY375
 	(IN ROOMS)
 	(DESC "375")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT375)
+	(PRECHOICE STORY375-PRECHOICE)
+	(CONTINUE STORY300)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY375-PRECHOICE ()
+	<TAKE-VESSEL ,LADY-OF-SHALOTT>>
 
 <ROOM STORY376
 	(IN ROOMS)
