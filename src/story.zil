@@ -39,6 +39,7 @@
 <ROUTINE RESET-STORY ()
 	<RESET-TEMP-LIST>
 	<SETG USED-CHARMS-TO-FLOAT F>
+	<SETG EAT-COCONUT-F F>
 	<PUTP ,STORY007 ,P?CODEWORD ,CODEWORD-DETRUDE>
 	<PUT <GETP ,STORY012 ,P?DESTINATIONS> 3 ,STORY409>
 	<PUT <GETP ,STORY136 ,P?DESTINATIONS> 2 ,STORY405>
@@ -99,6 +100,7 @@
 	<PUTP ,STORY331 ,P?DEATH T>
 	<PUTP ,STORY343 ,P?DEATH T>
 	<PUTP ,STORY346 ,P?DEATH T>
+	<PUTP ,STORY351 ,P?DEATH T>
 	<RETURN>>
 
 <CONSTANT DIED-IN-COMBAT "You died in combat">
@@ -5226,96 +5228,94 @@
 	(DEATH T)
 	(FLAGS LIGHTBIT)>
 
+<CONSTANT TEXT351 "The sun stares balefully down from a sky of burnished steel, leeching your strength. To prevent your brains being cooked in your skulls, you soak strips of torn cloth in the sea and wrap them round your brows. The brine dries to hard salt which chafes your many sores, but by now you are past caring.">
+<CONSTANT TEXT351-CONTINUED "After what seems an endless time, Oakley gives a surprised shout and lunges desperately for something floating in the water beside the boat. Fumbling in a frenzy of excitement, he finally gets a firm hold on the object and hefts it up for you all to see.||\"A coconut!\" says Blutz. \"But is it safe to eat? Floating out here in mid-ocean, I mean. How did it get there?\"||\"Jetsam,\" says Oakley with conviction.||Blutz scratches his fat jowls. \"Er... but I heard this legend of Domdaniel, which is the place under the sea where the drowned sailors live. This coconut might have floated up from one of their groves. That would make it dead men's food, you see, and not for us.\"||\"Pah! You fat fool!\" gasps Oakley.||Grimes and Oakley intend to eat the coconut whether it is safe or not. BLutz protests that even if it was dropped off a ship, it might have gone rotten.">
+
+<GLOBAL EAT-COCONUT-F F>
+
 <ROOM STORY351
 	(IN ROOMS)
 	(DESC "351")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT351)
+	(PRECHOICE TEXT351-PRECHOICE)
+	(CONTINUE STORY389)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE TEXT351-PRECHOICE ()
+	<LOSE-LIFE 1 DIED-GREW-WEAKER ,STORY351>
+	<COND (<IS-ALIVE>
+		<IF-ALIVE TEXT351-CONTINUED>
+		<COND (<CHECK-SKILL ,SKILL-WILDERNESS-LORE>
+			<STORY-JUMP ,STORY158>
+			<RETURN>
+		)>
+		<TELL CR "Eat some of the coconuts?">
+		<COND (<YES?>
+			<SETG EAT-COCONUT-F T>
+		)>
+	)>>
+
+<CONSTANT TEXT352 "The outlines of the ship become clearer as you approach the iceberg. She is a fine gilded galleon, her sails hanging like cerements, wreaths of frost along her flanks and spikes ice amid the rigging. Though apparently quite old and of exotic origin, it seems that the ice has kept the touch of time from harming her. You can even make out the name painted on the prow, the letters distorted and shimmering as though seen through a lens. Blutz (who is an educated man among pirates, having once drowned a school-teacher) reads it: \"The Octavius. Wonder how long she's been ice-bound, eh mates?\"||Coming alongside the ice-floe, Oakley leaps ashore and hammers a spike for the mooring roper. \"Years perhaps. But let's not linger here, it's chilly enough to make a brass monkey drop its balls. We'll just collect water and be off.\"||\"But will it be safe?\" says Blutz again. \"Surely an iceberg is just frozen sea-water. You can't drink it.\"">
+<CONSTANT CHOICES352 <LTABLE "collect some ice" "you can agree with Blutz">>
 
 <ROOM STORY352
 	(IN ROOMS)
 	(DESC "352")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT352)
+	(CHOICES CHOICES352)
+	(DESTINATIONS <LTABLE STORY425 STORY371>)
+	(TYPES TWO-NONES)
+	(CODEWORD CODEWORD-AUGUST)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT353 "Perhaps it is the warning of a sixth sense, perhaps just a groundless fear, but you suddenly how that  not all the riches of the Sidonian Main could tempt you to set foot on that eerily silent deck. Ignoring the captain's outstretched hand, you leap up onto the rail and from there jump to the rigging, making your way with catlike grace until you are astride the yardarm.||Captain Mandrigard takes out his sabre and shake it at you. \"Blast ye, come down from here, ye damned monkey!\" he roars. But you see that he won't be coming up in pursuit of you. Not with his wooden leg.||Seizing the pulleys that support the ship's cutter, or sailing boat, you swing it out over the side and then sever the ropes. The cutter falls with a splash and, as your friends scramble aboard it, you give the captain a dashing salute. \"Thank you, sir, for the fine new boat; please keep our old jollyboat in exchange. But now I must bid you adieu.\"||Mandrigard spits curses that would bring a blush to the Devil himself, but there is nothing he can do. Scrambling down the side of the ship, you join the others in the cutter. \"This is more like it,\" says Blutz appreciatively, slapping the firm timbers. \"She won't sink under us in a hurry!\"">
 
 <ROOM STORY353
 	(IN ROOMS)
 	(DESC "353")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT353)
+	(PRECHOICE STORY353-PRECHOICE)
+	(CONTINUE STORY330)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY353-PRECHOICE ()
+	<COND (<CHECK-CODEWORD ,CODEWORD-DETRUDE> <REMOVE ,CODEWORD-DETRUDE>)>
+	<COND (<CHECK-CODEWORD ,CODEWORD-PECCANT> <REMOVE ,CODEWORD-PECCANT>)>>
+
+<CONSTANT TEXT354 "\"This was the helmet of Spartan king,\" decides Scriptor after turning the object over in his hands. \"Despite the millennia that have passed since Sparta's heyday, their name is still a byword for stern martial prowess. I would conclude, therefore, that donning the helm would confer some skill at arms.\"||He demands a doubloon for what he's told you so far. Alternatively you can sell the helmet to Scriptor for his collection -- he'll pay you 15 doubloons for it.">
+<CONSTANT CHOICES354 <LTABLE "now ask him to identify a" "a" "or a" "it is time for you to leave">>
 
 <ROOM STORY354
 	(IN ROOMS)
 	(DESC "354")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT354)
+	(CHOICES CHOICES354)
+	(DESTINATIONS <LTABLE STORY373 STORY316 STORY335 STORY392>)
+	(REQUIREMENTS <LTABLE DRAGON-RING CONCH-SHELL-HORN BAT-SHAPED-TALISMAN NONE>)
+	(PRECHOICE STORY354-PRECHOICE)
+	(TYPES <LTABLE R-ITEM R-ITEM R-ITEM R-NONE>)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY354-PRECHOICE ()
+	<COND (,RUN-ONCE <SCRIPTOR-BUY-SELL ,BRONZE-HELMET ,STORY392 15>)>>
+
+<CONSTANT TEXT355 "Ducking under the low rafters, you cross the sawdust-strewn taproom and seat yourselves in an alcove. At a table nearby sits a blind old man sipping brandy from a wide saucer-shaped cup. Raucous laughter pulls your gaze to the bar, where three ruffians are amusing themselves at the expense of a gentleman in shabby scholastic robes. One of the ruffians has taken the man's spectacles and is jokingly trying them on, ignoring his short-sighted attempts to grab them back.">
+<CONSTANT CHOICES355 <LTABLE "talk to the bland man" "step in to help the scholar" "leave to visit the shipyard">>
 
 <ROOM STORY355
 	(IN ROOMS)
 	(DESC "355")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT355)
+	(CHOICES CHOICES355)
+	(DESTINATIONS <LTABLE STORY033 STORY052 STORY374>)
+	(PRECHOICE STORY355-PRECHOICE)
+	(TYPES THREE-NONES)
 	(FLAGS LIGHTBIT)>
 
+<ROUTINE STORY355-PRECHOICE ()
+	<COND (<CHECK-SKILL ,SKILL-STREETWISE> <STORY-JUMP ,STORY071>)>>
+	
 <ROOM STORY356
 	(IN ROOMS)
 	(DESC "356")
