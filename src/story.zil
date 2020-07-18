@@ -5593,94 +5593,60 @@
 <ROUTINE STORY375-PRECHOICE ()
 	<TAKE-VESSEL ,LADY-OF-SHALOTT>>
 
+<CONSTANT TEXT376 "The next few days see an upswing in your fortunes as treasure ships, anxious to be well clear of the region before the onset of the hurricane season, come sailing to your clutches like fish into a net. You board three well-laden galleons and carry off a fine haul in gold coins, jewelled trinkets and rich sea-coloured silks.||You pace to and fro as Blutz's quill scrapes on the pages of the account book, tracing the growth of your riches. At last he looks up with a sigh, sets aside his quill and cracks his knuckles. You, Grimes and Oakley leap forward like three expectant fathers waiting for midwife's news. \"Well?\"||\"We've enough loot to buy us one of the finest warships on the Carab Sea,\" declares Blutz with a broad grin.||\"Excellent news,\" You race up on deck. \"Hoist the mainsail! Helmsman, five points to starboard! We've bound for home.\"||A cry from the crow's nest warns of a dark cloud on your horizon of hope. \"A Gloriannic warship in sight off the port bow!\" calls the lookout. \"She's raising signals. The order is for us to heave to and prepare to be boarded.\"||\"Brandy and bilge-water!\" swears Grimes, joining you on the poopdeck. \"What's it to be, cap'n -- do we let those lubbers come aboard, or give 'em a run for their money?\"">
+<CONSTANT CHOICES376 <LTABLE "drop sail and allow the warship to come alongside" "try outrunning her" "turn and make a fight of it">>
+
 <ROOM STORY376
 	(IN ROOMS)
 	(DESC "376")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT376)
+	(CHOICES CHOICES376)
+	(DESTINATIONS <LTABLE STORY244 STORY214 STORY252>)
+	(TYPES THREE-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT377 "The search for clues becomes an obsession, driving you to sleepless nights and foolhardy risks. You begin to frequent the roughest taverns of Leshand -- places where a careless word can get your throat cut. Hardened villains scowl at your urgent questioning, but you soon discover that the name of El Draque seals all lips. \"But he's dead,\" you protest, \"hanged at sea more than a month ago.\"||They watch you in silence until one old sailor summons the courage to speak. \"Then how come I seen him on the deck of his vessel not one week since, drenched in moonlight and shrieking fit to burst?\"||Another seizes you by the collar. \"The grave's not more than a temporary berth for El Draque. But no one will be saying that of you, if you keep on poking your nose about!\"||You are finally forced to set sail back to Selenice empty handed.">
 
 <ROOM STORY377
 	(IN ROOMS)
 	(DESC "377")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT377)
+	(CONTINUE STORY396)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT378 "Your obsessive search for the iceberg drives you to steer course far off the known shipping lanes. At first, in awe of your reputation as a mariner, the crew toil on without complaint. But then the days draw by with no sight of land or other ships, and the grumbling begins. To begin with it takes the form of simple discontent -- a spluttered curse when a man bites into an apple from the deck-barrel and finds it rotten, or a surly rejoinder when orders are given. Oakley, Grimes and Blutz do their best to keep discipline, but the sun beats down day after day until the pitch bubbles in the seams and the sails blaze too bright to look at. Water begins to run low, and it is then that the grumbling begins to veer towards outright mutiny.">
+<CONSTANT CHOICES378 <LTABLE "press on regardless, to the west" "or east of your current position" "abandon the search and return to Selenice">>
 
 <ROOM STORY378
 	(IN ROOMS)
 	(DESC "378")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT378)
+	(CHOICES CHOICES378)
+	(DESTINATIONS <LTABLE STORY056 STORY093 STORY396>)
+	(TYPES THREE-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT379 "More flashes show from the Moon Dog's guns, but these shells go booming harmlessly beyond your bows, hissing to the deep below. You are now almost within grappling distance of the enemy ship.">
+<CONSTANT CHOICES379 <LTABLE "ram her at full sail" "close alongside for boarding">>
 
 <ROOM STORY379
 	(IN ROOMS)
 	(DESC "379")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT379)
+	(CHOICES CHOICES379)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
+
+<CONSTANT TEXT380 "\"It is expected to get worse,\" is the captain's view. \"The Sidonians rapaciously claim ownership of the whole of the New World; Glorianne and some other smaller nations dispute this. There is great wealth in the New World -- why should we not share it? But the Sidonians continue to act like selfish schoolyard bullies, and in the meantime we have a hard time keeping our few colonies safe. Why I have even heard that the King of Sidonia has put a price on Queen Titania's head: a million doubloons if she's delivered to him alive. The arrogance of the man!\"||It makes sense. If the King of Sidonia could force Titania into marriage, he would thereby add Glorianne to his empire without firing a shot. But first he would have to capture her, of course, and now you begin to see the scope of Skarvench's plan. If he succeeds in kidnapping the Queen, he can ransom her to the highest bidder -- either back to Glorianne, or for Sidonia's million doubloon reward.">
+<CONSTANT CHOICES380 <LTABLE "divulge what you know about Skarvench's plan to the captain" "ask him about pirates" "Queen Titania's tour of her colonies" "Port Leshand" "there is nothing else you wish to discuss">>
 
 <ROOM STORY380
 	(IN ROOMS)
 	(DESC "380")
-	(STORY TEXT-BLANK)
-	(CHOICES NONE)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
-	(EVENTS NONE)
-	(PRECHOICE NONE)
-	(CONTINUE NONE)
-	(ITEM NONE)
-	(CODEWORD NONE)
-	(COST 0)
-	(DEATH F)
-	(VICTORY F)
+	(STORY TEXT380)
+	(CHOICES CHOICES380)
+	(DESTINATIONS <LTABLE STORY011 STORY390 STORY403 STORY420 STORY108>)
+	(TYPES FIVE-NONES)
 	(FLAGS LIGHTBIT)>
 
 <ROOM STORY381
