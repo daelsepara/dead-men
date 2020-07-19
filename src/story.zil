@@ -41,8 +41,8 @@
 <ROUTINE RESET-STORY ()
 	<RESET-TEMP-LIST>
 	<SETG USED-CHARMS-TO-FLOAT F>
-	<SETG EAT-COCONUT-F F>
-	<PUTP ,STORY007 ,P?CODEWORD ,CODEWORD-DETRUDE>
+	<SETG EAT-COCONUT F>
+	<SETG DISABLE-MARKSMANSHIP F>
 	<PUT <GETP ,STORY012 ,P?DESTINATIONS> 3 ,STORY409>
 	<PUT <GETP ,STORY136 ,P?DESTINATIONS> 2 ,STORY405>
 	<PUT <GETP ,STORY164 ,P?DESTINATIONS> 5 ,STORY409>
@@ -53,6 +53,7 @@
 	<PUT <GETP ,STORY330 ,P?DESTINATIONS> 2 ,STORY349>
 	<PUT <GETP ,STORY392 ,P?DESTINATIONS> 1 ,STORY409>
 	<PUT <GETP ,STORY423 ,P?DESTINATIONS> 4 ,STORY409>
+	<PUTP ,STORY088 ,P?DESTINATIONS <LTABLE STORY183 STORY221 STORY297>>
 	<PUTP ,STORY005 ,P?DEATH T>
 	<PUTP ,STORY006 ,P?DEATH T>
 	<PUTP ,STORY013 ,P?DEATH T>
@@ -305,33 +306,21 @@
 	<COND (<CHECK-ITEM ,FEATHER-SHIELD> <SET DMG <- .DMG 2>>)>
 	<LOSE-LIFE .DMG DIED-EJADA-SORCERY ,STORY005>>
 
-<CONSTANT TEXT006 "All the pent-up emotion of your crew explodes in an excited roar as they go leaping onto the deck of the enemy ship with you at their head. The pirates stand ready to meet your boarding party, but the pounding they took from your guns has sapped their morale and the battle seems a forgone conclusion. Gunshots crack deafeningly all around you, and you are half blinded by the thick clouds of smoke and sprays of blood, but you charge right into the thick of the fray with a cry of, \"Have at them, lads!\"">
+<CONSTANT TEXT006 "All the pent-up emotion of your crew explodes in an excited roar as they go leaping onto the deck of the enemy ship with you at their head. The pirates stand ready to meet your boarding party, but the pounding they took from your guns has sapped their morale and the battle seems a forgone conclusion. Gunshots crack deafeningly all around you, and you are half blinded by the thick clouds of smoke and sprays of blood, but you charge right into the thick of the fray with a cry of, \"Have at them, lads!\"||A bullet tears into your leg.">
 <CONSTANT TEXT006-CONTINUED "You ignore the wound you have taken. The battle rages back and forth across the deck. Pirates come running at you but you dash them aside. Your only thought now is to find your foe and slay him yourself; you do not want him to have the mercy of a stray bullet.||The instant you catch sight of him, you realise your anxiety was misplaced. The bullets go whistling around his ears, but he stands there oblivious of danger, arms spread out and laughing like a fiend from the pit. You begin to wonder if he can be killed -- or are his hate and madness stronger than death itself?||His single eye fixes on you through the haze of gunsmoke. \"Ah, matey,\" he says. \"Come to see your old cap'n one last time, eh?\"">
 
 <ROOM STORY006
 	(IN ROOMS)
 	(DESC "006")
 	(STORY TEXT006)
-	(EVENTS STORY006-EVENTS)
 	(PRECHOICE STORY006-PRECHOICE)
 	(CONTINUE STORY089)
 	(DEATH T)
 	(FLAGS LIGHTBIT)>
 
-<ROUTINE STORY006-EVENTS ()
-	<PUTP ,STORY006 ,P?DEATH T>>
-
 <ROUTINE STORY006-PRECHOICE ()
-	<TELL "A bullet tears into your leg. ">
-	<COND (<IS-ALIVE 1>
-		<SETG ,LIFE-POINTS <- ,LIFE-POINTS 1>>
-		<PUTP ,STORY006 ,P?DEATH F>
-		<TELL TEXT006-CONTINUED>
-		<CRLF>
-	)(ELSE
-		<CRLF>
-		<LOSE-LIFE 1 "You died from the bullet wound" ,STORY006>
-	)>>
+	<LOSE-LIFE 1 "You died from the bullet wound" ,STORY006>
+	<IF-ALIVE TEXT006-CONTINUED>>
 
 <CONSTANT TEXT007 "It is impossible to prevent it from leaking. Already dangerously low in the water, it now requires two people to bail constantly.">
 
@@ -345,13 +334,8 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY007-EVENTS ()
-	<COND (,USED-CHARMS-TO-FLOAT
+	<COND (<OR ,USED-CHARMS-TO-FLOAT <CHECK-SKILL ,SKILL-CHARMS>>
 		<RETURN ,STORY026>
-	)>
-	<COND (<CHECK-SKILL ,SKILL-CHARMS>
-		<PUTP ,STORY007 ,P?CODEWORD NONE>
-	)(ELSE
-		<PUTP ,STORY007 ,P?CODEWORD CODEWORD-DETRUDE>
 	)>
 	<RETURN ,STORY007>>
 
@@ -742,7 +726,6 @@
 	(FLAGS LIGHTBIT)>
 
 <CONSTANT TEXT038-NODAMAGE "You pull your ship deftly aft of the enemy ship without taking damage">
-
 <CONSTANT TEXT038-DAMAGED "You are clipped by cannon-fire as you go in">
 
 <ROOM STORY038
@@ -809,7 +792,6 @@
 
 <CONSTANT TEXT041 "Heavy stones fly about you like shots from a cannon as you beat your retreat. Several of them thud harmlessly into the soft sand but then you feel a hot slash of pain as one strikes the inside of your head, leaving a ragged gash. You stumble, but Blutz catches your arm and helps you into the boat.||You lose consciousness for a moment. The next thing you know, the boat is already out amid the waves with Oakley and Grimes plying the oars for all they're worth.||The battering hail of rocks continues as the natives watch you row away.">
 <CONSTANT TEXT041-CONTINUED "You slump down into the bottom of the boat with an exhausted sigh of relief as you finally get out to open sea beyond reach of the islander's bombardment.||\"I think they wanted us to stay for dinner,\" jokes Oakley with grim humour. \"I hope the natives on the next island are more friendly.\"||So do you.">
-
 <CONSTANT DIED-BOMBARDMENT "You died from injuries sustained during the bombardment.">
 
 <ROOM STORY041
@@ -824,7 +806,7 @@
 <ROUTINE STORY041-PRECHOICE ()
 	<COND (<CHECK-SKILL ,SKILL-CHARMS>
 		<LOSE-LIFE 1 DIED-BOMBARDMENT ,STORY041>
-		<IF-ALIVE "[Your lucky magic amulet saved you from sustaining more serious injuries]">
+		<EMPHASIZE "[Your lucky magic amulet saved you from sustaining more serious injuries]">
 	)(ELSE
 		<LOSE-LIFE 4 DIED-BOMBARDMENT ,STORY041>
 	)>
@@ -1051,7 +1033,6 @@
 	(DESC "060")
 	(STORY TEXT060)
 	(CONTINUE STORY022)
-	(ITEM NONE)
 	(FLAGS LIGHTBIT)>
 
 <CONSTANT TEXT061 "Magic bends the very elements of nature to your will. The breeze obediently brings you the words of Skarvench and his cronies as they sit chatting over their bottle of grog. They are still more than fifty paces away, but you can now hear them as clearly as if they were right by your side!||\"So what's this treasure for, Cap'n?\" hiccups the quartermaster.||\"To pay a certain shipwright in Port Selenice, for one thing,\" says Skarvench. \"He's to be paid in gold for the new ship he's building us.\"||\"New ship?\" says Porbuck the mate, roused from his dull witted torpor. \"I liked the old one...\"||\"This one's better though. The Moon Dog, she's to be named, and her special sails were ensorcelled by the Queen's own wizard. Does things the Belle Dame never could.\"||\"The Queen's wizard?\" repeat Curshaw.||\"Aye, Will Wild himself. My dear half-brother! But he wants silver coins for his pains, see, so there's another reason for needing this here loot. Ahoy there, ye lazy lubbers, ain't you struck the box yet?\"||The two sailors look up from their work. \"Aye, Cap'n. Here it is.\"||You've heard enough.">
@@ -1139,10 +1120,8 @@
 	(FLAGS LIGHTBIT)>
 
 <CONSTANT TEXT068 "Scared witless by the gargoyle-prow and black sails of Skarvench's ship, the natives will not be easy to convince. Their chief believes the pirates will kill them if they suspect them of lying. In all honesty, you have to admit he is right. You must part with two items to bribe the natives. The will accept two of the following: a sword, a pistol, a wand, an amulet, a ship in a bottle, a conch-shell horn, a bat-shaped talisman, a black kite, a diamond, a toolkit, a healing potion, a bronze helmet, a crucifix, or a dragon ring.">
-
 <CONSTANT STORY068-UNWILLING "You were unwilling to part with two such items.">
 <CONSTANT STORY068-UNABLE "You are unable to part with two such items.">
-
 <CONSTANT CHOICES068 <LTABLE "stay here to confront Skarvench" "run off into the jungle">>
 
 <ROOM STORY068
@@ -1388,7 +1367,7 @@
 	(DESC "087")
 	(STORY TEXT087)
 	(CHOICES CHOICES087)
-	(DESTINATIONS <LTABLE STORY182 STORY315 STORY334>)
+	(DESTINATIONS <LTABLE STORY182 STORY315 STORY334 STORY201>)
 	(REQUIREMENTS <LTABLE NONE THUNDERCLOUD-FAN BAT-SHAPED-TALISMAN NONE>)
 	(TYPES <LTABLE R-NONE R-ITEM R-ITEM R-NONE>)
 	(FLAGS LIGHTBIT)>
@@ -1401,21 +1380,16 @@
 	(DESC "088")
 	(STORY TEXT088)
 	(CHOICES CHOICES088)
-	(DESTINATIONS NONE)
-	(REQUIREMENTS NONE)
-	(TYPES NONE)
+	(DESTINATIONS <LTABLE STORY183 STORY221 STORY297>)
+	(TYPES THREE-NONES)
 	(PRECHOICE STORY088-PRECHOICE)
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY088-PRECHOICE ()
 	<COND (<CHECK-SKILL ,SKILL-STREETWISE>
 		<PUTP ,STORY088 ,P?DESTINATIONS <LTABLE STORY164 STORY202 STORY278>>
-		<PUTP ,STORY088 ,P?REQUIREMENTS <LTABLE SKILL-STREETWISE SKILL-STREETWISE SKILL-STREETWISE>>
-		<PUTP ,STORY088 ,P?TYPES <LTABLE R-SKILL R-SKILL R-SKILL>>
 	)(ELSE
 		<PUTP ,STORY088 ,P?DESTINATIONS <LTABLE STORY183 STORY221 STORY297>>
-		<PUTP ,STORY088 ,P?REQUIREMENTS NONE>
-		<PUTP ,STORY088 ,P?TYPES THREE-NONES>
 	)>>
 
 <CONSTANT TEXT089 "\"You've given me a cannon-load o' trouble,\" says Skarvench. \"Here's where I pay you back -- with my trusty basilisk here.\"||You glance down to see that he is standing beside a cannon which is pointing straight at you. Skarvench shows you the lighted taper in his hand.||\"You despicable cur!\" you snarl. \"You've no stomach for facing me at close quarters, I see.\"||\"Stow your bluster, mate,\" he sneers. \"Here's where you retire to a safe distance. Thirty fathoms down!\"">
@@ -1444,9 +1418,9 @@
 	(STORY TEXT090)
 	(CHOICES CHOICES090)
 	(DESTINATIONS <LTABLE STORY052 STORY374>)
-	(TYPES TWO-NONES)
 	(EVENTS STORY090-EVENTS)
 	(PRECHOICE STORY090-PRECHOICE)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY090-EVENTS ()
@@ -1508,7 +1482,7 @@
 
 <CONSTANT TEXT095 "Calmly levelling your pistol, you shoot the end off the taper. \"By all that's unholy!\" sears Skarvench. \"I never seen such a shot!\"||Neither have you, but you do not let surprise cost you your momentary advantage. You race in before Skarvench can relight the fuse, and in seconds the two of you are locked in a fight to death.">
 
-<GLOBAL STORY095-MARKSMANSHIP-FLAG F>
+<GLOBAL DISABLE-MARKSMANSHIP F>
 
 <ROOM STORY095
 	(IN ROOMS)
@@ -1519,7 +1493,8 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY095-PRECHOICE ()
-	<SETG STORY095-MARKSMANSHIP-FLAG T>>
+	<EMPHASIZE "[You were not able to reload your pistol it in time. You will not be able use it again]">
+	<SETG DISABLE-MARKSMANSHIP T>>
 
 <CONSTANT TEXT096 "You hurry into the cabin, startling the pet monkey which is perched on the bunk. Immediately it starts jumping up and down, chittering wildly, and the only thing you can do is grab it and stuff it into your haversack. Praying that no-one heard the noise, you head up on deck.">
 
@@ -1635,12 +1610,13 @@
 	(DESC "103")
 	(STORY TEXT103)
 	(PRECHOICE STORY103-PRECHOICE)
-	(CONTINUE STORY122)
+	(CONTINUE STORY141)
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY103-PRECHOICE ()
 	<COND (<CHECK-CODEWORD ,CODEWORD-DETRUDE> <REMOVE ,CODEWORD-DETRUDE>)>
-	<COND (<CHECK-CODEWORD ,CODEWORD-PECCANT> <REMOVE ,CODEWORD-PECCANT>)>>
+	<COND (<CHECK-CODEWORD ,CODEWORD-PECCANT> <REMOVE ,CODEWORD-PECCANT>)>
+	<COND (<CHECK-SKILL ,SKILL-CHARMS> <STORY-JUMP ,STORY122>)>>
 
 <CONSTANT TEXT104 "Certain features of this island are ominously reminiscent of an old sea-myth concerning the giant crab Pusat Tassek. This crab is said to be as big as a house. It basks in mid-ocean with the top of its shell exposed, sometimes staying in one place so long that sands gathers on its back and plants start to grow there, all the while feeding on fish that it attracts to its maw with a sweet-smelling chemical secretion.">
 <CONSTANT CHOICES104 <LTABLE "stay here to look for food" "put to sea, either heading on your previous course westward" "turning north towards the Smoking Islands">>
@@ -1663,8 +1639,8 @@
 	(STORY TEXT105)
 	(CHOICES CHOICES105)
 	(DESTINATIONS <LTABLE STORY143 STORY162>)
-	(TYPES TWO-NONES)
 	(PRECHOICE STORY105-PRECHOICE)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY105-PRECHOICE ()
@@ -1713,7 +1689,6 @@
 	(FLAGS LIGHTBIT)>
 
 <CONSTANT TEXT110 "You lift your wand, occult syllables leaping to the front of your mind like war hounds eager to be unleashed. \"What can be locked can be unlocked,\" you assert. \"I shall open the chain by most potent art.\"||The colossus regards you with his cool majestic eyes. \"But, mortal: the chain is held closed by magic.\"||You laugh. \"Then I'll cast a spell to undo magic!\" No sooner do you, however, than the coracle is swept off away from the harbour at dizzying speed. If not for Blutz catching hold of your coat, you would have been thrown overboard. \"What's happened, skipper?\" he says as the four of you crouch terrified in the bottom of the coracle with the waves crashing against the sides.||\"I forgot,\" you say with a groan. \"It was magic that brought us here in the first place. My spell undid that.\"||It is dawn by the time you reach Selenice. You are flung up onto the shore, and by the time you turn and look out to the sea, the coracle has vanished.">
-
 <CONSTANT CHOICES110 <LTABLE "use both" "a deed given to you by Master Capstick" "diamonds">>
 
 <ROOM STORY110
@@ -1989,10 +1964,11 @@
 	(IN ROOMS)
 	(DESC "128")
 	(STORY TEXT128)
+	(CONTINUE STORY223)
 	(FLAGS LIGHTBIT)>
 
 <CONSTANT TEXT129 "Which of these possessions will you use?">
-<CONSTANT CHOICES129 <LTABLE "try the" "a" "a" "you give up and throw yourself on the giant's charity">>
+<CONSTANT CHOICES129 <LTABLE "try the" "a" "a" "give up and throw yourself on the giant's charity">>
 
 <ROOM STORY129
 	(IN ROOMS)
@@ -2102,9 +2078,9 @@
 
 <ROUTINE STORY136-PRECHOICE ()
 	<COND (<CHECK-CODEWORD ,CODEWORD-PECCANT>
-		<PUT <GETP ,STORY136 ,P?DESTINATIONS> 2 STORY386>		
+		<PUT <GETP ,STORY136 ,P?DESTINATIONS> 2 ,STORY386>		
 	)(ELSE
-		<PUT <GETP ,STORY136 ,P?DESTINATIONS> 2 STORY405>
+		<PUT <GETP ,STORY136 ,P?DESTINATIONS> 2 ,STORY405>
 	)>>
 
 <CONSTANT TEXT137 "Swept onwards, your little craft starts to spring leaks.">
@@ -2124,7 +2100,7 @@
 	<CONSUME-PROVISIONS 1 ,STORY156>>
 
 <CONSTANT TEXT138 "A strong breeze stretches your sails wide against the sky, driving you on towards your destiny. But you have no time to brood on what the future may hold; you have a ship to command. Seeing the way her prow cleaves the water, and the jaunty courage of your crew as they go about their chores, your heart brims with optimism. Soon Skarvench will see his last sunset in his life -- of that you feel sure.">
-<CONSTANT TEXT138-CONTINUED "More than a week goes by. On the ninth day, you stand on the deck watching the sun slide out of the sky. Long blazing beams of orange light turn the green waves to liquid gold. And then -- in the blink of an eye -- this idyllic scene is transformed. A purple murk rises from the western horizon, blotting out the afternoon sun behind thick thunderclouds. A cold gust blows in your face, setting the sails to a pensive fluttering like frightened birds. You know well the taste of that chill wind; it is the harbinger of the hurricane.||\"This is but the twitch of the lion's tail compared to what will come,\" mutters Grimes. \"We'll have to put about.\" He calls to the crew: \"Strike the main topsail.\"||You turn. \"Belay that striking order. Lash it!\"||Oakley stares at you. \"Skipper, the hurricane'll tear us apart.\"||The first rain spits into your face, icily intense. \"'We're going in, hurricane or not. God is the master of the heavens and all the world -- but, by all that's holy, I'm the master of this ship!">
+<CONSTANT TEXT138-CONTINUED "More than a week goes by. On the ninth day, you stand on the deck watching the sun slide out of the sky. Long blazing beams of orange light turn the green waves to liquid gold. And then -- in the blink of an eye -- this idyllic scene is transformed. A purple murk rises from the western horizon, blotting out the afternoon sun behind thick thunderclouds. A cold gust blows in your face, setting the sails to a pensive fluttering like frightened birds. You know well the taste of that chill wind; it is the harbinger of the hurricane.||\"This is but the twitch of the lion's tail compared to what will come,\" mutters Grimes. \"We'll have to put about.\" He calls to the crew: \"Strike the main topsail.\"||You turn. \"Belay that striking order. Lash it!\"||Oakley stares at you. \"Skipper, the hurricane'll tear us apart.\"||The first rain spits into your face, icily intense. \"'We're going in, hurricane or not. God is the master of the heavens and all the world -- but, by all that's holy, I'm the master of this ship!\"">
 <CONSTANT CHOICES138 <LTABLE "use a" "an amulet" "use" "otherwise">>
 
 <ROOM STORY138
@@ -2142,7 +2118,7 @@
 	<COND (,RUN-ONCE <GAIN-LIFE 2>)>
 	<CRLF>
 	<TELL TEXT138-CONTINUED>
-	<TELL ,EXCLAMATION-CR>>
+	<CRLF>>
 
 <CONSTANT TEXT139 "Mulling over your extensive knowledge of myth and legend, you consider what the items might be. Obviously they are classical in style. Very old, then -- which suggests the possibility of powerful magic, since everyone knows that the sorcerers of ancient times knew many magical secrets that are now lost. On the basis of hopeful surmise, you finally identify the items as follows:||The diamond would suffice to buy you a ship of your own but it has no magical properties, unless the effect of staggering wealth on men's greed can be accounted magical.||The conch-shell horn reminds you of such an item which was said to be taken by the Trojans after the sack of Atlantis. It can be used to convey its owner to the secret harbour of Poseidon, god of the sea. This harbour is filled with treasures, but it is guarded by a locked gate which can only be opened by the note of a flute or pipe.||The thundercloud fan is surely sacred to the storm deity of far-off Cathay. If wielded carefully, it unleashes a hurricane which can be directed as one wishes.||You soon place the bronze helmet as having belonged to a Spartan king. No doubt it confers skill at arms upon the wearer, since the Spartans were renowned for their martial prowess.||As for the dragon ring... you're not sure. It strikes a distant chord of memory, but nothing you can quite dredge to the surface. Handling it makes you feel distinctly uneasy, however.">
 <CONSTANT STORY139-LIST <LTABLE DIAMOND CONCH-SHELL-HORN THUNDERCLOUD-FAN BRONZE-HELMET DRAGON-RING>>
@@ -2541,7 +2517,7 @@
 		<TELL "You must acquire now " D ,SKILL-SEAFARING>
 		<HLIGHT 0>
 		<CRLF>
-		<SKILL-SWAP <LTABLE SKILL-BRAWLING>>
+		<SKILL-SWAP <LTABLE SKILL-SEAFARING>>
 	)>
 	<COND (<AND <CHECK-ITEM ,CORKSCREW> <CHECK-ITEM ,SHIP-IN-BOTTLE>>
 		<STORY-JUMP ,STORY261>
@@ -2597,7 +2573,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY171-PRECHOICE ("AUX" (DMG 5))
-	<COND (<AND <CHECK-SKILL ,SKILL-SWORDPLAY> <CHECK-SKILL ,SKILL-MARKSMANSHIP>>
+	<COND (<AND <CHECK-SKILL ,SKILL-SWORDPLAY> <AND <CHECK-SKILL ,SKILL-MARKSMANSHIP> <NOT ,DISABLE-MARKSMANSHIP>>>
 		<SET DMG 2>
 	)(<CHECK-SKILL ,SKILL-BRAWLING>
 		<SET DMG 3>
@@ -2686,7 +2662,6 @@
 	<TELL ,PERIOD-CR>>
 
 <CONSTANT TEXT177 "Taking stock of your situation leaves you in a grim mood. \"We're still more than two hundred leagues out from Port Leshand, ad there are no islands along the route for us to restock our supplies. What we've got left for now is going to have to keep us going for at least ten days.\"||Oakley has another thought, equally sobering. Pointing at the timbers of your vessel - now warped by the constant sun and the battering of high waves -- he mutters: \"Ten days? We might not stay afloat that long.\"||\"Maybe we shouldn't try to make it all the way to Leshand,\" suggests Blutz. \"We could head south from here towards the main shipping lanes. There's a good chance we'd be rescued by a friendly vessel.\"">
-
 <CONSTANT CHOICES177 <LTABLE "go south" "keep on heading west">>
 
 <ROOM STORY177
@@ -3441,6 +3416,7 @@
 	<TELL "Take the silver ingots that the corpses are lying on?">
 	<COND (<YES?>
 		<GAIN-CODEWORD ,CODEWORD-MALEFIC>
+		<STORY-JUMP ,STORY016>
 	)>>
 
 <CONSTANT TEXT227 "Your poor ship has taken all the damage she can stand. Listing hard over, her prow begins to sink beneath the waves. \"Man the lifeboats!\" shouts Oakley. \"Abandon ship!\"||Grimes takes your arm. \"Skipper, all's lost now. There's nothing left for us but to save ourselves.\"||You hesitate. Honour demands that a captain go down with his ship, but that is not what roots you to the spot. Instead it is your bitter disappointment at failing to scupper your foe. Who knows what wickedness he will now wreak, and you are powerless to stop him.||Whether or not you flee the sinking ship...">
@@ -5149,7 +5125,7 @@
 	(DESC "344")
 	(STORY TEXT344)
 	(CHOICES CHOICES344)
-	(DESTINATIONS <LTABLE STORY363 STORY372 STORY400>)
+	(DESTINATIONS <LTABLE STORY363 STORY382 STORY400>)
 	(TYPES THREE-NONES)
 	(FLAGS LIGHTBIT)>
 
@@ -5247,7 +5223,7 @@
 <CONSTANT TEXT351 "The sun stares balefully down from a sky of burnished steel, leeching your strength. To prevent your brains being cooked in your skulls, you soak strips of torn cloth in the sea and wrap them round your brows. The brine dries to hard salt which chafes your many sores, but by now you are past caring.">
 <CONSTANT TEXT351-CONTINUED "After what seems an endless time, Oakley gives a surprised shout and lunges desperately for something floating in the water beside the boat. Fumbling in a frenzy of excitement, he finally gets a firm hold on the object and hefts it up for you all to see.||\"A coconut!\" says Blutz. \"But is it safe to eat? Floating out here in mid-ocean, I mean. How did it get there?\"||\"Jetsam,\" says Oakley with conviction.||Blutz scratches his fat jowls. \"Er... but I heard this legend of Domdaniel, which is the place under the sea where the drowned sailors live. This coconut might have floated up from one of their groves. That would make it dead men's food, you see, and not for us.\"||\"Pah! You fat fool!\" gasps Oakley.||Grimes and Oakley intend to eat the coconut whether it is safe or not. BLutz protests that even if it was dropped off a ship, it might have gone rotten.">
 
-<GLOBAL EAT-COCONUT-F F>
+<GLOBAL EAT-COCONUT F>
 
 <ROOM STORY351
 	(IN ROOMS)
@@ -5268,7 +5244,7 @@
 		)>
 		<TELL CR "Eat some of the coconuts?">
 		<COND (<YES?>
-			<SETG EAT-COCONUT-F T>
+			<SETG EAT-COCONUT T>
 		)>
 	)>>
 
@@ -5418,12 +5394,13 @@
 <ROUTINE STORY362-EVENTS ()
 	<COND (<OR <CHECK-ITEM ,POCKET-WATCH> <CHECK-ITEM ,CRUCIFIX> <CHECK-ITEM ,MAGIC-AMULET>>
 		<LOSE-LIFE 3 DIED-IN-COMBAT ,STORY362>
-		<COND (<IS-ALIVE > <RETURN ,STORY242>)>
+		<COND (<IS-ALIVE> <RETURN ,STORY242>)>
 	)>
 	<RETURN ,STORY324>>
 
 <CONSTANT CHOICES363 <LTABLE "employ" "or" "use" "otherwise"
 >>
+
 <ROOM STORY363
 	(IN ROOMS)
 	(DESC "363")
@@ -5469,8 +5446,8 @@
 	(DESC "365")
 	(CHOICES STORY365-SWORDPLAY-CHOICES)
 	(DESTINATIONS <LTABLE STORY402 STORY419>)
-	(REQUIREMENTS <LTABLE SHARKS-TOOTH-SWORD <LTABLE SWORD CLEAVER RUSTY-SWORD>>)
-	(TYPES <LTABLE R-NONE R-ANY>)
+	(REQUIREMENTS <LTABLE SHARKS-TOOTH-SWORD NONE>)
+	(TYPES <LTABLE R-ITEM R-NONE>)
 	(FLAGS LIGHTBIT)>
 
 <CONSTANT TEXT366 "The fog thickens about the ship, smudging the outlines of the bay and covering the stars in a filmy veil. From the marshy ground of the shore comes a green unhealthy glow, just visible between the drifting palls of mist. Blutz gazes this eerie phosphorescence and says through chattering, \"Will o' wisps. Spirits of men who droned at sea and were washed up here.\"||You are due to take the first watch, with Blutz relieving you at eight bells. It strikes you that his nerves may not stand at midnight vigil, and maybe it would be better if he exchanged watches with you.">
@@ -5526,7 +5503,10 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY369-PRECHOICE ()
-	<COND (<CHECK-SKILL ,SKILL-ROGUERY> <REMOVE ,SKILL-ROGUERY>)>>
+	<COND (<CHECK-SKILL ,SKILL-ROGUERY>
+		<EMPHASIZE "[You lost the ROGUERY skill]">
+		<REMOVE ,SKILL-ROGUERY>
+	)>>
 
 <CONSTANT TEXT370 "The captain of the Jewel of Heaven is a bluff good-natured man who roars at his crew with gusto. For their part they seem devoted to him -- and perhaps a little overawed by his forceful nature and matchless knowledge of the sea. You spend several pleasant evenings sitting in his cabin, where the rum flows free after a good supper. \"Hark to that!\" he is wont to say, listening to the water lapping against the hull. \"Did you ever hear a mother with babe in arms sing such a sweet lullaby? Ah, the sweet sighing of the sea -- it's a sound to seal the hushed casket of a man's soul, my merry lads!\"||\"Here aboard your fine ship, I'm happy to agree,\" laughs Oakley. \"When we were drifting in our boat, though, the sea sang us a more mournful tune!\"||The captain is glad to have educated company, and you can strike up conversations on various topics.">
 <CONSTANT CHOICES370 <LTABLE "ask for his opinion on pirates" "on the war between Glorianne and Sidonia" "on Queen Titania's visit to the New World colonies" "for information about Port Leshand">>
@@ -5613,7 +5593,7 @@
 	(DESC "376")
 	(STORY TEXT376)
 	(CHOICES CHOICES376)
-	(DESTINATIONS <LTABLE STORY244 STORY214 STORY252>)
+	(DESTINATIONS <LTABLE STORY024 STORY214 STORY252>)
 	(TYPES THREE-NONES)
 	(FLAGS LIGHTBIT)>
 
@@ -5646,6 +5626,7 @@
 	(DESC "379")
 	(STORY TEXT379)
 	(CHOICES CHOICES379)
+	(DESTINATIONS <LTABLE STORY025 STORY415>)
 	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
 
@@ -5787,7 +5768,7 @@
 
 <ROUTINE STORY389-PRECHOICE ()
 	<COND (,RUN-ONCE
-		<COND (<NOT ,EAT-COCONUT-F>
+		<COND (<NOT ,EAT-COCONUT>
 			<CRLF>
 			<TELL "You did not eat some of the coconuts" ,PERIOD-CR>
 			<LOSE-LIFE 1 DIED-OF-HUNGER ,STORY389>
@@ -6050,7 +6031,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY407-PRECHOICE ()
-	<COND (<CHECK-SKILL ,SKILL-SEAFARING> <STORY-JUMP ,STORY333>)>>
+	<COND (<OR <CHECK-SKILL ,SKILL-SEAFARING> <CHECK-SKILL ,SKILL-WILDERNESS-LORE>> <STORY-JUMP ,STORY333>)>>
 
 <CONSTANT TEXT408 "Curshaw scowls as he sees you looking at him. \"I'll enjoy giving you a taste of the cat,\" he says, referring to the whip used to punish mutineers.||\"You would, you mouse,\" you say, taunting him. \"You only squeak bravely when your victims have their hands tied.\"||Curshaw leaps to his feet, hands bunched into fists. \"I'll cut out your tongue and swallow it whole! I'll fry your gizzard for breakfast!\"||You glance away nonchalantly. \"Big talk, small fry.\"||This is too much for him. Snatching up a paddle, he swings it at your head. It is your cue to explode into action. Still crouching, you duck under the swing and then, while Curshaw totters off-balance, you shoot to your feet and deliver a bone-cracking head butt that lays him flat.||Porbuck lets go of the oars and lumbers towards you -- only to go reeling back as you lash out with two flying kicks in rapid succession. He shakes his head, growls and comes doggedly on to pummel you with his huge fists.||It is a hard fight, testing your skill to the limit. Porbuck is a brutal and powerful fighter who would be difficult to beat even if you didn't have your hands tied.">
 <CONSTANT TEXT408-CONTINUED "You finally flatten Porbuck with a knee to the solar plexus. The others help you tip him and Curshaw overboard. Then the four of you quickly untie one another's bonds and start rowing away">
@@ -6152,7 +6133,7 @@
 	(DESC "413")
 	(STORY TEXT413)
 	(CHOICES CHOICES413)
-	(DESTINATIONS <LTABLE STORY107 STORY036 STORY366 STORY055 STORY074>)
+	(DESTINATIONS <LTABLE STORY017 STORY036 STORY366 STORY055 STORY074>)
 	(REQUIREMENTS <LTABLE SKILL-CHARMS SKILL-SPELLS NONE SKILL-SEAFARING NONE>)
 	(TYPES <LTABLE R-SKILL R-SKILL R-NONE R-SKILL R-NONE>)
 	(FLAGS LIGHTBIT)>
