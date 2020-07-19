@@ -1,4 +1,4 @@
-# Down Among the Dead Mean (Virtual Reality Adventures)
+# Down Among the Dead Men (Virtual Reality Adventures)
 
 This is a ZIL Implementation of Down Among the Dead Men game book (Virtual Reality Adventures) by Dave Morris.
 
