@@ -1,6 +1,6 @@
 all: clean
 	zilf -w deadmen.zil
-	zapf -ab deadmen.zap > deadmen_freq.xzap
+	-zapf -ab deadmen.zap > deadmen_freq.xzap
 	rm deadmen_freq.zap
 	zapf deadmen.zap
 
