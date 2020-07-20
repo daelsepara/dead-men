@@ -74,6 +74,7 @@
 	<PUTP ,STORY142 ,P?DEATH T>
 	<PUTP ,STORY152 ,P?DEATH T>
 	<PUTP ,STORY155 ,P?DEATH T>
+	<PUTP ,STORY163 ,P?DEATH T>
 	<PUTP ,STORY167 ,P?DEATH T>
 	<PUTP ,STORY171 ,P?DEATH T>
 	<PUTP ,STORY175 ,P?DEATH T>
@@ -82,10 +83,12 @@
 	<PUTP ,STORY197 ,P?DEATH T>
 	<PUTP ,STORY200 ,P?DEATH T>
 	<PUTP ,STORY203 ,P?DEATH T>
+	<PUTP ,STORY204 ,P?DEATH T>
 	<PUTP ,STORY206 ,P?DEATH T>
 	<PUTP ,STORY215 ,P?DEATH T>
 	<PUTP ,STORY216 ,P?DEATH T>
 	<PUTP ,STORY219 ,P?DEATH T>
+	<PUTP ,STORY222 ,P?DEATH T>
 	<PUTP ,STORY225 ,P?DEATH T>
 	<PUTP ,STORY231 ,P?DEATH T>
 	<PUTP ,STORY237 ,P?DEATH T>
@@ -105,6 +108,7 @@
 	<PUTP ,STORY331 ,P?DEATH T>
 	<PUTP ,STORY343 ,P?DEATH T>
 	<PUTP ,STORY346 ,P?DEATH T>
+	<PUTP ,STORY349 ,P?DEATH T>
 	<PUTP ,STORY351 ,P?DEATH T>
 	<PUTP ,STORY362 ,P?DEATH T>
 	<PUTP ,STORY365 ,P?DEATH T>
@@ -113,6 +117,7 @@
 	<PUTP ,STORY387 ,P?DEATH T>
 	<PUTP ,STORY389 ,P?DEATH T>
 	<PUTP ,STORY402 ,P?DEATH T>
+	<PUTP ,STORY404 ,P?DEATH T>
 	<PUTP ,STORY408 ,P?DEATH T>
 	<PUTP ,STORY415 ,P?DEATH T>
 	<PUTP ,STORY417 ,P?DEATH T>
@@ -2050,7 +2055,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY135-PRECHOICE ()
-	<LOSE-LIFE 1 DIED-OF-HUNGER ,STORY212>
+	<LOSE-LIFE 1 DIED-OF-HUNGER ,STORY135>
 	<COND (<IS-ALIVE>
 		<COND (<CONSUME-PROVISIONS 1 ,STORY212> <RETURN>)>
 		<COND (<CHECK-ITEM ,MONKEY>
@@ -4121,7 +4126,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY277-PRECHOICE ()
-	<LOSE-LIFE 2 DIED-GREW-WEAKER ,STORY275>>
+	<LOSE-LIFE 2 DIED-GREW-WEAKER ,STORY277>>
 
 <CONSTANT TEXT278 "You have always made sure of nurturing a network of paid informers in large towns such as Leshand, and now your foresight reaps dividends. You soon discover that Skarvench recently collected all outstanding debts and redeemed his treasures for hard cash. The evidence points to some sort of ambitious project for which he will need every bit of finance that he can muster.||\"I've heard he's engaged a shipwright in Port Selenice,\" one of your informants tells you. \"A special commission it was, for a ship to be called the Moon Dog. Got a lot of odd features.\"||\"Such as?\"||He leans closer, dropping his voice to a whisper. \"Gun ports along the keel! And other things, even weirder than that. Perhaps ol' Skarvench has gone mad -- but heaven help us all if so, for a mad dog is no nicer than a sane one.\"||As you turn away, the informant snatches at your sleeve. \"Here, what about my pay?\"||You tug away from his grip. \"For that tittle-tattle you've just told me? It's common knowledge that I could've had from any gossip in town. That's not what I pay you for, and you know it.\"||Ignoring his grumbles, you walk away. There are other rumours you might look into.">
 <CONSTANT CHOICES278 <LTABLE "look into rumours concerning El Draque" "or Queen Titania" "or alternatively, you could go shopping" "find someone who can identify magical items" "apply for a letter of marque" "pay a visit to Master Capstick" "you have now completed all your business in Leshand">>
@@ -4668,7 +4673,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY314-PRECHOICE ()
-	<LOSE-LIFE 2 DIED-GREW-WEAKER ,STORY276>
+	<LOSE-LIFE 2 DIED-GREW-WEAKER ,STORY314>
 	<COND (<IS-ALIVE>
 		<CRLF>
 		<TELL TEXT314-CONTINUED>
