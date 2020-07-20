@@ -2773,11 +2773,10 @@
 <ROOM STORY184
 	(IN ROOMS)
 	(DESC "184")
-	(PRECHOICE STORY184-PRECHOICE)
-	(CONTINUE STORY320)
+	(EVENTS STORY184-EVENTS)
 	(FLAGS LIGHTBIT)>
 
-<ROUTINE STORY184-PRECHOICE ()
+<ROUTINE STORY184-EVENTS ()
 	<COND (<EQUAL? ,CURRENT-VEHICLE ,LADY-OF-SHALOTT>
 		<PUTP ,LADY-OF-SHALOTT ,P?STARS 1>
 	)(<EQUAL? ,CURRENT-VEHICLE ,SHIVERED-TIMBER>
@@ -2794,7 +2793,8 @@
 		<PUTP ,PROVIDENCE ,P?STARS 5>
 	)(<EQUAL? ,CURRENT-VEHICLE ,CALYPSO>
 		<PUTP ,CALYPSO ,P?STARS 5>
-	)>>
+	)>
+	<RETURN ,STORY320>>
 
 <CONSTANT TEXT185 "One of the bullies gives a brutish sneer. \"You won't use that,\" he says with a scornful glance at the pistol. \"You'd be strung up for using a weapon in a brawl.\"||You shrug. \"True, I might get a rope around my neck -- if I'm caught. But it's a sure thing you won't attend the hanging. You'll be dead meat by then.\" He stares at you, licking his thick lips uncertainly. \"You wouldn't dare. Even if you kill me, my buddies here'll rip you apart.\"||You raise your pistol purposefully. It is aimed right between his eyes. \"Again, maybe that's so, but it won't do you any good with your brains splattered all over that wall.\"||His nerve breaks. With a snarl, he draws his cronies away and they slope off into the street. You tuck the pistol back inside your shirt before anyone sees you with it.">
 
