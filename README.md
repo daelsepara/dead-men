@@ -8,6 +8,9 @@ This is a ZIL Implementation of Down Among the Dead Men game book (Virtual Reali
 | |Not luck but judgement!|
 | |*Virtual Reality Adventure Books are a new generation of interactive fiction. This unique non-random game system makes the choices all yours. There are no dice to roll, no lengthy rules to learn. All you need is the spark of your own imagination!*|
 | |*Cover illustration by Fred Gambino|
+| | |
+| |**Colonies of the New World**|
+| |![Map](/images/colonies-of-the-new-world.jpg)<br>**From: [Museum of Computer Adventure Game History](https://mocagh.org/loadpage.php?getcompany=otherbook)|
 
 ## Additional Copyright Information 
 
