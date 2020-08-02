@@ -152,8 +152,9 @@
 
 ; "Story Routines - print story, process choices"
 ; ---------------------------------------------------------------------------------------------
-<ROUTINE PRINT-PAGE ("AUX" TEXT)
-    <SET TEXT <GETP ,HERE ,P?STORY>>
+<ROUTINE PRINT-PAGE ("OPT" PAGE "AUX" TEXT)
+    <COND (<NOT .PAGE> <SET PAGE ,HERE>)>
+    <SET TEXT <GETP .PAGE ,P?STORY>>
     <COND (.TEXT
         <CRLF>
         <TELL .TEXT>

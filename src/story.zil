@@ -1302,9 +1302,11 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY081-PRECHOICE ("AUX" (DMG 6))
-	<COND (<CHECK-ITEM ,FEATHER-SHIELD> <SET DMG <- .DMG 3>>)>
-	<COND (<CHECK-SKILL ,SKILL-CHARMS> <SET DMG <- .DMG 1>>)>
-	<COND (,RUN-ONCE <LOSE-LIFE .DMG DIED-EJADA-SORCERY ,STORY081>)>>
+	<COND (,RUN-ONCE
+		<COND (<CHECK-ITEM ,FEATHER-SHIELD> <SET DMG <- .DMG 3>>)>
+		<COND (<CHECK-SKILL ,SKILL-CHARMS> <SET DMG <- .DMG 1>>)>
+		<LOSE-LIFE .DMG DIED-EJADA-SORCERY ,STORY081>
+	)>>
 
 <CONSTANT TEXT082 "\"She was El Draque's ship,\" says Kemp. \"A fine stout vessel. I did some work on her once. Curious to choose a bat as your figurehead, but that was El Draque for you. Those scarlet sails can't have been cheap, either. I hear he was captured by the Gloriannic Navy and hanged at sea for his crimes -- though what became of the Grue, I can't say.\"||Kemp has other customers to attend to, so you bid him good day and walk back to town.||\"Where to now?\" says Oakley.||You think for a moment. \"We'll take rooms at the Sweat o' the Brow inn. If Skarvench shows his face anywhere in Selenice, it'll be there.\"||You have never spoken a truer word, for no sooner have you stepped through the doorway of the inn than you are rooted to the spot in shock. There the fiend stands, large as life in front of you. A rum bottle is clutched in his hand and his crew throng the tap-room around him, cowering as he subjects them to one of this thunderous drunken rants.||Then his eye alights on you. His snarling voice is cut off in mid-sentence. A thin line of spittle runs down into his beard as his teeth show shark-like in a vicious grin. It is the moment you have waited for. Face to face with your dearest foe.">
 
@@ -1525,6 +1527,7 @@
 <ROUTINE STORY097-PRECHOICE ()
 	<COND (<CHECK-SKILL ,SKILL-WILDERNESS-LORE>
 		<EMPHASIZE "You soaked your clothes in the water to protect yourself from the heat.">
+		<PUTP ,STORY097 ,P?DEATH F>
 	)(ELSE
 		<COND(,RUN-ONCE <LOSE-LIFE 1 RAGGED-CLOTHES ,STORY097>)>
 	)>
@@ -2339,9 +2342,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY155-PRECHOICE ("AUX" (DMG 2))
-	<COND(<CHECK-SKILL ,SKILL-SEAFARING>
-		<SET DMG 1>
-	)>
+	<COND(<CHECK-SKILL ,SKILL-SEAFARING> <SET DMG 1>)>
 	<LOSE-LIFE .DMG DIED-OF-THIRST ,STORY155>>
 
 <CONSTANT TEXT156 "The most westerly of the islands comes in sight. It is a large golden-shored jungle island with many welcoming coves. \"Others have put in here, when blown north off the main shipping route,\" Grimes recalls. \"The natives are said to be hospitable.\"||You stare into the west. Leshand is still two hundred leagues off, and it might be wise to re-provision before you undertake that long haul. And yet worry gnaws at your mind: \"Hospitable when faced with gifts and muskets and a sea-going vessel of ten cannon, perhaps. But how will they greet a handful of starving wretches in a ramshackle craft?\"||It's up to you.">
@@ -2640,9 +2641,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY175-PRECHOICE ("AUX" (DMG 2))
-	<COND (<CHECK-SKILL ,SKILL-SEAFARING>
-		<SET DMG 1>
-	)>
+	<COND (<CHECK-SKILL ,SKILL-SEAFARING> <SET DMG 1>)>
 	<LOSE-LIFE .DMG DIED-OF-HUNGER ,STORY175>>
 
 <CONSTANT TEXT176 "Resorting to an old trick of your trade, you toss a few pebbles to distract Ejada. She thinks she has heard you creeping away, and gives a wild laugh as she hurls her deathly bolts in the direction of the sound. Meanwhile you sneak into her tower and hastily feel your way along the wall until you come to a treasure chest. From this you pull a large diamond and a black kite.">
@@ -2971,6 +2970,7 @@
 		<TELL "Eat the monkey (if you are heartless or desperate enough)?">
 		<COND (<YES?>
 			<REMOVE ,MONKEY>
+			<PUTP ,STORY197 ,P?DEATH F>
 		)(ELSE
 			<LOSE-LIFE 2 DIED-OF-HUNGER ,STORY197>
 		)>
@@ -3556,10 +3556,10 @@
 	<COND (<YES?>
 		<REMOVE ,MONKEY>
 		<PUTP ,STORY237 ,P?DEATH F>
-		<IF-ALIVE TEXT237-CONTINUED>
 	)(ELSE
 		<LOSE-LIFE 1 DIED-OF-HUNGER ,STORY237>
-	)>>
+	)>
+	<IF-ALIVE TEXT237-CONTINUED>>
 
 <CONSTANT TEXT238 "Raising your sword, you leap aboard the raft. You intended only to warn Mortice, but instead of backing off he gives a murderous snarl and runs straight onto the sword, impaling himself through the heart. You look away quickly with a grimace of dismay. Still gripping the blade, you glance back at the others and start to say, \"There wasn't anything I could do. He just --\"||\"Look out!\" Blutz screeches in warning, pointing past you. \"He's not dead!\"||Your eyes jerk back to Mortice, who you now see to your horror is still moving. Twitching galvanically, he grins a blood-rimmed smile and coughs gore, then starts to pull himself along the sword blade towards you.">
 <CONSTANT CHOICES238 <LTABLE "flee back to the boat, letting go of your sword" "fight on">>
@@ -4728,9 +4728,7 @@
 
 <ROUTINE STORY317-PRECHOICE ("AUX" (DMG 4))
 	<COND (,RUN-ONCE
-		<COND (<CHECK-ITEM ,FEATHER-SHIELD>
-			<SET DMG 2>
-		)>
+		<COND (<CHECK-ITEM ,FEATHER-SHIELD> <SET DMG 2>)>
 		<LOSE-LIFE .DMG DIED-IN-COMBAT ,STORY317>
 		<COND (<AND <IS-ALIVE> <CHECK-ITEM ,FEATHER-SHIELD>>
 			<TELL CR CT ,FEATHER-SHIELD " deflects some of the damage" ,PERIOD-CR>
@@ -5206,9 +5204,7 @@
 		<COND (<CHECK-ITEM ,MONKEY>
 			<CRLF>
 			<TELL "Eat the monkey (if you are heartless or desperate enough)?">
-			<COND (<YES?>
-				<STORY-JUMP ,STORY368>
-			)>
+			<COND (<YES?> <STORY-JUMP ,STORY368>)>
 		)>
 	)>>
 
@@ -5397,10 +5393,10 @@
 		<LOSE-LIFE 3 DIED-IN-COMBAT ,STORY362>
 		<COND (<IS-ALIVE> <RETURN ,STORY242>)>
 	)>
+	<PUTP ,STORY362 ,P?DEATH F>
 	<RETURN ,STORY324>>
 
-<CONSTANT CHOICES363 <LTABLE "employ" "or" "use" "otherwise"
->>
+<CONSTANT CHOICES363 <LTABLE "employ" "or" "use" "otherwise">>
 
 <ROOM STORY363
 	(IN ROOMS)
@@ -5437,6 +5433,8 @@
 	<COND (,RUN-ONCE
 		<COND (<NOT <OR <CHECK-SKILL ,SKILL-SWORDPLAY> <CHECK-SKILL ,SKILL-MARKSMANSHIP> <CHECK-SKILL ,SKILL-BRAWLING>>>
 			<LOSE-LIFE 3 DIED-IN-COMBAT ,STORY365>
+		)(ELSE
+			<PUTP ,STORY365 ,P?DEATH F>
 		)>
 	)>>
 
@@ -5476,9 +5474,7 @@
 
 <ROUTINE STORY367-CHOICES ()
 	<LOSE-LIFE 1 DIED-OF-HUNGER ,STORY367>
-	<COND (<IS-ALIVE>
-		<CONSUME-PROVISIONS 1 ,STORY106>
-	)>>
+	<COND (<IS-ALIVE> <CONSUME-PROVISIONS 1 ,STORY106>)>>
 
 <CONSTANT TEXT368 "\"Poor little fellow, it seems unfair after he's been with us so long,\" bleats Blutz.||You agree in principle, but seamen soon learn that practical necessities must outweigh sentiment. \"We could eat you instead if you'd rather spare the monkey, Mister Blutz.\"||\"Aye,\" says Grimes, jabbing him good-naturedly in the ribs. \"And you'd make a better meal too. Wouldn't he, mates?\"||In the event, despite the shedding of a maudlin tear or two, it is the monkey who ends up on your plates. The meal is cold and gristly, but better than nothing.">
 
