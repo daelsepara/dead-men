@@ -692,7 +692,7 @@
 	(FLAGS LIGHTBIT)>
 
 <CONSTANT TEXT034 "His eyes roll in their sockets, each an orb as big as a boulder. \"A ship, is it? Well, there are many moored in this harbour. More ships than you could dream of: all the ships of myth and legend! But do you not see this harbour chain?\" His hand dips into the dark water, jangling the massive links as a man might play with a watch-chain.||\"Won't you lift it,\" you boldly ask him; \"allow us to enter and choose a vessel?\"||He booms his mirth to the sky. \"Hah! You're audacious enough to be a hero, at least. No, I won't help you -- but see this lock? You could open the chain yourself easily enough, except for the fact that no man can see or touch the key that fits it.\"">
-<CONSTANT CHOICES034 <LTABLE "try something" "try unlocking the chain by magic" "try an item that you think might do the trick" "failing any of these, you must admit defeat.">>
+<CONSTANT CHOICES034 <LTABLE "try something" "try unlocking the chain by magic" "try an item that you think might do the trick" "failing any of these, you must admit defeat">>
 
 <ROOM STORY034
 	(IN ROOMS)
@@ -1330,7 +1330,7 @@
 	(TYPES <LTABLE R-SKILL R-NONE R-NONE R-NONE>)
 	(FLAGS LIGHTBIT)>
 
-<CONSTANT TEXT084 "Most of the hands are just bare bone, but a couple still show traces of skin and sinew. One even wears a gold ring, though none of you cares o fish it out of the tank. \"I'm glad we haven't drunk from this,\" says Oakley quietly, closing the lid. \"No wonder the captain prefers wine. It could fair kill a bloke's thirst for fresh water, it could.\"||\"Here's what did the job,\" announces Grimes, picking something up off the deck. He hands it to you: a long-bladed butcher's cleaver.||\"I'm for leaving right now,\" declares Blutz, quaking with fear. But as he tries to climb back down the jolly boat moored alongside, he makes an ominous discovery. \"I can't get over the rail. It's as if some supernatural force is tugging me back!\"||The same applies to the rest of you. \"The ship is cursed,\" says Grimes. \"And now shipmates, we're cursed too.">
+<CONSTANT TEXT084 "Most of the hands are just bare bone, but a couple still show traces of skin and sinew. One even wears a gold ring, though none of you cares to fish it out of the tank. \"I'm glad we haven't drunk from this,\" says Oakley quietly, closing the lid. \"No wonder the captain prefers wine. It could fair kill a bloke's thirst for fresh water, it could.\"||\"Here's what did the job,\" announces Grimes, picking something up off the deck. He hands it to you: a long-bladed butcher's cleaver.||\"I'm for leaving right now,\" declares Blutz, quaking with fear. But as he tries to climb back down the jolly boat moored alongside, he makes an ominous discovery. \"I can't get over the rail. It's as if some supernatural force is tugging me back!\"||The same applies to the rest of you. \"The ship is cursed,\" says Grimes. \"And now shipmates, we're cursed too.">
 <CONSTANT CHOICES084 <LTABLE "make repairs to the boat using" "or a" "use" "otherwise">>
 
 <ROOM STORY084
@@ -1896,7 +1896,7 @@
 	(FLAGS LIGHTBIT)>
 
 <CONSTANT TEXT122 "The curse is immaterial. You are confident that your magical knowledge is enough to negate it -- at least so that you and your friends can escape from the ship. But Captain Mandrigard is another matter. Having suffered under the curse's power for so long, he is probably doomed forever now.||As you start to recite the charm, Grimes catches your sleeve and points up at the sails. \"We're running before an east wind,\" he says. \"No hurry in leaving the ship so long as can do it whenever we like. Let's leave it a day or so, when we'll be closer to home.\"||Blutz rolls his eyes at this. \"Madness! Let's get away while we have the chance.\"" >
-<CONSTANT CHOICES122 <LTABLE "neutralize the curse and escape right now" "remain on board for the nonce, in line with Grimes's suggestion.">>
+<CONSTANT CHOICES122 <LTABLE "neutralize the curse and escape right now" "remain on board for the nonce, in line with Grimes's suggestion">>
 
 <ROOM STORY122
 	(IN ROOMS)
@@ -2665,7 +2665,7 @@
 	<TELL TEXT176-CONTINUED>
 	<TELL ,PERIOD-CR>>
 
-<CONSTANT TEXT177 "Taking stock of your situation leaves you in a grim mood. \"We're still more than two hundred leagues out from Port Leshand, ad there are no islands along the route for us to restock our supplies. What we've got left for now is going to have to keep us going for at least ten days.\"||Oakley has another thought, equally sobering. Pointing at the timbers of your vessel - now warped by the constant sun and the battering of high waves -- he mutters: \"Ten days? We might not stay afloat that long.\"||\"Maybe we shouldn't try to make it all the way to Leshand,\" suggests Blutz. \"We could head south from here towards the main shipping lanes. There's a good chance we'd be rescued by a friendly vessel.\"">
+<CONSTANT TEXT177 "Taking stock of your situation leaves you in a grim mood. \"We're still more than two hundred leagues out from Port Leshand, and there are no islands along the route for us to restock our supplies. What we've got left for now is going to have to keep us going for at least ten days.\"||Oakley has another thought, equally sobering. Pointing at the timbers of your vessel - now warped by the constant sun and the battering of high waves -- he mutters: \"Ten days? We might not stay afloat that long.\"||\"Maybe we shouldn't try to make it all the way to Leshand,\" suggests Blutz. \"We could head south from here towards the main shipping lanes. There's a good chance we'd be rescued by a friendly vessel.\"">
 <CONSTANT CHOICES177 <LTABLE "go south" "keep on heading west">>
 
 <ROOM STORY177
@@ -3453,7 +3453,7 @@
 	(FLAGS LIGHTBIT)>
 
 <CONSTANT TEXT230 "You find only a couple of small crabs which between them amount to barely more than a mouthful. Blutz gazes at them hungrily, flabby jowls sagging in dismay. \"Not worth dividing them up,\" he groans. \"Who's going to be the lucky one, then?\"||As usual, the others instinctively look to you for leadership. Your own stomach is growling as much as anyone's.">
-<CONSTANT CHOICES230 <LTABLE "award yourself the crabs" "you can let one of the others have them.">>
+<CONSTANT CHOICES230 <LTABLE "award yourself the crabs" "you can let one of the others have them">>
 
 <ROOM STORY230
 	(IN ROOMS)
@@ -3513,7 +3513,7 @@
 	(FLAGS LIGHTBIT)>
 
 <CONSTANT TEXT235 "The storm rolls over you, tossing your jollyboat halfway to the clouds with each wave. The sea becomes thick with icy froth. The sky is a flickering lantern -- one moment blue-white and bright as daybreak, then blacker than the underworld in the thunderous space between lightning flashes.||Wretchedly sick, weak with exhaustion and hunger, the four of you struggle to keep the little craft from submerging. Oakley sings wildly into the sheets of rain as he bails water with cupped hands:||\"Oh, the Coffin Lid heaves to and fro,|tossed by storms and gales,|What's that thunder now I hear:|four hearts thudding full o' fear?|Or Death's bone fingers drawing near|and banging in the nails?\"||Grimes and Blutz both look to be near the end of their tether. Oakley's gallows song is not helping their nerves. Nor yours, for that matter.">
-<CONSTANT CHOICES235 <LTABLE "try to shut Oakley up and risk provoking a fight" "do nothing and then morale will drain away entirely.">>
+<CONSTANT CHOICES235 <LTABLE "try to shut Oakley up and risk provoking a fight" "do nothing and then morale will drain away entirely">>
 
 <ROOM STORY235
 	(IN ROOMS)
@@ -6177,7 +6177,7 @@
 	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
 
-<CONSTANT TEXT417 "The grisly sharpened-tooth grins on their faces as they accept your gift leave you uncertain of how you stand. While the gift is passed around for inspection, Oakley says: \"Quick now, lands -- let's get back to the jollyboat before these savages turn nasty.\"||You make a hasty descent of the cliffs, but before you are even halfway down a rock comes sailing past your head. \"Move it,\" you shout to the others, \"or we're all done for!\"||More rocks come dashing down, ad you can now hear a horrid chortling from the natives as they watch their missiles bruise and buffet you. Somehow you manage to keep your hold on the ladder despite this fearful barrage but by the time you reach the bottom you have blood from a dozen cuts.">
+<CONSTANT TEXT417 "The grisly sharpened-tooth grins on their faces as they accept your gift leave you uncertain of how you stand. While the gift is passed around for inspection, Oakley says: \"Quick now, lands -- let's get back to the jollyboat before these savages turn nasty.\"||You make a hasty descent of the cliffs, but before you are even halfway down a rock comes sailing past your head. \"Move it,\" you shout to the others, \"or we're all done for!\"||More rocks come dashing down, and you can now hear a horrid chortling from the natives as they watch their missiles bruise and buffet you. Somehow you manage to keep your hold on the ladder despite this fearful barrage but by the time you reach the bottom you have blood from a dozen cuts.">
 <CONSTANT TEXT417-CONTINUED "You race back as your weary limbs will allow.||\"Let's hope we have more luck on the next island,\" says Grimes">
 
 <ROOM STORY417
