@@ -28,16 +28,16 @@
 	<SETG USED-CHARMS-TO-FLOAT F>
 	<SETG EAT-COCONUT F>
 	<SETG DISABLE-MARKSMANSHIP F>
-	<PUT <GETP ,STORY012 ,P?DESTINATIONS> 3 ,STORY409>
-	<PUT <GETP ,STORY136 ,P?DESTINATIONS> 2 ,STORY405>
-	<PUT <GETP ,STORY164 ,P?DESTINATIONS> 5 ,STORY409>
-	<PUT <GETP ,STORY177 ,P?DESTINATIONS> 2 ,STORY404>
-	<PUT <GETP ,STORY202 ,P?DESTINATIONS> 5 ,STORY409>
-	<PUT <GETP ,STORY272 ,P?DESTINATIONS> 3 ,STORY348>
-	<PUT <GETP ,STORY278 ,P?DESTINATIONS> 6 ,STORY409>
-	<PUT <GETP ,STORY330 ,P?DESTINATIONS> 2 ,STORY349>
-	<PUT <GETP ,STORY392 ,P?DESTINATIONS> 1 ,STORY409>
-	<PUT <GETP ,STORY423 ,P?DESTINATIONS> 4 ,STORY409>
+	<SET-DESTINATION ,STORY012 3 ,STORY409>
+	<SET-DESTINATION ,STORY136 2 ,STORY405>
+	<SET-DESTINATION ,STORY164 5 ,STORY409>
+	<SET-DESTINATION ,STORY177 2 ,STORY404>
+	<SET-DESTINATION ,STORY202 5 ,STORY409>
+	<SET-DESTINATION ,STORY272 3 ,STORY348>
+	<SET-DESTINATION ,STORY278 6 ,STORY409>
+	<SET-DESTINATION ,STORY330 2 ,STORY349>
+	<SET-DESTINATION ,STORY392 1 ,STORY409>
+	<SET-DESTINATION ,STORY423 4 ,STORY409>
 	<PUTP ,STORY088 ,P?DESTINATIONS <LTABLE STORY183 STORY221 STORY297>>
 	<PUTP ,STORY005 ,P?DEATH T>
 	<PUTP ,STORY006 ,P?DEATH T>
@@ -458,9 +458,9 @@
 	<TELL ,TEXT012-CONTINUED>
 	<TELL ,PERIOD-CR>
 	<COND (<CHECK-SKILL ,SKILL-ROGUERY>
-		<PUT <GETP ,STORY012 ,P?DESTINATIONS> 3 ,STORY050>
+		<SET-DESTINATION ,STORY012 3 ,STORY050>
 	)(ELSE
-		<PUT <GETP ,STORY012 ,P?DESTINATIONS> 3 ,STORY409>
+		<SET-DESTINATION ,STORY012 3 ,STORY409>
 	)>>
 
 <CONSTANT TEXT013 "These men have cut-throat skills honed in a hundred desperate backstreet fights. They wield their knives with the precision of trained surgeons -- except that each finely judged cut is intended to cause death, not avert it.">
@@ -2128,9 +2128,9 @@
 
 <ROUTINE STORY136-PRECHOICE ()
 	<COND (<CHECK-CODEWORD ,CODEWORD-PECCANT>
-		<PUT <GETP ,STORY136 ,P?DESTINATIONS> 2 ,STORY386>		
+		<SET-DESTINATION ,STORY136 2 ,STORY386>
 	)(ELSE
-		<PUT <GETP ,STORY136 ,P?DESTINATIONS> 2 ,STORY405>
+		<SET-DESTINATION ,STORY136 2 ,STORY405>
 	)>>
 
 <CONSTANT TEXT137 "Swept onwards, your little craft starts to spring leaks.">
@@ -2513,9 +2513,9 @@
 
 <ROUTINE STORY164-PRECHOICE ()
 	<COND (<CHECK-SKILL ,SKILL-ROGUERY>
-		<PUT <GETP ,STORY164 ,P?DESTINATIONS> 5 ,STORY050>
+		<SET-DESTINATION ,STORY164 5 ,STORY050>
 	)(ELSE
-		<PUT <GETP ,STORY164 ,P?DESTINATIONS> 5 ,STORY409>
+		<SET-DESTINATION ,STORY164 5 ,STORY409>
 	)>>
 
 <CONSTANT TEXT165 "Of all the ports in the Carab Sea, only Selenice -- 'the Pirates' Haven' -- would it be safe for a bloodthirsty cut-throat like Skarvench to show his face and openly spend his ill-gotten gold. Selenice has no allegiance to any nation. It is ruled by the common consent of buccaneers who live here -- the Brethren of the Coast, as they term themselves -- and it is buccaneers and their families who are the town's only citizens.||Curiously, life here is not the lawless mayhem that outsiders imagine. The buccaneers of Selenice arrive here glutted with more than their share of violence and hardship. They want nothing more than to peacefully squander their loot on ale, women and dice. One rule that is stringently enforce above all others is an absolute ban on the use of weapons. Normal brawls can and do occur, for buccaneers are hard men filled with pride, and tempers can flare up easily when the rum flows freely. But any brawl is settled barehanded, since to draw a weapon in Selenice is to invite summary justice from the Brethren of the Coast. However you may have fared elsewhere under the laws of civilized kingdoms, you'd do well not to fall afoul of the Brethren.||Passing a pedlar in the street outside the Thorny Knot tavern, Oakley glances across at you. \"Maybe we should do a spot of shopping, skipper?\"||\"I'd rather do a spot of drinking,\" says Blutz, casting a longing eye at the tavern.">
@@ -2726,9 +2726,9 @@
 
 <ROUTINE STORY177-PRECHOICE ()
 	<COND (<CHECK-CODEWORD ,CODEWORD-PECCANT>
-		<PUT <GETP ,STORY177 ,P?DESTINATIONS> 2 ,STORY386>
+		<SET-DESTINATION ,STORY177 2 ,STORY386>
 	)(ELSE
-		<PUT <GETP ,STORY177 ,P?DESTINATIONS> 2 ,STORY404>
+		<SET-DESTINATION ,STORY177 2 ,STORY404>
 	)>>
 
 <CONSTANT TEXT178 "The flash of coral-pink tail against the white-foamed grey of the sea, and then she is gone.||Thunder rattles the buttresses of heaven, and the sky gleams with distant lightning. Grimes squints into the west. \"Another storm rolling in ahead,\" he says. \"We're in for a battering.\"||\"Let's head south!\" cries Blutz in sudden desperation. \"There are fewer storms, and we could pick up supplies among the islands, some of which are inhabited.\"||\"Yes,\" grunts Oakley. \"By cannibals.\"">
@@ -3101,9 +3101,9 @@
 
 <ROUTINE STORY202-PRECHOICE ()
 	<COND (<CHECK-SKILL ,SKILL-ROGUERY>
-		<PUT <GETP ,STORY202 ,P?DESTINATIONS> 5 ,STORY050>
+		<SET-DESTINATION ,STORY202 5 ,STORY050>
 	)(ELSE
-		<PUT <GETP ,STORY202 ,P?DESTINATIONS> 5 ,STORY409>
+		<SET-DESTINATION ,STORY202 5 ,STORY409>
 	)>>
 
 <CONSTANT TEXT203 "The shark and the dolphin slowly sink, taking the strange boat with them. The waters close over them like thin black oil, and in a last pearly glimmer they are gone. Moonrise flickers just below the horizon. The wind soughs, ruffling white flecks on the waves.||\"We'd have fared ill if we'd ventured into Neptune's realm,\" says Oakley with conviction. \"Better that we obtain a ship by more normal means.\"||You return to spend the night in Selenice. The next day you take stock of your remaining options.">
@@ -4081,9 +4081,9 @@
 	<TELL ,TEXT272-CONTINUED>
 	<TELL ,PERIOD-CR>
 	<COND (<CHECK-ITEM ,BOOK-OF-CHARTS>
-		<PUT <GETP ,STORY272 ,P?DESTINATIONS> 3 ,STORY329>
+		<SET-DESTINATION ,STORY272 3 ,STORY329>
 	)(ELSE
-		<PUT <GETP ,STORY272 ,P?DESTINATIONS> 3 ,STORY348>
+		<SET-DESTINATION ,STORY272 3 ,STORY348>
 	)>>
 
 <CONSTANT TEXT273 "Towards sunset the storm finally blows over, leaving the clouds in the west lying like blots of blood across the steel rim of the sea.||The four of you are by now slumped in the bottom of the boat, as limp as corpses on a trestle. Your lips are black and blistered, your flesh fish-white and swollen with sores. Blutz gnaws his knuckle until it bleeds, jut to feel moisture on his tongue. After looking up at the sky Grimes starts to shiver, either from dread of the onrushing night or because he is in the first stages for fever.||A shadow shimmers against the last light of day. A ship's sails show purple-black against the red haze. \"We're saved!\" gasps Oakley, raising his hands to hail the ship. \"Ahoy there!\"">
@@ -4168,9 +4168,9 @@
 
 <ROUTINE STORY278-PRECHOICE ()
 	<COND (<CHECK-SKILL ,SKILL-ROGUERY>
-		<PUT <GETP ,STORY278 ,P?DESTINATIONS> 6 ,STORY050>
+		<SET-DESTINATION ,STORY278 6 ,STORY050>
 	)(ELSE
-		<PUT <GETP ,STORY278 ,P?DESTINATIONS> 6 ,STORY409>
+		<SET-DESTINATION ,STORY278 6 ,STORY409>
 	)>>
 
 <CONSTANT TEXT279 "\"I got it fair and square, by the law of the sea,\" snorts Mandrigard. \"Took it from a marble hall atop an island cliff, and no hand was raised against me and my merry lads. But as we went -- not a man Jack of us able to straighten his back under the weight of loot, mind you -- and old fool of a priest called after us with a curse. He told us we'd know no rest sailing the ocean's breadth for ever more, and never able to find port nor set foot ashore so long as our hands were tainted with the theft of sacred treasures.\"||He pauses draining his wine-cup yet again. It occurs to you that you have not seen him refill it from the jug, but it never seems empty.||Rain rattles on the shutters across the cabin window. The ship's timbers groan and sigh as she sails on before the wind.">
@@ -4945,9 +4945,9 @@
 
 <ROUTINE STORY330-PRECHOICE ()
 	<COND (<CHECK-CODEWORD ,CODEWORD-PECCANT>
-		<PUT <GETP ,STORY330 ,P?DESTINATIONS> 2 ,STORY386>
+		<SET-DESTINATION ,STORY330 2 ,STORY386>
 	)(ELSE
-		<PUT <GETP ,STORY330 ,P?DESTINATIONS> 2 ,STORY349>
+		<SET-DESTINATION ,STORY330 2 ,STORY349>
 	)>>
 
 <CONSTANT TEXT331 "You raise the cleaver, a grim look setting your features like stone. \"Who's to be first?\" you ask.||Blutz's lip trembles. He looks like a large timid hamster when he says, \"Eh? What do you mean?\"||\"It's obvious mate,\" puts i Grimes, nodding towards the water tank full of decomposed hands. \"The only way off this island is to sacrifice a hand.\"||Oakley nods. \"That's what the sailors must've done. I don't know if it was the pain and loss that cancelled out their guilt. Maybe it was just a way of getting around the letter of the curse - y'know, chopping off the hand that did the fateful deed. Who's to say? But I see a tank full o' hands and no bodies to go with them, so they must've got away, mustn't they\"||Each of you in turn submits to the cleaver, depositing your severed hand in the water tank with the others. It is a gruesome sacrifice, but your only way of circumventing the curse.">
@@ -5842,9 +5842,9 @@
 
 <ROUTINE STORY392-PRECHOICE ()
 	<COND (<CHECK-SKILL ,SKILL-ROGUERY>
-		<PUT <GETP ,STORY392 ,P?DESTINATIONS> 1 ,STORY050>
+		<SET-DESTINATION ,STORY392 1 ,STORY050>
 	)(ELSE
-		<PUT <GETP ,STORY392 ,P?DESTINATIONS> 1 ,STORY409>
+		<SET-DESTINATION ,STORY392 1 ,STORY409>
 	)>>
 
 <CONSTANT TEXT393 "You recognise the man as Twitchy Pinque, a notorious petty thief who wouldn't hesitate to sell his own grandmother -- not that he would get much for her if he did, since she is a known witch with a soul of pure poison.||Seizing him by the scruff of his grubby neck, you whisper into his ear, \"It's not stolen, this lot, is it, Twitchy? Not selling stolen goods that you've pilfered here in Selenice? That'd be nothing short of pig stupid, I'd say. I'd only have to give a whistle and some of the nastiest pirates in the Carab are going to fall on you like half a ton of ballast. I wonder what they'd do to you, eh, Twitchy?\"||This unorthodox bargaining technique quickly convinces Pinque to drop to rock-bottom prices.||You are dubious about the amulet, but Pinque swears blind it's genuine. \"Belonged to my dear old granny, guv. Still does technically, I suppose, since I never asked her if I could take it.">
@@ -6313,9 +6313,9 @@
 	)>
 	<COND (<CHECK-SKILL ,SKILL-STREETWISE> <STORY-JUMP ,STORY127>)>
 	<COND (<CHECK-SKILL ,SKILL-ROGUERY>
-		<PUT <GETP ,STORY423 ,P?DESTINATIONS> 4 ,STORY050>
+		<SET-DESTINATION ,STORY423 4 ,STORY050>
 	)(ELSE
-		<PUT <GETP ,STORY423 ,P?DESTINATIONS> 4 ,STORY409>
+		<SET-DESTINATION ,STORY423 4 ,STORY409>
 	)>>
 
 <CONSTANT TEXT424 "You awaken cramped and sore, your limbs locked stiff after an uncomfortable and chilly night. Each of your friends gives a weak groan as he wakes, almost as though stricken with grief at having to face another terrible day of scorching heat. No sooner has the sun risen than waves of heat come rolling over the flat mirror of the sea, making you gasp for water. \"I'd give my soul for one drop...\" moans Grimes. \"Half a drop!\"||\"Your soul?\" Oakley manages a short bark of laughter. \"Who'd want your black soul, you old sea dog?\"||They cling together, shaking with gallows humour at this, wheezing between their teeth because belly laughter would crack their desiccated throats.||\"They're hysterical -- half mad!\" snaps Blutz. He stares at you hopelessly. \"Do something, or we'll all die. I don't want to end my days in an open boat, unshriven and unmourned, never to lie in the fresh soil of home!\"">
