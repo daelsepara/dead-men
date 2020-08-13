@@ -10,7 +10,6 @@
 <OBJECT VEHICLE (DESC "ships")>
 
 <ROUTINE RESET-OBJECTS ()
-	<RESET-CONTAINER ,LOST-SKILLS>
 	<PUTP ,LADY-OF-SHALOTT ,P?STARS 1>
 	<PUTP ,SHIVERED-TIMBER ,P?STARS 2>
 	<PUTP ,QUEENS-RANSOM ,P?STARS 3>
@@ -25,9 +24,13 @@
 
 <ROUTINE RESET-STORY ()
 	<RESET-TEMP-LIST>
+	<RESET-CONTAINER ,LOST-SKILLS>
+	<RESET-CONTAINER ,VEHICLES>
+	<SETG DROPPED-WEAPON NONE>
 	<SETG USED-CHARMS-TO-FLOAT F>
 	<SETG EAT-COCONUT F>
 	<SETG DISABLE-MARKSMANSHIP F>
+	<SETG CURRENT-VEHICLE NONE>
 	<SET-DESTINATION ,STORY012 3 ,STORY409>
 	<SET-DESTINATION ,STORY136 2 ,STORY405>
 	<SET-DESTINATION ,STORY164 5 ,STORY409>
@@ -113,6 +116,26 @@
 <CONSTANT INTERRUPT-KEY-CAPS !\D>
 <CONSTANT INTERRUPT-KEY !\d>
 
+<CONSTANT DIED-IN-COMBAT "You died in combat">
+<CONSTANT DIED-OF-HUNGER "You died of hunger and thirst">
+<CONSTANT DIED-GREW-WEAKER "You grow weaker and eventually died">
+<CONSTANT DIED-OF-THIRST "You go mad from thirst">
+<CONSTANT DIED-EJADA-SORCERY "You have died from the Ejada's sorcery">
+
+<CONSTANT FOUR-TREASURES <LTABLE MAGIC-WAND HEALING-POTION SHIP-IN-BOTTLE BLACK-KITE>>
+<CONSTANT PEDLAR-WARES <LTABLE POCKET-WATCH PISTOL SWORD HORNPIPE WEASEL MAGIC-AMULET>>
+
+<GLOBAL EAT-COCONUT F>
+<GLOBAL DISABLE-MARKSMANSHIP F>
+<GLOBAL DROPPED-WEAPON NONE>
+<GLOBAL USED-CHARMS-TO-FLOAT F>
+
+<OBJECT LOST-SKILLS
+	(DESC "skills lost")
+	(SYNONYM SKILLS)
+	(ADJECTIVE LOST)
+	(FLAGS CONTBIT OPENBIT)>
+
 <ROUTINE SPECIAL-INTERRUPT-ROUTINE (KEY)
 	<COND (<EQUAL? .KEY INTERRUPT-KEY-CAPS INTERRUPT-KEY>
 		<COND (<CHECK-ITEM ,HEALING-POTION>
@@ -126,21 +149,6 @@
 		)>
 	)>
 	<RFALSE>>
-
-<OBJECT LOST-SKILLS
-	(DESC "skills lost")
-	(SYNONYM SKILLS)
-	(ADJECTIVE LOST)
-	(FLAGS CONTBIT OPENBIT)>
-
-<CONSTANT DIED-IN-COMBAT "You died in combat">
-<CONSTANT DIED-OF-HUNGER "You died of hunger and thirst">
-<CONSTANT DIED-GREW-WEAKER "You grow weaker and eventually died">
-<CONSTANT DIED-OF-THIRST "You go mad from thirst">
-<CONSTANT DIED-EJADA-SORCERY "You have died from the Ejada's sorcery">
-
-<CONSTANT FOUR-TREASURES <LTABLE MAGIC-WAND HEALING-POTION SHIP-IN-BOTTLE BLACK-KITE>>
-<CONSTANT PEDLAR-WARES <LTABLE POCKET-WATCH PISTOL SWORD HORNPIPE WEASEL MAGIC-AMULET>>
 
 <ROUTINE SCRIPTOR-BUY-SELL (ITEM LEAVE "OPT" SELL-PRICE)
 	<COND (<NOT .ITEM> <RETURN>)>
@@ -533,7 +541,6 @@
 	(IN ROOMS)
 	(DESC "018")
 	(STORY TEXT018)
-	(PRECHOICE NONE)
 	(CONTINUE STORY094)
 	(FLAGS LIGHTBIT)>
 
@@ -1531,7 +1538,6 @@
 
 <CONSTANT TEXT095 "Calmly levelling your pistol, you shoot the end off the taper. \"By all that's unholy!\" sears Skarvench. \"I never seen such a shot!\"||Neither have you, but you do not let surprise cost you your momentary advantage. You race in before Skarvench can relight the fuse, and in seconds the two of you are locked in a fight to death.">
 
-<GLOBAL DISABLE-MARKSMANSHIP F>
 
 <ROOM STORY095
 	(IN ROOMS)
@@ -2984,7 +2990,6 @@
 
 <CONSTANT TEXT196 "A shot rings out. A man falls dead. It is a sad, grim, brutally sudden scene which has been played out many times on the stage of life. As always, the onlookers stand for a moment, stunned, waiting for Death to withdraw into the wings so the action can resume.||The moment passes. The natives are not awed by your ability to kill at a distance -- they have seen firearms before, and know it is no miracle. There is an angry shout, and a thrown rock grazes your hand. The pistol is knocked to the ground. The natives stand watching you, ominously tense, torn between shock, grief and rage.">
 <CONSTANT CHOICES196 <LTABLE "get out while you can, abandoning your pistol" "you stand and fight">>
-<GLOBAL DROPPED-WEAPON NONE>
 
 <ROOM STORY196
 	(IN ROOMS)
@@ -4589,7 +4594,6 @@
 
 <CONSTANT TEXT308 "With the help of others you put together a makeshift raft, even rigging a rough sail from interwoven palm leaves. You have to work fast, knowing that you have only the space of a single night, and you are not sure the raft will hold together long enough for you to reach the next island.">
 <CONSTANT CHOICES308 <LTABLE "put to sea on the raft" "try hiding in the jungle" "go to the witch's place at dawn">>
-<GLOBAL USED-CHARMS-TO-FLOAT F>
 
 <ROOM STORY308
 	(IN ROOMS)
@@ -5249,18 +5253,16 @@
 <CONSTANT TEXT351 "The sun stares balefully down from a sky of burnished steel, leeching your strength. To prevent your brains being cooked in your skulls, you soak strips of torn cloth in the sea and wrap them round your brows. The brine dries to hard salt which chafes your many sores, but by now you are past caring.">
 <CONSTANT TEXT351-CONTINUED "After what seems an endless time, Oakley gives a surprised shout and lunges desperately for something floating in the water beside the boat. Fumbling in a frenzy of excitement, he finally gets a firm hold on the object and hefts it up for you all to see.||\"A coconut!\" says Blutz. \"But is it safe to eat? Floating out here in mid-ocean, I mean. How did it get there?\"||\"Jetsam,\" says Oakley with conviction.||Blutz scratches his fat jowls. \"Er... but I heard this legend of Domdaniel, which is the place under the sea where the drowned sailors live. This coconut might have floated up from one of their groves. That would make it dead men's food, you see, and not for us.\"||\"Pah! You fat fool!\" gasps Oakley.||Grimes and Oakley intend to eat the coconut whether it is safe or not. BLutz protests that even if it was dropped off a ship, it might have gone rotten.">
 
-<GLOBAL EAT-COCONUT F>
-
 <ROOM STORY351
 	(IN ROOMS)
 	(DESC "351")
 	(STORY TEXT351)
-	(PRECHOICE TEXT351-PRECHOICE)
+	(PRECHOICE STORY351-PRECHOICE)
 	(CONTINUE STORY389)
 	(DEATH T)
 	(FLAGS LIGHTBIT)>
 
-<ROUTINE TEXT351-PRECHOICE ()
+<ROUTINE STORY351-PRECHOICE ()
 	<LOSE-LIFE 1 ,DIED-GREW-WEAKER ,STORY351>
 	<COND (<IS-ALIVE>
 		<IF-ALIVE TEXT351-CONTINUED>
