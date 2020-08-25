@@ -654,7 +654,6 @@
 	(CHOICES CHOICES027)
 	(DESTINATIONS <LTABLE STORY065 STORY046>)
 	(TYPES TWO-NONES)
-	(EVENTS NONE)
 	(FLAGS LIGHTBIT)>
 
 <CONSTANT TEXT028 "There is a sweet smell in the air which you notice as you tie up the boat. Could it be honey? Unlikely, you think, as how could bees live here with no flowers from which to gather pollen? Your worries about food are soon allayed, though, when you see shoals of fish swimming in towards the island.||\"Where are they going to? says Blutz, peering into the water. \"I can see dozens of fishes swimming this way, but none of them seems to be reaching the shore.\"||Oakley points at a dark indistinct shape moving sluggishly to and fro deep below the surface. \"Might that be a shark? Let's do no swimming, anyway, just to be on the safe side.\"||Striding towards the centre of the little island, you discover a rock pool and fall to your knees beside it with a cry of joy. However, no sooner have you tasted the water than you give a grimace and spit it out. It tastes of salt. This strikes you as odd, since the pool is surely above the level of high tide.">
@@ -1629,8 +1628,8 @@
 	(IN ROOMS)
 	(DESC "100")
 	(STORY TEXT100)
-	(CHOICES CHOICES100)
 	(PRECHOICE STORY100-PRECHOICE)
+	(CHOICES CHOICES100)
 	(DESTINATIONS <LTABLE STORY062 STORY195>)
 	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
@@ -1765,6 +1764,7 @@
 		<PUTP ,STORY110 ,P?DEATH F>
 		<TELL CR "Now you must look for another way to obtain a vessel:" CR>
 	)(ELSE
+		<PUTP ,STORY110 ,P?DEATH T>
 		<TELL CR "You have no hope of catching up with Skarvench" ,PERIOD-CR>
 	)>>
 
@@ -1929,9 +1929,10 @@
 
 <ROUTINE STORY120-PRECHOICE ()
 	<COND (<IS-ALIVE 2>
-		<PUTP ,STORY120 ,P?DEATH F>
+		<PREVENT-DEATH ,STORY120>
 		<STORY-JUMP ,STORY370>
 	)(ELSE
+		<PUTP ,STORY120 ,P?DEATH T>
 		<EMPHASIZE "You never recover consciousness: you're beyond any help they can give">
 	)>>
 
@@ -3068,6 +3069,7 @@
 <ROOM STORY200
 	(IN ROOMS)
 	(DESC "200")
+	(STORY TEXT200)
 	(PRECHOICE STORY200-PRECHOICE)
 	(CONTINUE STORY332)
 	(DEATH T)
@@ -3350,6 +3352,7 @@
 	(PRECHOICE STORY217-PRECHOICE)
 	(CHOICES CHOICES217)
 	(DESTINATIONS <LTABLE STORY255 STORY388>)
+	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY217-PRECHOICE ()
@@ -4057,6 +4060,7 @@
 	(CHOICES CHOICES271)
 	(DESTINATIONS <LTABLE STORY384 STORY317 STORY005>)
 	(REQUIREMENTS <LTABLE SKILL-SPELLS SKILL-MARKSMANSHIP NONE>)
+	(TYPES <LTABLE R-SKILL R-SKILL R-NONE>)
 	(DEATH T)
 	(FLAGS LIGHTBIT)>
 
