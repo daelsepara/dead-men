@@ -1547,7 +1547,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY095-PRECHOICE ()
-	<EMPHASIZE "[You were not able to reload your pistol it in time. You will not be able use it again]">
+	<EMPHASIZE "[You were not able to reload your pistol in time. You will not be able use it again]">
 	<SETG DISABLE-MARKSMANSHIP T>>
 
 <CONSTANT TEXT096 "You hurry into the cabin, startling the pet monkey which is perched on the bunk. Immediately it starts jumping up and down, chittering wildly, and the only thing you can do is grab it and stuff it into your haversack. Praying that no-one heard the noise, you head up on deck.">
