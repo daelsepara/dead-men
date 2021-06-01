@@ -1178,7 +1178,7 @@
 	(TYPES TWO-NONES)
 	(FLAGS LIGHTBIT)>
 
-<CONSTANT TEXT068 "Scared witless by the gargoyle-prow and black sails of Skarvench's ship, the natives will not be easy to convince. Their chief believes the pirates will kill them if they suspect them of lying. In all honesty, you have to admit he is right. You must part with two items to bribe the natives. The will accept two of the following: a sword, a pistol, a wand, an amulet, a ship in a bottle, a conch-shell horn, a bat-shaped talisman, a black kite, a diamond, a toolkit, a healing potion, a bronze helmet, a crucifix, or a dragon ring.">
+<CONSTANT TEXT068 "Scared witless by the gargoyle-prow and black sails of Skarvench's ship, the natives will not be easy to convince. Their chief believes the pirates will kill them if they suspect them of lying. In all honesty, you have to admit he is right. You must part with two items to bribe the natives. They will accept two of the following: a sword, a pistol, a wand, an amulet, a ship in a bottle, a conch-shell horn, a bat-shaped talisman, a black kite, a diamond, a toolkit, a healing potion, a bronze helmet, a crucifix, or a dragon ring.">
 <CONSTANT STORY068-UNWILLING "You were unwilling to part with two such items.">
 <CONSTANT STORY068-UNABLE "You are unable to part with two such items.">
 <CONSTANT CHOICES068 <LTABLE "stay here to confront Skarvench" "run off into the jungle">>

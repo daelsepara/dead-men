@@ -11,7 +11,7 @@
 
 <OBJECT SKILL-CHARMS
     (DESC "CHARMS")
-    (LDESC "The expert use of magical wards to protect you from danger. Also includes that most elusive of qualities. luck. YOu must possess a magic amulet to use this skill")
+    (LDESC "The expert use of magical wards to protect you from danger. Also includes that most elusive of qualities: luck. You must possess a magic amulet to use this skill")
     (REQUIRES <LTABLE MAGIC-AMULET>)>
 
 <OBJECT SKILL-CUNNING
@@ -56,7 +56,7 @@
 <OBJECT CHARACTER-ADVENTURER
     (DESC "Adventurer")
     (SYNONYM ADVENTURER)
-    (LDESC "You have explored haunted castles, ruined cities, dank crypts and desolate forests in your constant search for gold and glory. Now try your luck oon the high seas")
+    (LDESC "You have explored haunted castles, ruined cities, dank crypts and desolate forests in your constant search for gold and glory. Now try your luck on the high seas")
     (SKILLS <LTABLE SKILL-FOLKLORE SKILL-ROGUERY SKILL-SEAFARING SKILL-SWORDPLAY>)
     (POSSESSIONS <LTABLE SWORD>)
     (LIFE-POINTS 10)
