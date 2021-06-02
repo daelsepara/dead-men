@@ -59,6 +59,7 @@
 	<PUTP ,STORY125 ,P?DEATH T>
 	<PUTP ,STORY133 ,P?DEATH T>
 	<PUTP ,STORY135 ,P?DEATH T>
+	<PUTP ,STORY137 ,P?DEATH T>
 	<PUTP ,STORY142 ,P?DEATH T>
 	<PUTP ,STORY152 ,P?DEATH T>
 	<PUTP ,STORY155 ,P?DEATH T>
@@ -2141,6 +2142,7 @@
 	)>>
 
 <CONSTANT TEXT137 "Swept onwards, your little craft starts to spring leaks.">
+<CONSTANT TEXT137-CONTINUED "Thirst, hunger and the heat become your bitter foes. Petty quarrels break out as conditions worsen. Each man is nearing the end of his tether">
 
 <ROOM STORY137
 	(IN ROOMS)
@@ -2148,13 +2150,20 @@
 	(STORY TEXT137)
 	(PRECHOICE STORY137-PRECHOICE)
 	(CONTINUE STORY175)
+	(DEATH T)
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY137-PRECHOICE ()
 	<COND (,USED-CHARMS-TO-FLOAT
 		<EMPHASIZE "However, there is no cause for alarm.">
+	)(ELSE
+		<GAIN-CODEWORD ,CODEWORD-DETRUDE>
 	)>
-	<CONSUME-PROVISIONS 1 ,STORY156>>
+	<TELL ,TEXT137-CONTINUED>
+	<LOSE-LIFE 1 ,DIED-OF-HUNGER ,STORY137>
+	<COND (<IS-ALIVE>
+		<CONSUME-PROVISIONS 1 ,STORY156>
+	)>>
 
 <CONSTANT TEXT138 "A strong breeze stretches your sails wide against the sky, driving you on towards your destiny. But you have no time to brood on what the future may hold; you have a ship to command. Seeing the way her prow cleaves the water, and the jaunty courage of your crew as they go about their chores, your heart brims with optimism. Soon Skarvench will see his last sunset in his life -- of that you feel sure.">
 <CONSTANT TEXT138-CONTINUED "More than a week goes by. On the ninth day, you stand on the deck watching the sun slide out of the sky. Long blazing beams of orange light turn the green waves to liquid gold. And then -- in the blink of an eye -- this idyllic scene is transformed. A purple murk rises from the western horizon, blotting out the afternoon sun behind thick thunderclouds. A cold gust blows in your face, setting the sails to a pensive fluttering like frightened birds. You know well the taste of that chill wind; it is the harbinger of the hurricane.||\"This is but the twitch of the lion's tail compared to what will come,\" mutters Grimes. \"We'll have to put about.\" He calls to the crew: \"Strike the main topsail.\"||You turn. \"Belay that striking order. Lash it!\"||Oakley stares at you. \"Skipper, the hurricane'll tear us apart.\"||The first rain spits into your face, icily intense. \"'We're going in, hurricane or not. God is the master of the heavens and all the world -- but, by all that's holy, I'm the master of this ship!\"">
