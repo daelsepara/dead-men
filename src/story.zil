@@ -2641,7 +2641,7 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY171-PRECHOICE ("AUX" (DMG 5))
-	<COND (<AND <CHECK-SKILL ,SKILL-SWORDPLAY> <AND <CHECK-SKILL ,SKILL-MARKSMANSHIP> <NOT ,DISABLE-MARKSMANSHIP>>>
+	<COND (<OR <CHECK-SKILL ,SKILL-SWORDPLAY> <AND <CHECK-SKILL ,SKILL-MARKSMANSHIP> <NOT ,DISABLE-MARKSMANSHIP>>>
 		<SET DMG 2>
 	)(<CHECK-SKILL ,SKILL-BRAWLING>
 		<SET DMG 3>
@@ -2711,7 +2711,7 @@
 	<LOSE-LIFE .DMG ,DIED-OF-HUNGER ,STORY175>>
 
 <CONSTANT TEXT176 "Resorting to an old trick of your trade, you toss a few pebbles to distract Ejada. She thinks she has heard you creeping away, and gives a wild laugh as she hurls her deathly bolts in the direction of the sound. Meanwhile you sneak into her tower and hastily feel your way along the wall until you come to a treasure chest. From this you pull a large diamond and a black kite.">
-<CONSTANT TEXT176-CONTINUED "Ejada is still striding about the outside casting her spells into the undergrowth. \"Show yourself, coward!\" she screeches. \"This darkness won't last forever.\" Indeed it won't. Before the spell can wear off, you take your friends' arms and lead them back to the beach">
+<CONSTANT TEXT176-CONTINUED "Ejada is still striding about the outside casting her spells into the undergrowth. \"Show yourself, coward!\" she screeches. \"This darkness won't last forever.\"\n\nIndeed it won't. Before the spell can wear off, you take your friends' arms and lead them back to the beach">
 
 <ROOM STORY176
 	(IN ROOMS)
