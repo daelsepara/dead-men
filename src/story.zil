@@ -2930,7 +2930,7 @@
 	<RETURN>>
 
 <CONSTANT TEXT191 "You come face to face with the sailmaster. For a moment he stands there in simple perplexity. As an ordinary seaman you are not supposed to be in this part of the ship. \"What are you doing..?\" he starts to say.">
-<CONSTANT TEXT191-END "You are helpless to prevent him from altering the other pirates, who rush out of Skarvench's cabin to seize you. Your adventure ends before it even began">
+<CONSTANT TEXT191-END "You are helpless to prevent him from alerting the other pirates, who rush out of Skarvench's cabin to seize you. Your adventure ends before it even began">
 <CONSTANT CHOICES191 <LTABLE "attack him before he can sound the alarm using" "or" "fall back">>
 
 <ROOM STORY191
