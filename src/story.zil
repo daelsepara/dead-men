@@ -2819,6 +2819,7 @@
 		<CRLF>
 		<TELL ,TEXT182-DEATH>
 		<TELL ,PERIOD-CR>
+		<PUTP ,STORY182 ,P?DEATH T>
 	)>>
 
 <CONSTANT TEXT183 "\"El Draque?\" whispers an old sea salt whom you get talking to. \"Have ye not heard? He was captured and hanged at sea barely a month ago. By one account, his body was thrown overboard, but then swam three times around the ship before it sank.\"||Grimes peers into the sailor's tankard. \"What are you drinking mate?\"||\"Why, are you buying a round?\" says the fellow briskly.||\"No,\" Grimes replies. \"I was just going to advise you to drink a bit less of it.\" As you leave the tavern, he says, \"Enough of these taproom tales. It's time we shipped out after Skarvench.\"">
