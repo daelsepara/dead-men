@@ -3622,11 +3622,11 @@
 	<CRLF>
 	<TELL "Eat the monkey (if you are heartless or desperate enough)?">
 	<COND (<YES?>
-		<REMOVE ,MONKEY>
 		<PUTP ,STORY237 ,P?DEATH F>
 	)(ELSE
 		<LOSE-LIFE 1 ,DIED-OF-HUNGER ,STORY237>
 	)>
+	<REMOVE ,MONKEY>
 	<IF-ALIVE TEXT237-CONTINUED>>
 
 <CONSTANT TEXT238 "Raising your sword, you leap aboard the raft. You intended only to warn Mortice, but instead of backing off he gives a murderous snarl and runs straight onto the sword, impaling himself through the heart. You look away quickly with a grimace of dismay. Still gripping the blade, you glance back at the others and start to say, \"There wasn't anything I could do. He just --\"||\"Look out!\" Blutz screeches in warning, pointing past you. \"He's not dead!\"||Your eyes jerk back to Mortice, who you now see to your horror is still moving. Twitching galvanically, he grins a blood-rimmed smile and coughs gore, then starts to pull himself along the sword blade towards you.">
