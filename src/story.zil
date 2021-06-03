@@ -3822,7 +3822,7 @@
 	(FLAGS LIGHTBIT)>
 
 <CONSTANT TEXT253 "The islanders stare in horror at the red death's head daubed across your face. Several of them step forward with raised spears, angry defiance slowly replacing their initial shock. It is Grimes who realises the cause: \"Those other natives must be their enemies. And they think you're one of 'em.\"">
-<CONSTANT CHOICES253 <LTABLE "shout your way out of this" "try fighting your way through them back to the water" "resort to" "try wiping off the red dye and offering gifts to mollify them">>
+<CONSTANT CHOICES253 <LTABLE "shoot your way out of this" "try fighting your way through them back to the water" "resort to" "try wiping off the red dye and offering gifts to mollify them">>
 
 <ROOM STORY253
 	(IN ROOMS)
@@ -3875,7 +3875,7 @@
 	(FLAGS LIGHTBIT)>
 
 <CONSTANT TEXT257 "The shot rings out in the night and a puff of gunsmoke drifts like silver fog in the moonlight. As the smoke clears you see to your astonishment has not fallen. He is just standing there with a ghastly bloodless grin, eyes blazing like a ship's lanterns. Then you notice something else -- the bullet didn't miss him. There is a gaping hole through his chest. For a long moment no-one moves a muscle. Silence gives the scene an air of unreality.||\"He's not a living man!\" gasps Blutz at last. \"He's one of the undead!\"">
-<CONSTANT CHOICES257 <LTABLE "launch a barehanded assault on Mortice" "attack him with a sword" "you'd rather avoid a confrontation, and could just the line mooring his raft to the jollyboat">>
+<CONSTANT CHOICES257 <LTABLE "launch a barehanded assault on Mortice" "attack him with a sword" "you'd rather avoid a confrontation, and could just cut the line mooring his raft to the jollyboat">>
 
 <ROOM STORY257
 	(IN ROOMS)
