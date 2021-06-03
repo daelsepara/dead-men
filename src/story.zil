@@ -2602,7 +2602,7 @@
 	<TELL ,TEXT167-CONTINUED>
 	<TELL ,PERIOD-CR>>
 
-<CONSTANT TEXT168 "After agreeing to the captain's demands, you direct your crew to carry the bulk of the treasure aboard the warship. At least, that's the way it seems. The truth is that only the top of each chest contains gold coins - the rest is filled with the salt that was left aboard the Lady Shalott by her last owner. A few groans, pleas, tears and offers of bribery help to make this charade convincing. The warship sails off towards Leshand and you turn your prow towards Selenice, hoping to be long gone before they discover you've tricked them.">
+<CONSTANT TEXT168 "After agreeing to the captain's demands, you direct your crew to carry the bulk of the treasure aboard the warship. At least, that's the way it seems. The truth is that only the top of each chest contains gold coins - the rest is filled with the salt that was left aboard the Lady of Shalott by her last owner. A few groans, pleas, tears and offers of bribery help to make this charade convincing. The warship sails off towards Leshand and you turn your prow towards Selenice, hoping to be long gone before they discover you've tricked them.">
 
 <ROOM STORY168
 	(IN ROOMS)
@@ -3449,7 +3449,7 @@
 	(FLAGS LIGHTBIT)>
 
 <CONSTANT TEXT225 "The surviving marines are rounded up and bound. Grimes is all for going aboard the ship and user her as your new vessel. Blutz soon points out the drawback in this idea: \"We'd be hunted down by the entire Gloriannic navy! That's going to make it rather hard to save the Gloriannic Queen, isn't it?\"||\"The Queen be hanged!\" cries one of the crew. \"We've got treasure, and now that we've seized a warship it'll be easy to keep our coffers filled. I'm for a life of solid piracy. Forget revenge, abandon honour -- let rum and gold be our goals!\"">
-<CONSTANT TEXT225-CONTINUED "You still envisage yourself as the Queen's saviour and Skarvench's nemesis. You cut the warship adrift and sail the Lady Shalott back to Selenice">
+<CONSTANT TEXT225-CONTINUED "You still envisage yourself as the Queen's saviour and Skarvench's nemesis. You cut the warship adrift and sail the Lady of Shalott back to Selenice">
 
 <ROOM STORY225
 	(IN ROOMS)
