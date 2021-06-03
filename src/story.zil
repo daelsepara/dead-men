@@ -3796,7 +3796,7 @@
 	(FLAGS LIGHTBIT)>
 
 <CONSTANT TEXT251 "She emerges from the shadows of the entrance: a stately figure with skin the colour of burnished oak and hair like a shower of green stars. Her clothing and accent are not those of a Carab native, but seem to evoke the mysteries of an ancient civilization. \"I am Ejada, witch-queen of this isle,\" she tells you. \"I demand tribute from all who come to my shores, but my demands are not excessive. All I'll take is the soul of one of you, to be sacrificed at dawn to my mother the Earth Goddess.\"||\"Send your own soul to hell!\" yells Oakley, snatching up a rock and dashing forward. Ejada calmly sweeps her arm, knocking Oakley to the ground as though he'd run into a tree branch.||\"Return here in the hour before dawn,\" Ejada goes on. \"By then you must have decided which of you will give up his soul.||Helping Oakley to his feet, you return to find the jollyboat sunk deep into the sand of the beach. You try digging it up, but it only sinks deeper. \"That's that, then,\" sobs Blutz. \"The witch's magic has trapped us here. We'll have to choose who's to die!\"">
-<CONSTANT CHOICES251 <LTABLE "make a raft" "got to her at dawn as she told you to" "try hiding from her">>
+<CONSTANT CHOICES251 <LTABLE "make a raft" "go to her at dawn as she told you to" "try hiding from her">>
 
 <ROOM STORY251
 	(IN ROOMS)
