@@ -3740,7 +3740,7 @@
 	<TELL ,TEXT245-CONTINUED>
 	<TELL ,PERIOD-CR>>
 
-<CONSTANT TEXT246 "Without the lunar wind to fill her sails, the Moon Dog drops quickly. You hear her splash down some distance off your starboard bow.||\"Now Skarvench is a seaborne like us,\" says Oakley with a fierce smile. \"If not for this damned fog, we could give him a battle he'd not soon forget.\"">
+<CONSTANT TEXT246 "Without the lunar wind to fill her sails, the Moon Dog drops quickly. You hear her splash down some distance off your starboard bow.||\"Now Skarvench is seaborne like us,\" says Oakley with a fierce smile. \"If not for this damned fog, we could give him a battle he'd not soon forget.\"">
 <CONSTANT CHOICES246 <LTABLE "use a" "disperse the fog" "otherwise">>
 
 <ROOM STORY246
