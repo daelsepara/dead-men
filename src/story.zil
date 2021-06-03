@@ -3310,7 +3310,7 @@
 		<STORY-JUMP ,STORY016>
 	)>>
 
-<CONSTANT TEXT215 "You are outnumbered, but you have an advantage they do not hare. Warfare in their society is rarely fatal, intended only as a ritual show of strength. They lack the murderous instincts of you 'civilized' men.">
+<CONSTANT TEXT215 "You are outnumbered, but you have an advantage they do not have. Warfare in their society is rarely fatal, intended only as a ritual show of strength. They lack the murderous instincts of you 'civilized' men.">
 <CONSTANT TEXT215-CONTINUED "You fight your way down the beach and hastily put to sea under a hail of thrown pebbles.">
 
 <ROOM STORY215
