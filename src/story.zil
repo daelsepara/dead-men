@@ -1390,11 +1390,19 @@
 	(IN ROOMS)
 	(DESC "084")
 	(STORY TEXT084)
+	(PRECHOICE STORY084-PRECHOICE)
 	(CHOICES CHOICES084)
 	(DESTINATIONS <LTABLE STORY103 STORY103 STORY122 STORY141>)
 	(REQUIREMENTS <LTABLE SKILL-SEAFARING TOOLKIT SKILL-CHARMS NONE>)
 	(TYPES <LTABLE R-SKILL R-ITEM R-SKILL R-NONE>)
 	(FLAGS LIGHTBIT)>
+
+<ROUTINE STORY084-PRECHOICE ()
+	<COND(,RUN-ONCE
+		<CRLF>
+		<TELL "Take the cleaver?">
+		<COND (<YES?> <TAKE-ITEM ,CLEAVER>)>
+	)>>
 
 <CONSTANT TEXT085 "Before long the others call to you, saying they have collected a goodly share of barnacles and other succulent shellfish from the shore of the island. You have meanwhile been strolling around in search of fresh water, but every single pool that has formed in depressions in the rock has turned out to be full of brine.||Suddenly there is a shuddering underfoot. The whole island begins to shake. Your companions utter cries of alarm and you see them run towards the boat, abandoning their pile of shellfish. \"It's sinking into the sea!\" screeches Blutz. \"Hurry or we'll be drowned!\"||Out of the corner of your eye you see something break the surface of the sea. You turn watching aghast as it rises high up into the air. It is sharp and huge, its serrated edge casting an orange-red shadow across the sky. As it flexes open and closed, you stare at it dumbfounded. And then you realise what it is: a giant pincer.||The shock almost makes you pass out. This is no island. You're on the back of a gigantic crab.">
 
@@ -3696,9 +3704,11 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY242-PRECHOICE ()
-	<CRLF>
-	<TELL "Take corkscrew?">
-	<COND (<YES?> <TAKE-ITEM ,CORKSCREW>)>>
+	<COND(,RUN-ONCE
+		<CRLF>
+		<TELL "Take the corkscrew?">
+		<COND (<YES?> <TAKE-ITEM ,CORKSCREW>)>
+	)>>
 
 <CONSTANT TEXT243 "A key that no one can see or touch? The ocean god's riddle leaves you baffled until you remember the hornpipe in your pocket. Putting it to your lips, you play a snatch of an old sea shanty. As you do, the chain unlocks itself, falling aside to admit your boat into the harbour.||\"Well, son of a gun!\" says Blutz. \"It was a musical key that was needed, then.\"">
 
