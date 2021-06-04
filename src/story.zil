@@ -37,7 +37,7 @@
 	<SET-DESTINATION ,STORY177 2 ,STORY404>
 	<SET-DESTINATION ,STORY202 5 ,STORY409>
 	<SET-DESTINATION ,STORY272 3 ,STORY348>
-	<SET-DESTINATION ,STORY278 6 ,STORY409>
+	<SET-DESTINATION ,STORY278 5 ,STORY409>
 	<SET-DESTINATION ,STORY330 2 ,STORY349>
 	<SET-DESTINATION ,STORY392 1 ,STORY409>
 	<SET-DESTINATION ,STORY423 4 ,STORY409>
@@ -4068,7 +4068,7 @@
 	(CODEWORD CODEWORD-FETISH)
 	(FLAGS LIGHTBIT)>
 
-<CONSTANT TEXT271 "Your fist comes up and smashes into Ejada's jaw with agonizing force. Agonizing to you, that is. As you reel back, clutching your knuckles and groaning with pain, she laughs languidly and sweeps her arm out, dashing you to the point without apparent effort.">
+<CONSTANT TEXT271 "Your fist comes up and smashes into Ejada's jaw with agonizing force. Agonizing to you, that is. As you reel back, clutching your knuckles and groaning with pain, she laughs languidly and sweeps her arm out, dashing you to the ground without apparent effort.">
 <CONSTANT TEXT271-CONTINUED "You take stock of your situation. Hand-to-hand combat with her is futile as punching an oak tree.">
 <CONSTANT CHOICES271 <LTABLE "try using a wand" "a pistol" "else make a run for it">>
 
@@ -4197,9 +4197,9 @@
 
 <ROUTINE STORY278-PRECHOICE ()
 	<COND (<CHECK-SKILL ,SKILL-ROGUERY>
-		<SET-DESTINATION ,STORY278 6 ,STORY050>
+		<SET-DESTINATION ,STORY278 5 ,STORY050>
 	)(ELSE
-		<SET-DESTINATION ,STORY278 6 ,STORY409>
+		<SET-DESTINATION ,STORY278 5 ,STORY409>
 	)>>
 
 <CONSTANT TEXT279 "\"I got it fair and square, by the law of the sea,\" snorts Mandrigard. \"Took it from a marble hall atop an island cliff, and no hand was raised against me and my merry lads. But as we went -- not a man Jack of us able to straighten his back under the weight of loot, mind you -- and old fool of a priest called after us with a curse. He told us we'd know no rest sailing the ocean's breadth for ever more, and never able to find port nor set foot ashore so long as our hands were tainted with the theft of sacred treasures.\"||He pauses draining his wine-cup yet again. It occurs to you that you have not seen him refill it from the jug, but it never seems empty.||Rain rattles on the shutters across the cabin window. The ship's timbers groan and sigh as she sails on before the wind.">
