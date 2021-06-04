@@ -4257,6 +4257,7 @@
 		<PUT TEMP-SKILLS .COUNT ,SKILL-SWORDPLAY>
 		<EMPHASIZE "You have temporarily gained SWORDPLAY">
 	)>
+	<EMPHASIZE "Don't give up the ship!">
 	<RETURN>>
 
 <CONSTANT TEXT283 "The words have hardly left your lips when he gives an exultant shriek of laughter and launches himself up the side, scaling towards the rail with the speed of a spider running up a wall. Behind him, the two oarsmen throw off their cowls and also begin to climb. You see faces pale as candlewax gleaming in the lantern-light, and long sharp teeth bared in naked bloodlust.||Then an even more horrific sight at last draws a cry of fear from your lips, as a dozen other figures erupt out of the black water and start to make their way up the side of the ship. These are more grotesque than the first three, with ravaged faces of bare bone and grave-mould- Barnacles crust their tarnished breastplates and their once-fine coats hang about them like tattered shrouds.||\"All hands on deck!\" you manage to call out, at last freeing yourself from the paralysis of terror as the first of the monsters reaches the rail. \"We're being boarded by vampires!\"">
