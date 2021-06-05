@@ -5496,15 +5496,15 @@
 		)>
 	)>>
 
-<CONSTANT STORY365-SWORDPLAY-CHOICES <LTABLE "use a" "an ordinary sword">>
+<CONSTANT STORY365-CHOICES <LTABLE "use a" "an ordinary sword" "use a pistol" "resort to" "use a wand" "just make a run for it">>
 
 <ROOM STORY365-SWORDPLAY
 	(IN ROOMS)
 	(DESC "365")
-	(CHOICES STORY365-SWORDPLAY-CHOICES)
-	(DESTINATIONS <LTABLE STORY402 STORY419>)
-	(REQUIREMENTS <LTABLE SHARKS-TOOTH-SWORD NONE>)
-	(TYPES <LTABLE R-ITEM R-NONE>)
+	(CHOICES STORY365-CHOICES)
+	(DESTINATIONS <LTABLE STORY402 STORY419 STORY317 STORY241 STORY384 STORY005>)
+	(REQUIREMENTS <LTABLE SHARKS-TOOTH-SWORD SKILL-SWORDPLAY SKILL-MARKSMANSHIP SKILL-BRAWLING SKILL-SPELLS NONE>)
+	(TYPES <LTABLE R-ITEM R-SKILL R-SKILL R-SKILL R-SKILL R-NONE>)
 	(FLAGS LIGHTBIT)>
 
 <CONSTANT TEXT366 "The fog thickens about the ship, smudging the outlines of the bay and covering the stars in a filmy veil. From the marshy ground of the shore comes a green unhealthy glow, just visible between the drifting palls of mist. Blutz gazes this eerie phosphorescence and says through chattering, \"Will o' wisps. Spirits of men who droned at sea and were washed up here.\"||You are due to take the first watch, with Blutz relieving you at eight bells. It strikes you that his nerves may not stand at midnight vigil, and maybe it would be better if he exchanged watches with you.">
