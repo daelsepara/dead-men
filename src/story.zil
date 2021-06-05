@@ -5917,7 +5917,7 @@
 	(CODEWORD CODEWORD-ICARUS)
 	(FLAGS LIGHTBIT)>
 
-<CONSTANT TEXT396 "You sail the Lady of Shalott back into Selenice harbour no richer than when you left -- a run of bad luck which hardly bodes well for your chances against Skarvench.||\"We're a laughing stock,\" bemoans Oakley. \"Everyone's talking about the pirates who couldn't find a doubloon to save their lives. The only sailors who'll sign on with us now are old men, cripples and drunks.\"||You receive this news with a grim heart, but do your best to appear confident for the sake of your loyal lieutenants. \"Courage, my lads!\" you cry, brandishing your fist to the heavens. \"Skarvench cannot hide from us, and ow we have the advantage of surprise, for what trouble can be possibly expect from a little sloop like this?\"">
+<CONSTANT TEXT396 "You sail the Lady of Shalott back into Selenice harbour no richer than when you left -- a run of bad luck which hardly bodes well for your chances against Skarvench.||\"We're a laughing stock,\" bemoans Oakley. \"Everyone's talking about the pirates who couldn't find a doubloon to save their lives. The only sailors who'll sign on with us now are old men, cripples and drunks.\"||You receive this news with a grim heart, but do your best to appear confident for the sake of your loyal lieutenants. \"Courage, my lads!\" you cry, brandishing your fist to the heavens. \"Skarvench cannot hide from us, and now we have the advantage of surprise, for what trouble can be possibly expect from a little sloop like this?\"">
 
 <ROOM STORY396
 	(IN ROOMS)
