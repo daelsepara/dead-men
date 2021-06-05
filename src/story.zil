@@ -6137,7 +6137,7 @@
 	<TELL CR "You do not possess a diamond" ,PERIOD-CR>
 	<RETURN ,STORY409>>
 
-<CONSTANT TEXT410 "After a brief bout of haggling you settle on the prices.||You are dubious about the amulet, but the pedlar swears blind it is the genuine article. \"Belonged to my dear old granny, guv. Still does technically, I suppose, since I never asked her if I could take it.">
+<CONSTANT TEXT410 "After a brief bout of haggling you settle on the prices.||You are dubious about the amulet, but the pedlar swears blind it is the genuine article. \"Belonged to my dear old granny, guv. Still does technically, I suppose, since I never asked her if I could take it.\"">
 <CONSTANT CHOICES410 <LTABLE "enter the tavern" "go off to see the shipbuilder">>
 
 <ROOM STORY410
@@ -6191,7 +6191,7 @@
 	(FLAGS LIGHTBIT)>
 
 <CONSTANT TEXT414 "Now that the current has carried the iceberg into warmer latitudes, it is rather smaller than when you last clapped eyes on it. The ship frozen inside is clearly visible now, her gilt and paintwork shimmering mirage-like beyond the pane of ice that entraps her. You can make out the guns ranged along her flanks silent, eternally watchful sentinels. How many years since they last thundered forth their fury, you wonder? How long since wind filled those lank hoarfrosted sails? Since that fine prow last proudly split the waves?||\"The Octavius,\" you murmur, half to yourself, as you draw alongside the iceberg. \"But how will we ever get her out of that ice?\"||\"It would take the whole crew digging with picks from now till the moon goes blue,\" say Grimes.||You nod. The comment is unhelpful, but quite true. You had been counting on the iceberg being more reduced by sun and warm waters by this time. Now that you see it, excavating the Octavius seems an impossible task.||Blutz steps forward. \"Begging your pardon, skipper, but I've got an idea.\" You turn and give him a long dubious look. \"Er.. well, it might take a while, but I think there's a way we can get the ship out of the ice.\"||Oakley interrupts with an exasperated gasp. We're wasting time! The Octavius might as well be thirty fathoms deep for all the chance we've got of sailing her. Let's set to filling our coffers with a spot of good old-fashioned piracy. Then we can sail back and trade in this old tub for a decent warship.\"">
-<CONSTANT CHOICES414 <LTABLE "agree with Oakley" "you thin it's worth trying Blutz's plan">>
+<CONSTANT CHOICES414 <LTABLE "agree with Oakley" "you think it's worth trying Blutz's plan">>
 
 <ROOM STORY414
 	(IN ROOMS)
