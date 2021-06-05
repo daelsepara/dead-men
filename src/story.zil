@@ -5278,7 +5278,7 @@
 	(FLAGS LIGHTBIT)>
 
 <CONSTANT TEXT351 "The sun stares balefully down from a sky of burnished steel, leeching your strength. To prevent your brains being cooked in your skulls, you soak strips of torn cloth in the sea and wrap them round your brows. The brine dries to hard salt which chafes your many sores, but by now you are past caring.">
-<CONSTANT TEXT351-CONTINUED "After what seems an endless time, Oakley gives a surprised shout and lunges desperately for something floating in the water beside the boat. Fumbling in a frenzy of excitement, he finally gets a firm hold on the object and hefts it up for you all to see.||\"A coconut!\" says Blutz. \"But is it safe to eat? Floating out here in mid-ocean, I mean. How did it get there?\"||\"Jetsam,\" says Oakley with conviction.||Blutz scratches his fat jowls. \"Er... but I heard this legend of Domdaniel, which is the place under the sea where the drowned sailors live. This coconut might have floated up from one of their groves. That would make it dead men's food, you see, and not for us.\"||\"Pah! You fat fool!\" gasps Oakley.||Grimes and Oakley intend to eat the coconut whether it is safe or not. BLutz protests that even if it was dropped off a ship, it might have gone rotten.">
+<CONSTANT TEXT351-CONTINUED "After what seems an endless time, Oakley gives a surprised shout and lunges desperately for something floating in the water beside the boat. Fumbling in a frenzy of excitement, he finally gets a firm hold on the object and hefts it up for you all to see.||\"A coconut!\" says Blutz. \"But is it safe to eat? Floating out here in mid-ocean, I mean. How did it get there?\"||\"Jetsam,\" says Oakley with conviction.||Blutz scratches his fat jowls. \"Er... but I heard this legend of Domdaniel, which is the place under the sea where the drowned sailors live. This coconut might have floated up from one of their groves. That would make it dead men's food, you see, and not for us.\"||\"Pah! You fat fool!\" gasps Oakley.||Grimes and Oakley intend to eat the coconut whether it is safe or not. Blutz protests that even if it was dropped off a ship, it might have gone rotten.">
 
 <ROOM STORY351
 	(IN ROOMS)
@@ -5348,7 +5348,7 @@
 	<COND (,RUN-ONCE <SCRIPTOR-BUY-SELL ,BRONZE-HELMET ,STORY392 15>)>>
 
 <CONSTANT TEXT355 "Ducking under the low rafters, you cross the sawdust-strewn taproom and seat yourselves in an alcove. At a table nearby sits a blind old man sipping brandy from a wide saucer-shaped cup. Raucous laughter pulls your gaze to the bar, where three ruffians are amusing themselves at the expense of a gentleman in shabby scholastic robes. One of the ruffians has taken the man's spectacles and is jokingly trying them on, ignoring his short-sighted attempts to grab them back.">
-<CONSTANT CHOICES355 <LTABLE "talk to the bland man" "step in to help the scholar" "leave to visit the shipyard">>
+<CONSTANT CHOICES355 <LTABLE "talk to the blind man" "step in to help the scholar" "leave to visit the shipyard">>
 
 <ROOM STORY355
 	(IN ROOMS)
