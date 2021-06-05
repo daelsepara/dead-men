@@ -5599,8 +5599,8 @@
 <ROUTINE STORY372-PRECHOICE ()
 	<RESET-CONTAINER ,PLAYER>>
 
-<CONSTANT TEXT373 "Scriptor looks closely at the ring through his jeweller's lens, then hands it back to you with a frown. \"This is a very dangerous item indeed,\" he explains. \"It is cursed, and will bring disaster on anyone who tries to use it.\"||\"How do you use it?\" wonders Blutz, reaching for the ring. \"you snatch it back. \"We don't.\"||Oakley gives the doctor a shrewd look. \"This wouldn't just be your way of getting us to sell the ring cheap, would it, Doc?\" he mutters.||Scriptor splutters with outrage. \"Certainly not! I want nothing to do with it. In fact, I shall not even ask my usual fee of one doubloon for the consultation, since it is unlucky to seek profit from a curse item.\"">
-<CONSTANT CHOICES373 <LTABLE "now ask him to identify a" "a" "or a" "its time you were on your way">>
+<CONSTANT TEXT373 "Scriptor looks closely at the ring through his jeweller's lens, then hands it back to you with a frown. \"This is a very dangerous item indeed,\" he explains. \"It is cursed, and will bring disaster on anyone who tries to use it.\"||\"How do you use it?\" wonders Blutz, reaching for the ring.||You snatch it back. \"We don't.\"||Oakley gives the doctor a shrewd look. \"This wouldn't just be your way of getting us to sell the ring cheap, would it, Doc?\" he mutters.||Scriptor splutters with outrage. \"Certainly not! I want nothing to do with it. In fact, I shall not even ask my usual fee of one doubloon for the consultation, since it is unlucky to seek profit from a cursed item.\"">
+<CONSTANT CHOICES373 <LTABLE "now ask him to identify a" "a" "or a" "it's time you were on your way">>
 
 <ROOM STORY373
 	(IN ROOMS)
