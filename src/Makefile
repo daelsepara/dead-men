@@ -7,6 +7,6 @@ all: clean
 test: clean
 	zilf -w deadmen.zil
 	zapf deadmen.zap
-	
+
 clean:
 	rm -f *.xzap *.zap *.z?

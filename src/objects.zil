@@ -190,7 +190,7 @@
     (SYNONYM CALYPSO)
     (STARS 5)
     (FLAGS TAKEBIT VEHBIT)>
-    
+
 <OBJECT FAERIE-QUEEN
     (DESC "Faerie Queen")
     (SYNONYM QUEEN)

@@ -26,9 +26,9 @@
         <SET CHAR <GETB ,READBUF <+ .START .I>>>
         <COND (<OR
             <AND <G=? .CHAR !\0> <L=? .CHAR !\9>>
-            <AND <G? .BASE 10> <L=? .BASE 36> 
-                <OR 
-                    <AND <G=? .CHAR !\A> <L=? .CHAR !\Z>> 
+            <AND <G? .BASE 10> <L=? .BASE 36>
+                <OR
+                    <AND <G=? .CHAR !\A> <L=? .CHAR !\Z>>
                     <AND <G=? .CHAR !\a> <L=? .CHAR !\z>>
                 >
             >>
