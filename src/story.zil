@@ -2854,7 +2854,9 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY192-PRECHOICE ()
-	<ADD-QUANTITY ,PROVISIONS <GET-NUMBER "How many provisions to take" 1 2> ,PLAYER>>
+	<COND(,RUN-ONCE
+		<ADD-QUANTITY ,PROVISIONS <GET-NUMBER "How many provisions to take" 1 2> ,PLAYER>
+	)>>
 
 <CONSTANT TEXT193 "\"No, you're wrong,\" you tell Blutz. \"Look at most of the island. It's well covered in vegetation, right?\" That volcano has most likely been hissing and spitting for years, but if there had been any major eruption then the jungle wouldn't have grown up to that extent.\"||\"All the same,\" says Grimes, \"let's not dally longer than we have to. The sight of those lava-covered slopes puts me in mind of Satan's brimstone fires!\"">
 <CONSTANT CHOICES193 <LTABLE "go ashore" "row on westwards">>
@@ -3985,7 +3987,9 @@
 	(FLAGS LIGHTBIT)>
 
 <ROUTINE STORY272-PRECHOICE ()
-	<ADD-QUANTITY ,PROVISIONS <GET-NUMBER "How many provisions to take" 1 2> ,PLAYER>
+	<COND(,RUN-ONCE
+		<ADD-QUANTITY ,PROVISIONS <GET-NUMBER "How many provisions to take" 1 2> ,PLAYER>
+	)>
 	<TELL ,TEXT272-CONTINUED>
 	<TELL ,PERIOD-CR>
 	<COND (<CHECK-ITEM ,BOOK-OF-CHARTS>
