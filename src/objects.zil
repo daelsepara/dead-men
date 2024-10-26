@@ -1,3 +1,36 @@
+; "objects for Down Among the Dead Men"
+; ---------------------------------------------------------------------------------------------
+
+; "weapon"
+; ---------------------------------------------------------------------------------------------
+<OBJECT MAGIC-AMULET
+    (DESC "magic amulet")
+    (SYNONYM AMULET)
+    (ADJECTIVE MAGIC)
+    (REQUIRES SKILL-CHARMS)
+    (FLAGS TAKEBIT)>
+
+<OBJECT MAGIC-WAND
+    (DESC "magic wand")
+    (SYNONYM WAND)
+    (ADJECTIVE MAGIC)
+    (REQUIRES SKILL-SPELLS)
+    (FLAGS TAKEBIT)>
+
+<OBJECT PISTOL
+    (DESC "pistol")
+    (SYNONYM PISTOL)
+    (REQUIRES SKILL-MARKSMANSHIP)
+    (FLAGS TAKEBIT)>
+
+<OBJECT SWORD
+    (DESC "sword")
+    (SYNONYM SWORD)
+    (REQUIRES SKILL-SWORDPLAY)
+    (FLAGS TAKEBIT)>
+
+; "story objects"
+; ---------------------------------------------------------------------------------------------
 <OBJECT BAT-SHAPED-TALISMAN
     (DESC "bat-shaped talisman")
     (SYNONYM TALISMAN)
@@ -95,20 +128,6 @@
     (SYNONYM LODESTONE)
     (FLAGS TAKEBIT)>
 
-<OBJECT MAGIC-AMULET
-    (DESC "magic amulet")
-    (SYNONYM AMULET)
-    (ADJECTIVE MAGIC)
-    (REQUIRES SKILL-CHARMS)
-    (FLAGS TAKEBIT)>
-
-<OBJECT MAGIC-WAND
-    (DESC "magic wand")
-    (SYNONYM WAND)
-    (ADJECTIVE MAGIC)
-    (REQUIRES SKILL-SPELLS)
-    (FLAGS TAKEBIT)>
-
 <OBJECT MONKEY
     (DESC "monkey")
     (SYNONYM MONKEY)
@@ -129,12 +148,6 @@
     (DESC "provisions")
     (SYNONYM PROVISIONS)
     (QUANTITY 1)
-    (FLAGS TAKEBIT)>
-
-<OBJECT PISTOL
-    (DESC "pistol")
-    (SYNONYM PISTOL)
-    (REQUIRES SKILL-MARKSMANSHIP)
     (FLAGS TAKEBIT)>
 
 <OBJECT POCKET-WATCH
@@ -162,12 +175,6 @@
     (REQUIRES SKILL-SWORDPLAY)
     (FLAGS TAKEBIT)>
 
-<OBJECT SWORD
-    (DESC "sword")
-    (SYNONYM SWORD)
-    (REQUIRES SKILL-SWORDPLAY)
-    (FLAGS TAKEBIT)>
-
 <OBJECT THUNDERCLOUD-FAN
     (DESC "thundercloud fan")
     (SYNONYM FAN)
@@ -184,7 +191,8 @@
     (SYNONYM TOOLKIT)
     (FLAGS TAKEBIT)>
 
-; "Ships"
+; "ships"
+; ---------------------------------------------------------------------------------------------
 <OBJECT CALYPSO
     (DESC "Calypso")
     (SYNONYM CALYPSO)

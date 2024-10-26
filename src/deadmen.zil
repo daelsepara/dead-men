@@ -1,4 +1,5 @@
-"Down Among the Dead Men (ZIL)"
+; "Down Among the Dead Men (ZIL)"
+; ---------------------------------------------------------------------------------------------
 
 <CONSTANT GAME-TITLE "||Down Among the Dead Men">
 <CONSTANT GAME-DESCRIPTION "|Dave Morris (1993)||Implemented in ZIL by SD Separa (2020)|">

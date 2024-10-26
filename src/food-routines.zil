@@ -1,3 +1,6 @@
+; "food - routines"
+; ---------------------------------------------------------------------------------------------
+
 <ROUTINE ADD-FOOD ("OPT" AMOUNT)
 	<ADD-QUANTITY ,FOOD .AMOUNT ,PLAYER>>
 

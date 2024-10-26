@@ -1,3 +1,6 @@
+; "codewords for Down Among the Dead Men"
+; ---------------------------------------------------------------------------------------------
+
 <OBJECT CODEWORD-AUGUST
     (DESC "August")
     (SYNONYM AUGUST)>

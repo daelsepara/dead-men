@@ -1,3 +1,6 @@
+; "vehicle - routines"
+; ---------------------------------------------------------------------------------------------
+
 <ROUTINE CHECK-VEHICLE (RIDE)
 	<COND (<OR <IN? .RIDE ,VEHICLES> <AND ,CURRENT-VEHICLE <EQUAL? ,CURRENT-VEHICLE .RIDE>>> <RTRUE>)>
 	<RFALSE>>

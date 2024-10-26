@@ -1,3 +1,6 @@
+; "food - globals"
+; ---------------------------------------------------------------------------------------------
+
 <OBJECT FOOD
     (DESC "provision")
     (SYNONYM FOOD FOOD-PACK PACK)
